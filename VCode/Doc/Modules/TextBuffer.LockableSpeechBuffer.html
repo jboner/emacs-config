@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Dec 25 16:41:09 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class LockableSpeechBuffer</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class LockableSpeechBuffer</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="TextBuffer.html">TextBuffer</A></P>
+
+
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">LockableSpeechBuffer</SPAN>:
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.LockableSpeechBuffer.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.LockableSpeechBuffer.set_lock"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.LockableSpeechBuffer.set_lock</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">state</SPAN>)
+
+</PRE><H2>Description</H2><P>
+adds a locking interface to a SpeechBuffer
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.LockableSpeechBuffer.set_lock" CLASS="Method">TextBuffer.LockableSpeechBuffer.set_lock(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">state</SPAN>)</H2>
+<P>None</P>
+
+<P>
+locks/unlocks changes to the contents of a hidden speech 
+buffer, to ensure consistency between multiple get operations.
+When the buffer is
+locked, all speech-initiated changes to the buffer will be 
+deferred until it is unlocked.  No speech should be lost.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT</EM> state</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

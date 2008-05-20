@@ -1,0 +1,3 @@
+#name : object name extends T
+# --
+object ${1:name} extends ${2:type} $0

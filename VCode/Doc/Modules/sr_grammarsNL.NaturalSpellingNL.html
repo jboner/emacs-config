@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:44:37 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class NaturalSpellingNL</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class NaturalSpellingNL - natlink implemenation of NaturalSpelling </H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="sr_grammarsNL.html">sr_grammarsNL</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">sr_grammarsNL.NaturalSpellingNL<BR>
+&nbsp;&nbsp;sr_grammars.NaturalSpelling<BR>
+&nbsp;&nbsp;natlinkutils.GrammarBase<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">NaturalSpellingNL</SPAN>(<A CLASS="DocLink" HREF="sr_grammars.NaturalSpelling.html">NaturalSpelling</A>, <A CLASS="DocLink" HREF="natlinkutils.GrammarBase.html">GrammarBase</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_grammarsNL.NaturalSpellingNL.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)
+    <A CLASS="DocLink" HREF="#sr_grammarsNL.NaturalSpellingNL.activate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_grammarsNL.NaturalSpellingNL.activate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)
+    <A CLASS="DocLink" HREF="#sr_grammarsNL.NaturalSpellingNL.cleanup"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_grammarsNL.NaturalSpellingNL.cleanup</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#sr_grammarsNL.NaturalSpellingNL.create_rules"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_grammarsNL.NaturalSpellingNL.create_rules</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#sr_grammarsNL.NaturalSpellingNL.deactivate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_grammarsNL.NaturalSpellingNL.deactivate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # disable recognition from this grammar</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_grammarsNL.NaturalSpellingNL.gotResults_dgnletters</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">words</SPAN>, <SPAN CLASS="Argument">fullResults</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_grammarsNL.NaturalSpellingNL.load</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from natlinkutils.GrammarBase</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.activate</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">ruleName</SPAN>, <SPAN CLASS="Argument">window=0</SPAN>, <SPAN CLASS="Argument">exclusive=None</SPAN>, <SPAN CLASS="Argument">noError=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.activateAll</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window=0</SPAN>, <SPAN CLASS="Argument">exclusive=None</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.activateSet</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">ruleNames</SPAN>, <SPAN CLASS="Argument">window=0</SPAN>, <SPAN CLASS="Argument">exclusive=None</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.appendList</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">listName</SPAN>, <SPAN CLASS="Argument">words</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.deactivate</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">ruleName</SPAN>, <SPAN CLASS="Argument">noError=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.deactivateAll</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.emptyList</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">listName</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.load</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">gramSpec</SPAN>, <SPAN CLASS="Argument">allResults=0</SPAN>, <SPAN CLASS="Argument">hypothesis=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.resultsCallback</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">wordsAndNums</SPAN>, <SPAN CLASS="Argument">resObj</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.setList</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">listName</SPAN>, <SPAN CLASS="Argument">words</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.unload</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from sr_grammars.NaturalSpelling</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_grammars.NaturalSpelling.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spell_words=None</SPAN>, <SPAN CLASS="Argument">spelling_cbk=None</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)
+    <A CLASS="DocLink" HREF="#sr_grammars.NaturalSpelling.activate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_grammars.NaturalSpelling.activate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)
+    <A CLASS="DocLink" HREF="#sr_grammars.NaturalSpelling.cleanup"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_grammars.NaturalSpelling.cleanup</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#sr_grammars.NaturalSpelling.deactivate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_grammars.NaturalSpelling.deactivate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # disable recognition from this grammar</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from natlinkutils.GramClassBase</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.__del__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.activate</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window=0</SPAN>, <SPAN CLASS="Argument">exclusive=None</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.beginCallback</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">moduleInfo</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.callIfExists</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">funcName</SPAN>, <SPAN CLASS="Argument">argList</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.deactivate</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.hypothesisCallback</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">words</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.load</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grammar</SPAN>, <SPAN CLASS="Argument">allResults=0</SPAN>, <SPAN CLASS="Argument">hypothesis=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.setExclusive</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">exclusive</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.unload</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+
+</PRE><H2>Description</H2><P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR] rules</EM>
+<DD>list of rules for this grammar in natlink's format
+
+</DL>
+<H2 ID="sr_grammarsNL.NaturalSpellingNL.activate" CLASS="Method">sr_grammarsNL.NaturalSpellingNL.activate(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)</H2>
+<P>None</P>
+
+<P>
+activates the grammar for recognition tied to a window
+with the given handle</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> window
+<DD>window handle (unique identifier) for the window
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="sr_grammarsNL.NaturalSpellingNL.cleanup" CLASS="Method">sr_grammarsNL.NaturalSpellingNL.cleanup(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+method which must be called by the owner prior to deleting
+the grammar, to ensure that it doesn't have circular references
+to the owner
+</P>
+<H2 ID="sr_grammarsNL.NaturalSpellingNL.create_rules" CLASS="Method">sr_grammarsNL.NaturalSpellingNL.create_rules(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+create all the rules for this grammar and put them in
+self.rules</P>
+<P>
+<STRONG>INPUTS</STRONG> </P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="sr_grammarsNL.NaturalSpellingNL.deactivate" CLASS="Method">sr_grammarsNL.NaturalSpellingNL.deactivate(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>disable recognition from this grammar</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="sr_grammars.NaturalSpelling.activate" CLASS="Method">sr_grammars.NaturalSpelling.activate(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)</H2>
+<P>None</P>
+
+<P>
+activates the grammar for recognition tied to a window
+with the given handle</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> window
+<DD>window handle (unique identifier) for the window
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="sr_grammars.NaturalSpelling.cleanup" CLASS="Method">sr_grammars.NaturalSpelling.cleanup(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+method which must be called by the owner prior to deleting
+the grammar, to ensure that it doesn't have circular references
+to the owner
+</P>
+<H2 ID="sr_grammars.NaturalSpelling.deactivate" CLASS="Method">sr_grammars.NaturalSpelling.deactivate(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>disable recognition from this grammar</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises existing attributes, unless those attributes
+already exist</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

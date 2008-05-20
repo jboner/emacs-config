@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:37:40 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class UnexpectedRestoreFailure</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class UnexpectedRestoreFailure</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="ResMgr.html">ResMgr</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">ResMgr.UnexpectedRestoreFailure<BR>
+&nbsp;&nbsp;exceptions.RuntimeError<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">UnexpectedRestoreFailure</SPAN>(<A CLASS="DocLink" HREF="exceptions.RuntimeError.html">RuntimeError</A>):
+    <A CLASS="DocLink" HREF="#ResMgr.UnexpectedRestoreFailure.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">ResMgr.UnexpectedRestoreFailure.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buff_name</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">ResMgr.UnexpectedRestoreFailure.generate_message</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from exceptions.Exception</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">exceptions.Exception.__getitem__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">i</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">exceptions.Exception.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">*args</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">exceptions.Exception.__str__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from exceptions.StandardError</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from exceptions.RuntimeError</SPAN>
+
+</PRE><H2>Description</H2><P>
+exception used internally by BufferStatesBasic.restore_state 
+to signal that restore failed on a particular buffer, and to 
+trigger an attempt to un-restore all the buffers previously 
+restored</P>
+<P>
+This exception should be caught by the restore_state method, 
+so it should never be seen outside that method.
+</P>
+<H2 ID="ResMgr.UnexpectedRestoreFailure.__init__" CLASS="Method">ResMgr.UnexpectedRestoreFailure.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buff_name</SPAN>)</H2>
+<P>None</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR buff_name</EM>
+<DD>name of the buffer which could not be
+restored
+
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

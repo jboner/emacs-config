@@ -1,0 +1,707 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Jan 03 18:36:24 2001)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class TextBufferNotifyWX</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class TextBufferNotifyWX - TextBufferChangeNotify wrapper for wxTextCtrl</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="wxEditor.html">wxEditor</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">wxEditor.TextBufferNotifyWX<BR>
+&nbsp;&nbsp;TextBuffer.TextBufferChangeNotify<BR>
+&nbsp;&nbsp;TextBuffer.VisibleBuffer<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">TextBufferNotifyWX</SPAN>(<A CLASS="DocLink" HREF="TextBuffer.TextBufferChangeNotify.html">TextBufferChangeNotify</A>, <A CLASS="DocLink" HREF="TextBuffer.VisibleBuffer.html">VisibleBuffer</A>):
+    <A CLASS="DocLink" HREF="#wxEditor.TextBufferNotifyWX.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxEditor.TextBufferNotifyWX.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">underlying_control</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)<SPAN CLASS="OneLiner"> # wraps underlying wxPython wxTextCtrl</SPAN>
+    <A CLASS="DocLink" HREF="#wxEditor.TextBufferNotifyWX._external_position"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxEditor.TextBufferNotifyWX._external_position</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">internal</SPAN>)<SPAN CLASS="OneLiner"> # conversion from internal offset to external</SPAN>
+    <A CLASS="DocLink" HREF="#wxEditor.TextBufferNotifyWX._internal_line"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxEditor.TextBufferNotifyWX._internal_line</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">external</SPAN>)
+    <A CLASS="DocLink" HREF="#wxEditor.TextBufferNotifyWX._internal_position"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxEditor.TextBufferNotifyWX._internal_position</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">external</SPAN>)<SPAN CLASS="OneLiner"> # conversion from external offset to internal</SPAN>
+    <A CLASS="DocLink" HREF="#wxEditor.TextBufferNotifyWX._on_evt_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxEditor.TextBufferNotifyWX._on_evt_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">event</SPAN>)<SPAN CLASS="OneLiner"> # handler for wxEVT_COMMAND_TEXT_UPDATED.</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxEditor.TextBufferNotifyWX.get_length</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#wxEditor.TextBufferNotifyWX.get_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxEditor.TextBufferNotifyWX.get_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # retrieves range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#wxEditor.TextBufferNotifyWX.get_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxEditor.TextBufferNotifyWX.get_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # retrieves a portion of the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#wxEditor.TextBufferNotifyWX.get_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxEditor.TextBufferNotifyWX.get_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#wxEditor.TextBufferNotifyWX.range_defaults"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxEditor.TextBufferNotifyWX.range_defaults</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)
+    <A CLASS="DocLink" HREF="#wxEditor.TextBufferNotifyWX.set_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxEditor.TextBufferNotifyWX.set_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#wxEditor.TextBufferNotifyWX.set_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxEditor.TextBufferNotifyWX.set_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes a portion of the buffer</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.VisibleBuffer</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.VisibleBuffer.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.VisibleBuffer.get_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.VisibleBuffer.get_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.VisibleBuffer.make_position_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.VisibleBuffer.make_position_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">position=None</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.VisibleBuffer.refresh"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.VisibleBuffer.refresh</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.TextBufferChangeNotify</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeNotify.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeNotify.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">notification_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeNotify._on_change"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeNotify._on_change</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">program_initiated</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeNotify.set_change_notification_callback"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeNotify.set_change_notification_callback</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">notification_callback=None</SPAN>)<SPAN CLASS="OneLiner"> # changes the callback to a new function</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.TextBuffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)<SPAN CLASS="OneLiner"> # abstract base class - no arguments</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.get_length"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.get_length</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns the length of the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.get_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.get_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # retrieves range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.get_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.get_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # retrieves a portion of the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.set_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.set_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.set_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.set_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes a portion of the buffer</SPAN>
+
+</PRE><H2>Description</H2><P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>wxTextCtrl</EM> underlying
+<DD>underlying text control - a wxPython
+text control object
+<DT>
+<EM>BOOL</EM> program_initiated
+<DD>flag used internally to indicate to the
+whether the text changed event was due to a program-initiated change
+or to a user-initiated change.
+<DT>
+<EM>BOOL</EM> carriage_return_bug
+<DD>flag specifying whether the current
+version of wxPython requires a workaround for the carriage return
+bug.  (see comments below)
+</DL>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="wxEditor.TextBufferNotifyWX.__init__" CLASS="Method">wxEditor.TextBufferNotifyWX.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">underlying_control</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>wraps underlying wxPython wxTextCtrl</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>wxTextCtrl</EM> underlying_control
+<DD>underlying text control - a wxPython
+text control object
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="wxEditor.TextBufferNotifyWX._external_position" CLASS="Method">wxEditor.TextBufferNotifyWX._external_position(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">internal</SPAN>)</H2>
+<P>conversion from internal offset to external</P>
+
+<P>
+part of the workaround for the
+carriage return bug: text is returned with
+Windows carriage return/new line pairs replaced with simple new
+lines, but calls into wxTextCtrl which specify a character position
+offset use the actual internal buffer contents with 
+.  Currently
+wxPython 2.2.1 on Windows has the bug.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> internal
+<DD>offset into internal buffer with 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>corresponding offset into external buffer (as returned
+by get_text)
+
+</DL>
+<H2 ID="wxEditor.TextBufferNotifyWX._internal_line" CLASS="Method">wxEditor.TextBufferNotifyWX._internal_line(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">external</SPAN>)</H2>
+<P>None</P>
+
+<P>
+conversion from external offset to internal line number
+(first is 0)</P>
+<P>
+part of the workaround for the
+carriage return bug: text is returned with
+Windows carriage return/new line pairs replaced with simple new
+lines, but calls into wxTextCtrl which specify a character position
+offset use the actual internal buffer contents with 
+.  Currently
+wxPython 2.2.1 on Windows has the bug.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> external
+<DD>offset into external buffer, where 
+ ends
+lines.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>line index into internal buffer
+
+</DL>
+<H2 ID="wxEditor.TextBufferNotifyWX._internal_position" CLASS="Method">wxEditor.TextBufferNotifyWX._internal_position(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">external</SPAN>)</H2>
+<P>conversion from external offset to internal</P>
+
+<P>
+part of the workaround for the
+carriage return bug: text is returned with
+Windows carriage return/new line pairs replaced with simple new
+lines, but calls into wxTextCtrl which specify a character position
+offset use the actual internal buffer contents with 
+.  Currently
+wxPython 2.2.1 on Windows has the bug.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> external
+<DD>offset into external buffer 
+(as returned by get_text) with 
+ indicating new line.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>corresponding offset into internal buffer, where new
+lines end with 
+</DL>
+<H2 ID="wxEditor.TextBufferNotifyWX._on_evt_text" CLASS="Method">wxEditor.TextBufferNotifyWX._on_evt_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">event</SPAN>)</H2>
+<P>handler for wxEVT_COMMAND_TEXT_UPDATED.</P>
+
+<P>
+calls  TextBufferChangeNotify's _on_change
+</P>
+<H2 ID="wxEditor.TextBufferNotifyWX.get_selection" CLASS="Method">wxEditor.TextBufferNotifyWX.get_selection(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>retrieves range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM> --</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> (start, end)
+<DD>start is the offset into the buffer of 
+the start of the current
+selection.  end is the offset into the buffer of the character 
+following the selection (this matches Python's slice convention).
+
+</DL>
+<H2 ID="wxEditor.TextBufferNotifyWX.get_text" CLASS="Method">wxEditor.TextBufferNotifyWX.get_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>retrieves a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>the start of the region returned.
+Defaults to start of buffer.
+<DT>
+<EM>INT</EM> end
+<DD>the offset into the buffer of the character following 
+the region to be returned (this matches Python's slice convention).
+Defaults to end of buffer.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>contents of specified range of the buffer
+
+</DL>
+<H2 ID="wxEditor.TextBufferNotifyWX.get_visible" CLASS="Method">wxEditor.TextBufferNotifyWX.get_visible(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+ get start and end offsets of the currently visible region of
+the buffer.  End is the offset of the first character not
+visible (matching Python's slice convention)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM> --</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> (start, end)
+<DD>visible range
+
+</DL>
+<H2 ID="wxEditor.TextBufferNotifyWX.range_defaults" CLASS="Method">wxEditor.TextBufferNotifyWX.range_defaults(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+translates from TextBuffer defaults for specifying start and
+end of a range to the appropriate values for wxTextCtrl</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>internal offset of start of range, or None to
+default to the beginning of the buffer
+<DT>
+<EM>INT</EM> end
+<DD>internal offset of character following end of 
+range, or None to default to the end of the buffer
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>internal offsets
+</DL>
+<H2 ID="wxEditor.TextBufferNotifyWX.set_selection" CLASS="Method">wxEditor.TextBufferNotifyWX.set_selection(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>the start of the region to be selected.
+Defaults to start of buffer.
+<DT>
+<EM>INT</EM> end
+<DD>the offset into the buffer of the character following 
+the region to be selected (this matches Python's slice convention).
+Defaults to end of buffer.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="wxEditor.TextBufferNotifyWX.set_text" CLASS="Method">wxEditor.TextBufferNotifyWX.set_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> text
+<DD>the new text.
+<DT>
+<EM>INT</EM> start
+<DD>the offset into the buffer of the text to the
+replaced.  Defaults to start of buffer.
+<DT>
+<EM>INT</EM> end
+<DD>the offset into the buffer of the character following 
+the text to be replaced (this matches Python's slice convention).
+Defaults to end of buffer.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="TextBuffer.VisibleBuffer.get_visible" CLASS="Method">TextBuffer.VisibleBuffer.get_visible(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+ get start and end offsets of the currently visible region of
+the buffer.  End is the offset of the first character not
+visible (matching Python's slice convention)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>INT</EM> (start, end)
+</P>
+<H2 ID="TextBuffer.VisibleBuffer.make_position_visible" CLASS="Method">TextBuffer.VisibleBuffer.make_position_visible(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">position=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+scroll buffer (if necessary) so that  the specified position
+is visible.  Position defaults to the current cursor position.
+Note: if a particular subclass of VisibleBuffer cannot support
+this method, it should just leave it as a no-op.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT</EM> position</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.VisibleBuffer.refresh" CLASS="Method">TextBuffer.VisibleBuffer.refresh(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+force a refresh of the buffer.
+Note: if a particular subclass of VisibleBuffer cannot support
+this method, it should just leave it as a no-op.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.TextBufferChangeNotify.__init__" CLASS="Method">TextBuffer.TextBufferChangeNotify.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">notification_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> notification_callback
+<DD>notification_callback( <EM>TextBufferChangeNotify</EM> buffer,
+<EM>BOOL</EM> user_initiated) 
+see TextBufferChangeNotify documentation for details.
+
+</DL>
+<H2 ID="TextBuffer.TextBufferChangeNotify._on_change" CLASS="Method">TextBuffer.TextBufferChangeNotify._on_change(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">program_initiated</SPAN>)</H2>
+<P>None</P>
+
+<P>
+internal function which triggers the
+notification_callback.  Only the concrete subclass of
+TextBufferChangeNotify implementing the change notification 
+should call this function</P>
+<H2 ID="TextBuffer.TextBufferChangeNotify.set_change_notification_callback" CLASS="Method">TextBuffer.TextBufferChangeNotify.set_change_notification_callback(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">notification_callback=None</SPAN>)</H2>
+<P>changes the callback to a new function</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> notification_callback
+<DD>notification_callback( <EM>TextBufferChangeNotify</EM> buffer,
+<EM>BOOL</EM> program_initiated)
+function to be called on change to
+the underlying buffer.  
+see TextBufferChangeNotify documentation for details.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="TextBuffer.TextBuffer.__init__" CLASS="Method">TextBuffer.TextBuffer.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>abstract base class - no arguments</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.TextBuffer.get_length" CLASS="Method">TextBuffer.TextBuffer.get_length(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns the length of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>INT</EM> number of characters in the buffer</P>
+<H2 ID="TextBuffer.TextBuffer.get_selection" CLASS="Method">TextBuffer.TextBuffer.get_selection(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>retrieves range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>INT</EM> (start, end)</P>
+<P>
+start is the offset into the buffer of the start of the current
+selection.  end is the offset into the buffer of the character 
+following the selection (this matches Python's slice convention).
+</P>
+<H2 ID="TextBuffer.TextBuffer.get_text" CLASS="Method">TextBuffer.TextBuffer.get_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>retrieves a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT start</EM> is the start of the region returned.
+Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the region to be returned (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>contents of specified range of the buffer
+
+</DL>
+<H2 ID="TextBuffer.TextBuffer.set_selection" CLASS="Method">TextBuffer.TextBuffer.set_selection(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT start</EM> is the start of the region to be selected.
+Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the region to be selected (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.TextBuffer.set_text" CLASS="Method">TextBuffer.TextBuffer.set_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>STR text</EM> is the new text.</P>
+<P>
+<EM>INT start</EM> is the offset into the buffer of the text to the
+replaced.  Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the text to be replaced (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

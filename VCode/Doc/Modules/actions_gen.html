@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:32:26 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module actions_gen</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module actions_gen</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.Action.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">Action</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # Base class for all actions.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionAutoIndent.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionAutoIndent</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.Action.html">Action</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionBackspace.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionBackspace</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.ActionRepeatable.html">ActionRepeatable</A>)</SPAN><SPAN CLASS="OneLiner"> # Backspace a certain number of times.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionBidirectional.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionBidirectional</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.Action.html">Action</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionBidirectionalRepeat.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionBidirectionalRepeat</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.ActionRepeatable.html">ActionRepeatable</A>, <A CLASS="DocLink" HREF="actions_gen.ActionBidirectional.html">ActionBidirectional</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionCompileSymbols.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionCompileSymbols</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.Action.html">Action</A>)</SPAN><SPAN CLASS="OneLiner"> # Compiles symbols from a buffer.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionDecrIndentation.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionDecrIndentation</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.ActionRepeatable.html">ActionRepeatable</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionIncrIndentation.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionIncrIndentation</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.ActionRepeatable.html">ActionRepeatable</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionInsert.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionInsert</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.Action.html">Action</A>)</SPAN><SPAN CLASS="OneLiner"> # Action that inserts and indents code at cursor position</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionInsertNewClause.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionInsertNewClause</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.Action.html">Action</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionRepeatBidirectCmd.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionRepeatBidirectCmd</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.Action.html">Action</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionRepeatLastCmd.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionRepeatLastCmd</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.Action.html">Action</A>)</SPAN><SPAN CLASS="OneLiner"> # This action just repeats the last command in the command history.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionRepeatable.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionRepeatable</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.Action.html">Action</A>)</SPAN><SPAN CLASS="OneLiner"> # Base class for repeatable actions.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionSearch.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionSearch</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.ActionBidirectional.html">ActionBidirectional</A>)</SPAN><SPAN CLASS="OneLiner"> # Moves cursor to occurence of a regular expression.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionSearchRepeat.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionSearchRepeat</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.ActionSearch.html">ActionSearch</A>, <A CLASS="DocLink" HREF="actions_gen.ActionRepeatable.html">ActionRepeatable</A>)</SPAN><SPAN CLASS="OneLiner"> # Moves cursor to occurence of a regular expression.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionSelect.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionSelect</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.Action.html">Action</A>)</SPAN><SPAN CLASS="OneLiner"> # This action sets the selection in a buffer.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.ActionSwitchTranslation.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActionSwitchTranslation</SPAN></A>(<A CLASS="DocLink" HREF="actions_gen.Action.html">Action</A>)</SPAN><SPAN CLASS="OneLiner"> # Turns translation on/off</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="actions_gen.AnonymousAction.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">AnonymousAction</SPAN></A>(<A CLASS="DocLink" HREF="exceptions.Exception.html">Exception</A>)</SPAN><SPAN CLASS="OneLiner"> # Raised when the code for an anonymous action function has syntax errors</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#anonymous_action"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">anonymous_action</SPAN></A>(<SPAN CLASS="Argument">code</SPAN>, <SPAN CLASS="Argument">description</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # This function creates an anonymous action function.</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">indent_code</SPAN>(<SPAN CLASS="Argument">num</SPAN>, <SPAN CLASS="Argument">code</SPAN>)</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Mediator\\actions_gen.pyc'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">anonymous_action_curr_num</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_braces_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_brackets_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_parens_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_quotes_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_single_quotes_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_single_quotes_pair_after</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_translation_off</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSwitchTranslation instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_translation_on</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSwitchTranslation instance</SPAN></SPAN>
+</PRE><H2 ID="anonymous_action" CLASS="Function">anonymous_action(<SPAN CLASS="Argument">code</SPAN>, <SPAN CLASS="Argument">description</SPAN>)</H2>
+<P>This function creates an anonymous action function.</P>
+
+<P>
+The anonymous function gets an internal name of the form
+<EM>anonymous_action_N</EM> where <EM>N</EM> is some number.</P>
+
+<DL>
+
+<DT>
+<EM>STR code</EM>
+<DD>Code for the anoymous action function. This code
+ should assume that the application object is called <EM>app</EM>, and
+ the context object is called <EM>cont</EM>.
+<DT>
+<EM>STR description</EM>
+<DD>Description of the action function
+
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

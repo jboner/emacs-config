@@ -1,0 +1,1306 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:15:42 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class NewMediatorObject</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class NewMediatorObject - Main object for the mediator.</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="NewMediatorObject.html">NewMediatorObject</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">NewMediatorObject.NewMediatorObject<BR>
+&nbsp;&nbsp;Object.OwnerObject<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">NewMediatorObject</SPAN>(<A CLASS="DocLink" HREF="Object.OwnerObject.html">OwnerObject</A>):
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">interp=None</SPAN>, <SPAN CLASS="Argument">server=None</SPAN>, <SPAN CLASS="Argument">console=None</SPAN>, <SPAN CLASS="Argument">wave_playback=None</SPAN>, <SPAN CLASS="Argument">correct_evt=None</SPAN>, <SPAN CLASS="Argument">correct_recent_evt=None</SPAN>, <SPAN CLASS="Argument">test_args=None</SPAN>, <SPAN CLASS="Argument">test_space=None</SPAN>, <SPAN CLASS="Argument">global_grammars=0</SPAN>, <SPAN CLASS="Argument">exclusive=0</SPAN>, <SPAN CLASS="Argument">profile_prefix=None</SPAN>, <SPAN CLASS="Argument">bypass_sr_recog=0</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg_regression=1</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=0</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)<SPAN CLASS="OneLiner"> # creates the NewMediatorObject</SPAN>
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject._configure_from_file"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject._configure_from_file</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">exclude=None</SPAN>, <SPAN CLASS="Argument">config_file=None</SPAN>, <SPAN CLASS="Argument">user_config_file=None</SPAN>, <SPAN CLASS="Argument">reset=0</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=None</SPAN>, <SPAN CLASS="Argument">add_sr_entries_for_LSAs_and_CSCs=1</SPAN>, <SPAN CLASS="Argument">use_pickled_interp=0</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject._new_test_editor"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject._new_test_editor</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app</SPAN>, <SPAN CLASS="Argument">server=1</SPAN>, <SPAN CLASS="Argument">check_window=1</SPAN>, <SPAN CLASS="Argument">window_info=None</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.add_abbreviation"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.add_abbreviation</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">abbreviation</SPAN>, <SPAN CLASS="Argument">expansions</SPAN>)<SPAN CLASS="OneLiner"> # Add an abbreviation to VoiceCode's abbreviations dictionary.</SPAN>
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.add_app_prefix"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.add_app_prefix</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app_name</SPAN>, <SPAN CLASS="Argument">title_prefix</SPAN>)<SPAN CLASS="OneLiner"> # specifies a title prefix to use for a given editor application.</SPAN>
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.add_csc"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.add_csc</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">acmd</SPAN>)<SPAN CLASS="OneLiner"> # Add a new Context Sensitive Command.</SPAN>
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.add_csc_set"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.add_csc_set</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">set</SPAN>)<SPAN CLASS="OneLiner"> # add CSCs from a set</SPAN>
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.add_lsa"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.add_lsa</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">an_LSA</SPAN>)<SPAN CLASS="OneLiner"> # Add a language specific word.</SPAN>
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.add_lsa_set"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.add_lsa_set</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">set</SPAN>)<SPAN CLASS="OneLiner"> # add LSAs from a set</SPAN>
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.add_module"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.add_module</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">module</SPAN>)<SPAN CLASS="OneLiner"> # add a new KnownTargetModule to the AppMgr/RecogStartMgr</SPAN>
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.before_app_mgr_config"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.before_app_mgr_config</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">config_dict</SPAN>, <SPAN CLASS="Argument">ignore=0</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.before_interp_config"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.before_interp_config</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">config_dict</SPAN>, <SPAN CLASS="Argument">reset=0</SPAN>, <SPAN CLASS="Argument">ignore=0</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=None</SPAN>, <SPAN CLASS="Argument">add_sr_entries_for_LSAs_and_CSCs=1</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.can_reinterpret"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.can_reinterpret</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">n</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.configure"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.configure</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">config_file=None</SPAN>, <SPAN CLASS="Argument">user_config_file=None</SPAN>, <SPAN CLASS="Argument">exclude_interp=0</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.console"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.console</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.correct_recent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.correct_recent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>)<SPAN CLASS="OneLiner"> # initiate user selection of a recent utterance to correct</SPAN>
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.correct_utterance"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.correct_utterance</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">utterance_number</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.define_config_functions"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.define_config_functions</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">names</SPAN>, <SPAN CLASS="Argument">exclude=None</SPAN>, <SPAN CLASS="Argument">reset=0</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=None</SPAN>, <SPAN CLASS="Argument">add_sr_entries_for_LSAs_and_CSCs=1</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.delete_editor_cbk"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.delete_editor_cbk</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app_name</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">unexpected=0</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.editor_instance"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.editor_instance</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.has_lsa"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.has_lsa</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">language=None</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.interpreter"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.interpreter</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # return a reference to the mediator's current CmdInterp object</SPAN>
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.new_app_mgr"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.new_app_mgr</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.new_editor"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.new_editor</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app</SPAN>, <SPAN CLASS="Argument">server=1</SPAN>, <SPAN CLASS="Argument">check_window=1</SPAN>, <SPAN CLASS="Argument">window_info=None</SPAN>, <SPAN CLASS="Argument">test_editor=0</SPAN>)<SPAN CLASS="OneLiner"> # add a new editor application instance</SPAN>
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.new_interpreter"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.new_interpreter</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=0</SPAN>, <SPAN CLASS="Argument">no_circle=0</SPAN>)<SPAN CLASS="OneLiner"> # create a new interpreter</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.print_abbreviations</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.quit"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.quit</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">clean_sr_voc=0</SPAN>, <SPAN CLASS="Argument">save_speech_files=None</SPAN>, <SPAN CLASS="Argument">disconnect=1</SPAN>)<SPAN CLASS="OneLiner"> # Quit the mediator object</SPAN>
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.recent_dictation"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.recent_dictation</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">n=None</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.reconfigure"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.reconfigure</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">exclude=None</SPAN>, <SPAN CLASS="Argument">config_file=None</SPAN>, <SPAN CLASS="Argument">user_config_file=None</SPAN>, <SPAN CLASS="Argument">reset=0</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=None</SPAN>, <SPAN CLASS="Argument">add_sr_entries_for_LSAs_and_CSCs=1</SPAN>, <SPAN CLASS="Argument">use_pickled_interp=1</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.reinterpret_recent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.reinterpret_recent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">changed</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.remove_other_references"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.remove_other_references</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.reset"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.reset</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">config_file=None</SPAN>, <SPAN CLASS="Argument">user_config_file=None</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=None</SPAN>, <SPAN CLASS="Argument">add_sr_entries_for_LSAs_and_CSCs=1</SPAN>, <SPAN CLASS="Argument">use_pickled_interp=1</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.reset_results_mgr"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.reset_results_mgr</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name=None</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.scratch_recent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.scratch_recent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">n=1</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.standard_symbols_in</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_list</SPAN>)<SPAN CLASS="OneLiner"> # Compile symbols defined in a series of source files</SPAN>
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.stored_utterances"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.stored_utterances</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.trust_current_window"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.trust_current_window</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">trust=1</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.user_message"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.user_message</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">message</SPAN>, <SPAN CLASS="Argument">instance=None</SPAN>)
+    <A CLASS="DocLink" HREF="#NewMediatorObject.NewMediatorObject.window_info"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">NewMediatorObject.NewMediatorObject.window_info</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # find the window id, title, and module of the current window</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.OwnerObject</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject._cleanup_object"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject._cleanup_object</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">object</SPAN>)<SPAN CLASS="OneLiner"> # attempt to call cleanup on object</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_grandparent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_grandparent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grandparent</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_owned"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_owned</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)<SPAN CLASS="OneLiner"> # append a new attribute name to the list of owned objects</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_owned_list"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_owned_list</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)<SPAN CLASS="OneLiner"> # append new attribute names to the list of owned objects</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.cleanup"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.cleanup</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.name_parent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.name_parent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">parent=None</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.owned_by"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.owned_by</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns the name of the parent attribute</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.remove_other_references"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.remove_other_references</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+
+</PRE><H2>Description</H2><P>
+Note: there will be one such object, even if multiple editor
+instances are being controlled through a VoiceCode mediator.</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+[AppMgr] <EM>editors</EM>
+<DD>class which manages editor instances and whe
+their corresponding AppState interfaces.
+<DT>
+[CmdInterp] <EM>interp=CmdInterp.CmdInterp()</EM>
+<DD>Command interpreter used to
+translate pseudo-code to native code.
+<DT>
+<EM>BOOL symbol_match_dlg</EM>
+<DD>use a CmdInterp with symbol match 
+dialog/prompt.  Normally disabled except during regression
+testing, and even then, the persistent mediator object should
+be created symbol_match_dlg = 0, because if
+symbol_match_dlg_regression is set, the mediator object will 
+automatically enable the dialog when regression testing starts 
+and disable it afterwards.  
+<DT>
+<EM>BOOL symbol_match_dlg_regression</EM>
+<DD>use a CmdInterp with symbol match 
+dialog/prompt during regression testing, with both persistent
+and temporary mediator objects.
+<DT>
+[ServerNewMediator] <EM>server</EM>
+<DD>Server to listen for connections
+from new editors, or None if the mediator should operate only with
+an internal test editor
+<DT>
+<EM>{STR: BOOL} external_editors</EM>
+<DD>set of instance names
+of all external editors connected to the mediator via the server
+<DT>
+[MediatorConsole] <EM>the_console</EM>
+<DD>GUI console for viewing mediator
+status, allowing the user to close the mediator when it is running
+as a server, and for invoking the correction dialog boxes.  May be
+None if the mediator is not running in GUI mode
+<DT>
+<EM>CLASS</EM> wave_playback
+<DD>class constructor for a concrete
+subclass of WavePlayback, or None if no playback is available
+<DT>
+<EM>CorrectUtteranceEvent correct_evt</EM>
+<DD>doorbell used to send an
+event to bring up the correction box asynchronously.
+<DT>
+<EM>CorrectRecentEvent correct_recent_evt</EM>
+<DD>doorbell used to send an
+event to bring up the correct recent box asynchronously.
+<DT>
+<EM>{STR:ANY} test_args</EM>
+<DD>list of test names to run
+<DT>
+<EM>{STR:ANY} test_space</EM>
+<DD>if the mediator is started in regression 
+testing mode, test_space is the namespace in which regression tests 
+have been defined and will run.  Otherwise, it should be None.
+<DT>
+<EM>STR pickled_interp</EM>
+<DD>CmdInterp as originally configured,
+pickled to speed up regression testing
+<DT>
+<EM>BOOL global_grammars</EM>
+<DD>should this instance use global grammars for 
+regression testing (ignored if test_space is None)
+<DT>
+<EM>BOOL exclusive</EM>
+<DD>should this instance use exclusive grammars for 
+regression testing (ignored if test_space is None or global_grammars
+is false)
+<DT>
+<EM>STR profile_prefix</EM>
+<DD>prefix for filename for output of profiler,
+or None if not profiling (ignored if test_space is None) 
+<DT>
+<EM>BOOL bypass_sr_recog</EM>
+<DD>when testing, bypass natlink for 
+dictation utterances (ignored if test_space is None) 
+<DT>
+<EM>BOOL test_next</EM>
+<DD>flag to indicate that the mediator should run
+regression tests using the next editor to connect
+<DT>
+<EM>BOOL testing</EM>
+<DD>flag indicating that the mediator is currently
+running regression tests.
+<DT>
+<EM>STR config_file</EM>
+<DD>file which was used to configure the mediator.
+This file will also be the default to use if reconfigure is called
+(usually only by init_simulator_regression during regression tests)
+<DT>
+<EM>STR user_config_file</EM>
+<DD>user-specific file which was used to 
+configure the mediator.
+This file will also be the default to use if reconfigure is called
+(usually only by init_simulator_regression during regression tests)
+</DL>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM> --</P>
+<P>
+..[AppMgr] AppMgr.AppMgr.html
+..[CmdInterp] CmdInterp.CmdInterp.html
+..[ServerNewMediator] ServerNewMediator.tcp_server.html
+</P>
+<H2 ID="NewMediatorObject.NewMediatorObject.__init__" CLASS="Method">NewMediatorObject.NewMediatorObject.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">interp=None</SPAN>, <SPAN CLASS="Argument">server=None</SPAN>, <SPAN CLASS="Argument">console=None</SPAN>, <SPAN CLASS="Argument">wave_playback=None</SPAN>, <SPAN CLASS="Argument">correct_evt=None</SPAN>, <SPAN CLASS="Argument">correct_recent_evt=None</SPAN>, <SPAN CLASS="Argument">test_args=None</SPAN>, <SPAN CLASS="Argument">test_space=None</SPAN>, <SPAN CLASS="Argument">global_grammars=0</SPAN>, <SPAN CLASS="Argument">exclusive=0</SPAN>, <SPAN CLASS="Argument">profile_prefix=None</SPAN>, <SPAN CLASS="Argument">bypass_sr_recog=0</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg_regression=1</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=0</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)</H2>
+<P>creates the NewMediatorObject</P>
+
+<P>
+<STRONG>NOTE:</STRONG> the caller must also call configure before calling
+other methods, or starting the server.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>CmdInterp interp</EM>
+<DD>the command interpreter, or None to have
+NewMediatorObject create one
+<DT>
+<EM>BOOL symbol_match_dlg</EM>
+<DD>use a CmdInterp with symbol match 
+dialog/prompt.  Normally disabled except during regression
+testing, and even then, the persistent mediator object should
+be created symbol_match_dlg = 0, because if
+symbol_match_dlg_regression is set, the mediator object will 
+automatically the dialog when regression testing starts 
+and disable it afterwards.  
+<DT>
+<EM>BOOL symbol_match_dlg_regression</EM>
+<DD>use a CmdInterp with symbol match 
+dialog/prompt during regression testing, with both persistent
+and temporary mediator objects.
+<DT>
+<EM>ServerNewMediator server</EM>
+<DD>the TCP server which will listen 
+for new connections from external editors, or None if we are running
+only with internal editors.  The caller must create the server,
+but NewMediatorObject will always own it.  The application which
+creates NewMediatorObject must start the server but only after
+NewMediatorObject has been configured, and should then delete
+its reference to the server.
+<DT>
+<EM>MediatorConsole console</EM>
+<DD>GUI console for viewing mediator
+status, allowing the user to close the mediator when it is running
+as a server, and for invoking the correction dialog boxes.  Since
+console is an interface to an underlying GUI, NewMediatorObject
+does not own it, and will not clean up either it or the
+underlying GUI.  May be None if the mediator is not running in 
+GUI mode.
+<DT>
+<EM>CLASS</EM> wave_playback
+<DD>class constructor for a concrete
+subclass of WavePlayback, or None if no playback is available
+<DT>
+<EM>CorrectUtteranceEvent correct_evt</EM>
+<DD>doorbell used to send an
+event to bring up the correction box asynchronously.
+<DT>
+<EM>{STR:ANY} test_space</EM>
+<DD>if the mediator is started in regression 
+testing mode, test_space is the namespace in which regression tests 
+have been defined and will run.  Otherwise, it should be None.
+<DT>
+<EM>BOOL global_grammars</EM>
+<DD>should this instance use global grammars for 
+regression testing (ignored if test_space is None)
+<DT>
+<EM>BOOL exclusive</EM>
+<DD>should this instance use exclusive grammars for 
+regression testing (ignored if test_space is None or
+global_grammars is false)
+<DT>
+<EM>STR profile_prefix</EM>
+<DD>prefix for filename for output of profiler,
+or None if not profiling (ignored if test_space is None) 
+<DT>
+<EM>BOOL bypass_sr_recog</EM>
+<DD>when testing, bypass natlink for 
+dictation utterances (ignored if test_space is None) 
+<DT>
+STR <EM>symdict_pickle_fname=None</EM>
+<DD>Name of the file containing the
+persistent version of the symbols dictionnary.
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject._configure_from_file" CLASS="Method">NewMediatorObject.NewMediatorObject._configure_from_file(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">exclude=None</SPAN>, <SPAN CLASS="Argument">config_file=None</SPAN>, <SPAN CLASS="Argument">user_config_file=None</SPAN>, <SPAN CLASS="Argument">reset=0</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=None</SPAN>, <SPAN CLASS="Argument">add_sr_entries_for_LSAs_and_CSCs=1</SPAN>, <SPAN CLASS="Argument">use_pickled_interp=0</SPAN>)</H2>
+<P>None</P>
+
+
+<H3>private method used by configure and reconfigure to perform
+actual configuration.</H3>
+        <STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>[STR] exclude</EM>
+<DD>list of mediator object attributes objects 
+        to ignore during reconfiguration.  Currently, the only recognized 
+        attributes are ['editors', 'interp'].
+<DT>
+<EM>STR</EM> config_file*
+<DD>Full path of the config file.  Defaults to
+        the vc_globals.default_config_file 
+<DT>
+<EM>STR</EM> user_config_file
+<DD>Full path of the user config file.  
+        Defaults to vc_globals.default_user_config_file 
+<DT>
+<EM>BOOL reset</EM>
+<DD>if true, reset the current interpreter, or
+        replace it with a fresh one
+<DT>
+STR <EM>symdict_pickle_fname=None</EM>
+<DD>Name of the file containing the
+        persistent version of the symbols dictionnary.
+<DT>
+<EM>BOOL symbol_match_dlg</EM>
+<DD>use a CmdInterp with symbol match 
+        dialog/prompt.  Normally disabled except during regression
+        testing.  If None, use current setting.
+<DT>
+<EM>BOOL use_pickled_interp</EM>
+<DD>if true, reset the interpreter by
+        unpickling it from the copy pickled on initialization (if one is
+        available)
+</DL>
+        <STRONG>OUTPUTS</STRONG>        <EM>none</EM>
+        <H2 ID="NewMediatorObject.NewMediatorObject._new_test_editor" CLASS="Method">NewMediatorObject.NewMediatorObject._new_test_editor(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app</SPAN>, <SPAN CLASS="Argument">server=1</SPAN>, <SPAN CLASS="Argument">check_window=1</SPAN>, <SPAN CLASS="Argument">window_info=None</SPAN>)</H2>
+<P>None</P>
+
+private method to a new editor application instance and run
+regression tests.  This method should only be called by
+NewMediatorObject.new_editor.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>AppState</EM> app
+<DD>AppState interface corresponding to the new
+instance
+<DT>
+<EM>BOOL</EM> server
+<DD>true if this editor instance is connected to the 
+mediator via the server.
+<DT>
+<EM>BOOL</EM> check_window
+<DD>should we check to see if the
+current window belongs to this instance?  Normally ignored
+unless self.global_grammars is false, or the application manager
+is unable to create a universal instance
+<DT>
+<EM>(INT, STR, STR) window_info</EM> 
+<DD>window id, title, and module of 
+the current window as detected by the TCP server when it
+originally processed the new editor connection, or None to let
+RSM.new_instance check now.  Normally ignored unless
+check_window is true and either self.global_grammars is false
+or the application manager is unable to create a 
+universal instance.
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the regression tests were run
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.add_abbreviation" CLASS="Method">NewMediatorObject.NewMediatorObject.add_abbreviation(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">abbreviation</SPAN>, <SPAN CLASS="Argument">expansions</SPAN>)</H2>
+<P>Add an abbreviation to VoiceCode's abbreviations dictionary.</P>
+
+<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR</EM> abbreviation
+<DD>the abbreviation 
+<DT>
+<EM>[STR]</EM> expansions
+<DD>list of possible expansions
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.add_app_prefix" CLASS="Method">NewMediatorObject.NewMediatorObject.add_app_prefix(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app_name</SPAN>, <SPAN CLASS="Argument">title_prefix</SPAN>)</H2>
+<P>specifies a title prefix to use for a given editor application.</P>
+
+<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR</EM> app_name
+<DD>name of the editor application
+<DT>
+<EM>STR</EM> title_prefix 
+<DD>a unique string for each application, 
+used as the prefix of the title string (which is in turn 
+included as a substring of the window title, if the editor 
+can do so).  The prefix should be entirely alphabetic and
+contain no spaces or punctuation.
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>false if app_name was already known, or prefix wasn't
+unique
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.add_csc" CLASS="Method">NewMediatorObject.NewMediatorObject.add_csc(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">acmd</SPAN>)</H2>
+<P>Add a new Context Sensitive Command.</P>
+
+<A HREF="CSCmd.CSCmd.html">CSCmd</A> <EM>acmd</EM> is the command to add.      <H2 ID="NewMediatorObject.NewMediatorObject.add_csc_set" CLASS="Method">NewMediatorObject.NewMediatorObject.add_csc_set(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">set</SPAN>)</H2>
+<P>add CSCs from a set</P>
+
+<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>CSCmdSet set</EM>
+<DD>the set of commands to add
+</DL>
+<STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="NewMediatorObject.NewMediatorObject.add_lsa" CLASS="Method">NewMediatorObject.NewMediatorObject.add_lsa(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">an_LSA</SPAN>)</H2>
+<P>Add a language specific word.</P>
+
+<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>LSAlias an_LSA</EM>
+<DD>language-specific alias (see CmdInterp)
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.add_lsa_set" CLASS="Method">NewMediatorObject.NewMediatorObject.add_lsa_set(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">set</SPAN>)</H2>
+<P>add LSAs from a set</P>
+
+<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>LSAliasSet set</EM>
+<DD>the set of aliases to add
+</DL>
+<STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="NewMediatorObject.NewMediatorObject.add_module" CLASS="Method">NewMediatorObject.NewMediatorObject.add_module(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">module</SPAN>)</H2>
+<P>add a new KnownTargetModule to the AppMgr/RecogStartMgr</P>
+
+<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>KnownTargetModule</EM> module
+<DD>the new module
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true unless a module of the same name already exists
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.before_app_mgr_config" CLASS="Method">NewMediatorObject.NewMediatorObject.before_app_mgr_config(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">config_dict</SPAN>, <SPAN CLASS="Argument">ignore=0</SPAN>)</H2>
+<P>None</P>
+
+called by configure to add the functions pertaining to
+AppMgr configuration to the configuration dictionary.  If
+ignore is true, this method will instead add dummy versions of those
+functions which will do nothing.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>{STR: ANY} config_dict</EM>
+<DD>dictionary to which to add
+interpreter configuration functions.  This dictionary will be
+used as the namespace for executing the configuration file.
+<DT>
+<EM>BOOL ignore</EM>
+<DD>if true, add dummy versions of the application
+manager configuration functions, so that calls to these functions from
+the configuration file will be ignored.  
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.before_interp_config" CLASS="Method">NewMediatorObject.NewMediatorObject.before_interp_config(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">config_dict</SPAN>, <SPAN CLASS="Argument">reset=0</SPAN>, <SPAN CLASS="Argument">ignore=0</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=None</SPAN>, <SPAN CLASS="Argument">add_sr_entries_for_LSAs_and_CSCs=1</SPAN>)</H2>
+<P>None</P>
+
+called by configure to reset or replace the current interpreter 
+(unless reset is false), and add the functions pertaining to
+interpreter configuration to the configuration dictionary.  If
+ignore is true, this method will add dummy versions of those
+functions which will do nothing.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>{STR: ANY} config_dict</EM>
+<DD>dictionary to which to add
+interpreter configuration functions.  This dictionary will be
+used as the namespace for executing the configuration file.
+<DT>
+<EM>BOOL reset</EM>
+<DD>if true, reset the current interpreter, or
+replace it with a fresh one
+<DT>
+<EM>BOOL ignore</EM>
+<DD>if true, add dummy versions of the interpreter
+configuration functions, so that calls to these functions from
+the configuration file will be ignored.  Normally, reset should
+be false if ignore is true
+<DT>
+STR <EM>symdict_pickle_fname=None</EM>
+<DD>Name of the file containing the
+persistent version of the symbols dictionnary.
+<DT>
+<EM>BOOL symbol_match_dlg</EM>
+<DD>use a CmdInterp with symbol match 
+dialog/prompt.  Normally disabled except during regression
+testing.  If None, use current setting.
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.can_reinterpret" CLASS="Method">NewMediatorObject.NewMediatorObject.can_reinterpret(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">n</SPAN>)</H2>
+<P>None</P>
+
+can we safely reinterpret the nth most recent utterance
+into the specified editor<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR instance_name</EM>
+<DD>the editor 
+<DT>
+<EM>INT n</EM>
+<DD>the depth in the editor state stack of the utterance
+to be reinterpreted
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if we can safely reinterpret that utterance
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.configure" CLASS="Method">NewMediatorObject.NewMediatorObject.configure(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">config_file=None</SPAN>, <SPAN CLASS="Argument">user_config_file=None</SPAN>, <SPAN CLASS="Argument">exclude_interp=0</SPAN>)</H2>
+<P>None</P>
+
+Configures a mediator object based on a configuration file.
+Must be called before (and only before) run.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR</EM> config_file
+<DD>Full path of the config file.  Defaults to
+vc_globals.default_config_file 
+<DT>
+<EM>STR</EM> user_config_file
+<DD>Full path of the user config file.  
+Defaults to vc_globals.default_user_config_file 
+<DT>
+<EM>BOOL</EM> exclude_interp
+<DD>if true, don't re-configure the
+interpreter
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.console" CLASS="Method">NewMediatorObject.NewMediatorObject.console(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+returns a reference to the MediatorConsole which provides the
+GUI correction interfaces.<STRONG>INPUTS</STRONG><EM>none</EM><STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="NewMediatorObject.NewMediatorObject.correct_recent" CLASS="Method">NewMediatorObject.NewMediatorObject.correct_recent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>)</H2>
+<P>initiate user selection of a recent utterance to correct</P>
+
+NOTE: this is a synchronous method which starts a modal
+correction box, and will not return until the user has 
+dismissed the correct recent dialog box.  Generally, it should 
+be called only in response to a CorrectRecent event, rather than
+in direct response to a spoken correction command.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR instance_name</EM>
+<DD>name of the application instance
+</DL>
+<STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="NewMediatorObject.NewMediatorObject.correct_utterance" CLASS="Method">NewMediatorObject.NewMediatorObject.correct_utterance(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">utterance_number</SPAN>)</H2>
+<P>None</P>
+
+initiate user correction of the utterance with a given
+utterance number into the given instanceNOTE: this is a synchronous method which starts a modal
+correction box, and will not return until the user has 
+dismissed the correction box.  Generally, it should be called
+only in response to a CorrectUtterance event, rather than
+in direct response to a spoken correction command.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR instance_name</EM>
+<DD>name of the application instance
+<DT>
+<EM>INT utterance_number</EM>
+<DD>the number assigned to the utterance by
+interpret_dictation
+</DL>
+<STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="NewMediatorObject.NewMediatorObject.define_config_functions" CLASS="Method">NewMediatorObject.NewMediatorObject.define_config_functions(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">names</SPAN>, <SPAN CLASS="Argument">exclude=None</SPAN>, <SPAN CLASS="Argument">reset=0</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=None</SPAN>, <SPAN CLASS="Argument">add_sr_entries_for_LSAs_and_CSCs=1</SPAN>)</H2>
+<P>None</P>
+
+Adds the appropriate configuration functions to the  given
+namespace, to allow the configuration file to access the
+appropriate mediator methods.  These functions are generally
+bound methods.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> names
+<DD>the dictionary or namespace to which to
+add the functions
+<DT>
+<EM>[STR] exclude</EM>
+<DD>list of mediator object attributes objects 
+to ignore during reconfiguration.  Currently, the only recognized 
+attributes are ['editors', 'interp'].
+<DT>
+<EM>BOOL reset</EM>
+<DD>if true, reset the current interpreter, or
+replace it with a fresh one
+<DT>
+STR <EM>symdict_pickle_fname=None</EM>
+<DD>Name of the file containing the
+persistent version of the symbols dictionnary.
+<DT>
+<EM>BOOL symbol_match_dlg</EM>
+<DD>use a CmdInterp with symbol match 
+dialog/prompt.  Normally disabled except during regression
+testing.  If None, use current setting.
+</DL>
+<STRONG>OUTPUTS</STRONG><EM>none</EM> 
+<H2 ID="NewMediatorObject.NewMediatorObject.delete_editor_cbk" CLASS="Method">NewMediatorObject.NewMediatorObject.delete_editor_cbk(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app_name</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">unexpected=0</SPAN>)</H2>
+<P>None</P>
+
+callback from the application manager indicating that
+an editor closed or disconnected from the mediator<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR app_name</EM>
+<DD>name of the editor 
+<DT>
+<EM>STR instance_name</EM>
+<DD>name of the application instance
+<DT>
+<EM>BOOL unexpected</EM>
+<DD>for external editors, was the editor
+connection broken unexpectedly, or did the editor notify the
+mediator that it was going to close/disconnect?
+</DL>
+<STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="NewMediatorObject.NewMediatorObject.editor_instance" CLASS="Method">NewMediatorObject.NewMediatorObject.editor_instance(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>)</H2>
+<P>None</P>
+
+return a reference to the AppState object corresponding to a
+particular instance. <STRONG>Note:</STRONG> Use only temporarily.  Storing 
+this reference is unsafe, and may lead to mediator crashes on 
+calls to its methods, and to failure to free resources.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR</EM> instance
+<DD>name of the application instance 
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>AppState</EM>
+<DD>temporary reference to the corresponding AppState
+object
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.has_lsa" CLASS="Method">NewMediatorObject.NewMediatorObject.has_lsa(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">language=None</SPAN>)</H2>
+<P>None</P>
+
+check if there is already an LSA defined with this spoken
+form<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR spoken_form</EM>
+<DD>spoken form to check
+<DT>
+<EM>STR language</EM>
+<DD>name of the language in which to check
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if such an LSA exists
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.interpreter" CLASS="Method">NewMediatorObject.NewMediatorObject.interpreter(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>return a reference to the mediator's current CmdInterp object</P>
+
+<STRONG>INPUTS</STRONG><EM>none</EM><STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="NewMediatorObject.NewMediatorObject.new_app_mgr" CLASS="Method">NewMediatorObject.NewMediatorObject.new_app_mgr(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+create a new AppMgr if one was not supplied to  the
+constructor<STRONG>INPUTS</STRONG><EM>none</EM><STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if a new AppMgr was sucessfully created
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.new_editor" CLASS="Method">NewMediatorObject.NewMediatorObject.new_editor(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app</SPAN>, <SPAN CLASS="Argument">server=1</SPAN>, <SPAN CLASS="Argument">check_window=1</SPAN>, <SPAN CLASS="Argument">window_info=None</SPAN>, <SPAN CLASS="Argument">test_editor=0</SPAN>)</H2>
+<P>add a new editor application instance</P>
+
+<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>AppState</EM> app
+<DD>AppState interface corresponding to the new
+instance
+<DT>
+<EM>BOOL</EM> server
+<DD>true if this editor instance is connected to the 
+mediator via the server.
+<DT>
+<EM>BOOL</EM> check_window
+<DD>should we check to see if the
+current window belongs to this instance?
+<DT>
+<EM>(INT, STR, STR) window_info</EM> 
+<DD>window id, title, and module of 
+the current window as detected by the TCP server when it
+originally processed the new editor connection, or None to let
+RSM.new_instance check now.  Ignored unless check_window is
+true.
+<DT>
+BOOL <EM>test_editor</EM>
+<DD>flag indicating whether or not the editor
+is expecting to be used for regression testing
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>name of the application instance.  Necessary
+if you want to add windows to the application in the future.
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.new_interpreter" CLASS="Method">NewMediatorObject.NewMediatorObject.new_interpreter(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=0</SPAN>, <SPAN CLASS="Argument">no_circle=0</SPAN>)</H2>
+<P>create a new interpreter</P>
+
+<STRONG>INPUTS</STRONG><EM>none</EM><STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="NewMediatorObject.NewMediatorObject.quit" CLASS="Method">NewMediatorObject.NewMediatorObject.quit(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">clean_sr_voc=0</SPAN>, <SPAN CLASS="Argument">save_speech_files=None</SPAN>, <SPAN CLASS="Argument">disconnect=1</SPAN>)</H2>
+<P>Quit the mediator object</P>
+
+<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>BOOL</EM> clean_sr_voc=0
+<DD>If true, remove all SR entries for known
+symbols.
+<DT>
+<EM>BOOL</EM> save_speech_files = None
+<DD>Indicates whether or not
+speech files should be saved. If <EM>None</EM>, then ask the user.
+<DT>
+<EM>BOOL</EM> disconnect = 1
+<DD>Indicates whether or not to disconnect from
+the SR system.
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.recent_dictation" CLASS="Method">NewMediatorObject.NewMediatorObject.recent_dictation(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">n=None</SPAN>)</H2>
+<P>None</P>
+
+returns a list of the most recent SpokenUtterance objects for
+the specified editor<STRONG>Note:</STRONG> additional dictation into the editor will increment
+the indices of specific utterances, so the mediator must not
+allow dictation into the editor between the call to 
+recent_dictation to get the utterances and the call to 
+reinterpret_recent.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR instance_name</EM>
+<DD>the editor 
+<DT>
+<EM>INT n</EM>
+<DD>the number of utterances to return, or None to return 
+all available utterances.
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>[(SpokenUtterance, INT, BOOL)]</EM>
+<DD>the n most recent dictation 
+utterances (or all available if &lt; n), sorted most recent last, 
+each with a corresponding identifying number and a flag indicating 
+if the utterance can be undone and re-interpreted, 
+or None if no utterances are stored.
+</DL>
+The utterance number is unique, within a given editor instance.Note:  These utterances should not be stored permanently, nor
+should they be modified except as part of the correction
+process.  Also, the status of whether a given utterance can be
+re-interpreted may change if the user makes other changes to the 
+<H2 ID="NewMediatorObject.NewMediatorObject.reconfigure" CLASS="Method">NewMediatorObject.NewMediatorObject.reconfigure(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">exclude=None</SPAN>, <SPAN CLASS="Argument">config_file=None</SPAN>, <SPAN CLASS="Argument">user_config_file=None</SPAN>, <SPAN CLASS="Argument">reset=0</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=None</SPAN>, <SPAN CLASS="Argument">add_sr_entries_for_LSAs_and_CSCs=1</SPAN>, <SPAN CLASS="Argument">use_pickled_interp=1</SPAN>)</H2>
+<P>None</P>
+
+reconfigure an existing mediator object.  Unlike configure,
+reconfigure may be called while the mediator object is already
+running.  By default, reconfigure will use the same files used by
+configure, or the vc_globals.default_config_file  and
+vc_globals.default_user_config_file if configure
+did not record the filenames.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>[STR] exclude</EM>
+<DD>list of mediator object attributes objects 
+to ignore during reconfiguration.  Currently, the only recognized 
+attributes are ['editors', 'interp'].
+<DT>
+<EM>STR</EM> config_file*
+<DD>Full path of the config file.  If None,
+then use the same one used previously by configure, or
+the vc_globals.default_config_file if configure
+did not record the filename.
+<DT>
+<EM>STR</EM> user_config_file*
+<DD>Full path of the user config file.  If None,
+then use the same one used previously by configure, or
+the vc_globals.default_user_config_file if configure
+did not record the filename.
+<DT>
+<EM>BOOL reset</EM>
+<DD>if true, reset the current interpreter, or
+replace it with a fresh one
+<DT>
+STR <EM>symdict_pickle_fname=None</EM>
+<DD>Name of the file containing the
+persistent version of the symbols dictionnary.
+<DT>
+<EM>BOOL symbol_match_dlg</EM>
+<DD>use a CmdInterp with symbol match 
+dialog/prompt.  Normally disabled except during regression
+testing.  If None, use current setting.
+<DT>
+<EM>BOOL use_pickled_interp</EM>
+<DD>if true, reset the interpreter by
+unpickling it from the copy pickled on initialization
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.reinterpret_recent" CLASS="Method">NewMediatorObject.NewMediatorObject.reinterpret_recent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">changed</SPAN>)</H2>
+<P>None</P>
+
+undo the effect of one or more recent utterances, if
+possible, and reinterpret these utterances (and possibly any
+intervening utterances), making the appropriate changes to the
+editor buffers.<STRONG>Note:</STRONG> this method does not perform adaption of the changed
+utterances.  The caller should do that itself.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>[INT] changed</EM>
+<DD>the utterance numbers of 
+those utterances which were corrected by the user
+</DL>
+<STRONG>NOTE:</STRONG> particular implementations of ResMgr may reinterpret 
+all utterances subsequent to the oldest changed utterance<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>[INT]</EM>
+<DD>the indices onto the stack of recent utterances 
+actually reinterpreted (including intervening ones), sorted 
+with the oldest first, or None if no utterances could be 
+reinterpreted
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.remove_other_references" CLASS="Method">NewMediatorObject.NewMediatorObject.remove_other_references(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+additional cleanup to ensure that this object's references to
+its owned objects are the last remaining references<STRONG>NOTE:</STRONG> subclasses must call their parent class's 
+remove_other_references method, after performing their own duties.
+Also, a class inheriting from two OwnerObject classes MUST
+define remove_other_references and call both subclasses'
+versions<STRONG>INPUTS</STRONG><EM>none</EM><STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="NewMediatorObject.NewMediatorObject.reset" CLASS="Method">NewMediatorObject.NewMediatorObject.reset(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">config_file=None</SPAN>, <SPAN CLASS="Argument">user_config_file=None</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=None</SPAN>, <SPAN CLASS="Argument">add_sr_entries_for_LSAs_and_CSCs=1</SPAN>, <SPAN CLASS="Argument">use_pickled_interp=1</SPAN>)</H2>
+<P>None</P>
+
+reset the mediator object to continue regression testing with
+a fresh interpreter<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR</EM> config_file*
+<DD>Full path of the config file.  If None,
+then use the same one used previously by configure, or
+the vc_globals.default_config_file if configure
+did not record the filename.
+<DT>
+<EM>STR</EM> user_config_file*
+<DD>Full path of the user config file.  If None,
+then use the same one used previously by configure, or
+the vc_globals.default_user_config_file if configure
+did not record the filename.
+<DT>
+<EM>BOOL symbol_match_dlg</EM>
+<DD>use a CmdInterp with symbol match 
+dialog/prompt.  Normally disabled except during regression
+testing.  If None, use current setting.
+<DT>
+<EM>BOOL add_sr_entries_for_LSAs_and_CSCs=1</EM>
+<DD>see [CmdInterp] attribute 
+by the same name.
+<DT>
+<EM>BOOL use_pickled_interp</EM>
+<DD>if true, reset the interpreter by
+unpickling it from the copy pickled on initialization
+</DL>
+..[CmdInterp] CmdInterp.CmdInterp.html<H2 ID="NewMediatorObject.NewMediatorObject.reset_results_mgr" CLASS="Method">NewMediatorObject.NewMediatorObject.reset_results_mgr(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name=None</SPAN>)</H2>
+<P>None</P>
+
+resets the ResMgr objects for a given editor, erasing any 
+stored utterance and corresponding editor state information.  
+Normally called only as part of resetting the mediator for 
+a new regression test<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR instance_name</EM>
+<DD>the editor whose data should be reset, or
+None to reset ResMgr data for all editors
+</DL>
+<STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="NewMediatorObject.NewMediatorObject.scratch_recent" CLASS="Method">NewMediatorObject.NewMediatorObject.scratch_recent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">n=1</SPAN>)</H2>
+<P>None</P>
+
+undo the effect of the most recent n utterances into the
+specified editor, if possible.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR instance_name</EM>
+<DD>the editor 
+<DT>
+<EM>INT n</EM>
+<DD>number of utterances to undo
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>number of utterances actually undone
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.stored_utterances" CLASS="Method">NewMediatorObject.NewMediatorObject.stored_utterances(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>)</H2>
+<P>None</P>
+
+queries the ResMgr to see how many dictated utterances have 
+been stored for the specified editor<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR instance_name</EM>
+<DD>the editor 
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>number of utterances which can be retrieved with
+recent_dictation
+
+</DL>
+<H2 ID="NewMediatorObject.NewMediatorObject.trust_current_window" CLASS="Method">NewMediatorObject.NewMediatorObject.trust_current_window(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">trust=1</SPAN>)</H2>
+<P>None</P>
+
+specifies whether the RecogStartMgr should trust that the current
+window corresponds to the editor when the editor first connects to
+VoiceCode, or when it notifies VoiceCode of a new window.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>BOOL</EM> trust_current_window
+<DD>1 if RSM should trust that the current
+window corresponds to the editor when the editor first connects to
+VoiceCode, or when it notifies VoiceCode of a new window.
+</DL>
+<STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="NewMediatorObject.NewMediatorObject.user_message" CLASS="Method">NewMediatorObject.NewMediatorObject.user_message(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">message</SPAN>, <SPAN CLASS="Argument">instance=None</SPAN>)</H2>
+<P>None</P>
+
+displays a user message via the appropriate channel
+(e.g. stdout, or a MediatorConsole status line, or an 
+editor-specific status line if supported.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR message</EM>
+<DD>the message
+<DT>
+<EM>STR instance_name</EM>
+<DD>the editor from which the message
+originated, or None if it is not associated with a specific
+editor.
+</DL>
+<STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="NewMediatorObject.NewMediatorObject.window_info" CLASS="Method">NewMediatorObject.NewMediatorObject.window_info(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>find the window id, title, and module of the current window</P>
+
+<STRONG>INPUTS</STRONG><EM>none</EM><STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>(INT, STR, STR)</EM>
+<DD>the window id, title, and module name
+
+</DL>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM>
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+Initialises existing attributes, unless those attributes
+already exist<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.OwnerObject._cleanup_object" CLASS="Method">Object.OwnerObject._cleanup_object(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">object</SPAN>)</H2>
+<P>attempt to call cleanup on object</P>
+
+<STRONG>INPUTS*</STRONG>
+<DL>
+
+<DT>
+<EM>OwnerObject object</EM>
+<DD>note: class of object is the expected
+class, but _cleanup_object doesn't assume this is correct, nor
+does it check whether the object is a subclass of
+OwnerObject, only that it is a class instance and that it
+has a cleanup attribute
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>reason for error (or None if no error).
+
+</DL>
+<H2 ID="Object.OwnerObject.add_grandparent" CLASS="Method">Object.OwnerObject.add_grandparent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grandparent</SPAN>)</H2>
+<P>None</P>
+
+specify the name of the attribute containing a reference to 
+this object's grandparent (or great-grandparent, etc.)
+(Actually, any other reference which needs to be del'ed but not
+cleaned up)<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR grandparent</EM>
+<DD>names of owned attributes
+</DL>
+<STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="Object.OwnerObject.add_owned" CLASS="Method">Object.OwnerObject.add_owned(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)</H2>
+<P>append a new attribute name to the list of owned objects</P>
+
+<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR owned</EM>
+<DD>names of owned attributes
+</DL>
+<STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="Object.OwnerObject.add_owned_list" CLASS="Method">Object.OwnerObject.add_owned_list(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)</H2>
+<P>append new attribute names to the list of owned objects</P>
+
+<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>[STR] owned</EM>
+<DD>names of owned attributes
+</DL>
+<STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="Object.OwnerObject.cleanup" CLASS="Method">Object.OwnerObject.cleanup(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+method to cleanup circular references by cleaning up 
+any children, and then removing the reference to the parent<STRONG>INPUTS</STRONG><EM>none</EM><STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="Object.OwnerObject.name_parent" CLASS="Method">Object.OwnerObject.name_parent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">parent=None</SPAN>)</H2>
+<P>None</P>
+
+specify the name of the attribute containing a reference to 
+this object's parent.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR parent</EM>
+<DD>name of the parent, or None if none
+</DL>
+<STRONG>OUTPUTS</STRONG><EM>none</EM>
+<H2 ID="Object.OwnerObject.owned_by" CLASS="Method">Object.OwnerObject.owned_by(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns the name of the parent attribute</P>
+
+<STRONG>INPUTS</STRONG><EM>none</EM><STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>name of the parent, or None if none
+
+</DL>
+<H2 ID="Object.OwnerObject.remove_other_references" CLASS="Method">Object.OwnerObject.remove_other_references(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+additional cleanup to ensure that this object's references to
+its owned objects are the last remaining references<STRONG>NOTE:</STRONG> subclasses must call their parent class's 
+remove_other_references method, after performing their own duties.
+Also, a class inheriting from two OwnerObject classes MUST
+define remove_other_references and call both subclasses'
+versions<STRONG>INPUTS</STRONG><EM>none</EM><STRONG>OUTPUTS</STRONG><EM>none</EM>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

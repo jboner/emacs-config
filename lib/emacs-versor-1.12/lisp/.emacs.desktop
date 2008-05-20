@@ -1,0 +1,721 @@
+;; -*- mode: emacs-lisp; coding: utf-8-emacs; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Mon Jul 02 18:19:38 2007
+;; Desktop file format version 206
+;; Emacs version 23.0.0.1
+
+;; Global section:
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-dimensions.el"
+  "versor-dimensions.el"
+  'emacs-lisp-mode
+  nil
+  21764
+  '(21525 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "*info*"
+  'Info-mode
+  nil
+  116762
+  '(nil nil)
+  t
+  '("c:/fsf/emacs23/ntemacs23/info/emacs" "Saving Emacs Sessions")
+  '((tab-width . 8) (buffer-file-coding-system . undecided-dos) (case-fold-search . t)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-base-moves.el"
+  "versor-base-moves.el"
+  'emacs-lisp-mode
+  nil
+  28241
+  '(1 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-commands.el"
+  "versor-commands.el"
+  'emacs-lisp-mode
+  nil
+  4864
+  '(31255 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-selection.el"
+  "versor-selection.el"
+  'emacs-lisp-mode
+  nil
+  9732
+  '(9755 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/languide.el"
+  "languide.el"
+  'emacs-lisp-mode
+  nil
+  12079
+  '(7063 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-text-in-code.el"
+  "versor-text-in-code.el"
+  'emacs-lisp-mode
+  nil
+  2030
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-help.el"
+  "versor-help.el"
+  'emacs-lisp-mode
+  nil
+  2307
+  '(2277 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-tlc.el"
+  "versor-tlc.el"
+  'emacs-lisp-mode
+  nil
+  14355
+  '(22667 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-names.el"
+  "versor-names.el"
+  'emacs-lisp-mode
+  nil
+  4746
+  '(4716 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-voice.el"
+  "versor-voice.el"
+  'emacs-lisp-mode
+  nil
+  4813
+  '(1517 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/ChangeLog"
+  "ChangeLog"
+  'change-log-mode
+  '(auto-fill-mode abbrev-mode)
+  325
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode . t) (buffer-file-coding-system . undecided-dos) (fill-column . 74)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/languide-c-like.el"
+  "languide-c-like.el"
+  'emacs-lisp-mode
+  nil
+  13212
+  '(4517 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/htdocs/index.html"
+  "index.html"
+  'html-helper-mode
+  '(auto-fill-mode abbrev-mode)
+  794
+  '(228 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/htdocs/versor.css"
+  "versor.css"
+  'fundamental-mode
+  nil
+  548
+  '(1472 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/htdocs/versor.html"
+  "versor.html"
+  'html-helper-mode
+  '(auto-fill-mode abbrev-mode)
+  4016
+  '(304 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/htdocs/versor-speaking.html"
+  "versor-speaking.html"
+  'html-helper-mode
+  '(auto-fill-mode abbrev-mode)
+  337
+  '(391 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-trim-whitespace.el"
+  "versor-trim-whitespace.el"
+  'emacs-lisp-mode
+  nil
+  7656
+  '(4991 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-custom.el"
+  "versor-custom.el"
+  'emacs-lisp-mode
+  nil
+  3159
+  '(3053 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/statement-nav-directions.el"
+  "statement-nav-directions.el"
+  'emacs-lisp-mode
+  nil
+  2708
+  '(10225 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-dwim.el"
+  "versor-dwim.el"
+  'emacs-lisp-mode
+  nil
+  5623
+  '(5737 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/statement-navigation.el"
+  "statement-navigation.el"
+  'emacs-lisp-mode
+  nil
+  7973
+  '(4639 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/languide-test.el"
+  "languide-test.el"
+  'emacs-lisp-mode
+  nil
+  718
+  '(759 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/languide-sh-like.el"
+  "languide-sh-like.el"
+  'emacs-lisp-mode
+  nil
+  1345
+  '(1939 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/languide-python.el"
+  "languide-python.el"
+  'emacs-lisp-mode
+  nil
+  2325
+  '(1416 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/languide-lisp-like.el"
+  "languide-lisp-like.el"
+  'emacs-lisp-mode
+  nil
+  1448
+  '(1308 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/languide-functional.el"
+  "languide-functional.el"
+  'emacs-lisp-mode
+  nil
+  1491
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor.el"
+  "versor.el"
+  'emacs-lisp-mode
+  nil
+  14259
+  '(14337 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/texinfo/versor.texinfo"
+  "versor.texinfo"
+  'texinfo-mode
+  '(auto-fill-mode abbrev-mode)
+  15901
+  '(2294 t)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (fill-column . 70)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-alter-item.el"
+  "versor-alter-item.el"
+  'emacs-lisp-mode
+  nil
+  1173
+  '(11512 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/languide-edits.el"
+  "languide-edits.el"
+  'emacs-lisp-mode
+  nil
+  8036
+  '(2198 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/languide-custom.el"
+  "languide-custom.el"
+  'emacs-lisp-mode
+  nil
+  2578
+  '(2605 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-demo.el"
+  "versor-demo.el"
+  'emacs-lisp-mode
+  nil
+  22493
+  '(22479 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-status.el"
+  "versor-status.el"
+  'emacs-lisp-mode
+  nil
+  5703
+  '(4863 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/statement-parts.el"
+  "statement-parts.el"
+  'emacs-lisp-mode
+  nil
+  4202
+  '(1272 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/statement-cache.el"
+  "statement-cache.el"
+  'emacs-lisp-mode
+  nil
+  4719
+  '(1 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/buffer-select-hooks.el"
+  "buffer-select-hooks.el"
+  'emacs-lisp-mode
+  nil
+  2010
+  '(995 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/modal-functions.el"
+  "modal-functions.el"
+  'emacs-lisp-mode
+  nil
+  2344
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-language-edits.el"
+  "versor-language-edits.el"
+  'emacs-lisp-mode
+  nil
+  1
+  '(5889 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/statement-definition.el"
+  "statement-definition.el"
+  'emacs-lisp-mode
+  nil
+  860
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-containers.el"
+  "versor-containers.el"
+  'emacs-lisp-mode
+  nil
+  840
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-chop-chop.el"
+  "versor-chop-chop.el"
+  'emacs-lisp-mode
+  nil
+  824
+  '(824 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-menu.el"
+  "versor-menu.el"
+  'emacs-lisp-mode
+  nil
+  1279
+  '(1279 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/languide-insertions.el"
+  "languide-insertions.el"
+  'emacs-lisp-mode
+  nil
+  879
+  '(880 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-local.el"
+  "versor-local.el"
+  'emacs-lisp-mode
+  nil
+  983
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/flexi-choose.el"
+  "flexi-choose.el"
+  'emacs-lisp-mode
+  nil
+  1
+  '(8742 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/nested-blocks.el"
+  "nested-blocks.el"
+  'emacs-lisp-mode
+  nil
+  9152
+  '(7928 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/texinfo/languide.info"
+  "languide.info"
+  'Info-mode
+  nil
+  28881
+  '(28881 t)
+  t
+  nil
+  '((tab-width . 8) (buffer-file-coding-system . undecided-unix) (case-fold-search . t)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/pedals.el"
+  "pedals.el"
+  'emacs-lisp-mode
+  nil
+  904
+  '(16271 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/texinfo/sf.css"
+  "sf.css"
+  'fundamental-mode
+  nil
+  37
+  '(28 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-keymap.el"
+  "versor-keymap.el"
+  'emacs-lisp-mode
+  nil
+  816
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/languide-keymap.el"
+  "languide-keymap.el"
+  'emacs-lisp-mode
+  nil
+  826
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-tracking.el"
+  "versor-tracking.el"
+  'emacs-lisp-mode
+  nil
+  844
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-dot-emacs.el"
+  "versor-dot-emacs.el"
+  'emacs-lisp-mode
+  nil
+  103
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-modal.el"
+  "versor-modal.el"
+  'emacs-lisp-mode
+  nil
+  957
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/htdocs/.tail"
+  ".tail"
+  'html-helper-mode
+  '(auto-fill-mode abbrev-mode)
+  205
+  '(6 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/versor-research.el"
+  "versor-research.el"
+  'emacs-lisp-mode
+  nil
+  823
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/languide-html-like.el"
+  "languide-html-like.el"
+  'emacs-lisp-mode
+  nil
+  927
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/languide-bindings.el"
+  "languide-bindings.el"
+  'emacs-lisp-mode
+  nil
+  850
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/texinfo/languide.texinfo"
+  "languide.texinfo"
+  'texinfo-mode
+  '(auto-fill-mode abbrev-mode)
+  33053
+  '(33054 t)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (fill-column . 70)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/lisp/handsfree-menus.el"
+  "handsfree-menus.el"
+  'emacs-lisp-mode
+  nil
+  1394
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/emacs-versor/texinfo/Makefile"
+  "Makefile"
+  'fundamental-mode
+  nil
+  236
+  '(1 t)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "c:/users/jcgs/.context-log"
+  ".context-log"
+  'fundamental-mode
+  nil
+  1033588
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-dos)))
+
+(desktop-create-buffer 206
+  "i:/common/open-projects/mulvoc/mulvoc/etc/LanguageCodes.tab"
+  "LanguageCodes.tab"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  t
+  nil
+  '((buffer-file-coding-system . iso-latin-1-dos)))
+

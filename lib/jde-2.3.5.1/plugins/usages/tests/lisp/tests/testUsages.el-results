@@ -1,0 +1,1015 @@
+
+(TEST-type-hierarchy "testproject.Main")
+nil
+
+
+(TEST-type-hierarchy "testproject.A$I")
+(["testproject/A$I" interface] "testproject/A$C")
+
+
+(TEST-type-hierarchy "testproject.A$D")
+nil
+
+
+(TEST-type-hierarchy "testproject.A$C")
+("testproject.ASuperSuper" ("testproject.ASuper" ("testproject.A" "testproject.A$C")))
+
+
+(TEST-type-hierarchy "testproject.A$B")
+nil
+
+
+(TEST-type-hierarchy "testproject.A")
+("testproject.ASuperSuper" ("testproject.ASuper" ("testproject/A" "testproject/A$C")))
+
+
+(TEST-type-hierarchy "testproject.ASuper")
+("testproject.ASuperSuper" ("testproject/ASuper" ("testproject/A" "testproject/A$C")))
+
+
+(TEST-type-hierarchy "testproject.ASuperSuper")
+("testproject/ASuperSuper" ("testproject/ASuper" ("testproject/A" "testproject/A$C")))
+
+
+(TEST-type-hierarchy "testproject.ASuperInt")
+(["testproject/ASuperInt" interface] ("testproject/ASuper" ("testproject/A" "testproject/A$C")))
+
+
+(TEST-type-hierarchy "testproject.AInt")
+(["testproject/AInt" interface] ("testproject/A" "testproject/A$C"))
+
+
+(TEST-supers "testproject.Main")
+("testproject.Main")
+
+
+(TEST-supers "testproject.A$I")
+(["testproject.A$I" interface])
+
+
+(TEST-supers "testproject.A$D")
+("testproject.A$D")
+
+
+(TEST-supers "testproject.A$C")
+("testproject.A$C" ("testproject.A" ("testproject.ASuper" "testproject.ASuperSuper"
+                                     ["testproject.ASuperInt" interface])
+                    ["testproject.AInt" interface])
+ ["testproject.A$I" interface]
+ ["java.lang.Comparable" interface])
+
+
+(TEST-supers "testproject.A$B")
+("testproject.A$B")
+
+
+(TEST-supers "testproject.A")
+("testproject.A" ("testproject.ASuper" "testproject.ASuperSuper"
+                  ["testproject.ASuperInt" interface])
+ ["testproject.AInt" interface])
+
+
+(TEST-supers "testproject.ASuper")
+("testproject.ASuper" "testproject.ASuperSuper"
+ ["testproject.ASuperInt" interface])
+
+
+(TEST-supers "testproject.ASuperSuper")
+("testproject.ASuperSuper")
+
+
+(TEST-supers "testproject.ASuperInt")
+(["testproject.ASuperInt" interface])
+
+
+(TEST-supers "testproject.AInt")
+(["testproject.AInt" interface])
+
+
+(TEST-subs both "testproject.Main")
+nil
+
+
+(TEST-subs implementers "testproject.Main")
+nil
+
+
+(TEST-subs subclasses "testproject.Main")
+nil
+
+
+(TEST-subs both "testproject.A$I")
+(["testproject/A$I" interface] "testproject/A$C")
+
+
+(TEST-subs implementers "testproject.A$I")
+(["testproject/A$I" interface] "testproject/A$C")
+
+
+(TEST-subs subclasses "testproject.A$I")
+nil
+
+
+(TEST-subs both "testproject.A$D")
+nil
+
+
+(TEST-subs implementers "testproject.A$D")
+nil
+
+
+(TEST-subs subclasses "testproject.A$D")
+nil
+
+
+(TEST-subs both "testproject.A$C")
+nil
+
+
+(TEST-subs implementers "testproject.A$C")
+nil
+
+
+(TEST-subs subclasses "testproject.A$C")
+nil
+
+
+(TEST-subs both "testproject.A$B")
+nil
+
+
+(TEST-subs implementers "testproject.A$B")
+nil
+
+
+(TEST-subs subclasses "testproject.A$B")
+nil
+
+
+(TEST-subs both "testproject.A")
+("testproject/A" "testproject/A$C")
+
+
+(TEST-subs implementers "testproject.A")
+("testproject/A" "testproject/A$C")
+
+
+(TEST-subs subclasses "testproject.A")
+nil
+
+
+(TEST-subs both "testproject.ASuper")
+("testproject/ASuper" ("testproject/A" "testproject/A$C"))
+
+
+(TEST-subs implementers "testproject.ASuper")
+("testproject/ASuper" ("testproject/A" "testproject/A$C"))
+
+
+(TEST-subs subclasses "testproject.ASuper")
+nil
+
+
+(TEST-subs both "testproject.ASuperSuper")
+("testproject/ASuperSuper" ("testproject/ASuper" ("testproject/A" "testproject/A$C")))
+
+
+(TEST-subs implementers "testproject.ASuperSuper")
+("testproject/ASuperSuper" ("testproject/ASuper" ("testproject/A" "testproject/A$C")))
+
+
+(TEST-subs subclasses "testproject.ASuperSuper")
+nil
+
+
+(TEST-subs both "testproject.ASuperInt")
+(["testproject/ASuperInt" interface] ("testproject/ASuper" ("testproject/A" "testproject/A$C")))
+
+
+(TEST-subs implementers "testproject.ASuperInt")
+(["testproject/ASuperInt" interface] ("testproject/ASuper" ("testproject/A" "testproject/A$C")))
+
+
+(TEST-subs subclasses "testproject.ASuperInt")
+nil
+
+
+(TEST-subs both "testproject.AInt")
+(["testproject/AInt" interface] ("testproject/A" "testproject/A$C"))
+
+
+(TEST-subs implementers "testproject.AInt")
+(["testproject/AInt" interface] ("testproject/A" "testproject/A$C"))
+
+
+(TEST-subs subclasses "testproject.AInt")
+nil
+
+
+(TEST-class-list)
+("A (in testproject)" "AInt (in testproject)"
+ "ASuper (in testproject)"
+ "ASuperInt (in testproject)"
+ "ASuperSuper (in testproject)"
+ "B (in testproject.A$)"
+ "C (in testproject.A$)"
+ "D (in testproject.A$)"
+ "I (in testproject.A$)"
+ "Main (in testproject)")
+
+
+(TEST-usages-at-point "testproject.Main" 901)
+("java.lang.Object" ("testproject.Main" "test" "<void>" nil 44 nil 0)
+ "java.lang.StringBuffer"
+ ("testproject.Main" "test" "<void>" nil 45 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 862)
+(("testproject.Main" "test" "<void>" nil 44 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 830)
+("testproject.A" ("testproject.Main" "test" "<void>" nil 42 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 43 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 808)
+(("testproject.Main" "test" "<void>" nil 42 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 43 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 787)
+(("testproject.Main" "test" "<void>" nil 41 nil 0)
+ ("testproject.A$C" "methodI" "int" ("testproject.A$B") 32 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 760)
+("testproject.A$I" ("testproject.Main" "test" "<void>" nil 39 nil 0)
+ "testproject.A$C"
+ ("testproject.Main" "test" "<void>" nil 40 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 737)
+(("testproject.Main" "test" "<void>" nil 39 nil 0)
+ "testproject.A$C"
+ ("testproject.Main" "test" "<void>" nil 40 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 685)
+nil
+
+
+(TEST-usages-at-point "testproject.Main" 663)
+nil
+
+
+(TEST-usages-at-point "testproject.Main" 641)
+nil
+
+
+(TEST-usages-at-point "testproject.Main" 620)
+(("testproject.Main" "test" "<void>" nil 33 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 26 nil 0)
+ ("testproject.Main" "test" "<void>" nil 26 nil 1)
+ ("testproject.Main" "test" "<void>" nil 26 nil 2)
+ ("testproject.Main" "test" "<void>" nil 26 nil 3))
+
+
+(TEST-usages-at-point "testproject.Main" 598)
+(("testproject.Main" "test" "<void>" nil 32 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 31 nil 0)
+ ("testproject.Main" "test" "<void>" nil 31 nil 1)
+ ("testproject.Main" "test" "<void>" nil 31 nil 2)
+ ("testproject.Main" "test" "<void>" nil 31 nil 3))
+
+
+(TEST-usages-at-point "testproject.Main" 575)
+("testproject.ASuperSuper" ("testproject.Main" "test" "<void>" nil 32 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 27 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 31 nil 0)
+ ("testproject.Main" "test" "<void>" nil 31 nil 1)
+ ("testproject.Main" "test" "<void>" nil 31 nil 2)
+ ("testproject.Main" "test" "<void>" nil 31 nil 3))
+
+
+(TEST-usages-at-point "testproject.Main" 562)
+("testproject.ASuperSuper" ("testproject.Main" "test" "<void>" nil 32 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 27 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 31 nil 0)
+ ("testproject.Main" "test" "<void>" nil 31 nil 1)
+ ("testproject.Main" "test" "<void>" nil 31 nil 2)
+ ("testproject.Main" "test" "<void>" nil 31 nil 3))
+
+
+(TEST-usages-at-point "testproject.Main" 549)
+("testproject.ASuperSuper" ("testproject.Main" "test" "<void>" nil 32 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 27 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 31 nil 0)
+ ("testproject.Main" "test" "<void>" nil 31 nil 1)
+ ("testproject.Main" "test" "<void>" nil 31 nil 2)
+ ("testproject.Main" "test" "<void>" nil 31 nil 3))
+
+
+(TEST-usages-at-point "testproject.Main" 536)
+("testproject.ASuperSuper" ("testproject.Main" "test" "<void>" nil 32 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 27 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 31 nil 0)
+ ("testproject.Main" "test" "<void>" nil 31 nil 1)
+ ("testproject.Main" "test" "<void>" nil 31 nil 2)
+ ("testproject.Main" "test" "<void>" nil 31 nil 3))
+
+
+(TEST-usages-at-point "testproject.Main" 514)
+(("testproject.Main" "test" "<void>" nil 30 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 492)
+(("testproject.Main" "test" "<void>" nil 29 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 471)
+(("testproject.Main" "test" "<void>" nil 28 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 450)
+("testproject.ASuperSuper" ("testproject.Main" "test" "<void>" nil 32 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 27 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 31 nil 0)
+ ("testproject.Main" "test" "<void>" nil 31 nil 1)
+ ("testproject.Main" "test" "<void>" nil 31 nil 2)
+ ("testproject.Main" "test" "<void>" nil 31 nil 3))
+
+
+(TEST-usages-at-point "testproject.Main" 429)
+("testproject.AInt" ("testproject.Main" "test" "<void>" nil 33 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 26 nil 0)
+ ("testproject.Main" "test" "<void>" nil 26 nil 1)
+ ("testproject.Main" "test" "<void>" nil 26 nil 2)
+ ("testproject.Main" "test" "<void>" nil 26 nil 3)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 30 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 417)
+("testproject.AInt" ("testproject.Main" "test" "<void>" nil 33 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 26 nil 0)
+ ("testproject.Main" "test" "<void>" nil 26 nil 1)
+ ("testproject.Main" "test" "<void>" nil 26 nil 2)
+ ("testproject.Main" "test" "<void>" nil 26 nil 3)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 30 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 405)
+(("testproject.Main" "test" "<void>" nil 26 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 401)
+nil
+
+
+(TEST-usages-at-point "testproject.Main" 370)
+(("testproject.Main" "test" "<void>" nil 26 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 366)
+"Cannot find usages for static finals"
+
+
+(TEST-usages-at-point "testproject.Main" 349)
+("testproject.AInt" ("testproject.Main" "test" "<void>" nil 33 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 26 nil 0)
+ ("testproject.Main" "test" "<void>" nil 26 nil 1)
+ ("testproject.Main" "test" "<void>" nil 26 nil 2)
+ ("testproject.Main" "test" "<void>" nil 26 nil 3)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 30 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 335)
+("testproject.AInt" ("testproject.Main" "test" "<void>" nil 33 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 26 nil 0)
+ ("testproject.Main" "test" "<void>" nil 26 nil 1)
+ ("testproject.Main" "test" "<void>" nil 26 nil 2)
+ ("testproject.Main" "test" "<void>" nil 26 nil 3)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 30 nil 0))
+
+
+(TEST-usages-at-point "testproject.Main" 321)
+("testproject.AInt" ("testproject.Main" "test" "<void>" nil 33 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 26 nil 0)
+ ("testproject.Main" "test" "<void>" nil 26 nil 1)
+ ("testproject.Main" "test" "<void>" nil 26 nil 2)
+ ("testproject.Main" "test" "<void>" nil 26 nil 3)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 30 nil 0))
+
+
+(TEST-subs-implementing-method (function "testproject.Main" "test" nil nil))
+nil
+
+
+(TEST-subs-implementing-method (function "testproject.Main" "<init>" nil nil))
+nil
+
+
+(TEST-subs-implementing-method (function "testproject.ASuperSuper"
+                                         "method2"
+                                         nil
+                                         nil))
+(("testproject/ASuperSuper")
+ ("testproject/ASuper" ("testproject/A")))
+
+
+(TEST-subs-implementing-method (function "testproject.ASuper"
+                                         "method5"
+                                         nil
+                                         nil))
+nil
+
+
+(TEST-subs-implementing-method (function "testproject.ASuper"
+                                         "method1"
+                                         nil
+                                         nil))
+(("testproject/ASuper")
+ ("testproject/A"))
+
+
+(TEST-subs-implementing-method (function "testproject.ASuper"
+                                         "<init>"
+                                         nil
+                                         nil))
+(("testproject/ASuper")
+ (("testproject/A")
+  ("testproject/A$C")))
+
+
+(TEST-subs-implementing-method (function "testproject.AInt"
+                                         "method3"
+                                         nil
+                                         nil))
+(("testproject/AInt")
+ ("testproject/A"))
+
+
+(TEST-subs-implementing-method (function "testproject.AInt"
+                                         "method1"
+                                         nil
+                                         nil))
+(("testproject/AInt")
+ ("testproject/A"))
+
+
+(TEST-subs-implementing-method (function "testproject.A$D"
+                                         "method1"
+                                         "String"
+                                         nil))
+nil
+
+
+(TEST-subs-implementing-method (function "testproject.A$I"
+                                         "methodI"
+                                         "int"
+                                         ("B")))
+(("testproject/A$I")
+ ("testproject/A$C"))
+
+
+(TEST-subs-implementing-method (function "testproject.A$C"
+                                         "compareTo"
+                                         "int"
+                                         ("Object")))
+nil
+
+
+(TEST-subs-implementing-method (function "testproject.A$C"
+                                         "methodI"
+                                         "int"
+                                         ("B")))
+nil
+
+
+(TEST-subs-implementing-method (function "testproject.A$B" "methodB" "A" nil))
+nil
+
+
+(TEST-subs-implementing-method (function "testproject.A" "method4" nil nil))
+nil
+
+
+(TEST-subs-implementing-method (function "testproject.A" "method3" nil nil))
+nil
+
+
+(TEST-subs-implementing-method (function "testproject.A" "method2" nil nil))
+nil
+
+
+(TEST-subs-implementing-method (function "testproject.A" "method1" nil nil))
+nil
+
+
+(TEST-usages (function "testproject.Main" "test" nil nil) :notstrict)
+nil
+
+
+(TEST-usages (function "testproject.Main" "test" nil nil) :strict)
+nil
+
+
+(TEST-usages (function "testproject.Main" "<init>" nil nil) :notstrict)
+nil
+
+
+(TEST-usages (function "testproject.Main" "<init>" nil nil) :strict)
+nil
+
+
+(TEST-usages (function "testproject.ASuperSuper" "method2" nil nil)
+             :notstrict)
+(("testproject.Main" "test" "<void>" nil 32 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 31 nil 0)
+ ("testproject.Main" "test" "<void>" nil 31 nil 1)
+ ("testproject.Main" "test" "<void>" nil 31 nil 2)
+ ("testproject.Main" "test" "<void>" nil 31 nil 3))
+
+
+(TEST-usages (function "testproject.ASuperSuper" "method2" nil nil) :strict)
+(("testproject.Main" "test" "<void>" nil 32 nil 0))
+
+
+(TEST-usages (function "testproject.ASuper" "method5" nil nil) :notstrict)
+("testproject.A" ("testproject.Main" "test" "<void>" nil 42 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 43 nil 0))
+
+
+(TEST-usages (function "testproject.ASuper" "method5" nil nil) :strict)
+(("testproject.Main" "test" "<void>" nil 43 nil 0))
+
+
+(TEST-usages (function "testproject.ASuper" "method1" nil nil) :notstrict)
+(("testproject.Main" "test" "<void>" nil 30 nil 0))
+
+
+(TEST-usages (function "testproject.ASuper" "method1" nil nil) :strict)
+(("testproject.Main" "test" "<void>" nil 30 nil 0))
+
+
+(TEST-usages (function "testproject.ASuper" "<init>" nil nil) :notstrict)
+(("testproject.A" "<init>" "<void>" nil 3 nil 0))
+
+
+(TEST-usages (function "testproject.ASuper" "<init>" nil nil) :strict)
+(("testproject.A" "<init>" "<void>" nil 3 nil 0))
+
+
+(TEST-usages (function "testproject.AInt" "method3" nil nil) :notstrict)
+("testproject.A" ("testproject.Main" "test" "<void>" nil 28 nil 0))
+
+
+(TEST-usages (function "testproject.AInt" "method3" nil nil) :strict)
+nil
+
+
+(TEST-usages (function "testproject.AInt" "method1" nil nil) :notstrict)
+(("testproject.Main" "test" "<void>" nil 33 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 26 nil 0)
+ ("testproject.Main" "test" "<void>" nil 26 nil 1)
+ ("testproject.Main" "test" "<void>" nil 26 nil 2)
+ ("testproject.Main" "test" "<void>" nil 26 nil 3))
+
+
+(TEST-usages (function "testproject.AInt" "method1" nil nil) :strict)
+(("testproject.Main" "test" "<void>" nil 33 nil 0))
+
+
+(TEST-usages (function "testproject.A$D" "method1" "String" nil) :notstrict)
+(("testproject.Main" "test" "<void>" nil 26 nil 0))
+
+
+(TEST-usages (function "testproject.A$D" "method1" "String" nil) :strict)
+(("testproject.Main" "test" "<void>" nil 26 nil 0))
+
+
+(TEST-usages (variable "testproject.A$I" "b" nil nil) :notstrict)
+nil
+
+
+(TEST-usages (variable "testproject.A$I" "b" nil nil) :strict)
+nil
+
+
+(TEST-usages (function "testproject.A$I" "methodI" "int" ("B")) :notstrict)
+(("testproject.Main" "test" "<void>" nil 39 nil 0)
+ "testproject.A$C"
+ ("testproject.Main" "test" "<void>" nil 40 nil 0))
+
+
+(TEST-usages (function "testproject.A$I" "methodI" "int" ("B")) :strict)
+(("testproject.Main" "test" "<void>" nil 39 nil 0))
+
+
+(TEST-usages (variable "testproject.A$C" "o" nil nil) :notstrict)
+nil
+
+
+(TEST-usages (variable "testproject.A$C" "o" nil nil) :strict)
+nil
+
+
+(TEST-usages (function "testproject.A$C" "compareTo" "int" ("Object"))
+             :notstrict)
+nil
+
+
+(TEST-usages (function "testproject.A$C" "compareTo" "int" ("Object"))
+             :strict)
+nil
+
+
+(TEST-usages (variable "testproject.A$C" "b" nil nil) :notstrict)
+nil
+
+
+(TEST-usages (variable "testproject.A$C" "b" nil nil) :strict)
+nil
+
+
+(TEST-usages (function "testproject.A$C" "methodI" "int" ("B")) :notstrict)
+("testproject.A$I" ("testproject.Main" "test" "<void>" nil 39 nil 0)
+ "testproject.A$C"
+ ("testproject.Main" "test" "<void>" nil 40 nil 0))
+
+
+(TEST-usages (function "testproject.A$C" "methodI" "int" ("B")) :strict)
+(("testproject.Main" "test" "<void>" nil 40 nil 0))
+
+
+(TEST-usages (function "testproject.A$B" "methodB" "A" nil) :notstrict)
+(("testproject.Main" "test" "<void>" nil 41 nil 0)
+ ("testproject.A$C" "methodI" "int" ("testproject.A$B") 32 nil 0))
+
+
+(TEST-usages (function "testproject.A$B" "methodB" "A" nil) :strict)
+(("testproject.Main" "test" "<void>" nil 41 nil 0)
+ ("testproject.A$C" "methodI" "int" ("testproject.A$B") 32 nil 0))
+
+
+(TEST-usages (function "testproject.A" "method4" nil nil) :notstrict)
+(("testproject.Main" "test" "<void>" nil 29 nil 0))
+
+
+(TEST-usages (function "testproject.A" "method4" nil nil) :strict)
+(("testproject.Main" "test" "<void>" nil 29 nil 0))
+
+
+(TEST-usages (function "testproject.A" "method3" nil nil) :notstrict)
+(("testproject.Main" "test" "<void>" nil 28 nil 0))
+
+
+(TEST-usages (function "testproject.A" "method3" nil nil) :strict)
+(("testproject.Main" "test" "<void>" nil 28 nil 0))
+
+
+(TEST-usages (function "testproject.A" "method2" nil nil) :notstrict)
+("testproject.ASuperSuper" ("testproject.Main" "test" "<void>" nil 32 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 27 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 31 nil 0)
+ ("testproject.Main" "test" "<void>" nil 31 nil 1)
+ ("testproject.Main" "test" "<void>" nil 31 nil 2)
+ ("testproject.Main" "test" "<void>" nil 31 nil 3))
+
+
+(TEST-usages (function "testproject.A" "method2" nil nil) :strict)
+(("testproject.Main" "test" "<void>" nil 27 nil 0))
+
+
+(TEST-usages (function "testproject.A" "method1" nil nil) :notstrict)
+("testproject.AInt" ("testproject.Main" "test" "<void>" nil 33 nil 0)
+ "testproject.A"
+ ("testproject.Main" "test" "<void>" nil 26 nil 0)
+ ("testproject.Main" "test" "<void>" nil 26 nil 1)
+ ("testproject.Main" "test" "<void>" nil 26 nil 2)
+ ("testproject.Main" "test" "<void>" nil 26 nil 3)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 30 nil 0))
+
+
+(TEST-usages (function "testproject.A" "method1" nil nil) :strict)
+(("testproject.Main" "test" "<void>" nil 26 nil 0)
+ ("testproject.Main" "test" "<void>" nil 26 nil 1)
+ ("testproject.Main" "test" "<void>" nil 26 nil 2)
+ ("testproject.Main" "test" "<void>" nil 26 nil 3))
+
+
+(TEST-usages (variable "testproject.A" "foo" nil nil) :notstrict)
+(("testproject.A" "method1" "<void>" nil 8 t 0))
+
+
+(TEST-usages (variable "testproject.A" "foo" nil nil) :strict)
+(("testproject.A" "method1" "<void>" nil 8 t 0))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

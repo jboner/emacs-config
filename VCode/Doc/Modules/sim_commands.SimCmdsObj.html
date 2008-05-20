@@ -1,0 +1,398 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:18:54 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class SimCmdsObj</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class SimCmdsObj</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="sim_commands.html">sim_commands</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">sim_commands.SimCmdsObj<BR>
+&nbsp;&nbsp;Object.Object<BR>
+&nbsp;&nbsp;InstanceSpace.InstanceSpace<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SimCmdsObj</SPAN>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>, <A CLASS="DocLink" HREF="InstanceSpace.InstanceSpace.html">InstanceSpace</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app</SPAN>, <SPAN CLASS="Argument">interp</SPAN>, <SPAN CLASS="Argument">names</SPAN>, <SPAN CLASS="Argument">bypass_sr_recog=0</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#sim_commands.SimCmdsObj.bind_methods"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.bind_methods</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">names</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.change_buffer</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buff_name</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.clear_abbreviations</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.clear_symbols</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.close_buffer</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buff_name</SPAN>, <SPAN CLASS="Argument">save=0</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.compile_symbols</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_list</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <A CLASS="DocLink" HREF="#sim_commands.SimCmdsObj.copy_flags"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.copy_flags</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.echo_command</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">cmd_name</SPAN>, <SPAN CLASS="Argument">*args</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.getmic</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.goto</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pos</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)<SPAN CLASS="OneLiner"> # Goes to position <EM>INT pos</EM> of the current buffer</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.goto_line</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">linenum</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)<SPAN CLASS="OneLiner"> # Goes to line number <EM>INT linenum</EM> of current source buffer</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.help</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.list_buffers</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.listen</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.make_position_visible</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pos</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.move</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">steps</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)<SPAN CLASS="OneLiner"> # Moves cursor by <EM>INT steps</EM> (can be negative)</SPAN>
+    <A CLASS="DocLink" HREF="#sim_commands.SimCmdsObj.open_file"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.open_file</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">fname</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)<SPAN CLASS="OneLiner"> # Open a file with name in current buffer.</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.print_abbreviations</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">show_unresolved=1</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.print_error</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">message</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.print_symbols</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symbols=None</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.provoke</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.quit</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">clean_sr_voc=0</SPAN>, <SPAN CLASS="Argument">save_speech_files=None</SPAN>, <SPAN CLASS="Argument">disconnect=1</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.save</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)<SPAN CLASS="OneLiner"> # save current buffer</SPAN>
+    <A CLASS="DocLink" HREF="#sim_commands.SimCmdsObj.save_as"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.save_as</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">fname</SPAN>, <SPAN CLASS="Argument">no_prompt=0</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)<SPAN CLASS="OneLiner"> # save current buffer</SPAN>
+    <A CLASS="DocLink" HREF="#sim_commands.SimCmdsObj.say"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.say</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">utterance</SPAN>, <SPAN CLASS="Argument">user_input=None</SPAN>, <SPAN CLASS="Argument">never_bypass_sr_recog=0</SPAN>, <SPAN CLASS="Argument">echo_utterance=0</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)<SPAN CLASS="OneLiner"> # Simulate an utterance <EM>STR utterance</EM></SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.select</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)<SPAN CLASS="OneLiner"> # Selects from position <EM>start</EM> to position <EM>end</EM> in current buffer</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.setmic</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">state</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.show_buff</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)<SPAN CLASS="OneLiner"> # Shows content of current source buffer</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.signal_quitting</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">quitting=1</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sim_commands.SimCmdsObj.utterance_spoken_forms</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">utterance</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from InstanceSpace.InstanceSpace</SPAN>
+    <A CLASS="DocLink" HREF="#InstanceSpace.InstanceSpace.bind_to_space"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">InstanceSpace.InstanceSpace.bind_to_space</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">names</SPAN>, <SPAN CLASS="Argument">methods</SPAN>)<SPAN CLASS="OneLiner"> # add bound copies of specified methods to the given dictionary</SPAN>
+
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">help_string</SPAN> = <SPAN CLASS="VariableValue">'an object providing methods...dictation utterances\012    '</SPAN></SPAN>
+</PRE><H2>Description</H2><P>
+an object providing methods corresponding to the non-method
+functions of sim_commands, but without resorting to global
+variables, and in such a way that it can be subclassed to maintain
+compatibility with NewMediatorObject </P>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR help_string</EM>
+<DD>the sim_commands help string
+</DL>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>AppState app</EM>
+<DD>interface to the editor used for interactive or 
+regression testing 
+<DT>
+<EM>CmdInterp interp</EM>
+<DD>interface to the mediator's command interpreter 
+<DT>
+<EM>{} names</EM>
+<DD>namespace in which to put the quit_flag
+<DT>
+<EM>BOOL</EM> clean_sr_voc
+<DD>If true, remove all SR entries for known
+symbols.
+<DT>
+<EM>BOOL</EM> save_speech_files
+<DD>Indicates whether or not
+speech files should be saved. If <EM>None</EM>, then ask the user.
+<DT>
+<EM>BOOL</EM> disconnect = 1
+<DD>Indicates whether or not to disconnect from
+the SR system.
+<DT>
+<EM>BOOL</EM> bypass_sr_recog
+<DD>Indicates that, for profiling
+purposes, we should bypass natlink for dictation utterances
+
+</DL>
+<H2 ID="sim_commands.SimCmdsObj.bind_methods" CLASS="Method">sim_commands.SimCmdsObj.bind_methods(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">names</SPAN>)</H2>
+<P>None</P>
+
+<P>
+add bound copies of this class's methods to the given dictionary,
+excluding those starting with <CODE>_</CODE></P>
+<P>
+<STRONG>NOTE:</STRONG> if you subclass this class, you must redefine this method,
+otherwise if called from an object of the subclass, it will only 
+include methods of the subclass, not this class</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR:ANY} names</EM>
+<DD>dictionary into which to insert the  bound
+methods
+
+</DL>
+<H2 ID="sim_commands.SimCmdsObj.copy_flags" CLASS="Method">sim_commands.SimCmdsObj.copy_flags(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+copy our internal flags which control the mediator cleanup 
+process to the namespace, in case they are being read from there
+instead of from this object</P>
+<H2 ID="sim_commands.SimCmdsObj.open_file" CLASS="Method">sim_commands.SimCmdsObj.open_file(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">fname</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</H2>
+<P>Open a file with name in current buffer.</P>
+
+<P>
+<EM>STR fname</EM> is the path of the file</P>
+<H2 ID="sim_commands.SimCmdsObj.save_as" CLASS="Method">sim_commands.SimCmdsObj.save_as(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">fname</SPAN>, <SPAN CLASS="Argument">no_prompt=0</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</H2>
+<P>save current buffer</P>
+
+<P>
+<EM>STR fname</EM> is the path of the file</P>
+
+<DL>
+
+<DT>
+<EM>BOOL no_prompt</EM>
+<DD>If true, don't prompt before overwriting
+an existing file
+</DL>
+<H2 ID="sim_commands.SimCmdsObj.say" CLASS="Method">sim_commands.SimCmdsObj.say(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">utterance</SPAN>, <SPAN CLASS="Argument">user_input=None</SPAN>, <SPAN CLASS="Argument">never_bypass_sr_recog=0</SPAN>, <SPAN CLASS="Argument">echo_utterance=0</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</H2>
+<P>Simulate an utterance <EM>STR utterance</EM></P>
+
+
+<DL>
+
+<DT>
+<EM>STR utterance</EM>
+<DD>The utterance. This can be a string with the
+ written form of what should be recognised by the SR system. If
+ it's a list, it should be a list of words in their written\spoken
+ form (or just written if it doesn't have a spoken form different
+ from its written form).
+</DL>
+<P>
+In general, it's better to specify <EM>utterance</EM> as a list of
+written\spoken words because it allows to simulate exactly what
+the SR does (e.g. what if the SR recognises an LSA as a sequence
+of words instead of its written\spoken form?)</P>
+
+<DL>
+
+<DT>
+<EM>STR user_input</EM>
+<DD>A string that will be sent to the mediator console's
+ standard input. Use in automated regression testing, if the <EM>say</EM>
+ command requires user additional user input (e.g. confirmation of
+ a symbol match).
+<DT>
+<EM>BOOL echo_utterance=0</EM>
+<DD>If true, echo the utterance on STDOUT.
+<DT>
+BOOL <EM>never_bypass_sr_recog</EM>
+<DD>If <EM>TRUE</EM>, the interpretation will always be done
+through NatLink's recognitionMimic function, even if the <CODE>bypass</CODE> switch was on.
+</DL>
+<P>
+Examples: say('x not equal to') -&gt; <CODE>x != </CODE>
+          say(['x', <CODE> != \not equal to'] -&gt; 'x != </CODE>
+</P>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises existing attributes, unless those attributes
+already exist</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="InstanceSpace.InstanceSpace.bind_to_space" CLASS="Method">InstanceSpace.InstanceSpace.bind_to_space(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">names</SPAN>, <SPAN CLASS="Argument">methods</SPAN>)</H2>
+<P>add bound copies of specified methods to the given dictionary</P>
+
+<P>
+<STRONG>NOTE:</STRONG> bind_to_space doesn't check that the named methods are
+actually methods</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR:ANY} names</EM>
+<DD>dictionary into which to insert the  bound
+methods
+<DT>
+<EM>[STR] methods</EM>
+<DD>the list of method names to insert
+
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

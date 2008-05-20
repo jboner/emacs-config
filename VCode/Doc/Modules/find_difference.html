@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Sep 12 01:06:54 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module find_difference</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module find_difference</H1>
+<PRE><SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#find_count"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">find_count</SPAN></A>(<SPAN CLASS="Argument">s</SPAN>, <SPAN CLASS="Argument">sub</SPAN>, <SPAN CLASS="Argument">count=1</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#find_difference"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">find_difference</SPAN></A>(<SPAN CLASS="Argument">old</SPAN>, <SPAN CLASS="Argument">new</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#find_string_difference"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">find_string_difference</SPAN></A>(<SPAN CLASS="Argument">old</SPAN>, <SPAN CLASS="Argument">new</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#rfind_count"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">rfind_count</SPAN></A>(<SPAN CLASS="Argument">s</SPAN>, <SPAN CLASS="Argument">sub</SPAN>, <SPAN CLASS="Argument">count=1</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VC...ediator\\find_difference.pyc'</SPAN></SPAN>
+</PRE><H2>Description</H2>
+<OL>
+
+<LI>utilities related to finding text in strings
+
+</OL>
+<H2 ID="find_count" CLASS="Function">find_count(<SPAN CLASS="Argument">s</SPAN>, <SPAN CLASS="Argument">sub</SPAN>, <SPAN CLASS="Argument">count=1</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P></P>
+
+<P>
+Generalizes string.find to find the count-th non-overlapping occurrence 
+of sub in s[start:end]</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> s
+<DD>string to search
+<DT>
+<EM>STR</EM> sub
+<DD>look for sub
+<DT>
+<EM>INT</EM> count
+<DD>ignore the first count-1 occurences
+<DT>
+<EM>INT</EM> start, end
+<DD>look in s[start:end]
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>index of count-th occurence, or -1 if there are fewer
+than count occureneces
+</DL>
+<H2 ID="find_difference" CLASS="Function">find_difference(<SPAN CLASS="Argument">old</SPAN>, <SPAN CLASS="Argument">new</SPAN>)</H2>
+<P></P>
+
+<P>
+Finds the difference between old and new sequences, assuming that there
+is only one contiguous changed region.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>SEQ ANY</EM> old
+<DD>old sequence
+<DT>
+<EM>SEQ ANY</EM> new
+<DD>new sequence
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+(start, end, change)</P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>the offset into old of the range replaced or deleted
+<DT>
+<EM>INT</EM> end
+<DD>the offset into old of the item following 
+the range modified (or deleted) (this matches Python's slice convention).
+<DT>
+<EM>ANY</EM> change
+<DD>the replacement range from new
+
+</DL>
+<H2 ID="find_string_difference" CLASS="Function">find_string_difference(<SPAN CLASS="Argument">old</SPAN>, <SPAN CLASS="Argument">new</SPAN>)</H2>
+<P></P>
+
+<P>
+Finds the difference between old and new strings, assuming that there
+is only one contiguous changed region.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> old
+<DD>old string
+<DT>
+<EM>STR</EM> new
+<DD>new string
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+(start, end, change)</P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>the offset into old of the range replaced or deleted
+<DT>
+<EM>INT</EM> end
+<DD>the offset into old of the character following 
+the range modified (or deleted) (this matches Python's slice convention).
+<DT>
+<EM>STR</EM> change
+<DD>the replacement string from new
+
+</DL>
+<H2 ID="rfind_count" CLASS="Function">rfind_count(<SPAN CLASS="Argument">s</SPAN>, <SPAN CLASS="Argument">sub</SPAN>, <SPAN CLASS="Argument">count=1</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P></P>
+
+<P>
+Generalizes string.rfind to find the count-th non-overlapping occurrence 
+of sub from the end of s[start:end]</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> s
+<DD>string to search
+<DT>
+<EM>STR</EM> sub
+<DD>look for sub
+<DT>
+<EM>INT</EM> count
+<DD>ignore the first count-1 occurences
+<DT>
+<EM>INT</EM> start, end
+<DD>look in s[start:end]
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>index of count-th occurence, or -1 if there are fewer
+than count occureneces
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

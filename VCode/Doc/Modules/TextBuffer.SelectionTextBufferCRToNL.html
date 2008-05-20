@@ -1,0 +1,729 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Dec 25 16:41:09 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class SelectionTextBufferCRToNL</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class SelectionTextBufferCRToNL</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="TextBuffer.html">TextBuffer</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">TextBuffer.SelectionTextBufferCRToNL<BR>
+&nbsp;&nbsp;<A HREF="TextBuffer.TextBufferCRToNL.html">TextBuffer.TextBufferCRToNL</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="TextBuffer.TextBufferChangeSpecify.html">TextBuffer.TextBufferChangeSpecify</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="TextBuffer.TextBuffer.html">TextBuffer.TextBuffer</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object.Object<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SelectionTextBufferCRToNL</SPAN>(<A CLASS="DocLink" HREF="TextBuffer.TextBufferCRToNL.html">TextBufferCRToNL</A>):
+    <A CLASS="DocLink" HREF="#TextBuffer.SelectionTextBufferCRToNL.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SelectionTextBufferCRToNL.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SelectionTextBufferCRToNL.get_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SelectionTextBufferCRToNL.get_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SelectionTextBufferCRToNL.set_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SelectionTextBufferCRToNL.set_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">range=(0, -1)</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.TextBufferCRToNL</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferCRToNL.__getattr__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL.__getattr__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">name</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferCRToNL.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">underlying</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferCRToNL._on_change_filter"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL._on_change_filter</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">selection_start</SPAN>, <SPAN CLASS="Argument">selection_end</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>, <SPAN CLASS="Argument">program_initiated</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferCRToNL.external_to_internal"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL.external_to_internal</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL.get_length</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferCRToNL.get_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL.get_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferCRToNL.get_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL.get_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferCRToNL.internal_to_external"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL.internal_to_external</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferCRToNL.line_num_of_internal"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL.line_num_of_internal</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">internal</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferCRToNL.line_range_external"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL.line_range_external</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferCRToNL.line_range_internal"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL.line_range_internal</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferCRToNL.range_defaults"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL.range_defaults</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferCRToNL.set_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL.set_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferCRToNL.set_text</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes a portion of the buffer - see TextBuffer</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.TextBuffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)<SPAN CLASS="OneLiner"> # abstract base class - no arguments</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.cur_pos"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.cur_pos</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.get_length"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.get_length</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns the length of the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.get_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.get_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # retrieves range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.get_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.get_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # retrieves a portion of the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.len"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.len</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns length of buffer </SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.set_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.set_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.set_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.set_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes a portion of the buffer</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.TextBufferChangeSpecify</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeSpecify.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeSpecify.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeSpecify._on_change_specification"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeSpecify._on_change_specification</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">selection_start</SPAN>, <SPAN CLASS="Argument">selection_end</SPAN>, <SPAN CLASS="Argument">program_initiated</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeSpecify.get_change_callback"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeSpecify.get_change_callback</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeSpecify.set_change_callback"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeSpecify.set_change_callback</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>)<SPAN CLASS="OneLiner"> # changes the callback to a new function</SPAN>
+
+</PRE><H2>Description</H2><P>
+newline only wrapper around a buffer inheriting from both
+TextBufferChangeSpecify and SelectionBuffer which uses 
+carriage return + line feed.</P>
+<P>
+note: SelectionTextBufferCRToNL uses the __getattr__ method to
+delegate unknown attributes and methods to the underlying
+TextBufferChangeSpecify/SelectionBuffer.  Thus, if a specific subclass of
+TextBufferChangeSpecify/SelectionBuffer has additional attributes or 
+methods, they will be visible through the containing TextBufferCRToNL.
+However, since SelectionTextBufferCRToNL inherits from
+TextBufferCRToNL, any
+attributes later added to the definition of TextBufferChangeSpecify will 
+not be unknown, and will not be
+automatically delegated.  Like get_text, set_text, etc.,
+corresponding methods must be added manually to
+TextBufferCRToNL or SelectionTextBufferCRToNL to ensure that 
+it will properly support
+these new attributes.</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+<P>
+see TextBufferCRToNL</P>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SelectionTextBufferCRToNL.__init__" CLASS="Method">TextBuffer.SelectionTextBufferCRToNL.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+
+initializes the wrapper</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<H2 ID="TextBuffer.SelectionTextBufferCRToNL.get_visible" CLASS="Method">TextBuffer.SelectionTextBufferCRToNL.get_visible(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns the current visible range
+which should be available to Select XYZ.  If ta concrete
+subclass of SpeechBufferSelection does not support returning the
+current visible range, then get_visible should return None.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM> range
+<DD>visible character range.  None means ehat
+the concrete implementation of SpeechBufferSelection does not
+support reporting the current visible range.  An empty range
+means that Select xyz is disabled.  A range of (0, -1) means the
+entire buffer is visible.  
+</DL>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SelectionTextBufferCRToNL.set_visible" CLASS="Method">TextBuffer.SelectionTextBufferCRToNL.set_visible(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">range=(0, -1)</SPAN>)</H2>
+<P>None</P>
+
+<P>
+tells the SpeechBufferSelection the current visible range
+which should be available to Select XYZ.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM> range
+<DD>character range which the buffer should
+is visible and therefore selectable.  If the end of the range is
+less than the start (as in the default), the entire buffer will 
+be considered visible.  Select xyz can be disabled by setting
+the range to (0, 0)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="TextBuffer.TextBufferCRToNL.__getattr__" CLASS="Method">TextBuffer.TextBufferCRToNL.__getattr__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">name</SPAN>)</H2>
+<P>None</P>
+
+<P>
+delegates unknown attributes (including methods) to the underlying
+TextBufferChangeNotify object</P>
+<H2 ID="TextBuffer.TextBufferCRToNL.__init__" CLASS="Method">TextBuffer.TextBufferCRToNL.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">underlying</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+
+initializes the wrapper</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>TextBufferChangeSpecify</EM> underlying
+<DD>underlying buffer 
+
+</DL>
+<H2 ID="TextBuffer.TextBufferCRToNL._on_change_filter" CLASS="Method">TextBuffer.TextBufferCRToNL._on_change_filter(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">selection_start</SPAN>, <SPAN CLASS="Argument">selection_end</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>, <SPAN CLASS="Argument">program_initiated</SPAN>)</H2>
+<P>None</P>
+
+<P>
+private method which handles change specification
+callbacks from the underlying TextBufferChangeSpecify object, 
+updating our internal copy of the buffer and translating character 
+ranges to get rid of CR-NL.
+Should not be called manually.
+</P>
+<H2 ID="TextBuffer.TextBufferCRToNL.external_to_internal" CLASS="Method">TextBuffer.TextBufferCRToNL.external_to_internal(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)</H2>
+<P>None</P>
+
+<P>
+converts a range of external positions (NL only) to
+internal positions (in the underlying
+buffer which uses CR-LF)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>start of range (external)
+<DT>
+<EM>INT</EM> end
+<DD>end of range (external)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>corresponding character range 
+internally, using CR-LF
+
+</DL>
+<H2 ID="TextBuffer.TextBufferCRToNL.get_selection" CLASS="Method">TextBuffer.TextBufferCRToNL.get_selection(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+retrieves range of current selection
+- see TextBuffer</P>
+<H2 ID="TextBuffer.TextBufferCRToNL.get_text" CLASS="Method">TextBuffer.TextBufferCRToNL.get_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+retrieves a portion of the buffer
+- see TextBuffer</P>
+<H2 ID="TextBuffer.TextBufferCRToNL.internal_to_external" CLASS="Method">TextBuffer.TextBufferCRToNL.internal_to_external(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)</H2>
+<P>None</P>
+
+<P>
+converts a range of internal positions (in the underlying
+buffer which uses CR-LF) to external positions (NL only)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>start of range (internal)
+<DT>
+<EM>INT</EM> end
+<DD>end of range (internal)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>corresponding character range 
+externally, assuming only newlines
+
+</DL>
+<H2 ID="TextBuffer.TextBufferCRToNL.line_num_of_internal" CLASS="Method">TextBuffer.TextBufferCRToNL.line_num_of_internal(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">internal</SPAN>)</H2>
+<P>None</P>
+
+<P>
+find line number of an internal position within
+contents_internal</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> internal
+<DD>internal character offset into
+contents_internal
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>corresponding line number
+
+</DL>
+<H2 ID="TextBuffer.TextBufferCRToNL.line_range_external" CLASS="Method">TextBuffer.TextBufferCRToNL.line_range_external(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)</H2>
+<P>None</P>
+
+<P>
+find line numbers of a range of external positions within
+contents_external</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>character offset into contents_external of start of range
+<DT>
+<EM>INT</EM> end 
+<DD>character offset into contents_external of end of range
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>corresponding range of line numbers
+
+</DL>
+<H2 ID="TextBuffer.TextBufferCRToNL.line_range_internal" CLASS="Method">TextBuffer.TextBufferCRToNL.line_range_internal(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)</H2>
+<P>None</P>
+
+<P>
+find line numbers of a range of internal positions within
+contents_internal</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>character offset into contents_internal of start of range
+<DT>
+<EM>INT</EM> end 
+<DD>character offset into contents_internal of end of range
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>corresponding range of line numbers
+
+</DL>
+<H2 ID="TextBuffer.TextBufferCRToNL.range_defaults" CLASS="Method">TextBuffer.TextBufferCRToNL.range_defaults(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+converts TextBuffer range defaults to actual offsets.  Uses
+external offsets, which must be converted to internal with
+external_to_internal.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>external offset of start of range, or None for
+beginning of buffer
+<DT>
+<EM>INT</EM> end
+<DD>external offset of end of range, or None for
+end of buffer
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>actual character range (external offsets)
+
+</DL>
+<H2 ID="TextBuffer.TextBufferCRToNL.set_selection" CLASS="Method">TextBuffer.TextBufferCRToNL.set_selection(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+changes range of current selection
+- see TextBuffer</P>
+<H2 ID="TextBuffer.TextBuffer.__init__" CLASS="Method">TextBuffer.TextBuffer.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>abstract base class - no arguments</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.TextBuffer.cur_pos" CLASS="Method">TextBuffer.TextBuffer.cur_pos(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns current position (either the start or end of
+the current selection, and usually the end)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>the offset into the buffer of the current cursor
+position.
+
+</DL>
+<H2 ID="TextBuffer.TextBuffer.get_length" CLASS="Method">TextBuffer.TextBuffer.get_length(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns the length of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>INT</EM> number of characters in the buffer</P>
+<H2 ID="TextBuffer.TextBuffer.get_selection" CLASS="Method">TextBuffer.TextBuffer.get_selection(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>retrieves range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>INT</EM> (start, end)</P>
+<P>
+start is the offset into the buffer of the start of the current
+selection.  end is the offset into the buffer of the character 
+following the selection (this matches Python's slice convention).
+</P>
+<H2 ID="TextBuffer.TextBuffer.get_text" CLASS="Method">TextBuffer.TextBuffer.get_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>retrieves a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT start</EM> is the start of the region returned.
+Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the region to be returned (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>contents of specified range of the buffer
+
+</DL>
+<H2 ID="TextBuffer.TextBuffer.len" CLASS="Method">TextBuffer.TextBuffer.len(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns length of buffer </P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>the length of the buffer
+
+</DL>
+<H2 ID="TextBuffer.TextBuffer.set_selection" CLASS="Method">TextBuffer.TextBuffer.set_selection(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT start</EM> is the start of the region to be selected.
+Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the region to be selected (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.TextBuffer.set_text" CLASS="Method">TextBuffer.TextBuffer.set_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>STR text</EM> is the new text.</P>
+<P>
+<EM>INT start</EM> is the offset into the buffer of the text to the
+replaced.  Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the text to be replaced (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.TextBufferChangeSpecify.__init__" CLASS="Method">TextBuffer.TextBufferChangeSpecify.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> change_callback
+<DD>change_callback( <EM>INT</EM> start, <EM>INT</EM> end, <EM>STR</EM> text, 
+<EM>INT</EM> selection_start,
+<EM>INT</EM> selection_end, TextBufferChangeSpecify buffer,
+<EM>BOOL</EM> program_initiated) 
+see TextBufferChangeSpecify documentation for details.
+
+</DL>
+<H2 ID="TextBuffer.TextBufferChangeSpecify._on_change_specification" CLASS="Method">TextBuffer.TextBufferChangeSpecify._on_change_specification(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">selection_start</SPAN>, <SPAN CLASS="Argument">selection_end</SPAN>, <SPAN CLASS="Argument">program_initiated</SPAN>)</H2>
+<P>None</P>
+
+<P>
+internal function which triggers the
+change_callback.  Only the concrete subclass of 
+TextBufferChangeSpecify implementing change specification
+should call this function</P>
+<H2 ID="TextBuffer.TextBufferChangeSpecify.get_change_callback" CLASS="Method">TextBuffer.TextBufferChangeSpecify.get_change_callback(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+return change callback function (used by wrappers like
+TextBufferCRToNL)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> change_callback
+<DD>change_callback( <EM>INT</EM> start, <EM>INT</EM> end, <EM>STR</EM> text, 
+<EM>INT</EM> selection_start, <EM>INT</EM> selection_end, 
+<EM>TextBufferChangeSpecify</EM> buffer, <EM>BOOL</EM> program_initiated) 
+
+</DL>
+<H2 ID="TextBuffer.TextBufferChangeSpecify.set_change_callback" CLASS="Method">TextBuffer.TextBufferChangeSpecify.set_change_callback(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>)</H2>
+<P>changes the callback to a new function</P>
+
+<P>
+<STRONG>INPUTS</STRONG>
+<EM>FCT</EM> change_callback --
+change_callback( <EM>INT</EM> start, <EM>INT</EM> end, <EM>STR</EM> text, 
+<EM>INT</EM> selection_start, <EM>INT</EM> selection_end, 
+<EM>TextBufferChangeSpecify</EM> buffer, <EM>BOOL</EM> program_initiated) 
+see TextBufferChangeSpecify documentation for details.
+-- function to be called on change to
+the underlying buffer.  
+see TextBufferChangeSpecify documentation for details.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

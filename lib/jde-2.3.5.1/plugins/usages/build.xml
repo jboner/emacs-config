@@ -1,0 +1,65 @@
+<project name="xref" default="help">
+
+<target name="help">
+	   <echo message="  ----------------------------------------------------------" />
+	   <echo message="  |  Targets                                               |" />
+	   <echo message="  ----------------------------------------------------------" />
+	   <echo message="  | help   : this help message                             |" />
+	   <echo message="  | build  : compiles the java files into the classes dir  |" />
+	   <echo message="  | jar    : bundles the classes into lib/usages.jar       |" />
+	   <echo message="  | plugin : creates the jde plugin file  ./jde-usages.zip |" />
+           <echo message="  ----------------------------------------------------------" />
+</target>
+
+<target name="init">
+  <mkdir dir="classes" />
+  <path id="build.classpath">
+    <pathelement location="classes" /> 
+<!-- Look for jde.jar in two places - this allows this plugin to be -->
+<!-- installed either in the default place of jde/plugins or in a plugins -->
+<!-- directory at the same level of the jde directory. -->
+<!-- In the former case the jde directory can be called anything while in -->
+<!-- the latter case it must be called "jde". -->
+    <pathelement location="../../jde/java/lib/jde.jar" />
+    <pathelement location="../../java/lib/jde.jar" />
+  </path>
+</target>
+
+<target name="build" depends="init">
+  <mkdir dir="classes" />
+  <javac srcdir="src" destdir="classes" debug="on" source="1.3" target="1.3">
+    <classpath refid="build.classpath"/>
+  </javac>
+</target>
+
+
+<target name="make-dir-and-copy-bsh">
+  <mkdir dir="lib" />
+  <copy todir="classes">
+    <fileset dir="src">
+          <include name="**/*.bsh"/>
+    </fileset>
+  </copy>
+</target>
+
+<target name="jar" depends="build,make-dir-and-copy-bsh">
+  <jar destfile="lib/usages.jar"  basedir="classes" excludes="jde/util/JdeUtilities.class" />
+</target>
+
+<target name="jar-with-JdeUtilities" depends="build,make-dir-and-copy-bsh">
+  <jar destfile="lib/usages.jar"  basedir="classes" />
+</target>
+
+<target name="clean">
+  <delete dir="classes" />
+</target>
+
+<target name="plugin" depends="jar">
+  <copy file="web/ReleaseNotes" tofile="ReleaseNotes" />
+  <zip destfile="jde-usages.zip" >
+    <zipfileset dir="../usages"  prefix="usages/" excludes="jde-usages.zip,classes/,backups/,diffs*,tests/classes/,web/"  />
+  </zip>
+  <delete file="ReleaseNotes" />
+</target>
+
+</project>

@@ -1,0 +1,187 @@
+    Scenario for a demo of VoiceCode
+    ================================
+
+Last modified: 2004-10-14
+
+
+Before the demo
+---------------
+
+- DISABLE ERGOSENTERY (for Alain Desilets)
+
+- IF USING A LAPTOP AND IT IS CONNECTED THROUGH WIRELESS CONNECTION,
+  MAKE SURE THAT THE LAPTOP POWER MANAGEMENT ARE SET SO THAT IT NEVER
+  GOES TO SLEEP. IF IT GOES TO SLEEP, MEDIATOR WILL LOSE SOCKET CONNECTION
+  WITH EMACS WHEN SYSTEM GOES TO SLEEP!!!
+
+  On Alain's laptop, it is sufficient to make sure that the laptop is
+  plugged into the power outlet (it doesn't go to sleep when 
+  plugged into the outlet).
+  
+- Open file Data/TestData/large_buff.py
+
+- Compile the symbols
+    
+- Open new file demo.py  
+
+
+Start demo by writing a bubble sorting class in demo.py
+-------------------------------------------------------
+   
+- Dictate it in one go without stopping to explain what is going on.
+
+- Afterwards, redictate it, stopping each step of the way to 
+  point out interesting things.
+  
+- If you need to talk about things that didn't show up during the 
+  dictation of buble sort, just dictate it on the side.
+
+- Code for the bubble sort could look something like this:
+
+class SortingStrategy:
+   def sort(self, list):
+      pass
+
+class BubbleSorter(SortingStrategy):
+   def sort(self, list):
+      if len(list) == 0:
+         return list
+      for index1 in range(len(list) - 1):
+         for index2 in range(index1 + 1, len(list)):
+            if list[index1] < list[index2]:
+               self.swap_elements(index1, index2, list)
+
+   def swap_elements(self, index1, index2, list):
+      temporary = list[index1]
+      list[index1] = list[index2]
+      list[index2] = temporary
+
+some_list = [1,  - 5, 2, 3, 1]
+print BubbleSorter().sort(some_list)
+        
+- Some interesting points to highlight during dissection afterwards
+  discussed below.
+      
+
+Natural pausing
+---------------
+
+    - Never HAVE TO pause anywhere
+    
+    - But CAN pause anywhere between commands or pseudo-symbols
+      (but CANNOT pause in the middle of a command or pseudo-symbol)
+
+
+Correction     
+----------
+
+    - uses smart undo-redo
+
+    - automatically adapts so that it won't make the same mistake again (hopefully)
+
+
+Code templates
+--------------
+
+    - When you said "define method", some stuff got typed automatically 
+      (eg: self and list of arguments of method)
+
+    - Simple navigation through template with "add argument", 
+      "do the following", etc...
+
+    - Show context sensitivity of template by saying "if check if okay then do".
+      The first if gets interpreted as an if statement because it's at the 
+      beginning of a line, but the second if is interpreted as being part of
+      a new symbol.
+    
+          
+Automatic indentation and de-indentation
+----------------------------------------
+
+    - "new statement" automatically indents to the right level
+    
+    - Back indent automatically deindents to right level
+    
+    
+New symbol dictation
+--------------------
+
+   - Everytime you say something that is not a command, system 
+     formatted it as a NEW symbol (at least in the bubble sort
+     example).
+     
+   - Show how formattting of new symbols is context sensitive.
+     Dictate a new class name within a "define method" utterance, and show that
+     the class was automatically formatted using CapitalHungarian formatting. 
+     Show that another new symbol dictated outside of the class name context
+     formats it in lowercase with underscore.
+   
+Existing symbol dictation
+-------------------------
+
+   - Display demo.py and large_buff.py one above the other and compile
+     symbols from large_buff.py.
+
+   - In demo.py, dictate some existing symbols from large_buff.py.
+     Some good ones are:
+     * prof_test ("profile test")
+     * init_attrs ("init attributes" or "init attributes")
+     * profConstrSmallObj ("profile constructor small object", "prof constructor small obj")
+
+   - Show how the same existing symbol can be dictated in different ways:
+       num_times = "num times" or "number times"
+
+
+Symbol reformatting
+-------------------
+
+    - When we have a symbol correction dialog working, show how that's done.
+    
+    - Do it for both new and existing symbols.
+
+
+Local navigation by punctuation
+-------------------------------
+
+    - Navigate by different punctuation marks
+
+    - Show how you can qualify the search with 
+      * "previous one"
+      * "next one"
+
+    - Show how you can repeat the commands
+      * "again"
+      * "again 2 times"
+
+   - Point out that there are other repeatable commands
+
+
+Local navigation by PseudoCode
+------------------------------
+
+-  move to a line by selecting parts of it
+
+- then insert a new statement above it
+
+
+Global navigation by switch buffer
+----------------------------------
+
+- Make sure at least two buffers opened
+
+- "Emacs switch buffer", "select buffer name", "newline"
+
+
+Multiple ways of saying the same thing
+--------------------------------------
+
+- "class some class"
+- "define class some class"
+- "class definition some class"
+
+
+Language sensitivity
+--------------------
+
+Dictate same class definition in C and Python files and show the difference. 
+

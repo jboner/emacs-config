@@ -1,0 +1,163 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Commands provided by jde-usages</title>
+    <link rel="stylesheet" title="Default" href="style.css" />
+  </head>
+  <body >
+    <center><h1 style="font-family:cursive;background:lightgreen">jde-usages</h1></center>
+      <a href="http://sourceforge.net">
+ 	<img    src="http://sourceforge.net/sflogo.php?group_id=103724&amp;type=1" align="right" width="88" height="31" border="0" alt="SourceForge.net Logo" />
+      </a>
+    <table cellspacing="10" cellpadding=0>
+      <tr>
+	<td width="150" valign="top" >
+	  <div class="leftmenu" style="background:lightblue;padding:10;border-style:solid;border-width:1;border-color:blue">
+	    <h3><a href="http://jde-usages.sourceforge.net">jde-usages</a></h3>
+	    <div style="padding-left:5">
+	      <h4><a href="index.html#Download">Download</a></h4>
+	      <h4><a href="index.html#Requirements">Requirements</a></h4>
+	      <h4><a href="commands.html">Docs</a></h4>
+	      <h4><a href="screenshots.html">Screenshots</a></h4>
+	      <h4><a href="index.html#UsefulKeybindings">Keybindings</a></h4>
+	      <h4><a href="index.html#Notes">Notes</a></h4>
+	      <h4><a href="index.html#Help">Help</a></h4>
+	    </div>
+	  </div>
+
+	</td>
+	<td>
+	  <h3>Commands provided by jde-usages</h3>
+	  <ul>
+	    <li><p><a href="screenshots.html#callers">Usage related commands:</a></p>
+	    <ul>
+	      <li><b><code>M-x jde-usages-display-call-tree</code> <br />
+                  JDEpi&rarr;jde-usages&rarr;Usages/Callers&nbsp;for&rarr;method&nbsp;or&nbsp;field&nbsp;definition&nbsp;at&nbsp;point</b>
+	      <p>Displays an interactive call tree of the locations where the current method
+	      declaration is called.</p>
+
+	      <p>If called if a prefix argument, this command will not display usages where the
+	      class of the called object is not the exactly the same as the original class.</p>
+	      </li>
+	      <li><b><code>M-x jde-usages-display-call-tree-for-thing-at-point</code><br />
+                  JDEpi&rarr;jde-usages&rarr;Usages/Callers&nbsp;for&rarr;Method&nbsp;call&nbsp;or&nbsp;field&nbsp;reference&nbsp;at&nbsp;point</b>
+
+	        <p>Uses JDEE's completion mechanism to try to figure out the class of the method call at
+	          point, and then displays usages for this method signature. Since there may be
+	          multiple methods with the same name and the types of the parameters to this method
+	          cannot be easily computed, this command only searchs for method calls with the
+	          same number of paramters as this one. This may return extra results. If you have
+	          "foo(int,int)" and "foo(String,String)" defined for a class, when point is at a
+	          call like "foo (1,1);"
+	          <code>jde-usages-display-call-tree-for-thing-at-point</code> will find usages of
+	          both methods combined.</p>
+	      </li>
+
+	      <li><b><code>M-x jde-usages-display-call-tree-for-specified-class</code>
+	          <br />JDEpi&rarr;jde-usages&rarr;Usages/Callers&nbsp;for&rarr;method&nbsp;or&nbsp;field&nbsp;specified&nbsp;interactively</b>
+
+	      <p>Lets you enter a class name, a method name and the number of parameters it takes, and
+	      will find all usages for such a method. The defaults for these fields are the current
+	      class name (as returned by <code>jde-usages-get-current-class</code>), the method
+	      "&lt;init&gt;" which is the name of the class constructor and 0. So accepting the
+	      defaults will result in a search for all places the default constructor for this class
+	      is called.</p>
+	      </li>
+	    </ul>
+	    
+	    <p>When searching for usages of a method the above commands will also display calls
+	    made using relevant super and sub classes of the original class. Prefixing the above
+	    commands with C-u will force a search for calls only to the orginal class. 
+	    <br />Example:</p>
+
+	    <blockquote><pre>
+	    01      class A { void foo() {} }
+	    02      
+	    03      class B extends A  { void foo() -!- {} }
+	    04      
+	    05      class C extends B  { }
+	    06      
+	    07      class D extends C  { void foo() {} }
+	    08      
+	    09      {
+	    10         B b = new C();
+	    11         A a = b;
+	    12         C c = (C)b;
+	    13         D d = new D();
+	    14     
+	    15         a.foo();
+	    16         b.foo();
+	    17         c.foo();
+	    18         d.foo();
+	    19     }</pre></blockquote>
+
+	    <p>If "-!-" indicates where point is, the command
+	      <b>JDEpi&rarr;jde-usages&rarr;Usages&rarr;for&nbsp;method&nbsp;defn&nbsp;at&nbsp;point</b>
+	    will show usages on lines 15, 16 and 17. Prefixing this command with "C-u" will result in
+	    only line 16 showing up in the usages. Note that in either case line 18 is not listed as a
+	    usage: since D overrides the defintion of foo(), a call to the method foo of an object of
+	    type D will execute the method defined on line 07 and not line 03.</p>
+	    </li>
+
+	    <li id="other"><p><a href="screenshots.html#classtree">Class tree commands:</a></p>
+              <ul>
+              <li><b><code>jde-usages-display-subs-and-implementers</code> <br />
+	    JDEpi&rarr;jde-usages&rarr;Inheritance&nbsp;trees&rarr;Subtypes</b>
+
+	    <p>This command displays a tree of all the subclasses for a class. For an interface all
+	    the implementing classes and all subinterfaces are shown.</p>
+	    </li>
+	    
+	    <li><b><code>jde-usages-display-superclasses</code> <br />
+	    JDEpi&rarr;jde-usages&rarr;Inheritance&nbsp;trees&rarr;Supertypes</b>
+
+	    <p>This command displays a tree of all the superclasses and implemented interfaces a
+	    class.</p>
+	    </li>
+	    
+	    <li><b><code>jde-usages-display-type-hierarchy</code> <br />
+	    JDEpi&rarr;jde-usages&rarr;Inheritance&nbsp;trees&rarr;Type Hierarchy</b>
+
+	    <p>This command displays all the superclasses and implemnted interfaces and
+	    superinterfaces for a class. </p>
+	    </li></ul>
+            <p>In the class trees displayed by these commands, class names that have an "(I)" next to
+            their names are interfaces, while abstract classes are distinguised by an "(A)".</p>
+	    </li>
+	    <li><b><code>M-x jde-usages-display-subs-implementing-method</code> <br />
+	        JDEpi&rarr;jde-usages&rarr;Misc&rarr;Classes&nbsp;overriding/implementing&nbsp;this&nbsp;method</b>
+	    <p>Shows you all the locations where the current method is overridden or
+	    implemented.</p>
+	    </li>
+
+	    <li><b><code>M-x jde-open-class-source-with-completion</code><br />
+              	JDEpi&rarr;jde-usages&rarr;Misc&rarr;Open&nbsp;class&nbsp;(with&nbsp;name&nbsp;completion)</b>
+	    <p>A wrapper around <code>jde-open-class-source</code> which provides class-name
+	    completion. The list of classes in the project is updated automatically.</li>
+
+	    <li><b><code>M-x jde-usages-locate-class</code><br />
+              	JDEpi&rarr;jde-usages&rarr;Misc&rarr;Locate&nbsp;class</b>
+              <p>Find the jar or directory in <code>jde-global-classpath</code> that the entered
+              class-name is located in.</p>
+            </li>
+	    <li><b><code>M-x jde-usages-next-pos</code></b>
+	    <p>Browses to the next entry in the *usages* buffer. Can be called from any buffer.
+	    </li>
+
+	    <li><b><code>M-x jde-usages-goto-definition-of-thing-at-point</code><br />
+              	JDEpi&rarr;jde-usages&rarr;Misc&rarr;Goto&nbsp;defn</b>
+              <p>Similar to jde-open-class-at-point, but can handle references to fields in interfaces
+              and outer class members.</p>
+            </li>
+
+	  </ul>
+	</td>
+      </tr>
+    </table>
+  </body>
+  <!--
+    Local Variables:
+    mode:auto-fill
+    fill-column:100
+    End:
+  -->
+</html>

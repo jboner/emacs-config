@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:18:54 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module sim_commands</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module sim_commands</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sim_commands.SimCmdsObj.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SimCmdsObj</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>, <A CLASS="DocLink" HREF="InstanceSpace.InstanceSpace.html">InstanceSpace</A>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">change_buffer</SPAN>(<SPAN CLASS="Argument">buff_name</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">clear_abbreviations</SPAN>(<SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">clear_symbols</SPAN>(<SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">close_buffer</SPAN>(<SPAN CLASS="Argument">buff_name</SPAN>, <SPAN CLASS="Argument">save=0</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">compile_symbols</SPAN>(<SPAN CLASS="Argument">file_list</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">echo_command</SPAN>(<SPAN CLASS="Argument">cmd_name</SPAN>, <SPAN CLASS="Argument">*args</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">getmic</SPAN>(<SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">goto</SPAN>(<SPAN CLASS="Argument">pos</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Goes to position <EM>INT pos</EM> of the current buffer</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">goto_line</SPAN>(<SPAN CLASS="Argument">linenum</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Goes to line number <EM>INT linenum</EM> of current source buffer</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">help</SPAN>()</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">list_buffers</SPAN>(<SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">listen</SPAN>(<SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">make_position_visible</SPAN>(<SPAN CLASS="Argument">pos</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">move</SPAN>(<SPAN CLASS="Argument">steps</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Moves cursor by <EM>INT steps</EM> (can be negative)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#open_file"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">open_file</SPAN></A>(<SPAN CLASS="Argument">fname</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Open a file with name in current buffer.</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">print_abbreviations</SPAN>(<SPAN CLASS="Argument">show_unresolved=1</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">print_error</SPAN>(<SPAN CLASS="Argument">message</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">print_symbols</SPAN>(<SPAN CLASS="Argument">symbols=None</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">provoke</SPAN>(<SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">quit</SPAN>(<SPAN CLASS="Argument">clean_sr_voc=0</SPAN>, <SPAN CLASS="Argument">save_speech_files=None</SPAN>, <SPAN CLASS="Argument">disconnect=1</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">save</SPAN>(<SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # save current buffer</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#save_as"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">save_as</SPAN></A>(<SPAN CLASS="Argument">fname</SPAN>, <SPAN CLASS="Argument">no_prompt=0</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # save current buffer</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#say"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">say</SPAN></A>(<SPAN CLASS="Argument">utterance</SPAN>, <SPAN CLASS="Argument">user_input=None</SPAN>, <SPAN CLASS="Argument">never_bypass_sr_recog=0</SPAN>, <SPAN CLASS="Argument">echo_utterance=0</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Simulate an utterance <EM>STR utterance</EM></SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">select</SPAN>(<SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Selects from position <EM>start</EM> to position <EM>end</EM> in current buffer</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">setmic</SPAN>(<SPAN CLASS="Argument">state</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">show_buff</SPAN>(<SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Shows content of current source buffer</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">signal_quitting</SPAN>(<SPAN CLASS="Argument">quitting=1</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:/Projects/VoiceCode/VCode/Mediator\\sim_commands.pyc'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">anonymous_action_curr_num</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_else</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_else_if</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_function_add_argument</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_function_body</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_function_declaration</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_goto_body</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSearch instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_new_statement</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_simple_for</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_simple_while</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">dictionary</SPAN> <SPAN CLASS="VariableName">command_space</SPAN> = <SPAN CLASS="VariableValue">{}</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">cpp_class_body</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSearch instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">cpp_class_definition</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">cpp_subclass</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_braces_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_brackets_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_parens_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_quotes_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_single_quotes_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_single_quotes_pair_after</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_translation_off</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSwitchTranslation instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_translation_on</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSwitchTranslation instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_class_body</SPAN> = <SPAN CLASS="VariableValue">actions_py.ActionPyInsertInBody instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_class_definition</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_empty_dictionary</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_function_add_argument</SPAN> = <SPAN CLASS="VariableValue">actions_py.ActionPyAddArgument instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_function_body</SPAN> = <SPAN CLASS="VariableValue">actions_py.ActionPyInsertInBody instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_function_declaration</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_goto_body</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSearch instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_method_declaration</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_new_statement</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsertNewClause instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_old_class_body</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSearch instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_old_function_body</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSearch instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_simple_for</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">quit_flag</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">sleep_before_recognitionMimic</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">None</SPAN> <SPAN CLASS="VariableName">the_mediator</SPAN> = <SPAN CLASS="VariableValue">None</SPAN></SPAN>
+</PRE><H2>Description</H2><P>
+Valid commands are:</P>
+<P>
+help()
+   display (this) list of commands</P>
+<P>
+open_file(STR fname)
+   Opens file with path name <EM>fname</EM> in the editor
+   simulator. It also compiles a list of symbols for that file.</P>
+<P>
+compile_symbols([STR] file_list)
+   Compiles symbols for all source files in list <EM>file_list</EM>.</P>
+<P>
+clear_symbols()
+   Removes all spoken forms of symbols added by VoiceCode to NatSpeak's 
+   vocabulary. Spoken forms which consist of a single word are however left
+   there.</P>
+<P>
+clear_abbreviations()
+   Removes all defined abbreviations from VoiceCode's symbol dictionary</P>
+
+<H3>say(STR utterance, never_bypass_sr_recog=0, user_input=None)
+   Interprets string <EM>utterance</EM> as though it had been said by a user.</H3>
+   Note that this command will not work with <EM>Select XYZ</EM> utterances.
+   For those, you must use the <EM>say_select</EM> command.
+<H3>   <EM>utterance</EM> can be either:</H3>
+
+<UL>
+
+<LI>a string with the written form of what should be recognised by the
+         SR system
+         e.g.: say('index not equal to 0')
+<LI>a list of words in their written\spoken form (or just
+         written if it doesn't have a spoken form different from its
+         written form).
+         e.g.: say(['index', <CODE> != \not equal to</CODE>, '0'])
+</UL>
+    In general, it's better to specify <EM>utterance</EM> as a list of
+    written\spoken words because it allows to simulate exactly what
+    the SR does (e.g. what if the SR recognises an LSA as a sequence
+    of words instead of its written\spoken form?)    Note that if the utterance is a <EM>Select XYZ</EM> utterance, the first item
+    in list <EM>utterances</EM> should be the whole verb used in the select statement.    Example: say(['select previous', <CODE>index</CODE>, <CODE> != \not equal to</CODE>, '0'])
+             NOT
+             say(['select', <CODE>previous</CODE>, <CODE>index</CODE>, <CODE> != \not equal to</CODE>, '0'])    Argument <EM>user_input</EM> is a string that will be sent to the
+    mediator console's standard input. Use in automated regression
+    testing, if the <EM>say</EM> command requires user additional user input
+    (e.g. confirmation of a symbol match).    If argument <EM>never_bypass_sr_recog</EM> is true, the interpretation will always be done
+    through NatLink's recognitionMimic function, even if the <CODE>bypass</CODE> switch was on.goto(INT pos)
+   Moves cursor to position <EM>pos</EM>goto_line(INT linenum)
+   Moves cursor to the beginning of line number <EM>linenum</EM>select(INT start, end)
+   Selects from position <EM>start</EM> to position <EM>end</EM> in current buffershow_buff()
+   Prints the content of the current buffer
+<H3>listen()
+   [Unnecessary in gui_sim.py]</H3>
+   Throws the mediator into a dictation loop. It will listen for
+   dictation utterances and interpret and execute any part of the
+   utterance that corresponds to a Context Sensitive Command.   Once in <CODE>listen</CODE> mode, you cannot type console commands until you
+   have clicked the <CODE>OK</CODE> button on the <CODE>Natlink/ Python Subsystem</CODE>
+   window.getmic()
+    returns current microphone state as a string ('on', <CODE>off</CODE>, <CODE>sleeping</CODE>, or
+    'disabled')setmic(state)
+    sets current microphone state to the string state ('on', <CODE>off</CODE>,
+    <CODE>sleeping</CODE> are allowed)make_position_visible(INT pos)
+   Scroll so that pos is visibleprint_abbreviations(show_unresolved=1)
+   Prints out a list of the abbreviations in symbols that were parsed
+   so far. If <EM>show_unresolved=1</EM>, also lists unresolved abbreviations
+   and the symbols they appear in (an unresolved abbreviation is an
+   abbreviation that appeared in a symbol and is neither a speech
+   vocabulary word nor a known abbreviation).print_error(STR message):
+   Prints an error to stderrprint_symbols()
+   Prints the list of symbols in the known symbols dictionaryprovoke()
+   causes an error deliberatelysave()
+   Save the current filesave_as(filename, no_prompt=0)
+   Save the current file
+<H3>quit()
+   Quit the simulator.</H3>
+   Note that if you don't quit using this command
+   (e.g. *Ctrl-C*), your DOS window will hang up.   
+<H2 ID="open_file" CLASS="Function">open_file(<SPAN CLASS="Argument">fname</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</H2>
+<P>Open a file with name in current buffer.</P>
+
+<EM>STR fname</EM> is the path of the file<H2 ID="save_as" CLASS="Function">save_as(<SPAN CLASS="Argument">fname</SPAN>, <SPAN CLASS="Argument">no_prompt=0</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</H2>
+<P>save current buffer</P>
+
+<EM>STR fname</EM> is the path of the file
+<DL>
+
+<DT>
+<EM>BOOL no_prompt</EM>
+<DD>If true, don't prompt before overwriting
+an existing file
+</DL>
+<H2 ID="say" CLASS="Function">say(<SPAN CLASS="Argument">utterance</SPAN>, <SPAN CLASS="Argument">user_input=None</SPAN>, <SPAN CLASS="Argument">never_bypass_sr_recog=0</SPAN>, <SPAN CLASS="Argument">echo_utterance=0</SPAN>, <SPAN CLASS="Argument">echo_cmd=0</SPAN>)</H2>
+<P>Simulate an utterance <EM>STR utterance</EM></P>
+
+
+<DL>
+
+<DT>
+<EM>STR utterance</EM>
+<DD>The utterance. This can be a string with the
+ written form of what should be recognised by the SR system. If
+ it's a list, it should be a list of words in their written\spoken
+ form (or just written if it doesn't have a spoken form different
+ from its written form).
+</DL>
+In general, it's better to specify <EM>utterance</EM> as a list of
+written\spoken words because it allows to simulate exactly what
+the SR does (e.g. what if the SR recognises an LSA as a sequence
+of words instead of its written\spoken form?)
+<DL>
+
+<DT>
+<EM>STR user_input</EM>
+<DD>A string that will be sent to the mediator console's
+ standard input. Use in automated regression testing, if the <EM>say</EM>
+ command requires user additional user input (e.g. confirmation of
+ a symbol match).
+<DT>
+BOOL <EM>never_bypass_sr_recog</EM>
+<DD>If <EM>TRUE</EM>, then the interpretation will always be done
+through NatLink's recognitionMimic function, even if the <CODE>bypass</CODE> command line switch was set.
+<DT>
+<EM>BOOL echo_utterance=0</EM>
+<DD>If true, echo the utterance on STDOUT.
+</DL>
+Examples: say('x not equal to') -&gt; <CODE>x != </CODE>
+          say(['x', <CODE> != \not equal to'] -&gt; 'x != </CODE>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

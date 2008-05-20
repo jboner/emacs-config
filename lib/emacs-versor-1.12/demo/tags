@@ -1,0 +1,12 @@
+
+demo-text.c,91
+void print_attr_if_present(6,95
+char *to_label(19,334
+static void output_graphic(34,742
+
+demo-text.el,331
+(defun find-next-lisp-binding-outwards find-next-lisp-binding-outwards6,114
+(defmodal variables-in-scope variables-in-scope19,538
+(defmodal adapt-binding-point adapt-binding-point96,3280
+(defmodal languide-region-type languide-region-type126,4306
+(defmodal variable-bindings-in-region variable-bindings-in-region277,9713

@@ -1,0 +1,6 @@
+*.pyc
+#*#
+*~
+footest*
+foo*
+correct_results.*

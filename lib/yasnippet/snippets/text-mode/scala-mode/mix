@@ -1,0 +1,5 @@
+#name : trait T { .. }
+# --
+trait ${1:name} {
+  $0
+}

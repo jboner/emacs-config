@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:31:38 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module debug</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module debug</H1>
+<PRE><SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_traces</SPAN>(<SPAN CLASS="Argument">print_to=None</SPAN>, <SPAN CLASS="Argument">status=None</SPAN>, <SPAN CLASS="Argument">active_traces=None</SPAN>, <SPAN CLASS="Argument">allow_trace_id_substrings=None</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Configures what traces are printed, and where</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#critical_warning"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">critical_warning</SPAN></A>(<SPAN CLASS="Argument">warn</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Prints a critical warning message.</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">dont_print_trace</SPAN>(<SPAN CLASS="Argument">trace_id</SPAN>, <SPAN CLASS="Argument">message</SPAN>, <SPAN CLASS="Argument">insert_nl=1</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Just ignore traces. Used for greater efficiency.</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">methods</SPAN>(<SPAN CLASS="Argument">instance</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">not_implemented</SPAN>(<SPAN CLASS="Argument">name</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Prints warning message when a stub function is called.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#print_call_stack"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">print_call_stack</SPAN></A>(<SPAN CLASS="Argument">print_to_file=&lt;open file '&lt;stdout&gt;', mode 'w' at 7628c0&gt;</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Prints the call stack.</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">print_trace</SPAN>(<SPAN CLASS="Argument">trace_id</SPAN>, <SPAN CLASS="Argument">message</SPAN>, <SPAN CLASS="Argument">insert_nl=1</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">trace</SPAN>(<SPAN CLASS="Argument">trace_id</SPAN>, <SPAN CLASS="Argument">message</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">trace_call_stack</SPAN>(<SPAN CLASS="Argument">trace_id</SPAN>, <SPAN CLASS="Argument">location_id=None</SPAN>, <SPAN CLASS="Argument">print_to_file=&lt;open file '&lt;stdout&gt;', mode 'w' at 7628c0&gt;</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">trace_is_active</SPAN>(<SPAN CLASS="Argument">trace_id</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">virtual</SPAN>(<SPAN CLASS="Argument">name</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Prints warning message when a virtual method is called.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#what_class"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">what_class</SPAN></A>(<SPAN CLASS="Argument">instance</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Returns a string describing the class of an instance.</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Mediator\\debug.pyc'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">activate_trace_id_substrings</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">dictionary</SPAN> <SPAN CLASS="VariableName">to_be_traced</SPAN> = <SPAN CLASS="VariableValue">{}</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">file</SPAN> <SPAN CLASS="VariableName">trace_file</SPAN> = <SPAN CLASS="VariableValue">&lt;open fi...t 7628c0&gt;</SPAN></SPAN>
+<SPAN CLASS="PyKeyword">alias</SPAN> <SPAN CLASS="AliasName">trace_fct</SPAN> = <SPAN CLASS="AliasFor">debug.dont_print_trace (type function)</SPAN>
+</PRE><H2 ID="critical_warning" CLASS="Function">critical_warning(<SPAN CLASS="Argument">warn</SPAN>)</H2>
+<P>Prints a critical warning message.</P>
+
+<P>
+A critical warning usually indicates a bug in the code which should
+be reported and resolved, but in a circumstance where the best 
+immediate response is to ignore and continue running.  For example, 
+if an error is detected by an object destructor or during cleanup, it 
+may be advisable to proceed to free the rest of the resources used
+by the object.</P>
+<H2 ID="print_call_stack" CLASS="Function">print_call_stack(<SPAN CLASS="Argument">print_to_file=&lt;open file '&lt;stdout&gt;', mode 'w' at 7628c0&gt;</SPAN>)</H2>
+<P>Prints the call stack.</P>
+
+<P>
+This is done by raising an exception, catching it and printing the
+traceback object. In Python 2, there is a more direct way of doing this.
+</P>
+<H2 ID="what_class" CLASS="Function">what_class(<SPAN CLASS="Argument">instance</SPAN>)</H2>
+<P>Returns a string describing the class of an instance.</P>
+
+<P>
+It works with any Python class or Python standard data types (int, float,
+string, etc.), but not with extension classes.</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

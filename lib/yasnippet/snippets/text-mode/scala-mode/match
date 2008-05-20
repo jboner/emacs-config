@@ -1,0 +1,5 @@
+#name : cc match { .. }
+# --
+${1:cc} match {
+  case ${2:pattern} => $0
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:32:56 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class SingleBufferWindow</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class SingleBufferWindow</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="GenEditWX.html">GenEditWX</A></P>
+
+
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SingleBufferWindow</SPAN>:
+    <A CLASS="DocLink" HREF="#GenEditWX.SingleBufferWindow.current_font"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GenEditWX.SingleBufferWindow.current_font</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # find the current font for the text buffers in this window</SPAN>
+    <A CLASS="DocLink" HREF="#GenEditWX.SingleBufferWindow.editor_buffer"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GenEditWX.SingleBufferWindow.editor_buffer</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns a reference to the TextBufferWX embedded in the GUI</SPAN>
+    <A CLASS="DocLink" HREF="#GenEditWX.SingleBufferWindow.editor_has_focus"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GenEditWX.SingleBufferWindow.editor_has_focus</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # indicates whether the editor window has the focus</SPAN>
+    <A CLASS="DocLink" HREF="#GenEditWX.SingleBufferWindow.editor_window"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GenEditWX.SingleBufferWindow.editor_window</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns a reference to the editor window</SPAN>
+    <A CLASS="DocLink" HREF="#GenEditWX.SingleBufferWindow.set_font"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GenEditWX.SingleBufferWindow.set_font</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">font</SPAN>)<SPAN CLASS="OneLiner"> # sets the current font for the text buffers in this window</SPAN>
+
+</PRE><H2>Description</H2><P>
+abstract base class for an editor window main panel 
+containing a single text buffer </P>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GenEditWX.SingleBufferWindow.current_font" CLASS="Method">GenEditWX.SingleBufferWindow.current_font(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>find the current font for the text buffers in this window</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>wxFont</EM>
+<DD>the current font
+
+</DL>
+<H2 ID="GenEditWX.SingleBufferWindow.editor_buffer" CLASS="Method">GenEditWX.SingleBufferWindow.editor_buffer(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns a reference to the TextBufferWX embedded in the GUI</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>TextBufferWX</EM>
+<DD>the TextBufferWX
+
+</DL>
+<H2 ID="GenEditWX.SingleBufferWindow.editor_has_focus" CLASS="Method">GenEditWX.SingleBufferWindow.editor_has_focus(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>indicates whether the editor window has the focus</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG>
+<EM>BOOL</EM> -- true if editor window has the focus
+</P>
+<H2 ID="GenEditWX.SingleBufferWindow.editor_window" CLASS="Method">GenEditWX.SingleBufferWindow.editor_window(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns a reference to the editor window</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>wxTextCtrl</EM>
+<DD>the editor window
+
+</DL>
+<H2 ID="GenEditWX.SingleBufferWindow.set_font" CLASS="Method">GenEditWX.SingleBufferWindow.set_font(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">font</SPAN>)</H2>
+<P>sets the current font for the text buffers in this window</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>wxFont font</EM>
+<DD>the desired font
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

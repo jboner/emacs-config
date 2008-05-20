@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Dec 25 16:42:20 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class SpyGrammar</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class SpyGrammar</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="VDBTest.html">VDBTest</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">VDBTest.SpyGrammar<BR>
+&nbsp;&nbsp;natlinkutils.GrammarBase<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SpyGrammar</SPAN>(<A CLASS="DocLink" HREF="natlinkutils.GrammarBase.html">GrammarBase</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VDBTest.SpyGrammar.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">log</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VDBTest.SpyGrammar.deactivate_spy</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VDBTest.SpyGrammar.gotResultsObject</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">recogType</SPAN>, <SPAN CLASS="Argument">resObj</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VDBTest.SpyGrammar.initialize</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VDBTest.SpyGrammar.reactivate</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from natlinkutils.GramClassBase</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.__del__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.activate</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window=0</SPAN>, <SPAN CLASS="Argument">exclusive=None</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.beginCallback</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">moduleInfo</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.callIfExists</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">funcName</SPAN>, <SPAN CLASS="Argument">argList</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.deactivate</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.hypothesisCallback</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">words</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.load</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grammar</SPAN>, <SPAN CLASS="Argument">allResults=0</SPAN>, <SPAN CLASS="Argument">hypothesis=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.setExclusive</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">exclusive</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.unload</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from natlinkutils.GrammarBase</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.activate</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">ruleName</SPAN>, <SPAN CLASS="Argument">window=0</SPAN>, <SPAN CLASS="Argument">exclusive=None</SPAN>, <SPAN CLASS="Argument">noError=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.activateAll</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window=0</SPAN>, <SPAN CLASS="Argument">exclusive=None</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.activateSet</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">ruleNames</SPAN>, <SPAN CLASS="Argument">window=0</SPAN>, <SPAN CLASS="Argument">exclusive=None</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.appendList</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">listName</SPAN>, <SPAN CLASS="Argument">words</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.deactivate</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">ruleName</SPAN>, <SPAN CLASS="Argument">noError=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.deactivateAll</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.emptyList</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">listName</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.load</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">gramSpec</SPAN>, <SPAN CLASS="Argument">allResults=0</SPAN>, <SPAN CLASS="Argument">hypothesis=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.resultsCallback</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">wordsAndNums</SPAN>, <SPAN CLASS="Argument">resObj</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.setList</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">listName</SPAN>, <SPAN CLASS="Argument">words</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GrammarBase.unload</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">gramSpec</SPAN> = <SPAN CLASS="VariableValue">'\012        &lt;start&gt; exported = {emptyList};\012    '</SPAN></SPAN>
+</PRE>
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

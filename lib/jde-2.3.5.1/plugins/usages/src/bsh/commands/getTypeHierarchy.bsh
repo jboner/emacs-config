@@ -1,0 +1,73 @@
+import java.util.List;
+import java.util.Collections;
+import java.io.PrintStream;
+import jde.util.Usages;
+import java.util.Stack;
+
+    
+void getTypeHierarchy (String className, PrintStream out) {
+    long start = System.currentTimeMillis();
+
+    Usages.IUsages u  = Usages.getCurrentIUsages();
+    
+    List subs = u.findSubs (className, /*getSubs*/ true, /*getImpls*/ true);
+//     message (subs);
+    List supers = u.findSupers (className, false);
+//     message (supers);
+
+    if (subs != null) {
+        if (supers.size() == 2) {
+            supers.set (0, subs);
+            reverseClassList (supers);
+        }
+        else
+            supers = subs;
+    } else if (supers.size() == 2)
+        reverseClassList (supers);
+    else // className has neither superclasses nor subclasses
+        supers = null;
+    
+//     message (supers);
+    
+    long stop = System.currentTimeMillis();
+
+    if (Usages.DEBUG) {
+        Usages.message ("total " + (stop - start));
+    }
+    
+    if (supers != null) {
+        out.println  ("(quote ");
+        Usages.print (out, supers);
+        out.println  (")");
+    } else {
+        out.println ("nil");
+    }
+}
+
+// void message (List list) {
+//     if (list != null)
+//         Usages.message (list.toString() + " " + list.size());
+//     else
+//         Usages.message ("null");
+// }
+
+void reverseClassList (List list) {
+    // push all the elements of list onto a stack
+    Stack stack = new Stack();
+    Object ptr = list;
+    while (ptr instanceof List) {
+        stack.push (((List) ptr).get(0));
+        ptr = ((List) ptr).get(1);
+    }
+    stack.push (ptr);
+    
+    while (true) {
+        list.set (0, stack.pop());
+        if (list.get(1) instanceof List) {
+            list = (List) list.get(1);
+        } else {
+            list.set (1, stack.pop());
+            break; // finish loop
+        }
+    }
+}

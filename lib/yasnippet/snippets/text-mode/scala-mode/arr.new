@@ -1,0 +1,3 @@
+#name : Array[T](..)
+# --
+Array[${1:value}](${2:args}) $0

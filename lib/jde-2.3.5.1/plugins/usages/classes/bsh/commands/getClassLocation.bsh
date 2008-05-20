@@ -1,0 +1,24 @@
+import jde.util.Usages;
+import jde.util.usages.*;
+
+void getClassLocation (String className) {
+    if (clazz == null)
+        return null;
+    
+    String clazz = className.replace ('.', '/').intern();
+
+    ASMUsages asm = Usages.getCurrentIUsages();
+
+    if (asm == null)
+        return "No current IUsages";
+
+    ClassPathManager cpm = asm.getClassPathManager();
+
+    ClassPathEntry cpe = cpm.getClassLocation (clazz);
+
+    if (cpe == null)
+        Usages.message ("Could not find " + className + " in the classpath.");
+    else
+        Usages.message ("Class " + className + " is loaded from " + cpe.toString());
+}
+

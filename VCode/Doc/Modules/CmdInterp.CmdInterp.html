@@ -1,0 +1,1364 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:17:15 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class CmdInterp</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class CmdInterp - Interprets Context Sensitive Commands spoken into a given application.</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="CmdInterp.html">CmdInterp</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">CmdInterp.CmdInterp<BR>
+&nbsp;&nbsp;Object.OwnerObject<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">CmdInterp</SPAN>(<A CLASS="DocLink" HREF="Object.OwnerObject.html">OwnerObject</A>):
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symdict_pickle_file=None</SPAN>, <SPAN CLASS="Argument">disable_dlg_select_symbol_matches=None</SPAN>, <SPAN CLASS="Argument">mediator=None</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.abbreviations_cleanup"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.abbreviations_cleanup</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # Removes all known abbreviations from the symbols dictionary.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.accept_symbol_match"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.accept_symbol_match</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">the_match</SPAN>)<SPAN CLASS="OneLiner"> # Accepts a match between a pseudo symbol and its native form.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.add_abbreviation"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.add_abbreviation</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">abbreviation</SPAN>, <SPAN CLASS="Argument">expansions</SPAN>, <SPAN CLASS="Argument">user_added=1</SPAN>)<SPAN CLASS="OneLiner"> # Add an abbreviation to VoiceCode's abbreviations dictionary.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.add_csc"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.add_csc</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">acmd</SPAN>)<SPAN CLASS="OneLiner"> # Add a new Context Sensitive Command. (synonym for index_csc)</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.add_csc_set"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.add_csc_set</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">set</SPAN>)<SPAN CLASS="OneLiner"> # add CSCs from a set</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.add_lsa"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.add_lsa</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">an_LSA</SPAN>)<SPAN CLASS="OneLiner"> # Add a language specific word.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.add_lsa_set"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.add_lsa_set</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">set</SPAN>)<SPAN CLASS="OneLiner"> # add LSAs from a set</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.choose_best_symbol"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.choose_best_symbol</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">choices</SPAN>)<SPAN CLASS="OneLiner"> # Chooses the best match for a spoken form of a symbol.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.chop_CSC"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.chop_CSC</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">cmd</SPAN>, <SPAN CLASS="Argument">app</SPAN>)<SPAN CLASS="OneLiner"> # Chops the start of a command if it starts with a CSC.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.chop_LSA"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.chop_LSA</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>, <SPAN CLASS="Argument">app</SPAN>)<SPAN CLASS="OneLiner"> # Chops off the first word of a command if it is an LSA.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.chop_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.chop_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">cmd</SPAN>, <SPAN CLASS="Argument">construct_check</SPAN>, <SPAN CLASS="Argument">app</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.chop_symbol"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.chop_symbol</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>, <SPAN CLASS="Argument">app</SPAN>)<SPAN CLASS="OneLiner"> # Chops off the beginning of a command if it is a known symbol.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.chop_word"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.chop_word</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)<SPAN CLASS="OneLiner"> # Removes a single word from a command.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.cleanup"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.cleanup</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">clean_sr_voc=0</SPAN>, <SPAN CLASS="Argument">clean_symdict=1</SPAN>, <SPAN CLASS="Argument">resave=1</SPAN>)<SPAN CLASS="OneLiner"> # Cleans up the symbol dictionary.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.dlg_select_symbol_match"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.dlg_select_symbol_match</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">untranslated_text</SPAN>, <SPAN CLASS="Argument">symbol_matches</SPAN>, <SPAN CLASS="Argument">app</SPAN>)<SPAN CLASS="OneLiner"> # Asks the user to select a match for pseudo symbol.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.enable_symbol_match_dlg"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.enable_symbol_match_dlg</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">enable=1</SPAN>)<SPAN CLASS="OneLiner"> # enables or disables the symbol match dialog</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.has_lsa"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.has_lsa</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">language=None</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.index_csc"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.index_csc</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">acmd</SPAN>)<SPAN CLASS="OneLiner"> # Add a new csc to the command interpreter's command dictionary</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.interpret_NL_cmd"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.interpret_NL_cmd</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">cmd</SPAN>, <SPAN CLASS="Argument">app</SPAN>, <SPAN CLASS="Argument">initial_buffer=None</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.interpret_cmd_tuples"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.interpret_cmd_tuples</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">cmd</SPAN>, <SPAN CLASS="Argument">app</SPAN>, <SPAN CLASS="Argument">initial_buffer=None</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.interpret_massaged"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.interpret_massaged</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">cmd</SPAN>, <SPAN CLASS="Argument">app</SPAN>, <SPAN CLASS="Argument">initial_buffer=None</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.is_spoken_CSC"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.is_spoken_CSC</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">app</SPAN>)<SPAN CLASS="OneLiner"> # Checks if a string is the spoken form of a CSC.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.is_spoken_LSA"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.is_spoken_LSA</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">app</SPAN>)<SPAN CLASS="OneLiner"> # Checks if a string is the spoken form of an LSA.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.is_spoken_symbol"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.is_spoken_symbol</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">app</SPAN>)<SPAN CLASS="OneLiner"> # Checks if a string is the spoken form of a known symbol.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.massage_command"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.massage_command</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)<SPAN CLASS="OneLiner"> # Massages a command to prepare it for interpretation.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.massage_command_tuples"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.massage_command_tuples</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command_tuples</SPAN>)<SPAN CLASS="OneLiner"> # Massages a command to prepare it for interpretation.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.match_pseudo_symbol"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.match_pseudo_symbol</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pseudo_symbol</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.match_untranslated_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.match_untranslated_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">untranslated_words</SPAN>, <SPAN CLASS="Argument">app</SPAN>)<SPAN CLASS="OneLiner"> # Tries to match last sequence of untranslated text to a symbol.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.parse_standard_symbols"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.parse_standard_symbols</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)<SPAN CLASS="OneLiner"> # Parse standard symbols for the various programming languages.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.parse_symbols"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.parse_symbols</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">contents</SPAN>, <SPAN CLASS="Argument">language_name</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.parse_symbols_from_file"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.parse_symbols_from_file</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_name</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)<SPAN CLASS="OneLiner"> # Parse symbols from a single source file.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.parse_symbols_from_files"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.parse_symbols_from_files</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_list</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)<SPAN CLASS="OneLiner"> # Parse symbols from a series of source files</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.peek_at_unresolved"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.peek_at_unresolved</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.print_abbreviations</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">show_unresolved=0</SPAN>)<SPAN CLASS="OneLiner"> # Prints the known and unresolved abbreviations.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.print_symbols"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.print_symbols</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symbols=None</SPAN>)<SPAN CLASS="OneLiner"> # Print the content of the symbols dictionary.</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.set_mediator"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.set_mediator</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">mediator</SPAN>)<SPAN CLASS="OneLiner"> # sets the parent mediator which owns this CmdInterp instance</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.spoken_form_regexp"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.spoken_form_regexp</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>)<SPAN CLASS="OneLiner"> # Returns a regexp that matches a spoken form of a command.</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.standard_symbols_in</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_list</SPAN>)<SPAN CLASS="OneLiner"> # Compile symbols defined in a series of source files</SPAN>
+    <A CLASS="DocLink" HREF="#CmdInterp.CmdInterp.user_message"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdInterp.CmdInterp.user_message</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">message</SPAN>, <SPAN CLASS="Argument">instance=None</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.OwnerObject</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject._cleanup_object"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject._cleanup_object</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">object</SPAN>)<SPAN CLASS="OneLiner"> # attempt to call cleanup on object</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_grandparent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_grandparent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grandparent</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_owned"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_owned</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)<SPAN CLASS="OneLiner"> # append a new attribute name to the list of owned objects</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_owned_list"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_owned_list</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)<SPAN CLASS="OneLiner"> # append new attribute names to the list of owned objects</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.cleanup"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.cleanup</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.name_parent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.name_parent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">parent=None</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.owned_by"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.owned_by</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns the name of the parent attribute</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.remove_other_references"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.remove_other_references</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+
+</PRE><H2>Description</H2><P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>NewMediatorObject mediator</EM>
+<DD>reference to the parent mediator
+which owns this CmdInterp instance
+<DT>
+{STR: [[(Context , FCT)]} <EM>cmd_index={}</EM>
+<DD>index of CSCs. Key
+ is the spoken form of the command, value is a list of contextual
+ meanings. A contextual meaning is a pair of a <EM>context object</EM>
+ and an <EM>action function</EM> to be fired if the context applies.
+<DT>
+<A HREF="SymDict.SymDict.html">SymDict</A> <EM>known_symbols</EM>
+<DD>dictionary of known symbols
+<DT>
+{STR: {STR: STR}} <EM>language_specific_aliases = {}</EM>
+<DD>Key is the name of
+ a programming language (None means all languages). Value is a
+ dictionary of written forms over spoken form keys 
+ specific to a language.
+<DT>
+BOOL <EM>disable_dlg_select_symbol_matches = None</EM>
+<DD>If true, then
+do not prompt the user for confirmation of new symbols.
+<DT>
+BOOL <EM>add_sr_entries_for_LSAs_and_CSCs</EM>
+<DD>if <EM>TRUE</EM>, then add 
+SR entries for the LSAs and CSCs when they are added. If <EM>FALSE</EM>, 
+assume that these entries were already added by an previous instance
+of the mediator. This is mostly used for regression testing purposes
+where we create a new mediator in each test, and don't want to waste
+CPU time adding the same LSAs and CSCs over and over again.
+<DT>
+<EM>{STR: {STR: STR}}</EM> lsa_spacing = {}
+<DD>Key is the name of
+ a programming language (None means all languages). Value is a
+ dictionary of spacing flags over spoken form keys 
+ specific to a language.
+</DL>
+<P>
+CLASS ATTRIBUTES**</P>
+<P>
+<EM>none</EM> --</P>
+<H2 ID="CmdInterp.CmdInterp.__init__" CLASS="Method">CmdInterp.CmdInterp.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symdict_pickle_file=None</SPAN>, <SPAN CLASS="Argument">disable_dlg_select_symbol_matches=None</SPAN>, <SPAN CLASS="Argument">mediator=None</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FILE symdict_pickle_file = None</EM>
+<DD>File used to for
+reading/writing the symbol dictionary. If <EM>None</EM>, then don't
+read/write the symbol dictionary from/to file.
+<DT>
+<EM>BOOL disable_dlg_select_symbol_matches = None</EM>
+<DD>If true, then
+do not prompt the user for confirmation of new symbols.
+<DT>
+<EM>NewMediatorObject mediator</EM>
+<DD>reference to the parent mediator
+which owns this CmdInterp instance
+
+</DL>
+<H2 ID="CmdInterp.CmdInterp.abbreviations_cleanup" CLASS="Method">CmdInterp.CmdInterp.abbreviations_cleanup(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>Removes all known abbreviations from the symbols dictionary.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="CmdInterp.CmdInterp.accept_symbol_match" CLASS="Method">CmdInterp.CmdInterp.accept_symbol_match(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">the_match</SPAN>)</H2>
+<P>Accepts a match between a pseudo symbol and its native form.</P>
+
+<P>
+Adds the new written\spoken symbol to the SR vocabulary and
+adds new abbreviations which are used in the match.</P>
+<P>
+Also, adds written\spoken symbols for symbols that contain
+those new abbreviations and whose spoken form can now be
+resolved because of those new abbreviations.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<A HREF="SymDict.SymbolMatch.html">SymbolMatch</A> the_match
+<DD>The match to be accepted
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM> --</P>
+<H2 ID="CmdInterp.CmdInterp.add_abbreviation" CLASS="Method">CmdInterp.CmdInterp.add_abbreviation(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">abbreviation</SPAN>, <SPAN CLASS="Argument">expansions</SPAN>, <SPAN CLASS="Argument">user_added=1</SPAN>)</H2>
+<P>Add an abbreviation to VoiceCode's abbreviations dictionary.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> abbreviation
+<DD>the abbreviation 
+<DT>
+<EM>[STR]</EM> expansions
+<DD>list of possible expansions
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="CmdInterp.CmdInterp.add_csc" CLASS="Method">CmdInterp.CmdInterp.add_csc(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">acmd</SPAN>)</H2>
+<P>Add a new Context Sensitive Command. (synonym for index_csc)</P>
+
+<P>
+<A HREF="CSCmd.CSCmd.html">CSCmd</A> <EM>acmd</EM> is the command to add.</P>
+<H2 ID="CmdInterp.CmdInterp.add_csc_set" CLASS="Method">CmdInterp.CmdInterp.add_csc_set(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">set</SPAN>)</H2>
+<P>add CSCs from a set</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>CSCmdSet set</EM>
+<DD>the set of commands to add
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="CmdInterp.CmdInterp.add_lsa" CLASS="Method">CmdInterp.CmdInterp.add_lsa(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">an_LSA</SPAN>)</H2>
+<P>Add a language specific word.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>LSAlias an_LSA</EM>
+<DD>the new language-specific alias
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="CmdInterp.CmdInterp.add_lsa_set" CLASS="Method">CmdInterp.CmdInterp.add_lsa_set(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">set</SPAN>)</H2>
+<P>add LSAs from a set</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>LSAliasSet set</EM>
+<DD>the set of aliases to add
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="CmdInterp.CmdInterp.choose_best_symbol" CLASS="Method">CmdInterp.CmdInterp.choose_best_symbol(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">choices</SPAN>)</H2>
+<P>Chooses the best match for a spoken form of a symbol.</P>
+
+<P>
+For now, we just choose the first item in <EM>choices</EM>, but in
+the future, we might choose the one that appears closest to
+the cursor, or the one that used most recently, or the one
+that best matches the spoken form.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> spoken_form
+<DD>spoken form of the symbol. 
+<DT>
+<EM>ANY</EM> choices
+<DD>undocumented 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="CmdInterp.CmdInterp.chop_CSC" CLASS="Method">CmdInterp.CmdInterp.chop_CSC(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">cmd</SPAN>, <SPAN CLASS="Argument">app</SPAN>)</H2>
+<P>Chops the start of a command if it starts with a CSC.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[(STR, STR)]</EM> cmd
+<DD>The command,  a list of
+ tuples of (spoken_form, written_form), with the spoken form
+ cleaned and the written form cleaned for VoiceCode.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+Returns a tuple <EM>(chopped_CSC, consumed, rest)</EM> where:</P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> chopped_symbol
+<DD>The spoken form of the CSC that
+was chopped off. If <EM>None</EM>, it means <EM>cmd</EM> did
+not start with a known CSC.
+<DT>
+<EM>INT</EM> consumed*
+<DD>Number of words consumed by the CSC from
+ the command
+<DT>
+<EM>(STR, STR)</EM> rest
+<DD>is what was left of <EM>cmd</EM> after the CSC
+ was chopped off.        
+
+</DL>
+<H2 ID="CmdInterp.CmdInterp.chop_LSA" CLASS="Method">CmdInterp.CmdInterp.chop_LSA(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>, <SPAN CLASS="Argument">app</SPAN>)</H2>
+<P>Chops off the first word of a command if it is an LSA.</P>
+
+<P>
+        <STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[(STR, STR)]</EM> cmd
+<DD>The command,  a list of
+         tuples of (spoken_form, written_form), with the spoken form
+         cleaned and the written form cleaned for VoiceCode.
+</DL>
+<P>
+        <STRONG>OUTPUTS</STRONG></P>
+<P>
+        Returns a tuple <EM>(chopped_LSA, consumed, rest)</EM> where:</P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> chopped_LSA
+<DD>The written form of the LSA that was
+         chopped off. If <EM>None</EM>, it means <EM>command</EM> did not start with
+         an LSA.
+<DT>
+<EM>INT</EM> consumed*
+<DD>Number of words consumed by the LSA from
+         the command (always 1, but return it anyway because want to
+         keep same signature as chop_CSC and chop_symbol)
+<DT>
+<EM>(STR, STR)</EM> rest
+<DD>is what was left of <EM>cmd</EM> after the LSA
+         was chopped off.        
+        
+</DL>
+<H2 ID="CmdInterp.CmdInterp.chop_construct" CLASS="Method">CmdInterp.CmdInterp.chop_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">cmd</SPAN>, <SPAN CLASS="Argument">construct_check</SPAN>, <SPAN CLASS="Argument">app</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Look at NL command to see if it starts with a
+particular kind of construct (e.g. CSC, LSA, symbol)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR]</EM> cmd
+<DD>The words in the NL command (in their written\spoken
+form).
+<DT>
+<EM>METHOD</EM> construct_check(self, STR) returns STR
+<DD>Method used
+ to check wether a string corresponds to the type of construct
+ we are looking for. For LSA and symbol constructs, it returns
+ the construct's written form. For CSCs, it returns its spoken
+ form. If the string doesn't correspond to the proper construtct,
+ it returns <EM>None</EM>.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>(chopped_construct, consumed, rest)</EM></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> chopped_construct
+<DD>Spoken form of the construct
+chopped from the command
+<DT>
+<EM>INT</EM> consumed
+<DD>Number of words consumed from <EM>cmd</EM>
+<DT>
+<EM>[STR]</EM> rest
+<DD>The remaining of <EM>cmd</EM> after the construct has been
+chopped
+</DL>
+<H2 ID="CmdInterp.CmdInterp.chop_symbol" CLASS="Method">CmdInterp.CmdInterp.chop_symbol(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>, <SPAN CLASS="Argument">app</SPAN>)</H2>
+<P>Chops off the beginning of a command if it is a known symbol.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[(STR, STR)]</EM> cmd
+<DD>The command,  a list of
+ tuples of (spoken_form, written_form), with the spoken form
+ cleaned and the written form cleaned for VoiceCode.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+Returns a tuple <EM>(chopped_symbol, consumed, rest)</EM> where:</P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> chopped_symbol
+<DD>The written form of the known symbol that
+was chopped off. If <EM>None</EM>, it means <EM>command</EM> did
+not start with a known symbol.
+<DT>
+<EM>INT</EM> consumed*
+<DD>Number of words consumed by the symbol from
+ the command
+<DT>
+<EM>(STR, STR)</EM> rest
+<DD>is what was left of <EM>cmd</EM> after the symbol
+ was chopped off.        
+
+</DL>
+<H2 ID="CmdInterp.CmdInterp.chop_word" CLASS="Method">CmdInterp.CmdInterp.chop_word(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)</H2>
+<P>Removes a single word from a command.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[(STR, STR)]</EM> cmd
+<DD>The command,  a list of
+ tuples of (spoken_form, written_form), with the spoken form
+ cleaned and the written form cleaned for VoiceCode.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+Returns a tuple <EM>(chopped_word, consumed, rest)</EM> where:</P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> chopped_word
+<DD>The spoken form of the first word
+<DT>
+<EM>INT</EM> consumed
+<DD>Number of words consumed (always 1, but
+ return it anyway because want to keep same method signature
+ as chop_CSC, chop_LSA and chop_symbol).
+<DT>
+<EM>[(STR, STR)]</EM> rest
+<DD>Rest of the command after the word was chopped
+</DL>
+<H2 ID="CmdInterp.CmdInterp.cleanup" CLASS="Method">CmdInterp.CmdInterp.cleanup(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">clean_sr_voc=0</SPAN>, <SPAN CLASS="Argument">clean_symdict=1</SPAN>, <SPAN CLASS="Argument">resave=1</SPAN>)</H2>
+<P>Cleans up the symbol dictionary.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM> clean_sr_voc=0
+<DD>If true, then remove symbols from SR
+vocabulary
+<DT>
+<EM>BOOL</EM> clean_symdict=1
+<DD>If true, then removes symbols from
+ the symbol dictionary.
+<DT>
+<EM>BOOL resave = 1</EM>
+<DD>If true, symbol dictionary is
+resaved to disk after cleanup.        
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="CmdInterp.CmdInterp.dlg_select_symbol_match" CLASS="Method">CmdInterp.CmdInterp.dlg_select_symbol_match(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">untranslated_text</SPAN>, <SPAN CLASS="Argument">symbol_matches</SPAN>, <SPAN CLASS="Argument">app</SPAN>)</H2>
+<P>Asks the user to select a match for pseudo symbol.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> untranslated_text
+<DD>untranslated form of the text which
+matched
+<DT>
+<EM>[SymbolMatch]</EM> symbol_matches
+<DD>List of possible matches.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="CmdInterp.CmdInterp.enable_symbol_match_dlg" CLASS="Method">CmdInterp.CmdInterp.enable_symbol_match_dlg(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">enable=1</SPAN>)</H2>
+<P>enables or disables the symbol match dialog</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM> enable
+<DD>1 to enable the dialog, 0 to disable it
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>previous status of the dialog
+
+</DL>
+<H2 ID="CmdInterp.CmdInterp.has_lsa" CLASS="Method">CmdInterp.CmdInterp.has_lsa(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">language=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+check if there is already an LSA defined with this spoken
+form</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR spoken_form</EM>
+<DD>spoken form to check
+<DT>
+<EM>STR language</EM>
+<DD>name of the language in which to check
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if such an LSA exists
+
+</DL>
+<H2 ID="CmdInterp.CmdInterp.index_csc" CLASS="Method">CmdInterp.CmdInterp.index_csc(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">acmd</SPAN>)</H2>
+<P>Add a new csc to the command interpreter's command dictionary</P>
+
+<P>
+<A HREF="CSCmd.CSCmd.html">CSCmd</A> <EM>acmd</EM> is the command to be indexed.</P>
+<H2 ID="CmdInterp.CmdInterp.interpret_NL_cmd" CLASS="Method">CmdInterp.CmdInterp.interpret_NL_cmd(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">cmd</SPAN>, <SPAN CLASS="Argument">app</SPAN>, <SPAN CLASS="Argument">initial_buffer=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Interprets a natural language command and executes
+corresponding instructions.</P>
+
+<DL>
+
+<DT>
+<EM>[STR] cmd</EM>
+<DD>The command. It is a list of written\spoken words.
+<DT>
+<EM>AppState app</EM>
+<DD>the AppState interface to the editor
+<DT>
+<EM>[STR] initial_buffer</EM>
+<DD>The name of the target buffer at the 
+start of the utterance.  Some CSCs may change the target buffer of 
+subsequent parts of the command.  If None, then the current buffer 
+will be used.
+</DL>
+<H2 ID="CmdInterp.CmdInterp.interpret_cmd_tuples" CLASS="Method">CmdInterp.CmdInterp.interpret_cmd_tuples(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">cmd</SPAN>, <SPAN CLASS="Argument">app</SPAN>, <SPAN CLASS="Argument">initial_buffer=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Interprets a natural language command and executes
+corresponding instructions.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[(STR, STR)]</EM> cmd
+<DD>The command to be massaged. It's a list of
+ tuples of (spoken_form, written_form), with the written form
+ already cleaned for VoiceCode.
+<DT>
+<EM>AppState app</EM>
+<DD>the AppState interface to the editor
+<DT>
+<EM>[STR] initial_buffer</EM>
+<DD>The name of the target buffer at the 
+start of the utterance.  Some CSCs may change the target buffer of 
+subsequent parts of the command.  If None, then the current buffer 
+will be used.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="CmdInterp.CmdInterp.interpret_massaged" CLASS="Method">CmdInterp.CmdInterp.interpret_massaged(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">cmd</SPAN>, <SPAN CLASS="Argument">app</SPAN>, <SPAN CLASS="Argument">initial_buffer=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Interprets a natural language command and executes
+corresponding instructions.</P>
+
+<DL>
+
+<DT>
+<EM>[(STR, STR)]</EM> cmd
+<DD>The command,  a list of
+ tuples of (spoken_form, written_form), with the spoken form
+ cleaned and the written form cleaned for VoiceCode.
+<DT>
+<EM>AppState app</EM>
+<DD>the AppState interface to the editor
+<DT>
+<EM>[STR] initial_buffer</EM>
+<DD>The name of the target buffer at the 
+start of the utterance.  Some CSCs may change the target buffer of 
+subsequent parts of the command.  If None, then the current buffer 
+will be used.
+</DL>
+<H2 ID="CmdInterp.CmdInterp.is_spoken_CSC" CLASS="Method">CmdInterp.CmdInterp.is_spoken_CSC(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">app</SPAN>)</H2>
+<P>Checks if a string is the spoken form of a CSC.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> spoken_form
+<DD>String to be checked
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM> return value
+<DD>True iif <EM>spoken_form</EM> is the spoken form of a CSC.
+
+</DL>
+<H2 ID="CmdInterp.CmdInterp.is_spoken_LSA" CLASS="Method">CmdInterp.CmdInterp.is_spoken_LSA(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">app</SPAN>)</H2>
+<P>Checks if a string is the spoken form of an LSA.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM> return value
+<DD>True iif <EM>spoken_form</EM> is the spoken form of a LSA.
+
+</DL>
+<H2 ID="CmdInterp.CmdInterp.is_spoken_symbol" CLASS="Method">CmdInterp.CmdInterp.is_spoken_symbol(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">app</SPAN>)</H2>
+<P>Checks if a string is the spoken form of a known symbol.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM> return value
+<DD>True iif <EM>spoken_form</EM> is the spoken form of a
+known symbol.
+
+</DL>
+<H2 ID="CmdInterp.CmdInterp.massage_command" CLASS="Method">CmdInterp.CmdInterp.massage_command(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)</H2>
+<P>Massages a command to prepare it for interpretation.</P>
+
+<P>
+Makes sure to substitute special characters (e.g. {Spacebar})
+in the written form of words in the command. Also, makes sure
+that the spoken forms are all lowercase, and contain no
+multiple, leading or trailing blanks.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR]</EM> command
+<DD>The command to be massaged. It's a list of
+ written\spoken words.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[(STR, STR)]</EM>
+<DD>The massaged command
+
+</DL>
+<H2 ID="CmdInterp.CmdInterp.massage_command_tuples" CLASS="Method">CmdInterp.CmdInterp.massage_command_tuples(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command_tuples</SPAN>)</H2>
+<P>Massages a command to prepare it for interpretation.</P>
+
+<P>
+Makes sure to substitute special characters (e.g. {Spacebar})
+in the written form of words in the command. Also, makes sure
+that the spoken forms are all lowercase, and contain no
+multiple, leading or trailing blanks.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[(STR, STR)]</EM> cmd
+<DD>The command to be massaged. It's a list of
+ tuples of (spoken_form, written_form), with the written form
+ already cleaned for VoiceCode.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[(STR, STR)]</EM>
+<DD>The massaged command
+
+</DL>
+<H2 ID="CmdInterp.CmdInterp.match_pseudo_symbol" CLASS="Method">CmdInterp.CmdInterp.match_pseudo_symbol(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pseudo_symbol</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Returns a prioritized list of all known native symbols that
+match a given pseudo symbol.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> pseudo_symbol
+<DD>The pseudo symbol to be matched. 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[</EM> <A HREF="SymDict.SymbolMatch.html">SymbolMatch</A> <EM>]</EM>
+<DD>Prioritized list of symbol matches.
+</DL>
+<H2 ID="CmdInterp.CmdInterp.match_untranslated_text" CLASS="Method">CmdInterp.CmdInterp.match_untranslated_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">untranslated_words</SPAN>, <SPAN CLASS="Argument">app</SPAN>)</H2>
+<P>Tries to match last sequence of untranslated text to a symbol.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR]</EM>
+<DD>list of untranslated words
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="CmdInterp.CmdInterp.parse_standard_symbols" CLASS="Method">CmdInterp.CmdInterp.parse_standard_symbols(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)</H2>
+<P>Parse standard symbols for the various programming languages.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM> add_sr_entries = 1
+<DD>If true, then add symbols to the
+ SR vocabulary.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="CmdInterp.CmdInterp.parse_symbols" CLASS="Method">CmdInterp.CmdInterp.parse_symbols(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">contents</SPAN>, <SPAN CLASS="Argument">language_name</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Parse symbols from a string representing the contents of a 
+source file.</P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> contents
+<DD>the contents of the source file
+<DT>
+<EM>STR</EM> language_name
+<DD>the name of the language of the source
+file
+<DT>
+<EM>BOOL</EM> add_sr_entries = 1
+<DD>If true, add symbols to the SR vocabulary
+
+</DL>
+<H2 ID="CmdInterp.CmdInterp.parse_symbols_from_file" CLASS="Method">CmdInterp.CmdInterp.parse_symbols_from_file(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_name</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)</H2>
+<P>Parse symbols from a single source file.</P>
+
+
+<DL>
+
+<DT>
+<EM>STR</EM> file_name
+<DD>The path of the file.
+<DT>
+<EM>BOOL</EM> add_sr_entries = 1
+<DD>If true, add symbols to the SR vocabulary
+
+</DL>
+<H2 ID="CmdInterp.CmdInterp.parse_symbols_from_files" CLASS="Method">CmdInterp.CmdInterp.parse_symbols_from_files(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_list</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)</H2>
+<P>Parse symbols from a series of source files</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+*[STR] file_list
+<DD>List of files to be compiled
+<DT>
+<EM>BOOL</EM> add_sr_entries = 1
+<DD>If true, add symbols to the SR vocabulary
+</DL>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="CmdInterp.CmdInterp.peek_at_unresolved" CLASS="Method">CmdInterp.CmdInterp.peek_at_unresolved(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns a reference to the dictionary of unresolved 
+abbreviations maintained by the SymDict, and the symbols 
+containing those abbreviations.</P>
+<P>
+<STRONG>NOTE:</STRONG> This method is intended only for diagnostic testing
+purpose.  The caller must not modify the dictionary returned</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: {STR: 1}}</EM> unresolved_abbreviations={}
+<DD>Dictionary of
+unresolved abbreviations. These are abbreviations that have
+appeared in at least one compiled symbol, yet are neither a word
+in the speech vocabulary or a known abbreviation. Values are
+dictionnaries that list the symbols containing the unresolved
+abbreviation.
+
+</DL>
+<H2 ID="CmdInterp.CmdInterp.print_symbols" CLASS="Method">CmdInterp.CmdInterp.print_symbols(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symbols=None</SPAN>)</H2>
+<P>Print the content of the symbols dictionary.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR] symbols</EM>
+<DD>list of symbols to print, or None to print
+the whole dictionary
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="CmdInterp.CmdInterp.set_mediator" CLASS="Method">CmdInterp.CmdInterp.set_mediator(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">mediator</SPAN>)</H2>
+<P>sets the parent mediator which owns this CmdInterp instance</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>NewMediatorObject mediator</EM>
+<DD>reference to the parent mediator
+which owns this CmdInterp instance
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="CmdInterp.CmdInterp.spoken_form_regexp" CLASS="Method">CmdInterp.CmdInterp.spoken_form_regexp(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_form</SPAN>)</H2>
+<P>Returns a regexp that matches a spoken form of a command.</P>
+
+<P>
+<EM>STR spoken_form</EM> is the spoken form. The returned regexp will match
+it even if the case of the first letter of each word do not match.</P>
+<H2 ID="CmdInterp.CmdInterp.user_message" CLASS="Method">CmdInterp.CmdInterp.user_message(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">message</SPAN>, <SPAN CLASS="Argument">instance=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+sends a user message up the chain to the NewMediatorObject to
+be displayed</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR message</EM>
+<DD>the message
+<DT>
+<EM>STR instance_name</EM>
+<DD>the editor from which the message
+originated, or None if it is not associated with a specific
+editor.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises existing attributes, unless those attributes
+already exist</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.OwnerObject._cleanup_object" CLASS="Method">Object.OwnerObject._cleanup_object(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">object</SPAN>)</H2>
+<P>attempt to call cleanup on object</P>
+
+<P>
+<STRONG>INPUTS*</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>OwnerObject object</EM>
+<DD>note: class of object is the expected
+class, but _cleanup_object doesn't assume this is correct, nor
+does it check whether the object is a subclass of
+OwnerObject, only that it is a class instance and that it
+has a cleanup attribute
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>reason for error (or None if no error).
+
+</DL>
+<H2 ID="Object.OwnerObject.add_grandparent" CLASS="Method">Object.OwnerObject.add_grandparent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grandparent</SPAN>)</H2>
+<P>None</P>
+
+<P>
+specify the name of the attribute containing a reference to 
+this object's grandparent (or great-grandparent, etc.)
+(Actually, any other reference which needs to be del'ed but not
+cleaned up)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR grandparent</EM>
+<DD>names of owned attributes
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.add_owned" CLASS="Method">Object.OwnerObject.add_owned(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)</H2>
+<P>append a new attribute name to the list of owned objects</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR owned</EM>
+<DD>names of owned attributes
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.add_owned_list" CLASS="Method">Object.OwnerObject.add_owned_list(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)</H2>
+<P>append new attribute names to the list of owned objects</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR] owned</EM>
+<DD>names of owned attributes
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.cleanup" CLASS="Method">Object.OwnerObject.cleanup(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+method to cleanup circular references by cleaning up 
+any children, and then removing the reference to the parent</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.name_parent" CLASS="Method">Object.OwnerObject.name_parent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">parent=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+specify the name of the attribute containing a reference to 
+this object's parent.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR parent</EM>
+<DD>name of the parent, or None if none
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.owned_by" CLASS="Method">Object.OwnerObject.owned_by(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns the name of the parent attribute</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>name of the parent, or None if none
+
+</DL>
+<H2 ID="Object.OwnerObject.remove_other_references" CLASS="Method">Object.OwnerObject.remove_other_references(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+additional cleanup to ensure that this object's references to
+its owned objects are the last remaining references</P>
+<P>
+<STRONG>NOTE:</STRONG> subclasses must call their parent class's 
+remove_other_references method, after performing their own duties.
+Also, a class inheriting from two OwnerObject classes MUST
+define remove_other_references and call both subclasses'
+versions</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

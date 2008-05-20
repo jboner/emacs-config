@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:13:48 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module Object</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module Object</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="Object.BadConstrCall.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">BadConstrCall</SPAN></A>(<A CLASS="DocLink" HREF="exceptions.Exception.html">Exception</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="Object.ChildObject.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ChildObject</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="Object.EnforcedConstrArg.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">EnforcedConstrArg</SPAN></A>(<A CLASS="DocLink" HREF="exceptions.Exception.html">Exception</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="Object.LargeNonObject.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">LargeNonObject</SPAN></A></SPAN><SPAN CLASS="OneLiner"> # A "raw" test object with many attributes.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="Object.LargeObject.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">LargeObject</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # A test object with many attributes</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="Object.Object.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">Object</SPAN></A></SPAN><SPAN CLASS="OneLiner"> # A generic base class for all objects.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="Object.OwnerObject.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">OwnerObject</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="Object.SmallNonObject.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SmallNonObject</SPAN></A></SPAN><SPAN CLASS="OneLiner"> # A "raw" test object with many attributes.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="Object.SmallObject.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SmallObject</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # A test object with few attributes</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#profConstrLargeNonObj"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">profConstrLargeNonObj</SPAN></A>(<SPAN CLASS="Argument">num_times</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Profile performance of constructor</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#profConstrLargeObj"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">profConstrLargeObj</SPAN></A>(<SPAN CLASS="Argument">num_times</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Profile performance of constructor</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#profConstrSmallNonObj"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">profConstrSmallNonObj</SPAN></A>(<SPAN CLASS="Argument">num_times</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Profile performance of constructor</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#profConstrSmallObj"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">profConstrSmallObj</SPAN></A>(<SPAN CLASS="Argument">num_times</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Profile performance of constructor</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#profGetLargeNonObj"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">profGetLargeNonObj</SPAN></A>(<SPAN CLASS="Argument">num_times</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Profile performance of attribute <EM>get</EM></SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#profGetLargeObj"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">profGetLargeObj</SPAN></A>(<SPAN CLASS="Argument">num_times</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Profile performance of attribute <EM>get</EM></SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#profGetSmallNonObj"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">profGetSmallNonObj</SPAN></A>(<SPAN CLASS="Argument">num_times</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Profile performance of attribute <EM>get</EM></SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#profGetSmallObj"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">profGetSmallObj</SPAN></A>(<SPAN CLASS="Argument">num_times</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Profile performance of attribute <EM>get</EM></SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#profObject"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">profObject</SPAN></A>(<SPAN CLASS="Argument">num_times</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Profile the performance of the Object class</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#profSetLargeNonObj"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">profSetLargeNonObj</SPAN></A>(<SPAN CLASS="Argument">num_times</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Profile performance of attribute <EM>get</EM></SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#profSetLargeObj"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">profSetLargeObj</SPAN></A>(<SPAN CLASS="Argument">num_times</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Profile performance of attribute <EM>get</EM></SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#profSetSmallNonObj"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">profSetSmallNonObj</SPAN></A>(<SPAN CLASS="Argument">num_times</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Profile performance of attribute <EM>get</EM></SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#profSetSmallObj"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">profSetSmallObj</SPAN></A>(<SPAN CLASS="Argument">num_times</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Profile performance of attribute <EM>get</EM></SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">prof_test</SPAN>()</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Mediator\\Object.pyc'</SPAN></SPAN>
+</PRE><H2 ID="profConstrLargeNonObj" CLASS="Function">profConstrLargeNonObj(<SPAN CLASS="Argument">num_times</SPAN>)</H2>
+<P>Profile performance of constructor</P>
+
+<P>
+This method profiles the performance of constructors for classes
+that <EM>are not</EM> subclasses of Object and have <EM>many</EM> attributes</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> num_times
+<DD>number of times to invoke the constructor 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="profConstrLargeObj" CLASS="Function">profConstrLargeObj(<SPAN CLASS="Argument">num_times</SPAN>)</H2>
+<P>Profile performance of constructor</P>
+
+<P>
+This method profiles the performance of constructors for classes
+that <EM>are</EM> subclasses of Object and have <EM>many</EM> attributes</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> num_times
+<DD>number of times to invoke the constructor
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="profConstrSmallNonObj" CLASS="Function">profConstrSmallNonObj(<SPAN CLASS="Argument">num_times</SPAN>)</H2>
+<P>Profile performance of constructor</P>
+
+<P>
+This method profiles the performance of constructors for classes
+that <EM>are not</EM> subclasses of Object and have <EM>few</EM> attributes</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> num_times
+<DD>number of times to invoke the constructor 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="profConstrSmallObj" CLASS="Function">profConstrSmallObj(<SPAN CLASS="Argument">num_times</SPAN>)</H2>
+<P>Profile performance of constructor</P>
+
+<P>
+This method profiles the performance of constructors for classes
+that <EM>are</EM> subclasses of Object and have <EM>few</EM> attributes</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> num_times
+<DD>number of times to invoke the constructor 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="profGetLargeNonObj" CLASS="Function">profGetLargeNonObj(<SPAN CLASS="Argument">num_times</SPAN>)</H2>
+<P>Profile performance of attribute <EM>get</EM></P>
+
+<P>
+This method profiles the performance of attribute <EM>get</EM>  classes
+that <EM>are not</EM> subclasses of Object and have <EM>many</EM> attributes</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> num_times
+<DD>number of times to invoke the get 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="profGetLargeObj" CLASS="Function">profGetLargeObj(<SPAN CLASS="Argument">num_times</SPAN>)</H2>
+<P>Profile performance of attribute <EM>get</EM></P>
+
+<P>
+This method profiles the performance of attribute <EM>get</EM>  classes
+that <EM>are</EM> subclasses of Object and have <EM>many</EM> attributes</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> num_times
+<DD>number of times to invoke the get 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="profGetSmallNonObj" CLASS="Function">profGetSmallNonObj(<SPAN CLASS="Argument">num_times</SPAN>)</H2>
+<P>Profile performance of attribute <EM>get</EM></P>
+
+<P>
+This method profiles the performance of attribute <EM>get</EM>  classes
+that <EM>are not</EM> subclasses of Object and have <EM>few</EM> attributes</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> num_times
+<DD>number of times to invoke the get 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="profGetSmallObj" CLASS="Function">profGetSmallObj(<SPAN CLASS="Argument">num_times</SPAN>)</H2>
+<P>Profile performance of attribute <EM>get</EM></P>
+
+<P>
+This method profiles the performance of attribute <EM>get</EM>  classes
+that <EM>are</EM> subclasses of Object and have <EM>few</EM> attributes</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> num_times
+<DD>number of times to invoke the get 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="profObject" CLASS="Function">profObject(<SPAN CLASS="Argument">num_times</SPAN>)</H2>
+<P>Profile the performance of the Object class</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> num_times
+<DD>number of times to carry out the various tests
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="profSetLargeNonObj" CLASS="Function">profSetLargeNonObj(<SPAN CLASS="Argument">num_times</SPAN>)</H2>
+<P>Profile performance of attribute <EM>get</EM></P>
+
+<P>
+This method profiles the performance of attribute <EM>set</EM>  classes
+that <EM>are not</EM> subclasses of Object and have <EM>many</EM> attributes</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> num_times
+<DD>number of times to invoke the get 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="profSetLargeObj" CLASS="Function">profSetLargeObj(<SPAN CLASS="Argument">num_times</SPAN>)</H2>
+<P>Profile performance of attribute <EM>get</EM></P>
+
+<P>
+This method profiles the performance of attribute <EM>set</EM>  classes
+that <EM>are</EM> subclasses of Object and have <EM>many</EM> attributes</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> num_times
+<DD>number of times to invoke the get 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="profSetSmallNonObj" CLASS="Function">profSetSmallNonObj(<SPAN CLASS="Argument">num_times</SPAN>)</H2>
+<P>Profile performance of attribute <EM>get</EM></P>
+
+<P>
+This method profiles the performance of attribute <EM>set</EM>  classes
+that <EM>are not</EM> subclasses of Object and have <EM>few</EM> attributes</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> num_times
+<DD>number of times to invoke the get 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="profSetSmallObj" CLASS="Function">profSetSmallObj(<SPAN CLASS="Argument">num_times</SPAN>)</H2>
+<P>Profile performance of attribute <EM>get</EM></P>
+
+<P>
+This method profiles the performance of attribute <EM>set</EM>  classes
+that <EM>are</EM> subclasses of Object and have <EM>few</EM> attributes</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> num_times
+<DD>number of times to invoke the get 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

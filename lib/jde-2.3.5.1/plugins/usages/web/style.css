@@ -1,0 +1,24 @@
+blockquote {
+    border: 2px dotted;
+    padding-left:5;
+    background-color: #eee; 
+    margin: 10px 10px;
+    color: #333;
+    font-family: Courier,monospace;
+    font-size: 90%;
+}
+
+
+H3 A,H4 A {
+    text-decoration:none;
+}
+
+H3 A:hover, H4 A:hover {
+    text-decoration:underline;
+}
+
+LI H4 {
+   padding:5;
+   margin:0;
+   text-decoration:underline;
+}

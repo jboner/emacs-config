@@ -1,0 +1,3 @@
+#name : isInstanceOf[T] 
+# --
+isInstanceOf[${1:type}] $0

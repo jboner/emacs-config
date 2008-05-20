@@ -1,0 +1,3 @@
+#name : element1 :: Nil
+# --
+${1:element1} :: Nil $0

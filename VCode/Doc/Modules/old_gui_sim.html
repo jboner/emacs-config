@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Sep 12 01:20:19 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module old_gui_sim</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module old_gui_sim</H1>
+<PRE><SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">cleanup</SPAN>(<SPAN CLASS="Argument">clean_sr_voc=0</SPAN>, <SPAN CLASS="Argument">save_speech_files=None</SPAN>, <SPAN CLASS="Argument">disconnect=1</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#simulator_mode"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">simulator_mode</SPAN></A>(<SPAN CLASS="Argument">options</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Start mediator in console mode.</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Mediator\\old_gui_sim.py'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">anonymous_action_curr_num</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_else</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_else_if</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_function_add_argument</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_function_body</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_function_declaration</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_goto_body</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSearch instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_new_statement</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_simple_for</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">c_simple_while</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">dictionary</SPAN> <SPAN CLASS="VariableName">command_space</SPAN> = <SPAN CLASS="VariableValue">{}</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">cpp_class_body</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSearch instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">cpp_class_definition</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">cpp_subclass</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_braces_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_brackets_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_parens_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_quotes_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_single_quotes_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_single_quotes_pair_after</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_translation_off</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSwitchTranslation instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_translation_on</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSwitchTranslation instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_class_body</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSearch instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_class_definition</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_empty_dictionary</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_function_add_argument</SPAN> = <SPAN CLASS="VariableValue">actions_py.ActionPyAddArgument instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_function_body</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSearch instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_goto_body</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSearch instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_method_declaration</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_new_statement</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsertNewClause instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">py_simple_for</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">quit_flag</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">sleep_before_recognitionMimic</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">None</SPAN> <SPAN CLASS="VariableName">the_mediator</SPAN> = <SPAN CLASS="VariableValue">None</SPAN></SPAN>
+</PRE><H2>Description</H2><P>
+Main script for VoiceCode mediator.</P>
+<P>
+OPTIONS
+-------</P>
+<P>
+-h  : print this help message.</P>
+<P>
+-s  : run mediator in simulation mode</P>
+<P>
+-t  : run mediator in timed (profiled) simulation mode</P>
+<P>
+-p  : port number for communication with external programming environment</P>
+<P>
+Console mode
+------------</P>
+<P>
+When used with <CODE>-s</CODE> option, the script runs in simulation mode. It
+asks for commands and executes those using an editor simulator.</P>
+<P>
+After each command, the content of the current buffer is printed. The
+position of the cursor is indicated by a mark <EM>&lt;CURSOR&gt;</EM>.</P>
+<P>
+For valid commands, see sim_commands.py</P>
+<P>
+To quit, use:</P>
+
+<H3>quit()
+   Quit the simulator.</H3>
+   Note that if you don't quit using this command
+   (e.g. *Ctrl-C*), your DOS window will hang up.   
+<H2 ID="simulator_mode" CLASS="Function">simulator_mode(<SPAN CLASS="Argument">options</SPAN>)</H2>
+<P>Start mediator in console mode.</P>
+
+Useful for debugging purposes when using the mediator separately from
+an external editor.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>[STR: ANY] options</EM>
+<DD>Dictionary of options for the script.
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

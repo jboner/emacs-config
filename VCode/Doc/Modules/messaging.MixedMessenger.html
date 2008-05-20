@@ -1,0 +1,377 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Dec 26 23:44:31 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class MixedMessenger</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class MixedMessenger</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="messaging.html">messaging</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">messaging.MixedMessenger<BR>
+&nbsp;&nbsp;<A HREF="messaging.Messenger.html">messaging.Messenger</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Object.Object<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">MixedMessenger</SPAN>(<A CLASS="DocLink" HREF="messaging.Messenger.html">Messenger</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">messaging.MixedMessenger.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">sender</SPAN>, <SPAN CLASS="Argument">receiver</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#messaging.MixedMessenger.get_mess"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">messaging.MixedMessenger.get_mess</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">expect=None</SPAN>)
+    <A CLASS="DocLink" HREF="#messaging.MixedMessenger.send_mess"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">messaging.MixedMessenger.send_mess</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">mess_name</SPAN>, <SPAN CLASS="Argument">mess_argvals={}</SPAN>)<SPAN CLASS="OneLiner"> # Sends a message to the external editor.</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from messaging.Messenger</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">messaging.Messenger.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#messaging.Messenger.get_mess"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">messaging.Messenger.get_mess</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">expect=None</SPAN>)
+    <A CLASS="DocLink" HREF="#messaging.Messenger.send_mess"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">messaging.Messenger.send_mess</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">mess_name</SPAN>, <SPAN CLASS="Argument">mess_argvals={}</SPAN>)<SPAN CLASS="OneLiner"> # Sends a message to the external editor.</SPAN>
+    <A CLASS="DocLink" HREF="#messaging.Messenger.wrong_message"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">messaging.Messenger.wrong_message</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">received</SPAN>, <SPAN CLASS="Argument">expected</SPAN>, <SPAN CLASS="Argument">just_name=1</SPAN>)
+
+</PRE><H2>Description</H2><P>
+A class which sends messages through another Messenger (usually 
+MessengerBasic), but retrieves messages from a Queue.</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+[Messenger] <EM>sender</EM>
+<DD>Used to package and send messages
+<DT>
+Queue <EM>receiver</EM>
+<DD>Used to get unpacked messages
+</DL>
+<P>
+CLASS ATTRIBUTES**</P>
+<P>
+<EM>none</EM> --</P>
+<H2 ID="messaging.MixedMessenger.get_mess" CLASS="Method">messaging.MixedMessenger.get_mess(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">expect=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Gets a message from the external editor.
+<STRONG>NOTE:</STRONG> In this version, get_mess won't block, but will return 
+None if no message is available.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+[STR] <EM>expect</EM>
+<DD>If not <EM>None</EM>, then make sure the
+message's name is listed in <EM>expect</EM>. If not, send an
+error message.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+(STR, {STR: STR}) name_argvals_mess
+<DD>The message retrieved
+ from external editor in <EM>(mess_name, {arg:val})</EM> format, or
+ None if no message is available.
+</DL>
+<H2 ID="messaging.MixedMessenger.send_mess" CLASS="Method">messaging.MixedMessenger.send_mess(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">mess_name</SPAN>, <SPAN CLASS="Argument">mess_argvals={}</SPAN>)</H2>
+<P>Sends a message to the external editor.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+STR <EM>mess_name</EM>
+<DD>Identifier indicating what kind of message this is.
+<DT>
+{STR: STR} <EM>mess_argvals</EM>
+<DD>Dictionary of arguments and
+values for the message to be sent to the editor.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM> response
+<DD>
+</DL>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises existing attributes, unless those attributes
+already exist</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="messaging.Messenger.get_mess" CLASS="Method">messaging.Messenger.get_mess(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">expect=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Gets a message from the external editor.
+<STRONG>NOTE:</STRONG> get_mess may block if no message is available.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+[STR] <EM>expect</EM>
+<DD>If not <EM>None</EM>, then make sure the
+message's name is listed in <EM>expect</EM>. If not, send an
+error message.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+(STR, {STR: STR}) name_argvals_mess
+<DD>The message retrieved
+ from external editor in <EM>(mess_name, {arg:val})</EM> format, or
+ None if no message is available.
+</DL>
+<H2 ID="messaging.Messenger.send_mess" CLASS="Method">messaging.Messenger.send_mess(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">mess_name</SPAN>, <SPAN CLASS="Argument">mess_argvals={}</SPAN>)</H2>
+<P>Sends a message to the external editor.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+STR <EM>mess_name</EM>
+<DD>Identifier indicating what kind of message this is.
+<DT>
+{STR: STR} <EM>mess_argvals</EM>
+<DD>Dictionary of arguments and
+values for the message to be sent to the editor.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM> response
+<DD>
+</DL>
+<H2 ID="messaging.Messenger.wrong_message" CLASS="Method">messaging.Messenger.wrong_message(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">received</SPAN>, <SPAN CLASS="Argument">expected</SPAN>, <SPAN CLASS="Argument">just_name=1</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Send an error message when received message was not the
+expected one.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+(STR, {STR: STR}) <EM>received</EM>
+<DD>The received message in
+(mess_name, {arg_name: arg_val} format.
+<DT>
+STR <EM>expected</EM>
+<DD>Name of the message that was expected. 
+<DT>
+BOOL <EM>just_name</EM>
+<DD>If <EM>true</EM> just print the name of the
+received message. Don't print argument values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

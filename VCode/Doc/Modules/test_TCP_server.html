@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:37:20 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module test_TCP_server</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module test_TCP_server</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="test_TCP_server.ExternalEdSim.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ExternalEdSim</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # A simple external editor for testing the TCP/IP link.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="test_TCP_server.ListenThread.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ListenThread</SPAN></A>(<A CLASS="DocLink" HREF="threading.Thread.html">Thread</A>, <A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # Thread that listens for commands from VoiceCode and executes them.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#create_tcp_mess"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">create_tcp_mess</SPAN></A>(<SPAN CLASS="Argument">sock</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Creates a TCP/IP messenger</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">AF_INET</SPAN> = <SPAN CLASS="VariableValue">2</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">HOST</SPAN> = <SPAN CLASS="VariableValue">'acappellanova'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">INADDR_ALLHOSTS_GROUP</SPAN> = <SPAN CLASS="VariableValue">-536870911</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">INADDR_ANY</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">INADDR_BROADCAST</SPAN> = <SPAN CLASS="VariableValue">-1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">INADDR_LOOPBACK</SPAN> = <SPAN CLASS="VariableValue">2130706433</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">INADDR_MAX_LOCAL_GROUP</SPAN> = <SPAN CLASS="VariableValue">-536870657</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">INADDR_NONE</SPAN> = <SPAN CLASS="VariableValue">-1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">INADDR_UNSPEC_GROUP</SPAN> = <SPAN CLASS="VariableValue">-536870912</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IPPORT_RESERVED</SPAN> = <SPAN CLASS="VariableValue">1024</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IPPORT_USERRESERVED</SPAN> = <SPAN CLASS="VariableValue">5000</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IPPROTO_GGP</SPAN> = <SPAN CLASS="VariableValue">3</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IPPROTO_ICMP</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IPPROTO_IDP</SPAN> = <SPAN CLASS="VariableValue">22</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IPPROTO_IGMP</SPAN> = <SPAN CLASS="VariableValue">2</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IPPROTO_IP</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IPPROTO_MAX</SPAN> = <SPAN CLASS="VariableValue">256</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IPPROTO_ND</SPAN> = <SPAN CLASS="VariableValue">77</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IPPROTO_PUP</SPAN> = <SPAN CLASS="VariableValue">12</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IPPROTO_RAW</SPAN> = <SPAN CLASS="VariableValue">255</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IPPROTO_TCP</SPAN> = <SPAN CLASS="VariableValue">6</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IPPROTO_UDP</SPAN> = <SPAN CLASS="VariableValue">17</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IP_ADD_MEMBERSHIP</SPAN> = <SPAN CLASS="VariableValue">5</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IP_DROP_MEMBERSHIP</SPAN> = <SPAN CLASS="VariableValue">6</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IP_MULTICAST_IF</SPAN> = <SPAN CLASS="VariableValue">2</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IP_MULTICAST_LOOP</SPAN> = <SPAN CLASS="VariableValue">4</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IP_MULTICAST_TTL</SPAN> = <SPAN CLASS="VariableValue">3</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IP_OPTIONS</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IP_TOS</SPAN> = <SPAN CLASS="VariableValue">8</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">IP_TTL</SPAN> = <SPAN CLASS="VariableValue">7</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">MSG_DONTROUTE</SPAN> = <SPAN CLASS="VariableValue">4</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">MSG_OOB</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">MSG_PEEK</SPAN> = <SPAN CLASS="VariableValue">2</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SOCK_DGRAM</SPAN> = <SPAN CLASS="VariableValue">2</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SOCK_RAW</SPAN> = <SPAN CLASS="VariableValue">3</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SOCK_RDM</SPAN> = <SPAN CLASS="VariableValue">4</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SOCK_SEQPACKET</SPAN> = <SPAN CLASS="VariableValue">5</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SOCK_STREAM</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SOL_SOCKET</SPAN> = <SPAN CLASS="VariableValue">65535</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SOMAXCONN</SPAN> = <SPAN CLASS="VariableValue">5</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_ACCEPTCONN</SPAN> = <SPAN CLASS="VariableValue">2</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_BROADCAST</SPAN> = <SPAN CLASS="VariableValue">32</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_DEBUG</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_DONTROUTE</SPAN> = <SPAN CLASS="VariableValue">16</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_ERROR</SPAN> = <SPAN CLASS="VariableValue">4103</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_KEEPALIVE</SPAN> = <SPAN CLASS="VariableValue">8</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_LINGER</SPAN> = <SPAN CLASS="VariableValue">128</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_OOBINLINE</SPAN> = <SPAN CLASS="VariableValue">256</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_RCVBUF</SPAN> = <SPAN CLASS="VariableValue">4098</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_RCVLOWAT</SPAN> = <SPAN CLASS="VariableValue">4100</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_RCVTIMEO</SPAN> = <SPAN CLASS="VariableValue">4102</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_REUSEADDR</SPAN> = <SPAN CLASS="VariableValue">4</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_SNDBUF</SPAN> = <SPAN CLASS="VariableValue">4097</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_SNDLOWAT</SPAN> = <SPAN CLASS="VariableValue">4099</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_SNDTIMEO</SPAN> = <SPAN CLASS="VariableValue">4101</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_TYPE</SPAN> = <SPAN CLASS="VariableValue">4104</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SO_USELOOPBACK</SPAN> = <SPAN CLASS="VariableValue">64</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">VC_LISTENER_PORT</SPAN> = <SPAN CLASS="VariableValue">45770</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">VC_TALKER_PORT</SPAN> = <SPAN CLASS="VariableValue">45771</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VC...Mediator\\test_TCP_server.py'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">dictionary</SPAN> <SPAN CLASS="VariableName">errorTab</SPAN> = <SPAN CLASS="VariableValue">{10004: 'The operation was interrupted.', 10009: 'A bad file handle was passed.', 10013: 'Permission denied.', 10014: 'A fault occurred on the network??', ...}</SPAN></SPAN>
+<SPAN CLASS="PyKeyword">alias</SPAN> <SPAN CLASS="AliasName">SocketType</SPAN> = <SPAN CLASS="AliasFor">socket (type type)</SPAN>
+</PRE><H2>Description</H2><P>
+This script implements a simple editor (based on EdSim) that
+communicates with VoiceCode through a TCP/IP messaging protocol.
+</P>
+<H2 ID="create_tcp_mess" CLASS="Function">create_tcp_mess(<SPAN CLASS="Argument">sock</SPAN>)</H2>
+<P>Creates a TCP/IP messenger</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+socket <EM>sock</EM>
+<DD>The socket to connect the messenger to.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+[Messenger] <EM>msgr</EM>
+<DD>
+</DL>
+<P>
+messaging.Messenger.html</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

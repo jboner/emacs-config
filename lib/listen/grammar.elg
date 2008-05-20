@@ -1,0 +1,939 @@
+// SHORTTALK GRAMMAR FOR EMACSLISTEN
+// ---------------------------------
+// Nils Klarlund, AT&T, 1997-2003
+// -------------------------------
+//
+//
+// CONVENTION IN THIS FILE
+// @ denotes the cursor position after insertion of text
+
+// POSITION: HERE, THERE, LAST
+// "tair" is position under cursor, but don't go there
+// "loost" is the position where the cursor was before it was
+// changed by the last utterance
+// "gook" is position under cursor, go there
+// "lairk" is position of mairk
+
+<common-position> = hare | tair | gook | loost | lairk;
+
+// TISK, TAT
+// "tisk" (this) is what is between point and mouse
+// "tat" (that)  is the current selection
+
+<this-or-that> = tisk  | tat;
+
+// REPEAT COUNT
+
+// aaagh, NaturallySpeaking thinks that French "quatre" is Caps-On and, 
+// horribly, seems to absolutely prevent 1) it to be corrected, and 2) 
+// it from not being misrecognized (through shift key)
+// "trois" is misspelled "traio"
+
+<positive2>     =       twain | traio | fairn | faif;
+<positive>      =       ane | <positive2>;
+
+<negative2>     =       twoon | truo | foorn | foof;
+<negative>      =       oon | <negative2>;
+<signed1>       =       <positive> | <negative>;
+
+// STRUCT: CHUNK, WORD, TERM, BLOCK, LINE, PARAGRAPH
+
+<large_struct> =  tier | line | term | block | defi | senten | parra | buffer;
+
+<struct> = char
+         | stretch
+         | ting
+         | word
+         | eed
+         | chunk
+         | inner
+         | <large_struct>;
+
+<struct-positive> =  <positive> | <struct> | <struct> <positive>;
+
+<struct-signed1>  =   <signed1> | <struct> | <struct> <signed1>;
+
+<large-struct-repeat-at-position>  =
+  <this-or-that>
+ | <large_struct> (<signed1> | ) (<common-position> |) 
+ | <signed1> (<common-position> |)
+ | <common-position>; 
+
+<struct-repeat-at-position>  =
+  <this-or-that>
+ | <struct> (<signed1> | ) (<common-position> |) 
+ | <signed1> (<common-position> |)
+ | <common-position>; 
+
+<struct-repeat-at-position-for-wordlist> =
+   <this-or-that> | <struct> <signed1> | <common-position>; 
+
+
+// PEEK COLORS
+<colors> = red | blue | green | brown | purple | orange | yellow | pink;
+
+// SYMBOLS
+
+<symbol> = clam | lat | dall | dollar | numb | per | crat | amp | star | laip
+           | rye | plus | noos | eke | boor | lack | rack 
+           |lace | race | slash | beck | till | sem | col | colon
+           | cam | comma | doot | lang | rang | quest | score | hive | sing 
+           | quote | bing; 
+
+// PHONETIC LETTTERS
+
+<letter> = alpha | bravo | charlie | delta | echo | foxtrot | golf 
+     | hotel | india | juliet | kilo | lima | mike | november | oscar 
+     | papa | quebec | romeo | sierra | tango | uniform | victor 
+     | whiskey | x-ray | yankee | zulu;
+
+// DIGITS
+
+<digits> = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+
+// PHONETICS
+
+<phonetics> = <symbol> | <letter> | <digits>;
+
+// COPY CONTENTS OF WORD (TERM, LINE...) AT POSITION INTO THE CLIPBOARD
+
+save <struct-repeat-at-position>  :- copy-command;
+
+save <struct-repeat-at-position-for-wordlist> : copy-command;
+
+// DELETE WORD (TERM, LINE...) AT POSITION TO CLIPBOARD
+
+rem <struct-repeat-at-position> :- cut-command;
+
+rem <struct-repeat-at-position-for-wordlist> : cut-command;
+
+// DELETE WORD (TERM, LINE...)  AT POSITION; NOT TO CLIPBOARD
+
+smack <struct-repeat-at-position> :- delete-command;
+
+smack <struct-repeat-at-position-for-wordlist> : delete-command;
+
+
+// MARK SELECTION AT POSITION
+choose <struct-repeat-at-position> :- choose-command;
+
+choose <struct-repeat-at-position-for-wordlist> : choose-command;
+
+// Note: "choose tat" marks the area between mark and point even if not
+// active already
+
+// INSERT (REPLACE) AT CURSOR THE WORD (TERM, LINE...) AT POSITION
+// "on" means replace (one occurrence of structure)
+grab (on |) <struct-repeat-at-position> :- 
+  listen-text-from-common-position-to-point;
+
+grab (on |) <struct-repeat-at-position-for-wordlist> : 
+  listen-text-from-common-position-to-point;
+
+// INSERT (REPLACE) AT POSITION THE WORD (TERM, LINE...) AT CURSOR
+
+paste (on |)  <struct-repeat-at-position> :- 
+    listen-text-from-point-to-common-position;
+
+paste (on |)  <struct-repeat-at-position-for-wordlist> : 
+    <struct-repeat-at-position> listen-text-from-point-to-common-position;
+
+
+// MOVE WORD (TERM, LINE...) AT POSITION TO CURSOR (AND REPLACE)
+pull (on |) <struct-repeat-at-position> :- 
+  (listen-text-from-common-position-to-point
+      listen-event-command-words nil t);
+
+pull (on |) <struct-repeat-at-position-for-wordlist> :
+  (listen-text-from-common-position-to-point 
+     listen-event-command-words nil t);
+
+// MOVE WORD (TERM, LINE...) AT CURSOR TO MOUSE (AND REPLACE) 
+push (on |) <struct-repeat-at-position> :-
+   (listen-text-from-point-to-common-position
+               listen-event-command-words nil t);
+
+push (on |) <struct-repeat-at-position-for-wordlist> :
+   (listen-text-from-point-to-common-position
+               listen-event-command-words nil t);
+
+// SWAP 
+
+// swap exchanges what is at point (with repeat count) with what is at
+// the common position (without count) (:- means don't include in wordlist)
+swap <struct-repeat-at-position> :- swap-command;
+
+swap <struct-repeat-at-position-for-wordlist> : swap-command;
+
+// TRANSPOSE COMMANDS
+
+trans <struct-repeat-at-position> :- transpose-command;
+trans <struct-repeat-at-position-for-wordlist> : transpose-command;
+
+// YANK
+
+yank <common-position> | yank <positive> ( | <common-position>) :
+  listen-yank-command; 
+
+poop <common-position> : listen-pop-command;
+
+// YANK ON STRUCTURE AT COMMON POSITION
+(yank on | mute) <struct-repeat-at-position> :-
+        (listen-yank-command listen-event-command-words t); 
+
+(yank on | mute) ( <struct-repeat-at-position-for-wordlist> ) :
+        (listen-yank-command listen-event-command-words t); 
+
+// FILL
+
+fill <large-struct-repeat-at-position> :
+  (listen-do-position-or-region
+   'fill-paragraph 'fill-region-as-paragraph);
+
+// INDENTATION
+
+indent <large-struct-repeat-at-position> :
+  (listen-do-position-or-region 'indent-command 
+                                'listen-indent-region);
+
+rindent <large-struct-repeat-at-position>  : (indent-rigidly-command 2);
+lindent <large-struct-repeat-at-position>  : (indent-rigidly-command -2);
+
+// COMMENT/QUOTE
+
+comment  <large-struct-repeat-at-position>  :   comment-command;
+uncomment <large-struct-repeat-at-position> : (comment-command '(4));
+
+begin comment: begin-comment;
+end comment:   end-comment;
+
+// CURSOR MOVEMENT
+
+// word twain, line twoon, term uno, sent en,...
+<struct> <signed1> : listen-move-point;
+
+// move cursor to the beginning or end of <struct-signed1> (after cursor)
+(nairx | skaip) <struct-signed1> : listen-move-point;
+
+// move cursor to the beginning or end of <struct-signed1> (before cursor)
+(noorx | skoop) <struct-signed1> : listen-move-point;
+
+// move cursor to place following symbol
+(nairx | skaip) <phonetics> ( | <positive>) : listen-move-according-to-phonetic;
+(noorx | skoop) <phonetics> ( | <positive>) : listen-move-according-to-phonetic;
+
+// START/END OF WORDS, TERMS, LINES,...
+(ghin | ex) <struct> : listen-beginning-end;
+
+// go up <positive2> of blocks
+ghin block <positive2> : listen-beginning-end;
+ex block  <positive2> : listen-beginning-end;
+
+// KILL/ERASE WORDS, TERMS, LINES,...
+
+// backward over <struct-signed1>
+reese <struct-signed1>  : erase-command;
+
+// forward over struct, while deleting
+kaill <struct-signed1>   : kill-command;
+
+// PARENTHESES
+
+<paren-type> = par | bracket | brace | angle | quote | sing 
+              | bing | tech quote | tech sing | tech brace | tech angle
+              | X. M. angle | X. M. quote;
+
+<paren-type> pair: generic-paren-pair;
+<paren-type> nix: listen-unpair-command;
+
+// CURSOR MOVMENT: BACK AND FORTH, UP AND DOWN
+
+// GO LEFT --> go looft --> gloof
+//gloof | (gloof <positive2>) : (listen-do-at-position [left] t);
+gloof | (gloof <positive2>) : (listen-do-movement-command [left]);
+
+// GO RIGHT --> go raif --> graif
+//graif | (graif <positive2>) : (listen-do-at-position [right] t);
+graif | (graif <positive2>) : (listen-do-movement-command [right]);
+
+// GO DOWN go neither (down) -> go naither -> gnaith
+gnaith | (gnaith <positive2>) : (listen-do-movement-command [down]);
+
+// GO UP --> go op --> goop
+goop | (goop <positive2>) : (listen-do-movement-command [up]);
+
+// BACKSPACE AND DELETE
+// chuck --> choock
+
+choock (<common-position> | ) | (choock <positive2> (<common-position> |)) :-
+            (listen-do-at-position [backspace]);
+
+// chew --> chaiw: eat forwards (delete key)
+chaiw (<common-position> |) | (chaiw  <positive2> (<common-position> |)) :- 
+               (listen-do-at-position [delete]);
+
+// MARK
+
+// set mark (indicated by brown) (usually set-mark-command, cua-mode remaps)
+mairk: [?\C- ]; 
+
+// go to last mark
+gairk | gairk <signed1> : (listen-last-mark (listen-number-argument));
+goork | gairk <positive> : (listen-last-mark (- (listen-number-argument)));
+
+// LOOST POSITION
+goost : listen-go-last;
+
+// TAB KEY
+
+toob <common-position> | toob <positive>: (listen-do-at-position [tab]);
+toob loon (<common-position> |) : (listen-do-at-position [tab return]);
+loon toob (<common-position> |) : (listen-do-at-position [return tab]);
+
+toob <common-position> | (toob <positive2> (<common-position>|)):
+     (progn 
+      (if (member
+              (listen-argument listen-common-positions 
+                (listen-event-command-words last-command-event) t)
+             '(go here))
+        (listen-update-current-record space-status 'dont-touch))
+      (listen-do-at-position [tab]));
+   
+// 'nofix and 'phonetic properties are set in listen-parameters
+
+// OTHER KEYS
+
+//  home key: [home];
+//  end key: [end];
+
+// HYPHENATION
+
+hive <large-struct-repeat-at-position> :
+  (listen-do-position-or-region 'listen-hyphen
+   'listen-hyphenate-region);
+
+// SPACING
+
+space <common-position> : (listen-do-at-position 'listen-one-space); 
+
+// FIXING SPACING & CAPITALIZATION
+
+fix <common-position>: (listen-do-at-position 'listen-fix);
+
+// JOIN LINES
+
+join <common-position> : (listen-do-at-position '(progn (join-line 1) 
+                                           (listen-fix (point) t nil t)));
+
+// COMMON CHARACTERS AND THE REPETITIONS
+
+
+// CLICK BUTTON ONE (INCLUDES BOTH DOWN AND UP EFFECTS) 
+
+(left | ) clook: listen-click-1;
+mid clook: listen-click-2;
+right clook: listen-click-3;
+
+// WINDOW OPERATIONS
+
+// vox: in this window
+// vaix: in next window (split if necessary) but stay in present
+// voox: in previous window
+// maxi: maximize window
+// split: current window
+// mini: delete current window
+
+gaix ( | <positive>) : (other-window (listen-number-argument));
+goox ( | <positive>) : (other-window (- (listen-number-argument)));
+
+<window-op> = (vox | vaix | voox | maxi | sploot | mini); 
+
+<window-op> win :- (listen-window-manage-and-execute 'ignore);
+// "vox win" has no effect and can be confused with vox menu, so it is
+// omitted below (preventing it from being included in the word list)
+(vaix | voox | maxi | sploot | mini) win : (listen-window-manage-and-execute 'ignore);
+
+<window-op> down : (listen-window-manage-and-execute 
+                         '(listen-scroll "" 'up) t);
+<window-op> up   : (listen-window-manage-and-execute
+                        '(listen-scroll "" 'down) t);
+
+<window-op> center: (listen-window-manage-and-execute 'recenter);
+
+// "vox up" and "vox head" are confused, so use "head" instead of "top"
+<window-op> head : (listen-window-manage-and-execute '(recenter 2));
+
+<window-op> bottom : (listen-window-manage-and-execute '(recenter -2));
+
+
+// scroll a little bit
+<window-op> (<positive> | <negative>) : 
+  (listen-window-manage-and-execute 'listen-scroll t);
+
+// WINDOW MANIPULATION
+
+<window-op> switch: (listen-window-manage-and-execute 
+                            '(listen-switch-to-buffer) t);
+
+<window-op> grow : (listen-window-manage-and-execute 
+             'listen-enlarge-window t);
+
+<window-op> shrink : (listen-window-manage-and-execute
+             'listen-shrink-window t);
+
+// LISTEN PEEK WINDOWS
+
+<window-op>  <colors> : (listen-window-manage-and-execute 'listen-select-window-by-color);
+
+// BUFFER MANIPULATION
+
+<window-op> menu ... : (listen-window-manage-and-execute 'listen-buffer-menu);
+
+// mouse buffer: (listen-mouse-down 'mouse-buffer-menu); 
+
+vox rename: rename-buffer;
+
+<window-op> kaill: 
+   (listen-undo-with-quit 
+      '(listen-window-manage-and-execute 'kill-buffer t));
+
+// FILE OPERATIONS
+
+<window-op> open: (listen-undo-with-quit
+ '(listen-window-manage-and-execute 'find-file));
+
+<window-op> save: (listen-window-manage-and-execute 'save-buffer);
+
+<window-op> write: (listen-undo-with-quit
+ '(listen-window-manage-and-execute 'write-file));
+
+<window-op> insert: insert-file;
+
+
+// DIRECTORY OPERATIONS
+
+<window-op> direct: (listen-window-manage-and-execute '(dired
+     default-directory));
+
+// HELP
+
+<window-op> help :
+   (listen-thing-at-position-call-and-window-manage 'help-for-help nil t);
+<window-op> F. help (<common-position> | ): 
+   (listen-thing-at-position-call-and-window-manage 'describe-function nil t);
+<window-op> V. help (<common-position> | ): 
+   (listen-thing-at-position-call-and-window-manage 'describe-variable nil t); 
+<window-op> apropos command (<common-position> | ):  
+   (listen-thing-at-position-call-and-window-manage 'apropos-command);
+<window-op> apropos (<common-position> | ):       
+   (listen-thing-at-position-call-and-window-manage 'apropos nil nil); 
+<window-op> info :          
+   (listen-thing-at-position-call-and-window-manage 'info);
+
+// INVOKING THE EXTERNAL BROWSER
+
+browse <common-position>  : (listen-do-at-position 'browse-url-at-point);
+browse buffer : browse-url-of-buffer;
+browse file | browse file <common-position> : (listen-do-at-position
+     'listen-browse-file-name);
+browse direct: listen-browse-directory;
+
+// EMAIL
+
+<window-op> write mail: (listen-window-manage-and-execute 'message-mail );
+<window-op> read mail:  (listen-window-manage-and-execute 'my-read-all-e-mail
+);
+<window-op> recent ( | mail):  (listen-window-manage-and-execute 'my-read-recent-e-mail
+);
+
+vox send mail:  message-send-and-exit; 
+// vox quit mail: (gnus-group-exit);
+vox reply:     (gnus-summary-reply-with-original 1);
+vox follow-up: (gnus-summary-followup-with-original 1);
+vox forward: (gnus-summary-mail-forward);
+
+// SPELL CHECKING
+I. spell <struct-repeat-at-position> : 
+    (listen-do-position-or-region 'ispell-word 'ispell-region);
+
+// DICTIONARY
+D. search 
+  | D. search (<struct> (<signed1> | ) (<common-position> |) 
+  | D. search  <signed1> (<common-position> |)
+  | D. search  <common-position>: 
+    (listen-do-at-position 'dictionary-lookup-definition);
+
+D. match : dictionary-match-words;
+
+// LISP EVALUATION
+
+eval <struct-repeat-at-position> :
+  (listen-do-position-or-region 'eval-last-sexp 'eval-region);
+eval express: eval-expression;
+eval print: eval-print-last-sexp;
+
+// COMPLETION STUFF
+
+C. pleat : dabbrev-expand;
+M. pleat : dabbrev-completion;
+
+// LITERAL
+
+L. rall ... : listen-literal;
+// Example: when writing about aquatic birds, "the loon was looney" 
+// is entered as "the L. ral loon was looney"
+
+// COMMON CONTROL STUFF
+
+//  con A. : [?\C-a];
+//  con W. : [?\C-w];
+//  con Y. : [?\C-y]; 
+
+// EMACS COMMON META STUFF
+
+meta X. : (let ((listen-no-special-fix-in-minibuffer 'hyphen)) 
+               (listen-undo-with-quit 'execute-extended-command));
+
+meta N. : [?\M-n];
+meta P. : [?\M-p];
+meta toob : [M-tab];
+
+// NO SPACE
+
+pound <struct-repeat-at-position> :
+  (listen-do-position-or-region 
+        'delete-horizontal-space 
+        'listen-no-space-in-region);
+
+// EXACTLY ONE SPACE
+
+space <struct-repeat-at-position> :
+     (listen-do-position-or-region 'just-one-space 
+      'listen-just-one-space-in-region);
+
+// INITIAL UPPERCASE
+
+caip <struct-repeat-at-position> : listen-capitalize; 
+
+
+// MAKE UPPERCASE
+
+aipper <struct-repeat-at-position> : listen-upcase; 
+
+// MAKE LOWERCASE 
+
+laiw <struct-repeat-at-position> : listen-downcase;
+
+// HYPHENATE
+
+hive <struct-repeat-at-position> :
+   (listen-do-position-or-region 'listen-hyphen 'listen-hyphenate-region
+     t t);
+
+// GO LINE 
+
+go line ... : (listen-call-interactively-identifier 'goto-line);
+
+
+// EMACS QUIT
+
+vox quit : listen-quit;
+
+// SEARCH
+
+// aift = after (forward),  ooft = after (backwards),
+// baif  = before (forward), boof = before (backwards)
+<search> = aift | baif | ooft | boof;
+
+// sorch = interval (forward), rorch = interval (backward),
+<region> = sorch | rorch;
+
+// stroop terminates the argument list of predicate -- it has no other meaning
+stroop : listen-no-op;
+
+// SEARCH-BASED COMMANDS
+
+choose <region> ... : (progn (apply 'listen-make-region
+                                  (listen-search-interval))
+                             (listen-push-mark-if-prev-not-movement)
+                             (listen-add-assoc-command-status '(movement)));
+
+save <region> ... : (progn (apply 'kill-ring-save (listen-search-interval))
+                      (message "Copied: \"%s\"" (car kill-ring-yank-pointer)));
+
+smack  <region> ... : (let ((r (listen-search-interval)))
+                            (delete-region (car r) (cadr r))
+                           (listen-fix (car r) t nil t));
+
+rem  <region> ... : (let ((r (listen-search-interval)))
+                      (kill-region (car r) (cadr r))
+                      (listen-push-mark-if-prev-not-movement)
+                      (listen-add-assoc-command-status '(movement))
+                      (goto-char (car r)) (listen-fix (point) t));
+
+smack <region>... : (let ((r (listen-search-interval)))
+                            (delete-region (car r) (cadr r))
+                           (listen-fix (car r) t nil t));
+
+aipper <region>... : (let ((r (listen-search-interval)))
+                            (upcase-region (car r) (cadr r)));
+
+caip <region>... : (let ((r (listen-search-interval)))
+                            (capitalize-region (car r) (cadr r)));
+
+laiw <region>... : (let ((r (listen-search-interval)))
+                            (downcase-region (car r) (cadr r)));
+
+hive <region> ... : (let ((r (listen-search-interval)))
+                            (listen-hyphenate-region (car r) (cadr
+r)));
+
+pound <region> ... : (let ((r (listen-search-interval)))
+                            (listen-no-space-in-region (car r) (cadr r)));
+
+go <search> ...   : listen-go-command;
+
+(go pen | pen) <search> ... : listen-go-command; 
+
+(choose | choose pen) <search> ... : (apply 'listen-make-region (listen-search-interval-relative));
+
+(save | save pen) <search> ... :  
+            (progn (apply 'kill-ring-save (listen-search-interval-relative))
+                   (message "Copied: \"%s\"" (car kill-ring-yank-pointer)));
+
+(smack | smack pen) <search> ... : (progn (apply 'delete-region
+(listen-search-interval-relative)) (listen-fix (point) t nil t));
+
+(rem | rem pen) <search> ... : 
+              (progn (apply 'kill-region
+                     (listen-search-interval-relative))
+                     (listen-fix (point) t nil t));
+
+(pound | pound pen) <search>  ...  : 
+    (listen-do-at-search-pos
+          'delete-horizontal-space); 
+
+(spooce <search> | spooce  <positive2> <search>) ...  : (listen-do-at-search-pos
+    '(insert " ")); 
+(loon <search> | loon <positive2> <search>) ...  : (listen-do-at-search-pos
+    [return]);
+(aipper <search> | aipper <positive2> <search>) ...  : (listen-do-at-search-pos 'upcase-word);
+(laiw <search> | laiw <positive2> <search>) ...  : (listen-do-at-search-pos 'downcase-word);
+(caip <search>| caip <positive2> <search>) ...  :
+     (listen-do-at-search-pos 'capitalize-word);
+fix <search> ...  : (listen-do-at-search-pos 'listen-fix);
+join <search> ... : (listen-do-at-search-pos '(join-line 1));
+
+(choock <search> | choock <positive2> <search>) ...  :
+  (let ((n (listen-number-argument)))
+   (listen-do-at-search-pos (list 'delete-backward-char n))); 
+
+(chaiw <search> | chaiw <positive2> <search>) ...  :
+  (let ((n (listen-number-argument)))
+   (listen-do-at-search-pos (list 'delete-char n))); 
+
+(smack <search> | smack <positive2> <search>) ...  :
+  (let ((n (listen-number-argument)))
+   (listen-do-at-search-pos (list 'delete-backward-char n)));
+
+(space <search> | space <positive2> <search>) ...  :
+   (listen-do-at-search-pos 'listen-one-space); 
+
+hive <search> ...  :
+   (listen-do-at-search-pos 'listen-hyphen); 
+
+//  CROSS REFERENCES
+
+//  imenu is the universal indexing functionality in Emacs
+<window-op> I (<common-position> | ):
+ (listen-thing-at-position-call-and-window-manage 'listen-imenu t); 
+
+// for tex & latex
+<window-op> def (<common-position> | ): 
+   listen-goto-def;
+
+// for emacs
+<window-op> F. def (<common-position> | ): 
+   listen-goto-function-def;
+
+<window-op> V. def (<common-position> | ): 
+   listen-goto-variable-def;
+
+// XML & HTML
+
+// new element of the form <x>...</x> pair, where x is argument; if
+// region is active the region will be tagged; usually inline, unless
+// region calls for newlines in which case element is offset
+snex ... : listen-insert-XML-element;
+// new element, offset onto own lines
+dent snex  ... : listen-insert-XML-element-new-lines;
+
+// element of the form <x/>
+snoox ... : (listen-call-interactively-identifier
+  'listen-insert-empty-element);
+
+// change element name
+X. change tag (| <common-position>):  (listen-do-at-position
+'listen-change-element);
+
+X. no tag (| <common-position>): (listen-do-at-position
+                        'listen-no-tag);
+
+X. end tag (| <common-position>): (listen-do-at-position 'sgml-close-tag);
+
+// hacks
+X. quote: (listen-insert "&apos;@&apos;");
+X. angle: (listen-insert "&lt;@&gt;");
+X. C. data: (listen-insert "<![CDATA[@]]>");
+
+// LISTEN RECORDING
+
+vox rec:  listen-start-recording;
+vox done: listen-stop-recording;
+vox play | vox play <positive> : listen-repeat-recording;
+vox confirm : listen-confirm;
+
+// LISTEN REPEATING AND UNDOING
+
+// go again, repeat the last voice command
+// goink | goink <positive> : listen-go-again-by-voice; 
+goink | goink <positive> : listen-repeat-last-command-or-recording; 
+
+// UNDO LAST OPERATION IN BUFFER
+
+vox undo: listen-conventional-undo;
+
+
+// TEX/LATEX SUPPORT
+
+M. tech ... : listen-macro-tex; 
+M. no tech ( |  <common-position>) : (listen-do-at-position
+                       'listen-no-macro-tex);
+E. tech ... : listen-environment-tex;
+E. change tech ... : listen-change-environment-tex;
+E. no tech ( |  <common-position>) :   (listen-do-at-position
+                       'listen-no-environment-tex);
+E. end tech ( | <common-position>) : (listen-do-at-position
+                       'LaTeX-close-environment);
+// Preamble Stuff
+//---------------
+(tech | E. tech) article template:  (insert-file "~/Emacs/template.tex");
+(tech | E. tech) new command: (listen-insert "\\newcommand{@}");
+(tech | E. tech) new environment: (listen-insert "\\newenvironment{@}");
+(tech | E. tech) write letter: listen-tex-write-letter;
+
+// Sections And Major Units
+// ------------------------
+(tech | E. tech) section: (listen-insert "\\section{@}");
+
+(tech | E. tech) sub section: (listen-insert "\\subsection{@}");
+
+(tech | E. tech) sub sub section: (listen-insert "\\subsubsection{@}");
+
+(tech | E. tech) figure: (listen-insert "\\begin{figure}\n\n\\caption[x]{\footnotesize @}\n\\label{f:}\n\\end{figure}\n");
+
+(tech | E. tech) footnote: (listen-insert "\\footnote{@}");
+
+(tech | E. tech) enumerate: (listen-insert "\\begin{enumerate}\n@\n\\end{enumerate}");
+
+(tech | E. tech) itemize: (listen-insert "\\begin{itemize}\n@\n\\end{itemize}");
+
+(tech | E. tech) item: (listen-insert "\\item ");
+
+(tech | E. tech) center: (listen-insert "\\begin{center}\n@\n\\end{center}");
+
+// Labels And Citations
+// --------------------
+(tech | E. tech) label:  reftex-label;
+(tech | E. tech) ref:    reftex-reference;
+(tech | E. tech) cite:   reftex-citation;
+(tech | E. tech) no number: (listen-insert "\\nonumber");
+
+// Math Mode
+// ---------
+(tech | E. tech) math: (listen-insert "$@$");
+
+(tech | E. tech) display: (listen-insert "\\[@\n\\]");
+
+(tech | E. tech) slide: (listen-insert "\\begin{slide}{}\n@\n\\end{slide}");
+
+(tech | E. tech) array: (listen-insert "\\begin{array}{l}\n@\n\\end{array}");
+
+(tech | E. tech) choice array: (listen-insert "\\left\{\begin{array}{ll}\n@\n\\end{array}\right.");
+
+(tech | E. tech) E. Q. N. array : (listen-insert "\\begin{eqnarray}\n@ & = & \\n & = & \n\\end{eqnarray}");
+
+(tech | E. tech) equation: (listen-insert "\\begin{equation}\n@\n\\label{eq:}\n\\end{equation}");
+
+(tech | E. tech) left E. Q. N. : (listen-insert "\\lefteqn{}\nonumber @\\\\");
+
+
+// Font Commands
+// -------------
+(tech | E. tech) B. F. : (listen-insert "\\textbf{@}");
+(tech | E. tech) T. T. : (listen-insert "\\texttt{@}");
+(tech | E. tech) R. M. : (listen-insert "\\textrm{@}");
+(tech | E. tech) I. T. : (listen-insert "\\textit{@}");
+(tech | E. tech) B. B. : (listen-insert "\\textbb{@}");
+(tech | E. tech) S. C.:  (listen-insert "\\textsc{@}");
+(tech | E. tech) E. M. : (listen-insert "\\emph{@}");
+(tech | E. tech) frack : (listen-insert "\\frak{@}");
+(tech | E. tech) cali  : (listen-insert "\\mathcal{@}"); 
+
+
+(tech | E. tech) math R. M. : (listen-insert "\\mathrm{@}");
+(tech | E. tech) math B. F. : (listen-insert "\\mathbf{@}");
+(tech | E. tech) math T. T. :  (listen-insert "\\mathtt{@}");
+(tech | E. tech) math I. T. : (listen-insert "\\mathit{@}");
+
+(tech | E. tech) tiny: (listen-insert "\\tiny");
+(tech | E. tech) script size: (listen-insert "\\scriptsize");
+(tech | E. tech) footnote size: (listen-insert "\\footnotesize");
+(tech | E. tech) normal size: (listen-insert "\\normalsize");
+(tech | E. tech) small: (listen-insert "\\small");
+(tech | E. tech) large: (listen-insert "\\large");
+
+(tech | E. tech) overline: (listen-insert "\\overline{@}");
+(tech | E. tech) underline: (listen-insert "\\underline{@}");
+
+// Spaces, Nitty Gritty
+// ------
+(tech | E. tech) H. space: (listen-insert "\\hspace{in}{@}");
+(tech | E. tech) V. space: (listen-insert "\\vspace{in}{@}");
+(tech | E. tech) H. line: (listen-insert "\\hline"); 
+
+(tech | E. tech) thick space: (listen-insert "\\;");
+(tech | E. tech) space: (listen-insert "\\ ");
+(tech | E. tech) no indent: (listen-insert "\\noindent");
+(tech | E. tech) newpage: (listen-insert "\\newpage");
+(tech | E. tech) newline: (listen-insert "\\\\\n");
+
+(tech | E. tech) under: (listen-insert "\\_");
+(tech | E. tech) tab: (listen-insert "\\>");
+
+// Boxes
+// -----
+(tech | E. tech) parbox: (listen-insert "\\parbox{@}{}");
+(tech | E. tech) M. box: (listen-insert "\\mbox{@}");
+(tech | E. tech) text: (listen-insert "\\text{~@}");
+(tech | E. tech) make box: (listen-insert "\\makebox[]{@}");
+
+// Theorem Environments
+// --------------------
+(tech | E. tech) proposition: (listen-insert "\\begin{proposition}\\n@\\end{proposition}");
+(tech | E. tech) lemma: (listen-insert "\\begin{lemma}\\n@\\end{lemma}");
+(tech | E. tech) theorem: (listen-insert "\\begin{theorem}\\n@\\end{theorem}");
+
+// Operations With Arguments
+// -------------------------
+(tech | E. tech) sum: (listen-insert "\\sum_{@}^{}");
+(tech | E. tech) product: (listen-insert "\\prod_{@}");
+(tech | E. tech) super: (listen-insert "^{@}");
+(tech | E. tech) sub: (listen-insert "_{@}");
+(tech | E. tech) inverse: (listen-insert "^{-1}");
+(tech | E. tech) frac: (listen-insert "\\frac{@}{}");
+(tech | E. tech) limit: (listen-insert "\\lim_{@}");
+(tech | E. tech) stack rel: (listen-insert "\\stackrel{@}{}");
+
+// Greek Alphabet
+// --------------
+(tech | E. tech) alpha: (listen-insert "\\alpha");
+(tech | E. tech) beta: (listen-insert "\\beta");
+(tech | E. tech) gamma: (listen-insert "\\gamma");
+(tech | E. tech) delta: (listen-insert "\\delta");
+(tech | E. tech) epsilon: (listen-insert "\\epsilon");
+(tech | E. tech) var epsilon: (listen-insert "\\varepsilon");
+(tech | E. tech) zeta: (listen-insert "\\zeta");
+(tech | E. tech) eta: (listen-insert "\\eta");
+(tech | E. tech) iota: (listen-insert "\\iota");
+(tech | E. tech) theta: (listen-insert "\\theta");
+(tech | E. tech) var theta: (listen-insert "\\vartheta");
+(tech | E. tech) kappa: (listen-insert "\\kappa");
+(tech | E. tech) lambda: (listen-insert "\\lambda");
+(tech | E. tech) mu: (listen-insert "\\mu");
+(tech | E. tech) nu: (listen-insert "\\nu");
+(tech | E. tech) xi: (listen-insert "\\xi");
+(tech | E. tech) pi: (listen-insert "\\pi");
+(tech | E. tech) var pi: (listen-insert "\\varpi");
+(tech | E. tech) rho: (listen-insert "\\rho");
+(tech | E. tech) var rho: (listen-insert "\\varrho");
+(tech | E. tech) sigma: (listen-insert "\\sigma");
+(tech | E. tech) var sigma: (listen-insert "\\varsigma");
+(tech | E. tech) tau: (listen-insert "\\tau");
+(tech | E. tech) upsilon: (listen-insert "\\upsilon");
+(tech | E. tech) phi: (listen-insert "\\phi");
+(tech | E. tech) var phi: (listen-insert "\\varphi");
+(tech | E. tech) chi: (listen-insert "\\chi");
+(tech | E. tech) psi: (listen-insert "\\psi");
+(tech | E. tech) omega: (listen-insert "\\omega");
+
+(tech | E. tech) left brace: (listen-insert "\\{");
+(tech | E. tech) right brace: (listen-insert "\\}");
+
+
+// Common Symbols
+// --------------
+// non-standard names
+(tech | E. tech) imp: (listen-insert "\\Rightarrow");
+(tech | E. tech) by imp: (listen-insert "\\Leftrightarrow");
+
+// standard names
+(tech | E. tech) approx: (listen-insert "\\approx");
+(tech | E. tech) backslash: (listen-insert "\\backslash");
+(tech | E. tech) big O. plus: (listen-insert "\\bigoplus");
+(tech | E. tech) big cap: (listen-insert "\\bigcap");
+(tech | E. tech) big cup: (listen-insert "\\big cup");
+(tech | E. tech) bullet: (listen-insert "\\bullet");
+(tech | E. tech) cap: (listen-insert "\\cap");
+(tech | E. tech) C. dot: (listen-insert "\\cdot");
+(tech | E. tech) C. dots: (listen-insert "\\cdots");
+(tech | E. tech) circ: (listen-insert "\\circ");
+(tech | E. tech) cup: (listen-insert "\\cup");
+(tech | E. tech) dagger: (listen-insert "\\dagger");
+(tech | E. tech) degree: (listen-insert "\\deg");
+(tech | E. tech) ell: (listen-insert "\\ell");
+(tech | E. tech) empty set: (listen-insert "\\emptyset");
+(tech | E. tech) equiv: (listen-insert "\\equiv");
+(tech | E. tech) exists: (listen-insert "\\exists");
+(tech | E. tech) for all: (listen-insert "\\forall");
+(tech | E. tech) greater equal: (listen-insert "\\geq");
+(tech | E. tech) hook right arrow: (listen-insert "\\hookrightarrow");
+(tech | E. tech) in: (listen-insert "\\in");
+(tech | E. tech) not in: (listen-insert "\\notin");
+(tech | E. tech) infinity: (listen-insert "\\infty");
+(tech | E. tech) L. angle: (listen-insert "\\langle");
+(tech | E. tech) L. dots: (listen-insert "\\ldots");
+(tech | E. tech) left: (listen-insert "\\left");
+(tech | E. tech) left arrow: (listen-insert "\\leftarrow");
+(tech | E. tech) left right: (listen-insert "\\leftrightarrow");
+(tech | E. tech) less equal: (listen-insert "\\leq");
+(tech | E. tech) log: (listen-insert "\\log");
+(tech | E. tech) maps to: (listen-insert "\\mapsto");
+(tech | E. tech) maximum: (listen-insert "\\max");
+(tech | E. tech) mid: (listen-insert "\\mid");
+(tech | E. tech) models: (listen-insert "\\models");
+(tech | E. tech) neg: (listen-insert "\\neg")
+(tech | E. tech) not equal: (listen-insert "\\neq");
+(tech | E. tech) not: (listen-insert "\\not");
+(tech | E. tech) O. minus: (listen-insert "\\ominus");
+(tech | E. tech) O. plus: (listen-insert "\\oplus");
+(tech | E. tech) O. times: (listen-insert "\\otimes");
+(tech | E. tech) partial: (listen-insert "\\partial");
+(tech | E. tech) precedes: (listen-insert "\\prec");
+(tech | E. tech) R. angle: (listen-insert "\\rangle");
+(tech | E. tech) right arrow: (listen-insert "\\rightarrow");
+(tech | E. tech) right: (listen-insert "\\right");
+(tech | E. tech) set minus: (listen-insert "\\setminus");
+(tech | E. tech) sim: (listen-insert "\\sim");
+(tech | E. tech) subset: (listen-insert "\\subset");
+(tech | E. tech) subset equal: (listen-insert "\\subseteq");
+(tech | E. tech) succeeds: (listen-insert "\\succ");
+(tech | E. tech) superset equal: (listen-insert "\\supseteq");
+(tech | E. tech) times: (listen-insert "\\times");
+(tech | E. tech) V. dash: (listen-insert "\\vdash");
+(tech | E. tech) V. dots: (listen-insert "\\vdots");
+(tech | E. tech) vee: (listen-insert "\\vee");
+(tech | E. tech) wedge: (listen-insert "\\wedge");
+
+
+

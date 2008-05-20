@@ -1,0 +1,70 @@
+//
+// $Header: /cvsroot/voicecode/VCode/Doc/Modules/pythondoc.css,v 1.63 2003/02/19 00:19:48 dcfox Exp $
+//
+// Default style sheet for pythondoc HTML4 mode.
+//
+// Written by Daniel Larsson.
+//
+// $History: $
+//
+
+H1, H2, H3 {
+	font-family: Verdana;
+	font-style: bold;
+}
+
+
+//H1.ModuleName, H1.FunctionName, H1.ClassName {
+//	font-size: 18pt;
+//}
+
+.ClassHead	{
+}
+
+.Body		{
+}
+
+SPAN.PyKeyword, SPAN.VariableType {
+	color: indigo;
+}
+
+SPAN.ClassName {
+	color: blue;
+}
+
+SPAN.FunctionName, SPAN.VariableName, SPAN.AliasName {
+	color: blue;
+}
+
+.Argument {
+	color: brown;
+}
+
+.OneLiner {
+	color: darkgreen;
+}
+
+.IndexEntry0, .IndexEntry1, .IndexEntry2, .IndexEntry3 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.IndexEntry1 {
+	margin-left: 1em;
+}
+
+.IndexEntry2 {
+	margin-left: 2em;
+}
+
+.IndexEntry3 {
+	margin-left: 3em;
+}
+
+A.DocLink, A.IndexLink {
+	text-decoration: none;
+}
+
+A:hover {
+	text-decoration: underline;
+}

@@ -1,0 +1,5 @@
+#name : def f: R = {...}
+# --
+def ${1:name}: ${3:Unit} = {
+  $0
+}

@@ -1,0 +1,2916 @@
+START-INFO-DIR-ENTRY
+This is versor.info, produced by makeinfo version 4.11 from versor.texinfo.
+
+* versor::			Versatile cursors.
+END-INFO-DIR-ENTRY
+
+
+File: versor.info,  Node: Top,  Next: Introduction,  Prev: (dir),  Up: (dir)
+
+Versor - versatile cursors
+**************************
+
+This file documents versor, the versatile cursor system.
+
+   This document applies to version 1.04 of versor.
+
+Versor, the "versatile cursor" package, provides, and makes easily
+accessible, cursor movements in a variety of groups of "dimensions",
+such as:
+
+                         pages             lines         chars
+            functions    depth of nesting  expressions   chars
+paragraphs  sentences    phrases           words         chars
+functions   statements   statement-parts   expressions   chars
+
+   Versor is one of a pair of companion packages. The other one,
+Languide, provides some high-level editing operations. Part of Versor's
+functionality is provided by the lower-level parts of Languide.  *Note
+Languide and Versor: (languide)Languide and Versor, for more
+information.
+
+* Menu:
+
+* Introduction::                The concepts behind Versor
+* Familiarization::             Learning your way around Versor
+* Dimensions::                  Available coordinate systems
+* Further commands::            Commands other than movement
+* Refactoring::                 Refactoring and high-level editing using Languide
+* Advanced features::           More advanced features
+* Accessibility::               Using Versor when avoiding keyboard use,
+                                or with speech output
+* Versor and Languide::         Interfaces to a companion package
+* Setup::                       How to install and configure Versor
+* Extending versor::            Adding new commands, dimensions etc
+* Analysis::                    Versor use analysis
+* Versor and research::         Versor and research
+* Future plans::                Future plans
+* Known problems::              Known problems
+* Command Index::               Command Index
+* Concept Index::               Concept Index
+
+ --- The Detailed Node Listing ---
+
+Introduction
+
+* Aims::                        The aims of Versor
+* Concepts::                    The concepts behind Versor
+* Versor and GNUemacs::         Versor's interaction with the rest of GNUemacs
+
+Concepts
+
+* Coordinates and dimensions::  Coordinate systems and dimensions
+* The selection::               The selection
+
+Versor's interaction with the rest of GNUemacs
+
+* Versor minor mode::           Versor as a minor mode
+* Building on commands::        Building on commands
+
+Familiarization
+
+* Zooming::                     Zooming within a coordinate system
+* Switching coordinates::       Switching between coordinate systems
+* Editing::                     Editing with the selection
+* Extending::                   Extending the selection
+* Selecting around::            Selecting the expression around the selection
+
+Editing with the selection
+
+* Deleting the selection::      How to delete the selected text
+* Inserting using the selection::  Inserting before, after, around or over the selection
+
+Extending the selection
+
+* Selecting around::            Selecting the surrounding expression
+
+Available coordinate systems
+
+* Cartesian::                   Cartesian coordinates
+* Structural::                  Structural coordinates
+* Text::                        Text coordinates
+* Structured Text::             Structured Text coordinates
+* Tables::                      Table coordinates
+* Program::                     Program coordinates
+* Markers::                     Marker coordinates
+
+Further commands
+
+* Deletion::                    Deletion
+* Insertion::                   Insertion
+* Alteration::                  Alteration
+* DWIM::                        Do What I Mean
+* Describing selection::
+
+Refactoring and high-level editing using Languide
+
+* Expression handling::         Commands working on expressions
+* Statement handling::          Commands working on statements
+* Languide Feedback::           Feedback from Languide
+* Summary of refactoring::      Key bindings for refactoring
+
+Expression handling, expressions, and functions
+
+* Convert to variable::         Convert selection to variable
+                                Given a selection containing an
+                                expression, this sets up a variable
+                                initialised to that expression, and
+                                replaces the original expression with
+                                that variable.
+* Convert to function::         Convert selection to function
+                                This takes the selection,
+                                defines a new function just before the
+                                one containing the selection, and
+                                replaces the original selection with a
+                                call to the new function.
+* Surround with call::          Surround selection with call
+                                This wraps the selection with a
+                                call to a function.
+* Create function::             Create function for call
+                                This creates a new function to suit
+                                the function call around point
+* Remove call::                 Remove surrounding call
+                                This removes the function call
+                                surrounding point.
+
+Statement handling
+
+* Unify Statements::            Unify Statements
+                                This makes the selection into a
+                                compound statement.
+* Make conditional::            Make the selected code conditional
+* Make repeating::              Make the selected code iterative
+* Remove control::              Remove a control construct
+* Decision point::              Move to enclosing decision point
+                                This moves point to the most nearly
+                                enclosing decision point, that is, a
+                                suitable place for putting a new condition.
+
+Advanced features
+
+* Detect text in code::         Text in code
+* Per-buffer dimensions::       Per-buffer dimensions
+* Per-mode dimensions::         Per-mode dimensions
+
+Accessibility
+
+* TLC-mode::                    Two-Letter Commands (or TLC)
+* Pedals::                      Using pedals
+* Reversing::                   Reversing the selection motions
+* Voice input::                 Using voice input
+* Speech output::               Using speech output
+* Flexi-choose::                The flexible chooser
+* Other input devices::         Future interface possibilities
+
+TLC-mode
+
+* TLC Movements::               TLC Movements
+* TLC Dimensions::              TLC Dimensions (D for Dimension)
+* TLC Search::                  TLC Search (S for Search)
+* TLC Insert::                  TLC Insert (J as variant of I)
+* TLC Delete/Copy::             TLC Delete/Copy (K for Kill)
+* TLC Transpose::               TLC Transpose (T for Transpose)
+* TLC Versor and Languide::     TLC Versor and Languide (L and ;)
+* TLC Miscellany::              TLC Miscellany
+
+Setup
+
+* General configuration::       Some options to set when loading
+* Dimensions available::        Dimensions you can choose from, for each mode
+* Using Configure::             Configuring versor using M-x configure
+
+Using Configure
+
+* Motion::
+* Status::
+* Other control::
+
+Motion
+
+* Allow move to end of last::
+* Move out when at end::
+* Statement up to next::
+* Trim item starts::
+* Level wrap::
+* Meta level wrap::
+* Phrase end::
+* Reversible::
+
+Status
+
+* Show both dimensions::
+* Multi line level display::
+* Use face attributes::
+* Highlight with brackets::
+* Change cursor color::
+* Selection attribute::
+* Verbose::
+* Try to display whole item::
+
+Other control
+
+* Statement insertion with dummy value::
+* Reindent after insertion::
+* Per buffer::
+* Auto change for modes::
+* Mode current levels::
+* Text in code::
+* Announce text in code::
+* Text faces::
+* Reformat automatically::
+* Live commentary::
+* Missed opportunities::
+* Display full choices::
+* Flexi choose upstring::
+* Flexi choose topstring::
+
+Extending versor
+
+* Notes on internals::          Notes on the internals of Versor
+* Adding commands::             Adding new commands
+* Adding dimensions::           Adding new dimensions
+
+
+File: versor.info,  Node: Introduction,  Next: Familiarization,  Prev: Top,  Up: Top
+
+1 Introduction
+**************
+
+Versor provides, and makes easily accessible, cursor movements in a
+variety of groups of "dimensions", such as:
+
+                         pages             lines         chars
+            functions    depth of brackets expressions   chars
+paragraphs  sentences    phrases           words         chars
+functions   statements   statement-parts   expressions   chars
+
+   Some of these operations are already present in GNUemacs (but not all
+of them easily reachable; some require complex chording, and some may
+even need to be accessed through `M-x'), and some are added by Versor.
+Versor puts them all in easy reach on the arrow keys.
+
+   Although GNUemacs uses its modes to put the most useful commands for
+each mode directly on single keys, there are more dimensions mentioned
+above than will fit at the same time on the few arrow keys available
+(just two dimensions). However, note that the available dimensions are
+conveniently listed in a two-dimensional table, as above.
+
+   Conveniently, the arrow keys provide two dimensions, just like the
+two dimensions of the table above. Versor uses the arrow keys
+themselves, with a modifier key, to select a pair of adjacent
+dimensions from one of the rows above, and assign them to the arrow
+keys.
+
+   You will notice (unless your display cannot render this) that a unit
+of text, of the same size as the dimension you are using, will be
+highlighted, after each Versor command. This is called the "selection";
+it is what Versor regards as the cursor. The normal GNUemacs cursor
+appears at the start of it (or occasionally at the end), and all normal
+GNUemacs operations are available and will use the normal cursor. In
+GNUemacs versions from 21 onwards, the colour of the selection
+highlighting changes to indicate the current dimension; there is also
+an indication in the mode line.
+
+   The Versor selection highlight disappears at the start of every
+command (and is restored at the end of each Versor command), so when
+you use GNUemacs commands other than Versor commands, Versor quietly
+becomes invisible, until you use one of its commands again.
+
+* Menu:
+
+* Aims::                        The aims of Versor
+* Concepts::                    The concepts behind Versor
+* Versor and GNUemacs::         Versor's interaction with the rest of GNUemacs
+
+
+File: versor.info,  Node: Aims,  Next: Concepts,  Prev: Introduction,  Up: Introduction
+
+1.1 The aims of Versor
+======================
+
+Although we have the computer power to edit programs in more abstract
+terms than characters and lines, and many "natural" programmers have
+the thought power to do so, editing is still often done
+character-by-character, which seems to be inefficient, unreliable, and
+a waste of human effort. Versor aims to move beyond that.
+
+   Versor is also part of a research project (*note Versor and
+research::), which looks into whether programmers really have moved on
+from thinking of edits in terms of the lines of characters that they
+see on paper listing and on editor screen.
+
+   Ideally (especially for those whose hands are becoming tired of
+keyboard use) it should be possible to enter and edit programs with
+very little handling of individual characters. Versor tries to get as
+close to this as possible. (It includes an analysis facility (*note
+Analysis::) to see well it is doing in this, with each particular
+programmer.) All that need be entered character by character are new
+identifiers and comments. It may even be possible in future versions to
+offer a selection of suitable names for variables in certain
+circumstances, such as `i' for a first index variable, as some of these
+are quite stereotyped by role.
+
+
+File: versor.info,  Node: Concepts,  Next: Versor and GNUemacs,  Prev: Aims,  Up: Introduction
+
+1.2 Concepts
+============
+
+The main concepts within versor are the coordinate system, the
+dimension, and the selection.
+
+   It may be helpful to think of the arrow keys as being two dimensions,
+"Major" and "Minor"; some of the documentation refers to them in these
+terms. The way that major and minor dimensions are related in versor is
+often analogous to the way they are related in their traditional use
+for cartesian coordinates: keeping going in the minor dimension unto
+you reach the end of a major dimension unit will take you into the next
+unit in the major dimension.
+
+* Menu:
+
+* Coordinates and dimensions::  Coordinate systems and dimensions
+* The selection::               The selection
+
+
+File: versor.info,  Node: Coordinates and dimensions,  Next: The selection,  Prev: Concepts,  Up: Concepts
+
+1.2.1 Coordinate systems and dimensions
+---------------------------------------
+
+A "dimension" is a group of related movement commands, defining the
+following movements for the same kind of text unit:
+
+   * first
+
+   * previous
+
+   * next
+
+   * last
+
+   A "coordinate system" is a group of related dimensions.
+
+   You can find what the current coordinate system is from the mode
+line, or the selection colour, or by using the command
+`versor-display-current-dimensions'.
+
+
+File: versor.info,  Node: The selection,  Prev: Coordinates and dimensions,  Up: Concepts
+
+1.2.2 The selection
+-------------------
+
+The selection is best thought of as a cursor, although it looks rather
+like a GNUemacs transient region. It is normally displayed by setting
+the background colour of the text it contains (you can change how it is
+displayed: *note Selection attribute::). Versor editing operations act
+on the selection; for example, the versor "Delete" command deletes the
+current selection.
+
+   The selection covers one or more units of the current dimension
+(*note Coordinates and dimensions::). For how to make it cover more
+than one unit, see *note Extending::.
+
+   The selection is distinct from the GNUemacs region, to avoid putting
+lots of marks into the mark ring.
+
+   The selection highlighting disappears when you do a non-versor
+action, and reappears when you do a versor action.
+
+
+File: versor.info,  Node: Versor and GNUemacs,  Prev: Concepts,  Up: Introduction
+
+1.3 Versor's interaction with the rest of GNUemacs
+==================================================
+
+* Menu:
+
+* Versor minor mode::           Versor as a minor mode
+* Building on commands::        Building on commands
+
+
+File: versor.info,  Node: Versor minor mode,  Next: Building on commands,  Prev: Versor and GNUemacs,  Up: Versor and GNUemacs
+
+1.3.1 Versor as a minor mode
+----------------------------
+
+You can switch Versor on and off using `versor-mode', which, with no
+prefix argument, toggles whether Versor is active. With a prefix
+argument, it turns Versor on if the prefix argument is positive, and
+off otherwise.
+
+   Versor rebinds several keys, but it remembers the old bindings, so
+that its commands can mimic the behaviour of a non-versor GNUemacs.
+
+
+File: versor.info,  Node: Building on commands,  Prev: Versor minor mode,  Up: Versor and GNUemacs
+
+1.3.2 Building on commands
+--------------------------
+
+Versor is, in part, a convenient way of accessing existing GNUemacs
+functionality. Below that access layer, it also fills out the
+functionality a little, including such things as motion over tabular
+text. In the file `versor-dimensions.el' you will find the examples you
+need to integrate motion commands of your own into Versor.
+
+
+File: versor.info,  Node: Familiarization,  Next: Dimensions,  Prev: Introduction,  Up: Top
+
+2 Familiarization
+*****************
+
+The easiest way to start finding your way around Versor is to run the
+demo (or to view the screenshots of it at
+`http://www.emacs-versor.sourceforge.net/demo/'), and then start trying
+things. You will first need to install Versor (*note Setup::), and call
+its initialisation function, indicating which set of arrow keys you
+wish it to use.
+
+   To run the demo, you need to unpack the tarball, and put the versor
+code directory on your `load-path', with the directory `demo' beside
+it, load the file `versor-demo.el', and run the command `versor-demo'.
+This will do an animated, non-interactive, demo of the main features of
+versor.
+
+   Versor can use either the keypad arrows, or the normal arrow keys.
+Because it is often useful to mix traditional movements with Versor
+movements, it is recommended that you give Versor only one set of arrow
+keys. The explanations here will be phrased in terms of the main arrow
+keys and the key cluster that, on typical keyboards, is just above
+them. *Note Setup::, for how to set Versor up to use a particular set
+of keys.
+
+   The clearest demonstration of the basic facilities of Versor is
+probably to be had with a buffer containing a large number of Lisp
+functions, some of them with very deeply nested expressions. Since
+Versor provides commands for modification as well as navigation, we
+suggest you take a copy of your sample material!
+
+   Unless customised to do otherwise (*note Setup::), Versor will start
+in its `cartesian" coordinate system, which is similar to the normal
+cursor keys: you can move left or right with the <LEFT> and <RIGHT>
+arrow keys, and up and down with the <UP> and <DOWN> arrow keys. (You
+can change the initial coordinate system, on a mode by mode basis.)
+
+   To help you to find out what versor will do for each key, Versor
+extends the GNUemacs documentation system when used on versor
+functions, so you can do `C-h k' on a cursor key bound to Versor, and
+it will tell you not only what Versor function it is bound to, but also
+what underlying function (if relevant) will currently be used by Versor
+for that key.
+
+* Menu:
+
+* Zooming::                     Zooming within a coordinate system
+* Switching coordinates::       Switching between coordinate systems
+* Editing::                     Editing with the selection
+* Extending::                   Extending the selection
+* Selecting around::            Selecting around the selection
+
+
+File: versor.info,  Node: Zooming,  Next: Switching coordinates,  Prev: Familiarization,  Up: Familiarization
+
+2.1 Zooming within a coordinate system
+======================================
+
+The `LEFT' and `RIGHT' Meta arrows zoom in and out within a coordinate
+system.
+
+   You can zoom out along a series of coordinates by typing `M-LEFT'.
+Now the minor cursor keys (`LEFT' and `RIGHT' arrows) will select
+previous and next lines of the buffer, and the major cursor keys (`UP'
+and `DOWN' arrows) will move by whole pages.  You will also see that
+when you move by lines, a whole line is highlighted in a particular
+colour.  This is the current "versor selection", and its colour
+provides feedback on the currently selected dimension.
+
+   `M-RIGHT' zooms back in; the finest scale in most coordinate systems
+is the character.
+
+
+File: versor.info,  Node: Switching coordinates,  Next: Editing,  Prev: Zooming,  Up: Familiarization
+
+2.2 Switching between coordinate systems
+========================================
+
+`C-x' following by the `UP' and `DOWN' arrows switches between
+coordinate systems.
+
+   Starting from the "cartesian" coordinate system, typing `C-x down'
+will select a "structural" coordinate system, and if your current
+dimension was the second one, "lines", you should now be in the second
+of the structural coordinates, which is "exprs", that is,
+"expressions". The minor cursor keys will now select previous and next
+s-expressions (you will see the current expression is highlighted), and
+the major cursor keys will select the depth (you will see the pair of
+brackets highlighted - Versor can use multipart selections).
+
+   You can control which dimensions are available in each mode (*note
+Dimensions available::).
+
+   You can also put these commands onto `M-up' and `M-down' by putting
+`'meta' amongst the arguments to `versor-setup'.
+
+
+File: versor.info,  Node: Editing,  Next: Extending,  Prev: Switching coordinates,  Up: Familiarization
+
+2.3 Editing with the selection
+==============================
+
+Versor provides some editing commands which act on the current
+selection.
+
+* Menu:
+
+* Deleting the selection::      How to delete the selected text
+* Inserting using the selection::  Inserting before, after, around or over the selection
+
+
+File: versor.info,  Node: Deleting the selection,  Next: Inserting using the selection,  Prev: Editing,  Up: Editing
+
+2.3.1 Deleting the selection
+----------------------------
+
+Pressing `delete' while using versor will delete the current versor
+selection.  If it is a multipart selection, such as an opening bracket
+and the corresponding closing bracket (as selected by the versor
+"bracket nesting" dimension), all parts of the selection will be
+deleted, and will become successive elements of the kill ring.
+
+
+File: versor.info,  Node: Inserting using the selection,  Prev: Deleting the selection,  Up: Editing
+
+2.3.2 Inserting with the selection
+----------------------------------
+
+Pressing `insert' while using versor can do many kinds of insertion.
+The first thing to choose is whether you are inserting before, after,
+around, or in place of, the selection. Each of these may be done by
+pressing the `left', `right', `up' or `down' arrow keys respectively.
+
+   Inserting around the selection will insert one item from the kill
+ring before the selection, and the next item after it.  This is the
+counterpart of deleting a multipart selection, such as a balanced pair
+of brackets.
+
+   Inserting in place of the selection will delete the selection
+(putting it onto the kill ring), and replace it with the selected
+insertion. A handy tip: used with a two-part selection consisting of
+opening and closing brackets, and inserting another kind of bracket,
+this lets you change a matched pair of brackets from one kind to
+another, without risk of losing track of which brackets are which.
+
+   Having chosen where to insert, you then press another key to decide
+what to insert. The most common ones here will be `delete', to insert
+the most recently deleted text, and `(' to insert a pair of parentheses
+(the opening bracket of other kinds of brackets works like this, too).
+
+   If inserting around the selection, you can type `?' to wrap an `if'
+statement around the selection, `@' to wrap a `while' statement around
+it, `=' to wrap a scoping construct around it (like `let' in Lisp),
+`&', `|' or `!' to wrap an `and', `or', or `not' expression around it.
+
+   *Note Insertion::, for full details of the possible kinds of things
+to insert.
+
+
+File: versor.info,  Node: Extending,  Next: Selecting around,  Prev: Editing,  Up: Familiarization
+
+2.4 Extending the selection
+===========================
+
+You can also extend the selection, using `C-right' and `C-left'. If you
+start by moving right, the extension grows from the end of the current
+selection, and moving left will shrink the extension. If you start by
+moving left, the extension grows from the beginning of the current
+selection, and moving right will shrink the extension.
+
+
+File: versor.info,  Node: Selecting around,  Prev: Extending,  Up: Familiarization
+
+2.5 Selecting around the selection
+==================================
+
+The command `versor-select-surrounding' (usually bound to `ctrl-DEL')
+selects the s-exp surrounding the selection, except for the original
+selection.
+
+   This is probably most usefully followed by deleting the new
+selection, which will leave the original in its place. For example,
+this sequence can be used to replace a function call by its argument,
+or to make something that was conditional become unconditional.
+
+
+File: versor.info,  Node: Dimensions,  Next: Further commands,  Prev: Familiarization,  Up: Top
+
+3 Available coordinate systems
+******************************
+
+This section describes the coordinate systems which Versor provides.
+By default, all coordinates systems are available in all modes.  *Note
+Dimensions available::, for how to restrict this, on a mode by mode
+basis, to just the coordinates most likely to be useful in that mode.
+
+   You can move between coordinate systems using the keys `C-x up' and
+`C-x down'; alternatively, you can put these commands onto `M-up' and
+`M-down' by putting `'meta' amongst the arguments to `versor-setup'.
+(If you want both, include `'meta 'ctrl-x'.)
+
+* Menu:
+
+* Cartesian::                   Cartesian coordinates
+* Structural::                  Structural coordinates
+* Text::                        Text coordinates
+* Structured Text::             Structured Text coordinates
+* Tables::                      Table coordinates
+* Program::                     Program coordinates
+* Markers::                     Marker coordinates
+
+
+File: versor.info,  Node: Cartesian,  Next: Structural,  Prev: Dimensions,  Up: Dimensions
+
+3.1 Cartesian coordinates
+=========================
+
+Cartesian coordinates is the Versor dimension most similar to the normal
+cursor keys. The main difference you will notice is that when you have
+selected "lines" as your current dimension, you will see a whole line
+highlighted.
+
+   The dimensions available in cartesian coordinates are as follows:
+
+   * characters
+
+   * lines
+
+   * pages
+
+
+File: versor.info,  Node: Structural,  Next: Text,  Prev: Cartesian,  Up: Dimensions
+
+3.2 Structural coordinates
+==========================
+
+Structural coordinates uses bracketing characters to navigate by
+s-expressions (*note Expressions: (emacs)Expressions.).
+
+   The dimensions specific to this coordinate system are "exprs",
+"depth", and "defuns".
+
+   Moving in the "exprs" dimension goes over s-expressions, that is,
+balanced bracketed expressions. In the simplest case, with no brackets,
+it will move over a symbol, as defined by the major mode's syntax
+table. This is typically an identifier in a programming language.
+
+   When before an "open parenthesis" character, moving forward in this
+dimension will move to just after the corresponding "close
+parenthesis"; likewise, moving backward from just after a "close
+parenthesis" will move to just before the corresponding "open
+parenthesis".
+
+   The whole expression (whether a single symbol, or an expression on
+parentheses) is selected.
+
+   Moving in the "depth" dimension goes in and out levels of
+parentheses. It leaves the selection split into the opening and closing
+parenthesis characters.
+
+   Moving in the "defuns" dimension moves over successive top-level
+function definitions.
+
+   In structured text languages such as HTML, the sexp-based commands
+are augmented to treat opening and closing tags as a form of
+parentheses; the `exprs' and `depth' dimensions handle this. (This is
+built using the "nested blocks" facility, which you can also use by
+itself; see *note Structured Text::.)
+
+   The dimensions available in structural coordinates are as follows:
+
+   * chars
+
+   * exprs
+
+   * depth
+
+   * defuns
+
+
+File: versor.info,  Node: Text,  Next: Structured Text,  Prev: Structural,  Up: Dimensions
+
+3.3 Text coordinates
+====================
+
+Text coordinates works in terms of natural language units such as words
+and phrases.
+
+   The dimensions available in text coordinates are as follows:
+
+   * chars
+
+   * words
+
+   * phrases
+
+   * sentences
+
+   * paragraphs
+
+   Navigating by words is slightly different from the emacs
+`forward-word' command (*note Words: (emacs)Words.): it always leaves
+the cursor on the first character of a word.
+
+   Navigating by phrases uses the variable `phrase-end' to define the
+end of a phrase.
+
+   The other dimensions in this group are based closely on the
+underlying Emacs facilities. *Note Sentences: (emacs)Sentences, and
+*Note Paragraphs: (emacs)Paragraphs.
+
+
+File: versor.info,  Node: Structured Text,  Next: Tables,  Prev: Text,  Up: Dimensions
+
+3.4 Structured Text coordinates
+===============================
+
+Structured text coordinates are similar to text coordinates (*note
+Text::), with the addition of moving by nested blocks as used in many
+markup languages, in a manner similar to structural coordinates (*note
+Structural::).
+
+   The dimensions available in structured text coordinates are:
+
+   * chars
+
+   * words
+
+   * blocks
+
+   * block-depth
+
+   Nested blocks extend the idea of bracketed expressions, to things
+where the brackets are not single characters but things such as HTML
+tags.
+
+   The definition of block syntax is mode-specific. For example, in
+HTML, paired tags are defined to begin and end blocks.
+
+   The commands for moving backwards and forwards over nested blocks are
+similar to those for moving over bracketed s-expressions, but use
+opening and closing tags, such as those in HTML, instead of parentheses.
+
+   Likewise, the commands for moving in and out of levels of nested
+blocks are similar to those for moving in and out of bracketed lists.
+
+   In modes supported structured forms of text, Versor's sexp-based
+commands (*note Structural::) are extended to handle the language
+syntax. This is built on top of the nested blocks facility, and
+provides behaviour which is more consistent with that provided for
+programming languages. This is recommended in preference to the bare
+"structured text" / "nested blocks" facility (which, however, is still
+available should you prefer it).
+
+   An associated command is `another-block' which analyzes the block
+before point (that is, from a closing-block construct back to the
+corresponding opening-block construct), collects up all the structuring
+constructs in it, and inserts a copy of those at point.  For example,
+if point is just after an HTML table row (so that the tag most
+immediately before point is `</tr>', the HTML table row ender),
+`another-block' will find all the HTML tags back to the corresponding
+`<tr>', and insert them, but without the intervening non-tag text.
+(This specific example is probably the most useful use of this command,
+in the author's experience.)
+
+   This part of Versor is very much a work in progress, and you are
+encouraged to add to the definition of block syntax for your favourite
+markup language, and send it to the author of Versor. The block syntax
+mechanism is defined in the file `nested-blocks.el'.
+
+
+File: versor.info,  Node: Tables,  Next: Program,  Prev: Structured Text,  Up: Dimensions
+
+3.5 Table coordinates
+=====================
+
+Table coordinates provides movements based on cells and rows, in
+various modes for which these concepts are meaningful, such as
+`tex-mode' and its variants, `html-mode' and `html-helper-mode'.
+
+   The dimensions defined in table coordinates are as follows:
+
+   * chars
+
+   * cells
+
+   * rows
+
+
+File: versor.info,  Node: Program,  Next: Markers,  Prev: Tables,  Up: Dimensions
+
+3.6 Program coordinates
+=======================
+
+Program coordinates uses the syntax of programming languages to guide
+to the selection movements. This uses the accompanying package, Languide
+(*note Top: (languide)Top.), to provide the primitives for moving around
+source code. It is, of course, mode-specific.
+
+   Languide definitions are already reasonably comprehensive for Lisp,
+C, Perl and Java, in progress for shell scripts, and planned for
+Haskell and Python. They would probably not be meaningful for
+PostScript. You are encouraged to contribute further or better
+definitions, both for the languages already covered and for others.
+
+   The dimensions defined in program coordinates are as follows:
+
+   * chars
+
+   * exprs
+
+   * statement parts
+
+   * statements
+
+   * defuns
+
+   Apart from the statement-related dimensions, these are the same as
+those in structural coordinates *note Structural::.
+
+   Movement by statement parts moves the selection between parts of the
+current statement.  Programming language statements can typically be
+divided into two or three parts, as follows:
+
+  1. The head of a statement is often a condition, such as in an `if'
+     or a `while' statement.
+
+  2. The body of a statement is typically another statement, or a group
+     of statements, such as the body of an `if' or a `while' statement.
+
+  3. The tail of a statement occurs in only a few statement types, such
+     as `if-then-else' or `try-catch-finally'.
+
+   The "statement parts" dimension will move between these in turn, and
+can also moved to the "container" of the current statement, that is, a
+grouping statement surrounding it.
+
+   when you select the body of a statement, and the body is a compound
+statement, you can then either:
+
+   * continue moving to other parts of the same statement
+
+   * select statements within the body, by using the "statements"
+     dimension movements
+
+   If using voice input (*note Voice input::), it is convenient to
+define commands such as "head", "body",and "container", so that you can
+jump directly to the one you want rather than treating it as part of a
+sequence. The commands `navigate-this-head', `navigate-this-body',
+`navigate-this-tail', `navigate-this-whole', and
+`navigate-this-container' are available for binding directly to voice
+commands (or, for that matter, to keys of their own).
+
+   The "statement" dimension moves between successive statements at the
+same structural level. This is different from the statement movements
+provided as part of the GNUemacs' C-mode, which moves in and out of
+compound statements.
+
+
+File: versor.info,  Node: Markers,  Prev: Program,  Up: Dimensions
+
+3.7 Marker coordinates
+======================
+
+Versor provides a miscellany of coordinate systems that work using
+markers left by GNUemacs and by various packages.
+
+   The marker coordinate systems are as follows:
+
+   * The mark ring, by order of creation
+
+   * The mark ring, by order of position
+
+   * tempo template markers, as made by html-helper-mode and others
+
+   * Else markers (from the Emacs Language Sensitive Editor by Peter
+     Milliken)
+
+   * Text property changes
+
+
+File: versor.info,  Node: Further commands,  Next: Refactoring,  Prev: Dimensions,  Up: Top
+
+4 Further commands
+******************
+
+As well as redefining the arrow keys, Versor takes over a few other
+keys as well. The most noticeable of these is that `DEL' now deletes
+the current Versor selection.
+
+* Menu:
+
+* Deletion::                    Deletion
+* Insertion::                   Insertion
+* Alteration::                  Alteration
+* DWIM::                        Do What I Mean
+* Describing selection::
+
+
+File: versor.info,  Node: Deletion,  Next: Insertion,  Prev: Further commands,  Up: Further commands
+
+4.1 Deletion
+============
+
+Versor defines the `DEL' key to delete the current selection. Note that
+if this is a multipart selection, such as a pair of opening and closing
+brackets, all parts of it are deleted.
+
+   Deleting a multipart selection puts the parts of it into separate
+entries in the kill-ring. This is compatible with Versor's insertion
+commands (*note Insertion::) while also keeping compatibility with
+normal Emacs kill-ring use.
+
+
+File: versor.info,  Node: Insertion,  Next: Alteration,  Prev: Deletion,  Up: Further commands
+
+4.2 Insertion
+=============
+
+Pressing the `INS' key gives you a choice of several ways to insert,
+which you choose between by pressing one of the Versor arrow keys.
+
+   The `LEFT' and `RIGHT' arrow keys let you insert before or after the
+selection.
+
+   The `UP' arrow key inserts two entries from the kill ring, one
+before and one after the selection; that is to say, it inserts around
+the selection. This is compatible with Versor's way of deleting a
+multipart selection such as a pair of opening and closing brackets
+*note Deletion::.
+
+   These are defined in `versor-insertion-placement-keymap'.
+
+   Having chosen where to make an insertion, you must choose which one
+of several kinds of things to insert.  The choices are as follows:
+
+`delete'
+
+`DEL'
+
+`C-y'
+     The top item(s) on the kill ring
+
+`1..9'
+     The top N items on the kill ring
+
+`C-s'
+     the most recent search string
+
+`('
+
+`['
+
+`{'
+
+`<'
+     A pair of brackets, the opening bracket being the character typed
+
+`?'
+     An `if-then' statement in the programming language handled by the
+     current major mode. This is meant for use when inserting around the
+     selection; it wraps the selection in the conditional statement.
+     Statement insertions such as this are very basic string insertions;
+     Languide (*note Alterations: (languide)Alterations.)  has more
+     sophisticated ones, which use the template and skeleton insertion
+     systems, and can maintain indentation and spacing better.
+
+`%'
+     An `if-then-else' statement in the programming language handled by
+     the current major mode.
+
+`@'
+     A `while' statement in the programming language handled by the
+     current major mode.
+
+`='
+     A variable declaration in the programming language handled by the
+     current major mode
+
+`&'
+
+`|'
+
+`!'
+     An "and", "or" or "not" expression in the programming language
+     handled by the current major mode
+
+`f'
+     The name of the file in the next window. (if there is only one
+     window, the name of the file in that window is inserted).
+
+
+
+File: versor.info,  Node: Alteration,  Next: DWIM,  Prev: Insertion,  Up: Further commands
+
+4.3 Alteration
+==============
+
+The "alterations" system provides a Versor style interface to changing
+the text of the current Versor selection.
+
+   You can enter the alteration system by typing `M-insert', and you
+can accept the current value by typing <insert> or <return>.  You can
+abandon the alterations, leaving the text at its original value, by
+pressing <delete>.
+
+   While you are doing alterations, the <LEFT> and <RIGHT> cursor keys
+change the text within the selection, between several possible values
+of the same kind. The <UP> and <DOWN> cursor keys change which kind of
+thing you are choosing between.
+
+   The effect is similar to turning the selection into a little window
+behind which you are scrolling a two-dimensional grid of possible
+values.
+
+   For example, you could use the <LEFT> and <RIGHT> keys to put any
+local variable which is currently in scope into the selection, and <UP>
+and <DOWN> keys to switch between selecting local variables, global
+variables, and expressions wrapped around a variable.
+
+   When you have got the text you want into the selection, you can use a
+"select" key (either `insert' or `return') to accept that selection, or
+a "reject" key (`delete') to go back to the original value.
+
+   The types of value available depends on the context. Possible types
+include:
+
+   * local variables
+
+   * global variables
+
+   * tags in your tag table
+
+   * functions defined in this file
+
+   * reserved words in a programming language
+
+   The data used by Versor's "alteration" feature is provided by the
+companion package, Languide (Language Guided Editing).  *Note
+Alterations: (languide)Alterations, for details.
+
+   "Alterations" grew from the same kind of idea as DoReMi.el
+(`http://www.emacswiki.org/cgi-bin/wiki/doremi.el'), which I may try to
+integrate with in future versions.
+
+
+File: versor.info,  Node: DWIM,  Next: Describing selection,  Prev: Alteration,  Up: Further commands
+
+4.4 Do What I Mean
+==================
+
+Sometimes Versor deviates from its most logical design, to make sure
+that the selection ends up where you are likeliest to want it.
+
+   An example of this is that if you are moving by s-expressions, and
+move forward from the last one in the enclosing expression, the
+selection moves to the end of the last expression, and then on past any
+whitespace and comments, ending up where you are likely to want to type
+the next s-expression.
+
+   However, it is still not always possible to get to exactly the right
+place without using character-level movements. For these circumstances,
+Versor provides a "Do What I Mean" (DWIM) command, which moves the
+selection to a point likely to be of interest that is otherwise hard to
+get at using the current Versor dimension. This command is normally
+bound to the key `M-home'. Alternatively, it can be accessed with `M-x
+versor-dwim'.
+
+   This function reads the user's mind, using the following algorithm:
+
+  1.   Tell the user what has been done each time;
+
+  2.   Eventually, the user will come to expect the behaviour of this
+     function;
+
+  3.   Reading what the user wants Versor to do should then usually be
+     trivial.
+
+   Aspects of mental state not necessary for figuring out where to
+leave point are factored out of the calculations.
+
+   `versor-dwim' is mode-specific in its behaviour. For example, in
+programming language modes, it can move point in and out of string
+constants and comments.
+
+
+File: versor.info,  Node: Describing selection,  Prev: DWIM,  Up: Further commands
+
+4.5 Describing the selection
+============================
+
+The command `versor-describe-selection', normally bound to `C-x ?' (or
+`C-?' if you are using `M-' rather than `C-x' for selecting dimensions)
+will show a description of the current selection, if it knows how to
+for the current mode.
+
+   Here are some sample descriptions:
+`functor'
+     The selection is the function-name part of a function call.
+
+`if-condition'
+     The selection is the condition of an `if-then' or an
+     `if-then-else'.
+
+`if-then-body; 2 parts'
+     The selection is two statements, which make up the whole body of an
+     `if' statement that has no `else' clause.
+
+`let-bindings; 3 bindings'
+     The selection is the entire list of variables in a form that allows
+     variable declarations (such as `let' in Lisp).
+
+`progn-whole'
+     The selection is a whole compound statement of the kind that simply
+     sequences the statements within it.
+
+`symbol'
+     The selection is just a symbol.
+
+`variable-binding'
+     The selection is the declaration of a new local variable.
+
+   These descriptions are meant to be as closely equivalent as possible
+between all supported programming languages. (They are used by Languide
+to decide whether various high-level editing operations are appropriate
+for a particular selection.)
+
+   If the variable `versor-describe-selection' is non-nil, this is done
+automatically at the end of most Versor commands; *Note Verbose::.
+
+
+File: versor.info,  Node: Refactoring,  Next: Advanced features,  Prev: Further commands,  Up: Top
+
+5 Refactoring and high-level editing using Languide
+***************************************************
+
+Some more sophisticated commands, replacing long sequences of manual
+keyboard labour by the programmer, are provided by the companion
+package, Languide. As described here, they are accessed through some
+wrapper functions which apply them to the versor selection. You can
+also access these directly to act on GNUemacs region; *Note Overview:
+(languide)Top.
+
+   A typical action (probably the one the author uses most often) is
+converting an expression to a local variable (so that the value can be
+re-used), involving the following steps:
+
+  1. examine the expression for the variables it needs
+
+  2. find the nearest scoping point, or (with a prefix arg) the widest
+     scoping point at which all the variables needed are defined
+
+  3. deduce the type of the expression (in statically typed languages
+     only)
+
+  4. insert a declaration for a variable (with the name supplied by the
+     user) at the chosen scoping point, and initialize it using the
+     original expression
+
+  5. replace the original expression with a use of the new variable
+
+  6. leave the new variable at the top of the kill ring, ready to be
+     inserted somewhere else
+
+  7.
+   Likewise, there is a function to turn a block of code into a function
+(working out automatically what needs to be passed in as the argument
+list), and replace its original occurrence with a call to the new
+function.
+
+   To draw attention to what they have done, these functions highlight,
+with an orange background, any changes they make away from the
+selection.  The highlighting is not the Versor selection, and is
+removed on your next input to GNUemacs.
+
+   These commands are divided into two groups, one of them acting on
+expressions (as used in both functional and imperative languages) and
+one acting on statements, as used in imperative languages.
+
+   There are also facilities by which languide can tell you when it has
+spotted something it knows about.
+
+* Menu:
+
+* Expression handling::         Commands working on expressions
+* Statement handling::          Commands working on statements
+* Languide Feedback::           Feedback from Languide
+* Summary of refactoring::      Key bindings for refactoring
+
+
+File: versor.info,  Node: Expression handling,  Next: Statement handling,  Prev: Refactoring,  Up: Refactoring
+
+5.1 Expression handling, expressions, and functions
+===================================================
+
+This group of commands manipulates value handling constructs in source
+code.  For example, you can select an expression (using the Versor
+selection), and turn it into a variable, so that you can re-use the
+same value.  Likewise, you can convert an expression into a function,
+so that you can call it elsewhere.
+
+* Menu:
+
+* Convert to variable::         Convert selection to variable
+                                Given a selection containing an
+                                expression, this sets up a variable
+                                initialised to that expression, and
+                                replaces the original expression with
+                                that variable.
+* Convert to function::         Convert selection to function
+                                This takes the selection,
+                                defines a new function just before the
+                                one containing the selection, and
+                                replaces the original selection with a
+                                call to the new function.
+* Surround with call::          Surround selection with call
+                                This wraps the selection with a
+                                call to a function.
+* Create function::             Create function for call
+                                This creates a new function to suit
+                                the function call around point
+* Remove call::                 Remove surrounding call
+                                This removes the function call
+                                surrounding point.
+
+
+File: versor.info,  Node: Convert to variable,  Next: Convert to function,  Prev: Expression handling,  Up: Expression handling
+
+5.1.1 Convert selection to variable
+-----------------------------------
+
+The command `versor-languide-convert-selection-to-variable' takes the
+current selection as an expression, sets up a variable (at the nearest
+scoping point) initialised to that expression, and replaces the
+original expression with that variable.
+
+   The variable name is left on the kill ring, ready for you to re-use,
+as the likely use of this command is that you want to use a value in
+two places, where it originally occurred once, in-line.
+
+   In the normal Versor key bindings, this command is bound to
+`C-insert ='.
+
+   If `languide-make-variables-interactively' is non-nil, the users
+chooses the scope using an interface similar to `isearch'; otherwise,
+it uses the following rules:
+   * With no prefix arg, it takes the nearest binding scope.
+
+   * With a positive numeric prefix arg, it goes out that number of
+     binding scopes.
+
+   * With a negative prefix arg, it lets the user choose interactively,
+     just as though `languide-make-variables-interactively' were
+     non-nil.
+
+   * With a non-numeric prefix arg, this tries to find the widest scope
+     in which all the necessary variables are bound, thus making the
+     value re-usable over as much code as possible. However, it does
+     not (in the current version of Versor/Languide) take note of
+     assignments to those variables, so this may not be the one you
+     want. Future versions of the software should handle this correctly.
+
+
+File: versor.info,  Node: Convert to function,  Next: Surround with call,  Prev: Convert to variable,  Up: Expression handling
+
+5.1.2 Convert selection to function
+-----------------------------------
+
+The command `versor-languide-convert-selection-to-function' takes the
+selection, defines a new function just before the one containing the
+selection, and replaces the original selection with a call to the new
+function. It examines the selection and the surrounding code, to find
+any variables referred to in the selection but defined outside it, and
+makes those into arguments to the new function.
+
+   A call to this function, with the appropriate argument list syntax,
+is left on the kill-ring, ready for you to insert another call to the
+new function, as the likely use of this command is to re-use a code
+block (occurring in-line once) as a function to be called from more
+than one place.
+
+   In the normal Versor key bindings, this command is bound to
+`C-insert f'.
+
+
+File: versor.info,  Node: Surround with call,  Next: Create function,  Prev: Convert to function,  Up: Expression handling
+
+5.1.3 Surround selection with call
+----------------------------------
+
+The command `versor-languide-surround-selection-with-call' wraps the
+selection with a call to a specified function, such that the selection
+becomes the argument list of the function.
+
+   In the normal Versor key bindings, this command is bound to
+`C-insert ('.
+
+
+File: versor.info,  Node: Create function,  Next: Remove call,  Prev: Surround with call,  Up: Expression handling
+
+5.1.4 Create function for call
+------------------------------
+
+With point positioned inside a function call (currently with some
+restrictions, such as not within a string literal argument to it, and
+not within an inner call in creating the argument list),
+`versor-languide-create-function-for-call' (normally bound to `C-insert
+e') creates an empty function definition to suit that call, just before
+the current function definition.
+
+   This lets you type a call to a function that doesn't yet exist, and
+then go and create the function without having to do all of the
+completely predictable manual text entry or pasting for it.
+
+
+File: versor.info,  Node: Remove call,  Prev: Create function,  Up: Expression handling
+
+5.1.5 Remove surrounding call
+-----------------------------
+
+The command `versor-languide-remove-function-call' removes the function
+call surrounding the selection. This leaves the function arguments in
+place of the call.
+
+   In the normal Versor key bindings, this command is bound to
+`C-insert )'.
+
+
+File: versor.info,  Node: Statement handling,  Next: Languide Feedback,  Prev: Expression handling,  Up: Refactoring
+
+5.2 Statement handling
+======================
+
+This group of commands acts mostly on imperative statements.
+
+* Menu:
+
+* Unify Statements::            Unify Statements
+                                This makes the selection into a
+                                compound statement.
+* Make conditional::            Make the selected code conditional
+* Make repeating::              Make the selected code iterative
+* Remove control::              Remove a control construct
+* Decision point::              Move to enclosing decision point
+                                This moves point to the most nearly
+                                enclosing decision point, that is, a
+                                suitable place for putting a new condition.
+
+
+File: versor.info,  Node: Unify Statements,  Next: Make conditional,  Prev: Statement handling,  Up: Statement handling
+
+5.2.1 Unify Statements
+----------------------
+
+The command `versor-languide-unify-statements' turns the current Versor
+selection into a compound statement.  In the normal Versor key
+bindings, this command is bound to `C-insert {'.
+
+
+File: versor.info,  Node: Make conditional,  Next: Make repeating,  Prev: Unify Statements,  Up: Statement handling
+
+5.2.2 Make conditional
+----------------------
+
+The command `versor-languide-make-conditional' makes the selection
+conditional, and positions point ready for filling in the condition. If
+the selection is already the body of a conditional construct, an `and'
+construct is wrapped around the existing condition (unless it already
+has one) and point is positioned for adding a further condition.
+
+   In the normal Versor key bindings, this command is bound to
+`C-insert ?'.
+
+
+File: versor.info,  Node: Make repeating,  Next: Remove control,  Prev: Make conditional,  Up: Statement handling
+
+5.2.3 Make repeating
+--------------------
+
+The command `versor-languide-make-iterative' makes the selection be the
+body of a repeating construct, and positions point ready for filling in
+the repeat condition.
+
+   This command is not yet implemented.
+
+
+File: versor.info,  Node: Remove control,  Next: Decision point,  Prev: Make repeating,  Up: Statement handling
+
+5.2.4 Remove control construct
+------------------------------
+
+The command `versor-languide-remove-control' removes the control
+construct most closely surrounding the selection.
+
+   This command is not yet implemented.
+
+
+File: versor.info,  Node: Decision point,  Prev: Remove control,  Up: Statement handling
+
+5.2.5 Enclosing decision point
+------------------------------
+
+The command `languide-enclosing-decision-point' moves point to the most
+nearly enclosing decision point, that is, a suitable place for putting
+a new condition. This is largely used as an internal function by
+Languide, but is also exposed for direct use in case it is useful.
+
+
+File: versor.info,  Node: Languide Feedback,  Next: Summary of refactoring,  Prev: Statement handling,  Up: Refactoring
+
+5.3 Feedback from Languide
+==========================
+
+If you set the variable `versor-describe-selection' to non-nil (*note
+Verbose::), Languide will tell you (at the end of any Versor command)
+when you have selected a piece of code that it may have a specific way
+of handling.
+
+   There is also a command of the same name, to do just that action;
+*Note Describing selection::, for details.
+
+
+File: versor.info,  Node: Summary of refactoring,  Prev: Languide Feedback,  Up: Refactoring
+
+5.4 Summary of refactoring commands
+===================================
+
+In the default configuration, Versor's refactoring commands begin with
+`C-insert'. The following keys may be used following this:
+
+`='
+     convert selection to variable
+
+`f'
+     convert selection to function
+
+`g'
+     convert selection to global variable
+
+`('
+     surround selection with call
+
+`)'
+     remove function call around selection
+
+`{'
+     unify selected statements
+
+`?'
+     make selected statements conditional
+
+`@'
+     make selected statements iterative
+
+`;'
+     comment selection
+
+
+File: versor.info,  Node: Advanced features,  Next: Accessibility,  Prev: Refactoring,  Up: Top
+
+6 Advanced features
+*******************
+
+* Menu:
+
+* Detect text in code::         Text in code
+* Per-buffer dimensions::       Per-buffer dimensions
+* Per-mode dimensions::         Per-mode dimensions
+
+
+File: versor.info,  Node: Detect text in code,  Next: Per-buffer dimensions,  Prev: Advanced features,  Up: Advanced features
+
+6.1 Detect text in code
+=======================
+
+Often, source code has pieces of natural-language text embedded in it,
+both in comments, and in string literals. The forms of movement that
+are useful for source code are often not convenient for these embedded
+pieces of text.
+
+   You can make Versor remember different current dimensions for actual
+code, and for the insides of comments and string literals. You can turn
+this on by requiring the feature `versor-text-in-code' and setting the
+variable `versor-text-in-code' to anything other than `nil'; or by
+including the symbol `text-in-code' in the arguments to `versor-setup',
+which does both of the above.
+
+   Then, after each movement of the GNUemacs cursor, Versor will check
+whether point is now in a comment or a string literal, or in code, and
+will switch its current dimension accordingly.
+
+   If you set the variable `versor-announce-text-in-code' non-nil,
+Versor will tell you (in the echo area) when it switches between code
+and embedded text.
+
+
+File: versor.info,  Node: Per-buffer dimensions,  Next: Per-mode dimensions,  Prev: Detect text in code,  Up: Advanced features
+
+6.2 Per-buffer dimensions
+=========================
+
+You can make Versor remember different current dimensions for each
+buffer. You can do this by requiring the feature `versor-local' and
+setting the variable `versor-per-buffer' to anything other than `nil';
+or by including the symbol `local' in the arguments to `versor-setup',
+which does both of the above.
+
+
+File: versor.info,  Node: Per-mode dimensions,  Prev: Per-buffer dimensions,  Up: Advanced features
+
+6.3 Per-mode dimensions
+=======================
+
+You can make Versor remember different current dimensions for each
+mode. You can do this by requiring the feature `versor-modal' and
+setting the variable `versor-auto-change-for-modes' to non-nil; or by
+including the symbol `modal' in the arguments to `versor-setup', which
+does both of the above.
+
+   You can make Versor bind some of its actions in particular ways
+per-mode. See the source file `versor-modal.el' for how to do this.
+It's probably not the best way of doing anything - it is an early part
+of Versor, and the author has since added better ways of doing most of
+the things it does.
+
+
+File: versor.info,  Node: Accessibility,  Next: Versor and Languide,  Prev: Advanced features,  Up: Top
+
+7 Accessibility
+***************
+
+Versor is designed to be usable not only through a conventional
+keyboard, but also through narrow interfaces such as pedals, and
+through voice recognition.
+
+* Menu:
+
+* TLC-mode::                    Two-Letter Commands (or TLC)
+* Pedals::                      Using pedals
+* Reversing::                   Reversing the selection motions
+* Voice input::                 Using voice input
+* Speech output::               Using speech output
+* Flexi-choose::                The flexible chooser
+* Other input devices::         Future interface possibilities
+
+
+File: versor.info,  Node: TLC-mode,  Next: Pedals,  Prev: Accessibility,  Up: Accessibility
+
+7.1 TLC-mode
+============
+
+`versor-tlc-mode' toggles a mode in which the printing characters
+generally perform commands rather than self-inserting. Yes, it's modal,
+and yes, you have to admit humbly that you-know-what does that too. But
+if you're tired of modifier keys, this may be what you need. And the
+commands it gives you include all the powerful versor ones, not the
+low-level ed-like ones.
+
+   The key assignments are not greatly mnemonic, but they try hard to
+gather around your home keys. Note for non-touch-typists: this means
+the keys a touch-typist's fingers normally rest over when they've not
+moved to some other key. TLC knows the layouts of various forms of
+keyboards (currently only QWERTY and Dvorak, but it is easy to add
+more), and attempts to bind the physical key location, rather than a
+particular letter.
+
+   TLC mode is normally toggled using `versor-tlc-mode', which, in TLC
+mode, is bound to <a>. (Mnemonic from the days of "ed": "Append" what
+you type at point.)
+
+   The mnemonics in the following menu are based on the QWERTY letters
+attached to the relevant keys.
+
+* Menu:
+
+* TLC Movements::               TLC Movements
+* TLC Dimensions::              TLC Dimensions (D for Dimension)
+* TLC Search::                  TLC Search (S for Search)
+* TLC Insert::                  TLC Insert (J as variant of I)
+* TLC Delete/Copy::             TLC Delete/Copy (K for Kill)
+* TLC Transpose::               TLC Transpose (T for Transpose)
+* TLC Versor and Languide::     TLC Versor and Languide (L and ;)
+* TLC Miscellany::              TLC Miscellany
+
+
+File: versor.info,  Node: TLC Movements,  Next: TLC Dimensions,  Prev: TLC-mode,  Up: TLC-mode
+
+7.1.1 TLC Movements
+-------------------
+
+
+File: versor.info,  Node: TLC Dimensions,  Next: TLC Search,  Prev: TLC Movements,  Up: TLC-mode
+
+7.1.2 TLC Dimensions
+--------------------
+
+
+File: versor.info,  Node: TLC Search,  Next: TLC Insert,  Prev: TLC Dimensions,  Up: TLC-mode
+
+7.1.3 TLC Search
+----------------
+
+
+File: versor.info,  Node: TLC Insert,  Next: TLC Delete/Copy,  Prev: TLC Search,  Up: TLC-mode
+
+7.1.4 TLC Insert
+----------------
+
+
+File: versor.info,  Node: TLC Delete/Copy,  Next: TLC Transpose,  Prev: TLC Insert,  Up: TLC-mode
+
+7.1.5 TLC Delete/Copy
+---------------------
+
+
+File: versor.info,  Node: TLC Transpose,  Next: TLC Versor and Languide,  Prev: TLC Delete/Copy,  Up: TLC-mode
+
+7.1.6 TLC Transpose
+-------------------
+
+
+File: versor.info,  Node: TLC Versor and Languide,  Next: TLC Miscellany,  Prev: TLC Transpose,  Up: TLC-mode
+
+7.1.7 TLC Versor and Languide
+-----------------------------
+
+
+File: versor.info,  Node: TLC Miscellany,  Prev: TLC Versor and Languide,  Up: TLC-mode
+
+7.1.8 TLC Miscellany
+--------------------
+
+
+File: versor.info,  Node: Pedals,  Next: Reversing,  Prev: TLC-mode,  Up: Accessibility
+
+7.2 Using pedals
+================
+
+The setup used by the author requires six pedals, arranged in two sets
+of three. The pedals are daisy-chained into the keyboard connector, and
+duplicate the actions of selected keys. One set provides the modifiers
+<Control>, <Shift> and <Alt>, and the other provides three types of
+action, referred to here as <Other>, <Move>, and <Select>.
+
+   If using the common commercially available pedals in which each unit
+has a large central pedal and a smaller pedal along each side, the
+recommended setup puts <Shift> and <Move> onto the large pedals.
+
+   <Move> is the main action, moving forward in the current dimension,
+and corresponds to the <Right> cursor key. `S-Move' moves in the other
+direction in the same dimension.
+
+   <Other> and `S-Other' provide the <DOWN> and <UP> actions of Versor.
+
+   <Select> brings up a menu, using the Text Mode Menus (*note Menu
+Bar: (emacs)Menu Bar.), and you can then move along the menu using
+<Move> and `S-Move', and select an entry using <Select>, which will
+either bring up a further menu, or run the selected command.
+
+   Some of these commands read their arguments through a system built on
+top of completing-read, that is designed to allow fast selection of
+possibilities without needing typing. *Note Flexi-choose::, for details
+of this.
+
+
+File: versor.info,  Node: Reversing,  Next: Voice input,  Prev: Pedals,  Up: Accessibility
+
+7.3 Reversing the selection motions
+===================================
+
+To make Versor usable with a very small number of keys (for example, a
+mouthswitch), it is possible to reverse the motion of Versor's
+"forward" and "back" commands (of all kinds, both dimensions and both
+meta-dimensions (ways of choosing dimensions). This is available
+through the command `versor-reverse'. If reversing is used, it appears
+in the mode line as an arrow at the appropriate end of the dimension
+indication.
+
+   This is an extreme solution, for extreme problems. It's unlikely to
+be useful if you can use Versor in other ways.
+
+
+File: versor.info,  Node: Voice input,  Next: Speech output,  Prev: Reversing,  Up: Accessibility
+
+7.4 Using voice input
+=====================
+
+Some parts of Versor are particularly suited to use with voice input,
+such as vr-mode `http://emacs-vr-mode.sourceforge.net/'.
+
+   Some of the voice or menu commands read their arguments through a
+system built on top of completing-read, that is designed to allow fast
+selection of possibilities without needing typing. *Note Flexi-choose::,
+for details of this.
+
+
+File: versor.info,  Node: Speech output,  Next: Flexi-choose,  Prev: Voice input,  Up: Accessibility
+
+7.5 Using speech output
+=======================
+
+If the variables `versor-speaking' (*note Speech output::) and
+`versor-describe-selection' (*note Languide Feedback::) are non-nil,
+Versor produces spoken feedback on changes to its state.
+
+   This may soon be replaced by proper integration with Emacspeak.
+
+
+File: versor.info,  Node: Flexi-choose,  Next: Other input devices,  Prev: Speech output,  Up: Accessibility
+
+7.6 The flexible chooser
+========================
+
+Flexi-choose splits a list of choices into a tree, and allows
+navigation down the tree without having to either type parts of an
+entry, nor having to scroll past all the ones before the one you want.
+It uses similar techniques to Text Mode Menus (*note Menu Bar:
+(emacs)Menu Bar.), but constructs the menu tree on the fly.
+
+   If used with a voice extension (contact the author for details), it
+is possible to say a word which occurs in the entry you want, and have
+the list of choices redisplayed with only the entries that match that
+word. Saying another word will narrow it down further, and so on. When
+the list is down to a single entry, that one is then selected
+automatically.
+
+   This should probably be integrated with the Icicles libraries,
+available through
+`http://www.emacswiki.org/cgi-bin/wiki/Icicles_-_Libraries'.
+
+
+File: versor.info,  Node: Other input devices,  Prev: Flexi-choose,  Up: Accessibility
+
+7.7 Other input devices
+=======================
+
+As well as pedals (*note Pedals::) it should be possible to extend
+versor to use other input devices, such as joysticks and mouthswitches.
+
+   For commands suitable for use with very "narrow-channel" input
+devices, *note Reversing::.
+
+   Versor may be used through a gamepad or a joystick; this can provide
+very swift and comfortable editing.
+
+
+File: versor.info,  Node: Versor and Languide,  Next: Setup,  Prev: Accessibility,  Up: Top
+
+8 Versor and Languide
+*********************
+
+Language provides "language guided editing", guiding editing operations
+using the syntax of the file being edited.
+
+   The statement-based dimensions of Versor use the lower levels of
+Languide, and the refactoring operations use the higher levels of it.
+
+   Languide is a cross-language package, with definitions for several
+popular programming languages.
+
+   *Note Languide and Versor: (languide)Languide and Versor, for
+languide's end of the story..
+
+
+File: versor.info,  Node: Setup,  Next: Extending versor,  Prev: Versor and Languide,  Up: Top
+
+9 Setup
+*******
+
+To install Versor, unpack the tarball into a suitable directory, and
+put that directory on your load-path.
+
+   From your .emacs, for the default setup, call
+
+       (add-to-list 'load-path "/path/to/versor/lisp")
+
+       (require 'versor)
+       (require 'languide)
+
+       (versor-setup)
+
+* Menu:
+
+* General configuration::       Some options to set when loading
+* Dimensions available::        Dimensions you can choose from, for each mode
+* Using Configure::             Configuring versor using M-x configure
+
+
+File: versor.info,  Node: General configuration,  Next: Dimensions available,  Prev: Setup,  Up: Setup
+
+9.1 General configuration
+=========================
+
+You can control which keys are used, and which other facilities are
+turned on, by giving some symbols as arguments to `versor-setup'.
+
+   The arguments can be any (combination) of
+
+`arrows'
+     for the main cursor keys
+
+`arrows-misc'
+     for insert, delete etc
+
+`keypad'
+     for the keypad cursor keys
+
+`keypad-misc'
+     for keypad insert, delete etc
+
+`meta'
+     to make <Meta> and whichever arrow keys you have selected do the
+     movement between dimensions; this is good if you have modifier
+     pedals to extend your keyboard, but is likely not to work with
+     console input, so may only be usable if you're using a window
+     system such as X
+
+`ctrl-x'
+     to make C-x and whichever arrow keys you have selected do the
+     movement between dimensions; this is the default, as it works OK
+     on consoles as well as with window managers
+
+   to select which keys are set up to do Versor commands.
+
+   You can turn on further facilities by including the following symbols
+amongst the arguments:
+
+`modal'
+     remember a different dimension for each mode
+
+`local'
+     remember a different dimension for each buffer
+
+`text-in-code'
+     switch dimensions for string literals and comments, allowing
+     code-oriented movement in actual code, and text-oriented movement
+     in embedded natural language text
+
+`menu'
+     define a menu of Versor commands
+
+`verbose'
+     rabbit on endlessly about what it is doing
+
+
+   The recommended default setup is:
+
+     (versor-setup 'arrows 'arrows-misc 'modal 'text-in-code 'menu)
+
+   You may then want to customize it further, like this:
+
+       ;; preset the dimensions for some modes
+       (setq versor-mode-current-levels
+     	    (mapcar 'versor-mode-levels-triplet
+     		    '(
+     		      (emacs-lisp-mode "structural" "exprs")
+     		      (lisp-interaction-mode "structural" "exprs")
+     		      (c-mode "program" "statement-parts")
+                           ;; using string for key means we are setting
+                           ;; modes for embedded strings and comments
+     		      ("c-mode" "text" "chars")
+     		      (text-mode "cartesian" "lines")
+     		      (html-helper-mode "text" "words")
+     		      )))
+
+
+File: versor.info,  Node: Dimensions available,  Next: Using Configure,  Prev: General configuration,  Up: Setup
+
+9.2 Dimensions available for each mode
+======================================
+
+The variable `versor-meta-dimensions-valid-for-modes' controls which
+meta-dimensions are valid for which major modes.
+
+   If t, all meta-dimensions are allowed in all major modes.
+
+   Otherwise, it is an alist mapping modes to sublists describing the
+meta-dimensions allowed in that mode.
+
+   Each sublist should begin with t, to indicate that only the
+meta-dimensions listed are to be allowed, or nil, to indicate that all
+meta-dimensions except those listed are allowed.
+
+   The rest of the sublist is the meta-dimensions allowed or blocked for
+that mode.
+
+   The head of the node may also be a list of major modes for which this
+rule applies.
+
+   A sublist for a major mode t gives the defaults.
+
+
+File: versor.info,  Node: Using Configure,  Prev: Dimensions available,  Up: Setup
+
+9.3 Using Configure
+===================
+
+* Menu:
+
+* Motion::
+* Status::
+* Other control::
+
+
+File: versor.info,  Node: Motion,  Next: Status,  Prev: Using Configure,  Up: Using Configure
+
+9.3.1 Motion
+------------
+
+Control details for versor movements.
+
+* Menu:
+
+* Allow move to end of last::
+* Move out when at end::
+* Statement up to next::
+* Trim item starts::
+* Level wrap::
+* Meta level wrap::
+* Phrase end::
+* Reversible::
+
+
+File: versor.info,  Node: Allow move to end of last,  Next: Move out when at end,  Prev: Motion,  Up: Motion
+
+9.3.1.1 Allow move to end of last
+.................................
+
+Variable: versor-allow-move-to-end-of-last
+
+   Type: boolean
+
+   Default value: 'dwim
+
+   Whether to allow moving to the end of the last sexp in a list.
+
+   Otherwise, versor-next stops at the start of it, and refuses to do
+another forward move.
+
+   Setting this non-nil does what you probably want in practice,
+although setting it nil is probably cleaner in some abstract sort of
+way.  Setting it non-nil and not t will make the last move within a list
+go to just before the closing syntax of the list, which is where you
+typically want to be to type the next sexp in.
+
+
+File: versor.info,  Node: Move out when at end,  Next: Statement up to next,  Prev: Allow move to end of last,  Up: Motion
+
+9.3.1.2 Move out when at end
+............................
+
+Variable: versor-move-out-when-at-end
+
+   Default value: t Type: boolean
+
+   If non-nil, trying to move further on when already at the end of the
+last thing in a container (see versor-allow-move-to-end-of-last will
+move to just after the end of the container. Can be convenient in
+practice, although it breaks the symmetry of the next<->previous
+operations.
+
+
+File: versor.info,  Node: Statement up to next,  Next: Trim item starts,  Prev: Move out when at end,  Up: Motion
+
+9.3.1.3 Statement up to next
+............................
+
+Variable: versor-statement-up-to-next
+
+   Type: boolean
+
+   Default value: nil
+
+   Whether to make a statement extend all the way to the start of the
+next one.  This highlights whitespace, and the author does not like it;
+but the code can do it easily enough.
+
+
+File: versor.info,  Node: Trim item starts,  Next: Level wrap,  Prev: Statement up to next,  Up: Motion
+
+9.3.1.4 Trim item starts to non-space
+.....................................
+
+Variable: versor-trim-item-starts-to-non-space
+
+   Type: boolean
+
+   Default value: t
+
+   Whether to move the start of the selection so that it is not on the
+whitespace between items.
+
+   To maintain consistency, it generally makes sense to adjust point so
+that it's at the start of some non-blank text; most commands will
+probably do this anyway, but here we just make sure, which makes it
+easier to borrow underlying commands not written specially for versor.
+
+   However, it's easy to include a flag to switch this off just in case
+anyone prefers it that way.
+
+
+File: versor.info,  Node: Level wrap,  Next: Meta level wrap,  Prev: Trim item starts,  Up: Motion
+
+9.3.1.5 Level wrap
+..................
+
+Variable: versor-level-wrap
+
+   Type: boolean
+
+   Default value: t
+
+   Whether to wrap the level changes.
+
+   If this is non-nil, going back from the first level takes you to the
+last one, and going forward from the last level takes you to the first
+one.
+
+
+File: versor.info,  Node: Meta level wrap,  Next: Phrase end,  Prev: Level wrap,  Up: Motion
+
+9.3.1.6 Meta level wrap
+.......................
+
+Variable: versor-meta-level-wrap
+
+   Type: boolean
+
+   Default value: t
+
+   Whether to wrap the meta-level changes.
+
+   If this is non-nil, going back from the first meta-level takes you
+to the last one, and going forward from the last meta-level takes you
+to the first one.
+
+
+File: versor.info,  Node: Phrase end,  Next: Reversible,  Prev: Meta level wrap,  Up: Motion
+
+9.3.1.7 Phrase end
+..................
+
+Type: regexp
+
+   Default value:  "[,;:] *"
+
+   Pattern to match the end of a phrase, for moving by phrases.
+
+
+File: versor.info,  Node: Reversible,  Prev: Phrase end,  Up: Motion
+
+9.3.1.8 Reversible
+..................
+
+Variable: versor-reversible
+
+   Type: boolean
+
+   Default value: (not (eq window-system 'x))
+
+   Whether we allow reversing.
+
+   This is useful if you cannot use "shift-next" for "previous" (as
+wanted for pedal use). These seem to work OK on X but not on an old
+Windows Emacs; not sure about other platforms/terminals yet.
+
+   Although the platform that needed this has now moved on, the feature
+is kept for possible use with very limited input devices such as
+mouthswitches, thus helping to make GNUemacs accessible even to
+quadriplegics.
+
+
+File: versor.info,  Node: Status,  Next: Other control,  Prev: Motion,  Up: Using Configure
+
+9.3.2 Status
+------------
+
+How versor displays its status information.
+
+* Menu:
+
+* Show both dimensions::
+* Multi line level display::
+* Use face attributes::
+* Highlight with brackets::
+* Change cursor color::
+* Selection attribute::
+* Verbose::
+* Try to display whole item::
+
+
+File: versor.info,  Node: Show both dimensions,  Next: Multi line level display,  Prev: Status,  Up: Status
+
+9.3.2.1 Show both dimensions
+............................
+
+Variable: versor-mode-line-show-both-dimensions
+
+   Type: boolean
+
+   Default value: t
+
+   Whether to show the major dimension as well as the minor dimension,
+in the mode line.  You might want to turn this off if your mode line is
+already has a lot in it.
+
+
+File: versor.info,  Node: Multi line level display,  Next: Use face attributes,  Prev: Show both dimensions,  Up: Status
+
+9.3.2.2 Multi line level display
+................................
+
+Variable: versor-multi-line-level-display
+
+   Type: boolean
+
+   Default value: `(and (boundp 'emacs-major-version (>=
+emacs-major-version 21))'
+
+   Whether to use multi-line indication of the current meta-level and
+level.
+
+
+File: versor.info,  Node: Use face attributes,  Next: Highlight with brackets,  Prev: Multi line level display,  Up: Status
+
+9.3.2.3 Use face attributes
+...........................
+
+Variable: versor-use-face-attributes
+
+   Type: boolean
+
+   Whether to use face attributes, as provided from Emacs 21 onwards.
+
+   If these are available, it'll normally make sense to use them.  See
+also versor-highlight-with-brackets.
+
+
+File: versor.info,  Node: Highlight with brackets,  Next: Change cursor color,  Prev: Use face attributes,  Up: Status
+
+9.3.2.4 Highlight with brackets
+...............................
+
+Variable: versor-highlight-with-brackets
+
+   Type: boolean
+
+   Default value: (not versor-use-face-attributes
+
+   Whether to use brackets around highlighted items in status feedback.
+
+   This is useful if you can't use face attributes (see
+versor-use-face-attributes).
+
+   The brackets are just in an overlay, and don't get inserted into the
+buffer contents.
+
+
+File: versor.info,  Node: Change cursor color,  Next: Selection attribute,  Prev: Highlight with brackets,  Up: Status
+
+9.3.2.5 Change cursor color
+...........................
+
+Variable: versor-change-cursor-color
+
+   Type: boolean
+
+   Default value: t
+
+   Whether to use the cursor color to indicate the level.
+
+   This refers to the normal GNUemacs cursor rather than the versor
+selection (highlight) cursor. Changing the color of the ordinary cursor
+gives you quick feedback on the current Versor dimension, even when the
+Versor selection is not visible.
+
+   See versor-item-attribute (*note Selection attribute::) for the
+attribute used to change the colour (or other aspect) of the selection.
+
+
+File: versor.info,  Node: Selection attribute,  Next: Verbose,  Prev: Change cursor color,  Up: Status
+
+9.3.2.6 Selection attribute
+...........................
+
+Variable: versor-item-attribute
+
+   Type: (set (const :background (const :foreground) (const :underline))
+
+   Default value: (:background)
+
+   An attribute to use to indicate the current item.
+
+   This is looked up in the current dimension, to get the value to set
+it to. For example, if versor-item-attribute is `:background',
+`:background' is looked up in the current dimension, to find the colour
+to set the background to.
+
+   You can only use this from Emacs 21 onwards.
+
+
+File: versor.info,  Node: Verbose,  Next: Try to display whole item,  Prev: Selection attribute,  Up: Status
+
+9.3.2.7 Show region type
+........................
+
+Variable: versor-describe-selection
+
+   Type: boolean
+
+   Default value: t
+
+   If you set the variable `versor-describe-selection' to non-nil,
+Languide will tell you when you have selected a piece of code that it
+may have a specific way of handling.
+
+   *Note Describing selection::, for a command of the same name, that
+does this action by itself without moving the selection.
+
+
+File: versor.info,  Node: Try to display whole item,  Prev: Verbose,  Up: Status
+
+9.3.2.8 Try to display whole item
+.................................
+
+Variable: versor-try-to-display-whole-item
+
+   Type: boolean
+
+   Default value: t
+
+   Whether to try to display the whole item after each movement.
+
+   This recenters the text, if possible, so both the start and the end
+of it are visible.
+
+
+File: versor.info,  Node: Other control,  Prev: Status,  Up: Using Configure
+
+9.3.3 Other control
+-------------------
+
+* Menu:
+
+* Statement insertion with dummy value::
+* Reindent after insertion::
+* Per buffer::
+* Auto change for modes::
+* Mode current levels::
+* Text in code::
+* Announce text in code::
+* Text faces::
+* Reformat automatically::
+* Live commentary::
+* Missed opportunities::
+* Display full choices::
+* Flexi choose upstring::
+* Flexi choose topstring::
+
+
+File: versor.info,  Node: Statement insertion with dummy value,  Next: Reindent after insertion,  Prev: Other control,  Up: Other control
+
+9.3.3.1 Statement insertion with dummy value
+............................................
+
+Variable: versor-display-underlying-commands
+
+   Type: boolean
+
+   Default value: nil
+
+   Whether versor statement insertion puts a placeholder value in when
+adding something.
+
+   This tries to avoid changing the semantics, for example, it uses
+"true" when adding "and" or "if".
+
+   You can then change the value, using the versor alterations system.
+
+
+File: versor.info,  Node: Reindent after insertion,  Next: Per buffer,  Prev: Statement insertion with dummy value,  Up: Other control
+
+9.3.3.2 Reindent after insertion
+................................
+
+Variable: versor-reindent-after-insert
+
+   Default value: t
+
+   Type: boolean
+
+   Whether Versor "around" insertion re-indents afterwards.
+
+
+File: versor.info,  Node: Per buffer,  Next: Auto change for modes,  Prev: Reindent after insertion,  Up: Other control
+
+9.3.3.3 Per buffer
+..................
+
+Variable: versor-per-buffer
+
+   Type: boolean
+
+   Default value: nil
+
+   Whether to remember the dimensions separately for each buffer.
+
+
+File: versor.info,  Node: Auto change for modes,  Next: Mode current levels,  Prev: Per buffer,  Up: Other control
+
+9.3.3.4 Auto change for modes
+.............................
+
+Variable: versor-auto-change-for-modes
+
+   Default value: t
+
+   Whether to change the dimension on changing modes.
+
+   Type: boolean
+
+
+File: versor.info,  Node: Mode current levels,  Next: Text in code,  Prev: Auto change for modes,  Up: Other control
+
+9.3.3.5 Mode current levels
+...........................
+
+Variable: versor-mode-current-levels
+
+   Type: association list
+
+   Default value:
+             ((emacs-lisp-mode "structural" "exprs")
+     	    ("emacs-lisp-mode" "text" "words")
+     	    (lisp-interaction-mode "structural" "exprs")
+     	    (c-mode "program" "statement-parts")
+     	    ("c-mode" "text" "words")
+     	    (text-mode "cartesian" "lines")
+     	    (html-helper-mode "structured text" "words")
+     	    ("html-helper-mode" "text" "chars")
+     	    (html-mode "structured text" "words")
+     	    ("html-mode" "text" "chars")
+     	    (latex-mode "structured text" "words")
+     	    ("latex-mode" "text" "chars")
+     	    (texinfo-mode "structured text" "words")
+     	    ("texinfo-mode" "text" "chars")
+     	    )
+
+   This remembers the latest dimensions selected in each mode. It can be
+pre-set to whatever you find convenient.
+
+
+File: versor.info,  Node: Text in code,  Next: Announce text in code,  Prev: Mode current levels,  Up: Other control
+
+9.3.3.6 Text in code
+....................
+
+Variable: versor-text-in-code
+
+   Type: boolean
+
+   Default value: t
+
+   Whether versor should switch dimensions for string literals and
+comments.
+
+   This requires font-lock-mode to be used, as it uses that to decide
+what kind of text it is on (it will have a limited attempt at doing so
+itself if font-lock-mode is not used).
+
+   The current dimensions are then remembered separately, and switch to
+the last one used in that kind of place, as point moves between code,
+comments and strings.
+
+   See versor-text-faces for the faces used to recognize this, building
+on font-lock-mode.
+
+   You can pre-set the dimensions to use for embedded text in each mode,
+separately from those used for the code, by putting entries starting
+with strings naming the mode symbols, into versor-mode-current-levels.
+
+
+File: versor.info,  Node: Announce text in code,  Next: Text faces,  Prev: Text in code,  Up: Other control
+
+9.3.3.7 Announce text in code
+.............................
+
+Variable: versor-announce-text-in-code
+
+   Type: boolean
+
+   Default value: t
+
+   Whether versor-text-in-code should put up messages telling you when
+changes the dimension.
+
+
+File: versor.info,  Node: Text faces,  Next: Reformat automatically,  Prev: Announce text in code,  Up: Other control
+
+9.3.3.8 Text faces
+..................
+
+Variable: versor-text-faces
+
+   Default value: '(font-lock-string-face font-lock-comment-face)
+
+   Faces which versor regards as being text rather than code.  See
+versor-text-in-code-function for how this is used.
+
+
+File: versor.info,  Node: Reformat automatically,  Next: Live commentary,  Prev: Text faces,  Up: Other control
+
+9.3.3.9 Reformat automatically
+..............................
+
+Variable: versor-reformat-automatically
+
+   Type: boolean
+
+   Default value: t
+
+   If non-nil, some versor movements call reformatting commands.
+
+
+File: versor.info,  Node: Live commentary,  Next: Missed opportunities,  Prev: Reformat automatically,  Up: Other control
+
+9.3.3.10 Live commentary
+........................
+
+Variable: versor-research-live-commentary
+
+   Type: boolean
+
+   Default value: nil
+
+   Whether to make a live commentary on versor and other activities.
+
+
+File: versor.info,  Node: Missed opportunities,  Next: Display full choices,  Prev: Live commentary,  Up: Other control
+
+9.3.3.11 Mention missed opportunities
+.....................................
+
+Variable: versor-indicate-missed-opportunities
+
+   Type: boolean
+
+   Default value: t
+
+   Whether to indicate when you used a non-versor command when a versor
+command was available. For this to work, you must have given
+`'research' among the arguments to `versor-setup'.
+
+   If set to 'all, shows versor commands that are not currently
+reachable by direct keystrokes.
+
+   If set to a number, waits that number of seconds after telling you.
+
+
+File: versor.info,  Node: Display full choices,  Next: Flexi choose upstring,  Prev: Missed opportunities,  Up: Other control
+
+9.3.3.12 Display full choices
+.............................
+
+Variable: choices-display-full
+
+   Type: boolean
+
+   Default value: t
+
+   Whether to display in full the range of choices at each level of a
+treewise chooser.
+
+
+File: versor.info,  Node: Flexi choose upstring,  Next: Flexi choose topstring,  Prev: Display full choices,  Up: Other control
+
+9.3.3.13 Flexi choose upstring
+..............................
+
+Variable: flexi-choose-upstring
+
+   Type: string
+
+   Default value: [Up]
+
+   The label to indicate going back up the tree.
+
+
+File: versor.info,  Node: Flexi choose topstring,  Prev: Flexi choose upstring,  Up: Other control
+
+9.3.3.14 Flexi choose topstring
+...............................
+
+Variable: flexi-choose-topstring
+
+   Type: string
+
+   Default value: [Top]
+
+   The label to indicate going straight back up to the top of the tree.
+
+
+File: versor.info,  Node: Extending versor,  Next: Analysis,  Prev: Setup,  Up: Top
+
+10 Extending versor
+*******************
+
+You can extend Versor to handle more types of movement, more
+commands... whatever you like. Here is a brief guide to programming
+Versor, to help you make your code work well with the existing
+facilities.
+
+   Some facilities of Versor are provided by its companion package,
+Languide.  To make Versor work with more programming languages, you
+need to add navigation definitions to Languide, and Versor will they
+use them automatically.
+
+* Menu:
+
+* Notes on internals::          Notes on the internals of Versor
+* Adding commands::             Adding new commands
+* Adding dimensions::           Adding new dimensions
+
+
+File: versor.info,  Node: Notes on internals,  Next: Adding commands,  Prev: Extending versor,  Up: Extending versor
+
+10.1 Notes on the internals of Versor
+=====================================
+
+The following notes are derived from the reply to a question about
+adding an emacspeak interface to Versor.
+
+   Most versor commands have a macro wrapped around most of the command,
+either `versor-as-versor-command' or `versor-as-motion-command', both
+defined in versor-commands.el.
+
+   `versor-as-versor-command' is a recent hack to let me turn versor
+off quickly, thus making eligible to be a minor mode; if `versor-mode'
+is nil, it just looks for whatever was previously on the key that
+triggered this command, and runs that instead.
+
+   More interesting is `versor-as-motion-command' (probably a bit of a
+misnomer by now) which is what updates the versor selection highlight
+at the end of each command. To do this, it calls
+`versor-clear-current-item-indication' before running the main logic of
+the command, to get rid of the old highlight, then after running the
+command-specific code that it is wrapped around, it calls
+`versor-indicate-current-item', which does the complicated bit.  After
+that, it runs any functions on `versor-post-command-hook'.
+
+   `versor-indicate-current-item' is probably the thing to advise, but
+I'm happy to include emacspeak-specific code in it. It first checks
+whether the internal variables indicating the selection have been set
+(by the command-specific logic calling `versor-set-current-item', or
+`versor-set-current-items' if it is a multi-part selection); if they
+haven't, it uses a heuristic to set them, again using
+`versor-indicate-current-item', which is what generates the colourful
+overlays.
+
+   Then it (`versor-indicate-current-item') calls
+`versor-describe-selection' on the selection, which gets a description
+of the selection, puts it in the echo area, and calls `versor-speak',
+which is my rudimentary attempt to interface to emacspeak.
+
+   I'm already planning to upgrade `versor-describe-selection' (which
+is part of languide) to give more information. From the versor /
+languide point of view, it is probably the best place to get more
+spoken information.
+
+   As it stands now, it calls some mode-specific stuff (using
+modal-functions.el, which is part of the download) to discover stuff
+about the specified part of a buffer. Each mode's definition (see
+`languide-lisp-like.el', `languide-c-like.el' for the current support)
+defines a function `languide-region-type' which returns things like
+`if-then-body', `if-then-else-tail', `progn-whole', `while-do-head',
+`defun-body', to describe the specified text. `languide-region-type' can
+also set the variable `languide-region-detail-string' to give more
+information. `region-type-description' converts the result of
+`languide-region-type' into human-readable text.
+
+   There is another function which could be used to give more
+information that should probably be spoken, which is
+`establish-current-statement', which works out the statement type at
+point. If `languide-region-type' says that the text is a single
+statement, `establish-current-statement' could be used to tell you what
+the statement is; if it is multiple statements, it could be used
+several times, to describe the region (or selection when used by
+versor) succintly.
+
+
+File: versor.info,  Node: Adding commands,  Next: Adding dimensions,  Prev: Notes on internals,  Up: Extending versor
+
+10.2 Adding new commands
+========================
+
+Most interactive Versor commands should have, as the outermost level of
+their body, the macro `versor-as-motion-command', which handles the
+block cursor (selection highlighting). in the code within
+`versor-as-motion-command', you can call `versor-set-current-item',
+passing in the beginning and end of the new selection, and the new
+selection will be displayed automatically at the end of
+`versor-as-motion-command'. If you do not call
+`versor-set-current-item', `versor-as-motion-command' will try to work
+out an appropriate selection for the current dimension.
+
+   If you want a multipart selection, you can call
+`versor-set-current-items', passing in a list of conses of start and
+end positions, or a list of overlays.
+
+
+File: versor.info,  Node: Adding dimensions,  Prev: Adding commands,  Up: Extending versor
+
+10.3 Adding new dimensions
+==========================
+
+To add new navigation dimensions, you use `versor-define-moves', giving
+it the name of your dimension, and a list of lists, each of which
+begins with a key symbol and then has a value. the currently recognised
+keywords are as follows:
+`first'
+     The command that will get you to the first item in a series.
+
+`previous'
+     The command that will get you to the previous item in a series.
+
+`next'
+     The command that will get you to the next item in a series.
+
+`end-of-item'
+     A command to move to the end of the current item.
+
+`last'
+     The command that will get you to the last item in a series.
+
+`transpose'
+     A command to transpose two of these items.
+
+`dwim'
+     A function to do some kind of movement based on this kind of item,
+     that is often useful and not easy to achieve by sequences of the
+     other movements.  For example, in a dimensional for use in a
+     programming language mode, this might take you into a string
+     literal.
+
+`:background'
+     Can be used as the way to highlight the selection, by setting
+     `versor-item-attribute' to `:background'. Value should then be the
+     colour to use.
+
+`:foreground'
+     Can be used as the way to highlight the selection, by setting
+     `versor-item-attribute' to `:foreground'. Value should then be the
+     colour to use.
+
+   Any attribute named by the variable `versor-item-attribute' will be
+used for highlighting. `:background' is probably the most useful of
+these, but you could use `:foreground' or anything else that GNUemacs
+can display.
+
+
+File: versor.info,  Node: Analysis,  Next: Versor and research,  Prev: Extending versor,  Up: Top
+
+11 Versor use analysis
+**********************
+
+Versor provides some facilities for measuring how much you are using
+it, and how much you are using non-Versor commands, and how the two are
+mixed. This is partly because Versor was developed as part of some
+research on the psychology of programming *note Versor and research::,
+and partly so that you can tune your own computer use, and partly to
+get feedback on what needs to be added to Versor to make it a complete
+way to edit programs.
+
+   To get a report on your Versor usage, use the command
+`versor-research-report'.
+
+   To save a report each time you quit GNUemacs, arrange for
+`versor-save-research-data' to be called by your exit sequence. For
+example, you can put it onto `kill-emacs-hook'. The reports are saved
+in the file `~/.versor-log' (you can change this location by setting
+the variable `versor-research-log-file').
+
+
+File: versor.info,  Node: Versor and research,  Next: Future plans,  Prev: Analysis,  Up: Top
+
+12 Versor and research
+**********************
+
+Versor was developed as part of some research on the psychology of
+programming (*note Versor and research::), to see how much people
+editing programs will use the facility to work at a higher level of
+abstraction than the character-by-character, line-by-line level, and
+how much, and when, they resort to traditional commands despite more
+powerful ones being available.
+
+   Versor will be used in controlled experimental conditions for this,
+but to gather wider information, the author encourages you to use
+Versor's use analysis features (*note Analysis::) and send in the
+results (in the form of the file, normally `~/.versor-log' but
+redefinable by setting `versor-research-log-file'), once you have been
+using Versor for a while.
+
+
+File: versor.info,  Node: Future plans,  Next: Known problems,  Prev: Versor and research,  Up: Top
+
+13 Future plans
+***************
+
+   * Integration with other Emacs packages, particularly Emacspeak, and
+     including DoReMi and Icicles.
+
+   * Commands to add, remove, and swap arguments in definition and uses
+     of a function.
+
+   * Languide to support many more language modes
+
+   * Commands to insert statement (or other construct) templates, and to
+     search for statements of a given type, going via Languide's
+     language-independent layer. These commands will be designed to work
+     well with voice input, and will integrate better with
+     Versor/Languide than separate use of templating mechanisms.
+
+   * Command to show all of Versor's current status
+
+   * Command input from devices other than keyboard and mouse; the
+     author has some ideas on using a joystick for this (via the Linux
+     Joystick Driver and probably a glue program talking the GNUemacs
+     via a socket).
+
+   The author also hopes to make Versor work with vr-mode and emacspeak
+together, thus producing a "conversational" Emacs that can be used
+entirely through an audio interface. This could be a compact and
+economical approach to wearable computing, using a laptop or similar
+computer in a pocket or backpack, and a bluetooth (or other) earpiece
+with microphone, and no expensive head-up display, wearable keyboard,
+etc.
+
+
+File: versor.info,  Node: Known problems,  Next: Command Index,  Prev: Future plans,  Up: Top
+
+14 Known problems
+*****************
+
+Versor is still in its early days as a released package, and there are
+sure to be some bugs that the author has not yet hit in his own use of
+it.
+
+   Problems known to the author include:
+
+  1. Movement by markup-based units sometimes gets stuck.
+
+  2. The "dimensions" display sometimes gets mis-formatted.
+
+
+File: versor.info,  Node: Command Index,  Next: Concept Index,  Prev: Known problems,  Up: Top
+
+Command Index
+*************
+
+ [index ]
+* Menu:
+
+* Convert selection to variable:         Convert to variable.   (line 6)
+* Zooming commands:                      Zooming.               (line 6)
+
+
+File: versor.info,  Node: Concept Index,  Prev: Command Index,  Up: Top
+
+Concept Index
+*************
+
+ [index ]
+* Menu:
+
+* cartesian co-ordinates:                Cartesian.             (line 6)
+* dimensions, cartesian:                 Cartesian.             (line 6)
+* Zooming:                               Zooming.               (line 6)
+
+
+
+Tag Table:
+Node: Top150
+Node: Introduction8415
+Node: Aims10830
+Node: Concepts12185
+Node: Coordinates and dimensions12982
+Node: The selection13564
+Node: Versor and GNUemacs14472
+Node: Versor minor mode14778
+Node: Building on commands15325
+Node: Familiarization15813
+Node: Zooming18356
+Node: Switching coordinates19183
+Node: Editing20212
+Node: Deleting the selection20620
+Node: Inserting using the selection21132
+Node: Extending22859
+Node: Selecting around23354
+Node: Dimensions23928
+Node: Cartesian25006
+Node: Structural25492
+Node: Text27167
+Node: Structured Text27959
+Node: Tables30425
+Node: Program30856
+Node: Markers33517
+Node: Further commands34068
+Node: Deletion34578
+Node: Insertion35127
+Node: Alteration37261
+Node: DWIM39178
+Node: Describing selection40768
+Node: Refactoring42300
+Node: Expression handling44680
+Node: Convert to variable46521
+Node: Convert to function48136
+Node: Surround with call49110
+Node: Create function49569
+Node: Remove call50317
+Node: Statement handling50709
+Node: Unify Statements51582
+Node: Make conditional51937
+Node: Make repeating52527
+Node: Remove control52895
+Node: Decision point53230
+Node: Languide Feedback53661
+Node: Summary of refactoring54177
+Node: Advanced features54847
+Node: Detect text in code55148
+Node: Per-buffer dimensions56286
+Node: Per-mode dimensions56778
+Node: Accessibility57527
+Node: TLC-mode58222
+Node: TLC Movements59893
+Node: TLC Dimensions60032
+Node: TLC Search60175
+Node: TLC Insert60307
+Node: TLC Delete/Copy60440
+Node: TLC Transpose60586
+Node: TLC Versor and Languide60741
+Node: TLC Miscellany60915
+Node: Pedals61049
+Node: Reversing62459
+Node: Voice input63167
+Node: Speech output63676
+Node: Flexi-choose64087
+Node: Other input devices65081
+Node: Versor and Languide65564
+Node: Setup66157
+Node: General configuration66786
+Node: Dimensions available69137
+Node: Using Configure70032
+Node: Motion70209
+Node: Allow move to end of last70548
+Node: Move out when at end71300
+Node: Statement up to next71844
+Node: Trim item starts72281
+Node: Level wrap73029
+Node: Meta level wrap73426
+Node: Phrase end73847
+Node: Reversible74091
+Node: Status74743
+Node: Show both dimensions75116
+Node: Multi line level display75543
+Node: Use face attributes75957
+Node: Highlight with brackets76377
+Node: Change cursor color76924
+Node: Selection attribute77625
+Node: Verbose78264
+Node: Try to display whole item78806
+Node: Other control79199
+Node: Statement insertion with dummy value79673
+Node: Reindent after insertion80257
+Node: Per buffer80602
+Node: Auto change for modes80901
+Node: Mode current levels81214
+Node: Text in code82250
+Node: Announce text in code83213
+Node: Text faces83559
+Node: Reformat automatically83934
+Node: Live commentary84258
+Node: Missed opportunities84588
+Node: Display full choices85229
+Node: Flexi choose upstring85579
+Node: Flexi choose topstring85897
+Node: Extending versor86213
+Node: Notes on internals86957
+Node: Adding commands90294
+Node: Adding dimensions91189
+Node: Analysis92873
+Node: Versor and research93858
+Node: Future plans94737
+Node: Known problems96162
+Node: Command Index96605
+Node: Concept Index96900
+
+End Tag Table

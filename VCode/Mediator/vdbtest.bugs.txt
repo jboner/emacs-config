@@ -1,0 +1,68 @@
+
+Note: there still a number of bugs in this VDBTest.py, but it's usable if
+you're careful of one thing, and its the best demo I have for the new stuff
+I've added to text buffer:
+
+The biggest bug is actually not in VDBTest.py but in natlink, apparently, as
+it is reproducible in Joel's windict.py as well.  When bringing up the
+correction dialog box with "Correct That" or correct xyz, be careful not to
+start another utterance before or even slightly after the correction box
+appears.  Otherwise, the python application may hang.  Eventually, you may get
+the Server Busy dialog box telling you to click on the taskbar icon for
+python, but that doesn't seem to help, so you might as well kill the
+application by killing the DOS box from which you launched it, or with
+Ctrl-Alt-Del and End Task.  Fortunately, you should be able to turn off the
+NaturallySpeaking microphone, and NaturallySpeaking itself shouldn't crash.
+I've been emailing Joel about this, and he's sent me one (unfortunately
+unsucessful) attempt at a fix, so hopefully this will be taken care of.
+
+A second bug also affects NaturallySpeaking.  Occasionally, if VDBTest is
+closed improperly, natlink.DictObj will still have an active begin or change
+callback pointing to nowhere.  Then, whenever you start an utterance, you get
+a couple of Dragon COM error message boxes popping up.  In this case, you will
+have to shut down NaturallySpeaking, and then use Ctrl-Alt-Del + end task to
+kill the residual Natspeak task which won't close because natlink thinks that
+it is still connected to an application, and then restart NaturallySpeaking.
+Fortunately, I've added some things to VDBTest so that it usually cleans up
+after itself, so this problem is pretty rare now.  The one thing they used to
+cause it consistently was exiting VDBTest by voice with "Click File", "exit".
+Even that seems to work fine now.
+
+Then, there are a number of other small bugs and inconveniences.  The log
+window seems to be limited to about 55K, so if you dictate for a while, it
+will stop recording output.  You can close the program and start it again, or
+type
+
+the_pane.log.Clear()
+
+at the command line to clear the window.  I've tried to cut down on the
+nonessential diagnostic message is going to the log window, so this should be
+less frequent.  I've e-mailed the wxPython people and it sounds like this is
+fixable, but I don't have the details yet.
+
+Finally, there is a lot of translation between buffers which use \r\n for new
+lines and ones which use \n.  wxTextCtrl uses a RichEdit control internally,
+which uses \r\n.  wxTextCtrl automatically translates when you get or set
+text, but doesn't take this into account in functions specifying character
+ranges.  NaturallySpeaking also uses \r\n internally.  The TextBufferWX and
+VoiceDictBuffer wrappers are supposed to translate so that VoiceCode can use
+\n exclusively.  However, there still at least one bug in one of the two
+wrappers, so you may on rare occasions get messages about discrepancies
+between two buffers, or may see some odd things.  The most common symptom is
+that one or more small black rectangles will appear at the end of the line.
+These represent nonprinting characters, usually a \r (= octal 15) which has
+gotten separated from its \n.  In more extreme cases, select-and-say may
+select the wrong character ranges because the voice buffer and screen buffer
+have gotten out of synch.  If you encounter either of these symptoms, make a
+note of what you were doing, a copy of the last screen or two of the log
+window and the last dozen or so lines printed in the MS-DOS box, and send them
+to me.
+
+Incidentally, when using select and say, you will occasionally get messages in
+the log window warning you about a "selection mismatch".  Unlike the other
+"discrepancy" messages, these are normal and the mismatch should be temporary
+(you won't continue to see messages about selection mismatches).  There was a
+bug which caused serious selection mismatches, but I've fixed it.
+
+David Fox
+dcfox@cfa.harvard.edu

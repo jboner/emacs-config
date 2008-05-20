@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Dec 25 16:40:04 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module RecogStartMgrNL</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module RecogStartMgrNL</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="RecogStartMgrNL.RecogStartGram.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">RecogStartGram</SPAN></A>(<A CLASS="DocLink" HREF="natlinkutils.GrammarBase.html">GrammarBase</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="RecogStartMgrNL.RecogStartMgrNL.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">RecogStartMgrNL</SPAN></A>(<A CLASS="DocLink" HREF="RecogStartMgr.RSMBasic.html">RSMBasic</A>)</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">AltCode</SPAN> = <SPAN CLASS="VariableValue">2</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">GrammarError</SPAN> = <SPAN CLASS="VariableValue">'GrammarError'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">LexicalError</SPAN> = <SPAN CLASS="VariableValue">'LexicalError'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">OptCode</SPAN> = <SPAN CLASS="VariableValue">4</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">RepCode</SPAN> = <SPAN CLASS="VariableValue">3</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SeqCode</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">SymbolError</SPAN> = <SPAN CLASS="VariableValue">'SymbolError'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">SyntaxError</SPAN> = <SPAN CLASS="VariableValue">'SyntaxError'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VC...ediator\\RecogStartMgrNL.pyc'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_active_cap_next</SPAN> = <SPAN CLASS="VariableValue">32</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_cap_all</SPAN> = <SPAN CLASS="VariableValue">2048</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_cond_no_space</SPAN> = <SPAN CLASS="VariableValue">1024</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_is_period</SPAN> = <SPAN CLASS="VariableValue">131072</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_lowercase_all</SPAN> = <SPAN CLASS="VariableValue">8192</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_lowercase_next</SPAN> = <SPAN CLASS="VariableValue">128</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_new_line</SPAN> = <SPAN CLASS="VariableValue">8388608</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_new_paragraph</SPAN> = <SPAN CLASS="VariableValue">16777216</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_no_cap_change</SPAN> = <SPAN CLASS="VariableValue">1048576</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_no_formatting</SPAN> = <SPAN CLASS="VariableValue">262144</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_no_space_all</SPAN> = <SPAN CLASS="VariableValue">16384</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_no_space_before</SPAN> = <SPAN CLASS="VariableValue">2097152</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_no_space_change</SPAN> = <SPAN CLASS="VariableValue">524288</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_no_space_next</SPAN> = <SPAN CLASS="VariableValue">256</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_nodelete</SPAN> = <SPAN CLASS="VariableValue">8</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_passive_cap_next</SPAN> = <SPAN CLASS="VariableValue">16</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_reset_no_space</SPAN> = <SPAN CLASS="VariableValue">32768</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_reset_uc_lc_caps</SPAN> = <SPAN CLASS="VariableValue">4194304</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_space_bar</SPAN> = <SPAN CLASS="VariableValue">134217728</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_title_mode</SPAN> = <SPAN CLASS="VariableValue">33554432</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_topicadded</SPAN> = <SPAN CLASS="VariableValue">1073741824</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_two_spaces_next</SPAN> = <SPAN CLASS="VariableValue">512</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_uppercase_all</SPAN> = <SPAN CLASS="VariableValue">4096</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_uppercase_next</SPAN> = <SPAN CLASS="VariableValue">64</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_useradded</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">genkeys_f_capitalize</SPAN> = <SPAN CLASS="VariableValue">524288</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">genkeys_f_lowercase</SPAN> = <SPAN CLASS="VariableValue">262144</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">genkeys_f_scan_code</SPAN> = <SPAN CLASS="VariableValue">65536</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">genkeys_f_uppercase</SPAN> = <SPAN CLASS="VariableValue">131072</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">genkeys_f_usekeypad</SPAN> = <SPAN CLASS="VariableValue">4194304</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">genkeys_f_virtkey</SPAN> = <SPAN CLASS="VariableValue">2097152</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_alt</SPAN> = <SPAN CLASS="VariableValue">2</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_ctrl</SPAN> = <SPAN CLASS="VariableValue">4</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_defertermination</SPAN> = <SPAN CLASS="VariableValue">256</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_extended</SPAN> = <SPAN CLASS="VariableValue">64</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_rightalt</SPAN> = <SPAN CLASS="VariableValue">16</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_rightctrl</SPAN> = <SPAN CLASS="VariableValue">32</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_rightshift</SPAN> = <SPAN CLASS="VariableValue">8</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_shift</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_syskeys_checkshifts</SPAN> = <SPAN CLASS="VariableValue">1024</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_systemkeys</SPAN> = <SPAN CLASS="VariableValue">512</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">vk_control</SPAN> = <SPAN CLASS="VariableValue">17</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">vk_menu</SPAN> = <SPAN CLASS="VariableValue">18</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">vk_shift</SPAN> = <SPAN CLASS="VariableValue">16</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_keydown</SPAN> = <SPAN CLASS="VariableValue">256</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_keyup</SPAN> = <SPAN CLASS="VariableValue">257</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_lbuttondblclk</SPAN> = <SPAN CLASS="VariableValue">515</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_lbuttondown</SPAN> = <SPAN CLASS="VariableValue">513</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_lbuttonup</SPAN> = <SPAN CLASS="VariableValue">514</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_mbuttondblclk</SPAN> = <SPAN CLASS="VariableValue">521</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_mbuttondown</SPAN> = <SPAN CLASS="VariableValue">519</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_mbuttonup</SPAN> = <SPAN CLASS="VariableValue">520</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_mousemove</SPAN> = <SPAN CLASS="VariableValue">512</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_rbuttondblclk</SPAN> = <SPAN CLASS="VariableValue">518</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_rbuttondown</SPAN> = <SPAN CLASS="VariableValue">516</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_rbuttonup</SPAN> = <SPAN CLASS="VariableValue">517</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_syskeydown</SPAN> = <SPAN CLASS="VariableValue">260</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_syskeyup</SPAN> = <SPAN CLASS="VariableValue">261</SPAN></SPAN>
+</PRE><H2>Description</H2><P>
+abstract class defining interface for an object which receives 
+recognition-starting (or onBegin/gotBegin) callbacks, figures out which
+application and buffer are active, and tells the GramMgr to activate the
+appropriate grammars.
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

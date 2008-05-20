@@ -1,0 +1,195 @@
+Version 0.10
+
+  * Various bug fixes
+  * ASM 2.0 
+  * jde-usages-goto-definition-of-thing-at-point getClassWithSignatureDefinition
+  * Lots of experimental replacements for JDE java code based functionaly in jde-usages
+   This is mainly to reduce memory usage by having just one location
+   for jde project specific data in the bsh JVM.
+
+(defalias 'jde-complete-invoke-get-class-info 'jde-usages-complete-invoke-get-class-info)
+(defalias 'jde-parse-eval-type-of 'jde-usages-parse-eval-type-of)
+(defalias 'jde-parse-import-list 'jde-usages-parse-import-list)
+(defalias 'jde-import-insert-import 'jde-usages-import-insert-import)
+(defalias 'jde-open-get-class-to-open 'jde-usages-get-class-to-open)
+(defalias 'jde-parse-get-qualified-name 'jde-usages-parse-get-qualified-name)
+(defalias 'jde-parse-class-exists 'jde-usages-parse-class-exists)
+
+Version 0.9.1
+
+  * Type Hierarchy buffer: 
+  (M-x jde-usages-display-type-hierarchy or 
+  Jde-Usages->Inheritance Tree->Type Hierarchy) 
+
+  This command displays a view which combines some of the information
+  in the subclasses and superclass views. It shows all the subtypes -
+  all derived classes/interfaces and classes that implement the
+  interfaces, and the direct super classes. The interfaces implemented
+  by this class are not shown in this view, only the superclasses view
+  shows them.
+
+  * Key bindings for class tree buffers
+  The *subclasses*, *superclasses* and *type-hierarchy* buffers have
+  the following single letter keybinding to view a different type of
+  class tree buffer for the class name under point.
+
+  `t':type hierarchy `a':superclasses (ancestors) `d':subclasses
+  (descendants)`q':delete window
+
+  Typing '?' in one of these buffers will show a message listing these
+  keybinding.
+
+  * *usages* changes
+  - When navigating to method calls from the *usages* buffer, point
+    goes to the exact location of the call in the source. Earlier it
+    would just be placed at beginning of the line with the call. It
+    makes use of jde-parse-* functions and works even when there are
+    multiple calls to the same method on a line. It does not get
+    confused by things that look like a call to the same method that
+    are in comments or inside strings or by method calls to the same
+    method name in an unrelated class.
+  - Clicking on the first line of the usages buffer takes you to the
+    method definition
+
+  * jde-open-class-source-with-completion used ido style completion.
+  If (the amazing and wonderful) ido-mode is active, ido-mode style
+  completion will be used for class names. Ido is included in CVS Gnu
+  Emacs. It replaces iswitchb and offers the same type of fast
+  switching for opening files as well as switching buffers.
+  
+  * motion-sensitive buffers
+  Jde Usages->Options->"Motion Senstive" Buffers or 
+  customize jde-usages-buffers-are-motion-sensitive
+  
+  If this option is enabled moving the cursor in any of the jde-usages
+  buffers will automatically make the corresponding line of source
+  visible in the other window.
+
+  * tag/caller highlighting
+  Jde Usages->Options->"Use Highlighting" or 
+  customize jde-usages-highlight 
+  
+  Momentarily highlights a tag or method call before moving to
+  it. When `jde-usages-buffers-are-motion-sensitive' is on the
+  highlighting happens in the source buffer while moving around in the
+  usages buffer, which remains the current buffer.
+  
+
+  * Ecb integration: Make jde-usages easier to use with ECB.
+  (This is not turned on by default you have to say M-x
+  jde-usages-load-ecb-integration or Jde-Usages->Options->Load ECB
+  Integration) 
+  For now this does the following things:
+  1) Adds a jde-usages submenu for the ECB methods buffer.
+  2) Add s the jde-usage buffer names to ecb-compilation-buffer-names
+     so they appear in same location as a compilation buffer.
+  3) Sets jde-usages-window-height to nil so that the height of the
+     jde-usages windows is only controlled by
+     ecb-compile-window-height.
+
+  
+  * Unit test framework + unit tests
+
+Version 0.9 
+
+* 2004/9/22
+  Set jde-usages-window-height to control the height of the *usages* and other windows
+  ASMUsages.refresh() now checks if it has been called during the last ASMUsages.TIME_BETWEEN_REFRESHES and returns right away if it has.
+  jde-usages.el uses labels to define internal functions so as not to pollute the global function namespace.
+  Point is moved to the end of the scratch eval buffer before bsh-eval
+  Fixed bug that made jde-usages report wrong info if you changed jde-global-classpath with jde-usages active
+  Added a modified JdeUtilities to the src which calls functions in jde.util.Usages for getQualifiedNames and classExists.
+  Set jde.util.usages.ClassPathManager.POOL_SIZE to the number of processors you have in your .bshrc to get jde-usages to use multiple threads when calculate the initial classes info.
+
+* 2004/6/16 jde-open-class-source-with-completion now updates jde-usages-known-classes if required, so
+  that it completes againsts the most up to date list of classes. The list of all classes is only
+  generated if jde.util.Usages has detected that a class was added or deleted since the last update
+  of the list.
+
+* 2004/6/11 Removed call to java.lang.String.matches() and added code to check java version in getCachedCPE 
+so jde-usages can be used with pre 1.4 JDKs
+
+* 2004/05/21 Fixed NPE for jde-usages-display-subs-and-implementers when the specified class
+does not exist.
+
+* 2004/05/19 Added support to find usages of member variables. The usages buffer indicates if it is
+  a read or write access.
+
+* 2004/05/06 It is now possible to differentiate between interfaces, abstract classes and regular
+  classes In the class hierarchy and method overrides buffers. Abstract classes have the string
+  "(A)" after their names while interfaces are marked with the string "(I)".
+
+* The dependency information for directories of classes can be cached to disk for faster startup
+  times.  To enable this caching create a directory called ".jde-usages" in your home directory. 
+  To find out what java thinks is your home directory type 
+  (System.getProperty("user.home")); 
+  in the *bsh* buffer. 
+
+  If the ~/.jde-usages directory exists cache files will we written there just before the JVM
+  quits. To ensure that the java process is allowed to shut down completely when quitting emacs add
+  the following code to your .emacs file.
+	  
+(defun jde-bsh-exit-nicely ()
+  "Tells the beanshell process to terminate and waits until the process finishes up."
+  (interactive)
+  (if (jde-bsh-running-p)
+      (let ((process (bsh-get-process (oref 'jde-bsh the-bsh))))
+	(message "Shutting down beanshell process")
+        (if (and
+             (boundp 'jde-ant-invocation-method) ;; ant package may not be loaded.
+             (string= (car jde-ant-invocation-method) "Ant Server"))
+            (bsh-eval (oref 'jde-bsh the-bsh) "jde.util.JdeUtilities.exit();\n")
+	  (bsh-eval (oref 'jde-bsh the-bsh) "exit();\n"))
+	(message ""))
+    (message "The beanshell is not running")))
+
+(add-hook 'kill-emacs-hook 'jde-bsh-exit-nicely)
+
+* If no usages (or subclasses, or subclasses overriding methods) are found, only a message is
+  reported in the mini-buffer; the *usages* (or *subclasses*) buffer is not displayed.
+
+* Added jde-usages-display-subs-implementing-method, which finds all subclasses of this class which
+  implement this method.
+
+* Added jde-usages-goto-sig to navigate to a classname + signature, this uses regexps. Maybe we can
+  move to using the semantic structures later.
+
+* Profiled memory usage
+  - using ArrayLists instead of HashMaps for the dependency structures
+    reduces the process size by about 25% (from 47.5MB to 35.5MB) for a
+    large project
+
+* Gray out menu items when not applicable  3/3/4
+
+Version 0.1 
+
+* Removed short-circuiting of lookups for Cloneable, Serializable and Object and put in correct fix -
+  only look for superclasses which for which the method is defined.
+
+* Added functions to find all sub classes of a class/interface 2/26/04
+
+* Added an option for "strictness" - do not look for calls to super and sub classes.
+
+* Handle deletion of entries from the classpath
+
+* Handle java.io.Serializable and java.lang.Cloneable without having to look at rt.jar
+  - nice speedup, but this means we can't find all usages of methods in Serializable or Cloneable
+    (or Object, from a previous fix). The correct thing to do would be to include only those super
+    classes for which the method you are looking for is defined.
+
+* Don't look at superclasses for usages of constructors. Added the isConstructor method to the
+    MethodSpec interface. This is checked before calling getSupers in ASMUsages.findUsages
+
+* ClassPathManager._subs was not being calculated. Instead of trying to delete stale info in _subs
+     when a classpath entry is refreshed we just add the new subclass relations and check for
+     staleness in getSubs. 2/10/04
+
+* Calls to super do not count as calls to the superclasses method.
+  - This just works, super() is probably converted into a call to <init>();
+
+* Decouple from jde-xref.Renamed some jde-xref functions to jde-usages. 2/10/04
+
+* Check timestamps of classpath entries before searching for usages
+
+* Added notification of current classpath entry in emacs mini-buffer while building the class
+  dependencies

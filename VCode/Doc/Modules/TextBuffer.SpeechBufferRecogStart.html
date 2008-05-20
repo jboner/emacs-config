@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Dec 25 16:41:09 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class SpeechBufferRecogStart</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class SpeechBufferRecogStart</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="TextBuffer.html">TextBuffer</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">TextBuffer.SpeechBufferRecogStart<BR>
+&nbsp;&nbsp;<A HREF="TextBuffer.SpeechBuffer.html">TextBuffer.SpeechBuffer</A><BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SpeechBufferRecogStart</SPAN>(<A CLASS="DocLink" HREF="TextBuffer.SpeechBuffer.html">SpeechBuffer</A>):
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBufferRecogStart.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBufferRecogStart.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">recog_start_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBufferRecogStart._on_recog_start"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBufferRecogStart._on_recog_start</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window_matches</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBufferRecogStart.set_recog_start_callback"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBufferRecogStart.set_recog_start_callback</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">recog_start_callback=None</SPAN>)<SPAN CLASS="OneLiner"> # changes the callback to a new function</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.SpeechBuffer</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.activate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.activate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">dict_globally=0</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.deactivate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.deactivate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # disable dictation into the SpeechBuffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.has_been_activated"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.has_been_activated</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.is_activated"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.is_activated</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.is_active"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.is_active</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.is_global"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.is_global</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.reactivate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.reactivate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+
+</PRE><H2>Description</H2><P>
+abstract subclass of SpeechBuffer which adds a recognition
+starting callback interface.</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> recog_start_callback
+<DD>recog_start_callback( <EM>SpeechBuffer</EM> buffer, <EM>BOOL</EM>
+    window_matches)
+callback which indicates the start of recognition.  This callback
+can activate or deactivate the SpeechBuffer (allowing more specific
+activation conditions than just the active window).  If necessary
+it should also update the state of the internal SpeechBuffer to match the
+corresponding editor buffer.  (This is necessary if the
+SpeechBuffer is not immediately updated whenever the editor buffer 
+changes).
+</DL>
+<P>
+If the SpeechBuffer is set to be active only when a specific
+window is active, window_matches will return true only if this
+is the case.</P>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SpeechBufferRecogStart.__init__" CLASS="Method">TextBuffer.SpeechBufferRecogStart.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">recog_start_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+abstract class initialization, but does common handling of
+the recog_start_callback</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> recog_start_callback
+<DD>recog_start_callback(
+<EM>SpeechBuffer</EM> buffer, <EM>BOOL</EM> window_matches) 
+callback which indicates the start of
+recognition.  
+</DL>
+<P>
+This callback can activate or deactivate the
+SpeechBuffer (allowing more specific activation conditions than
+just the active window).  </P>
+<P>
+If necessary it should also update the
+state of the internal SpeechBuffer to match the corresponding
+editor buffer.  (This is necessary if the SpeechBuffer is not
+immediately updated whenever the editor buffer changes).</P>
+<P>
+If the SpeechBuffer is set to be active only when a specific
+window is active, window_matches will return true only if this
+is the case.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SpeechBufferRecogStart._on_recog_start" CLASS="Method">TextBuffer.SpeechBufferRecogStart._on_recog_start(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window_matches</SPAN>)</H2>
+<P>None</P>
+
+<P>
+internal function which triggers the
+recog_start_callback.  Only the concrete subclass of
+SpeechBufferRecogStart implementing the change notification 
+should call this function</P>
+<H2 ID="TextBuffer.SpeechBufferRecogStart.set_recog_start_callback" CLASS="Method">TextBuffer.SpeechBufferRecogStart.set_recog_start_callback(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">recog_start_callback=None</SPAN>)</H2>
+<P>changes the callback to a new function</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> recog_start_callback
+<DD>recog_start_callback(
+<EM>SpeechBuffer</EM> buffer, <EM>BOOL</EM> window_matches) 
+callback which indicates the start of
+recognition.  This callback can activate or deactivate the
+SpeechBuffer (allowing more specific activation conditions than
+just the active window).  If necessary it should also update the
+state of the internal SpeechBuffer to match the corresponding
+editor buffer.  (This is necessary if the SpeechBuffer is not
+immediately updated whenever the editor buffer changes).
+</DL>
+<P>
+If the SpeechBuffer is set to be active only when a specific
+window is active, window_matches will return true only if this
+is the case.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SpeechBuffer.activate" CLASS="Method">TextBuffer.SpeechBuffer.activate(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">dict_globally=0</SPAN>)</H2>
+<P>None</P>
+
+<P>
+activates the speech buffer for dictation, either globally or
+tied to the current window.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM> dict_globally
+<DD>if true, activate globally, otherwise
+note the current window and activate only when it is the active window.
+Additional conditions can be placed on the activation by
+activating or deactivating manually or on recognition starting
+(see SpeechBufferRecogStart below)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SpeechBuffer.deactivate" CLASS="Method">TextBuffer.SpeechBuffer.deactivate(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>disable dictation into the SpeechBuffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SpeechBuffer.has_been_activated" CLASS="Method">TextBuffer.SpeechBuffer.has_been_activated(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+indicates whether the activate method has been invoked, or
+whether it needs to be called to activate dictation.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>returns true if activate was previously called, and
+the SpeechBuffer is still active, or can be reactivated with a
+call to reactivate (instead of a new call to activate).
+</DL>
+<H2 ID="TextBuffer.SpeechBuffer.is_activated" CLASS="Method">TextBuffer.SpeechBuffer.is_activated(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+indicates whether the  SpeechBuffer is currently activated or
+deactivated (not whether it is active)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>returns true iff the buffer is currently activated.
+Note that if the buffer was activated for a specific window,
+but that window is not active, is_activated will still return
+true.  To see if dictation is active now, use is_active.
+
+</DL>
+<H2 ID="TextBuffer.SpeechBuffer.is_active" CLASS="Method">TextBuffer.SpeechBuffer.is_active(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+indicates whether dictation into the SpeechBuffer is currently 
+active (activated globally, or activated with the current
+window)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>returns true iff dictation into the buffer is 
+currently active.
+
+</DL>
+<H2 ID="TextBuffer.SpeechBuffer.is_global" CLASS="Method">TextBuffer.SpeechBuffer.is_global(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+tells whether the buffer (when activated) is activated
+globally.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>is buffer set for global dictation.
+
+</DL>
+<H2 ID="TextBuffer.SpeechBuffer.reactivate" CLASS="Method">TextBuffer.SpeechBuffer.reactivate(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+reactivate dictation using the same window (or globally).
+This method should not be called, unless the buffer has
+previously been activated and then deactivate.</P>
+<P>
+Otherwise, its effect is undefined (although the concrete
+subclass of SpeechBuffer should still attempt to do something
+sensible)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

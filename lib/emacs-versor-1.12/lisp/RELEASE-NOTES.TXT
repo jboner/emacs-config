@@ -1,0 +1,15 @@
+Release notes for versor.el and friends.
+
+0.0
+
+Initial release, just to get something out there. The framework is
+based on something I've been using for a long time, and I've had a
+good go at untangling it from the rest of my emacs setup. I've also
+started to move it forward -- the idea of always have an ``item''
+cursor is quite new and not really complete (it should be possible to
+have a discontiguous selection, but that's not really there yet).
+
+The language-guided motion code that is needed to support
+statement-based motion is currently in another of my directories. This
+could do with a lot more work on it, and is where I'd most welcome
+contributed code.

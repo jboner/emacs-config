@@ -1,0 +1,527 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Dec 25 16:41:02 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class TargetWindow</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class TargetWindow</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="TargetWindow.html">TargetWindow</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">TargetWindow.TargetWindow<BR>
+&nbsp;&nbsp;Object.Object<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">TargetWindow</SPAN>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>):
+    <A CLASS="DocLink" HREF="#TargetWindow.TargetWindow.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TargetWindow.TargetWindow.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>, <SPAN CLASS="Argument">module</SPAN>, <SPAN CLASS="Argument">instance=None</SPAN>, <SPAN CLASS="Argument">single_display=0</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TargetWindow.TargetWindow.activate_instance"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TargetWindow.TargetWindow.activate_instance</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance</SPAN>)
+    <A CLASS="DocLink" HREF="#TargetWindow.TargetWindow.active_instance"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TargetWindow.TargetWindow.active_instance</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">title</SPAN>, <SPAN CLASS="Argument">editors</SPAN>, <SPAN CLASS="Argument">default_to_recent=1</SPAN>)
+    <A CLASS="DocLink" HREF="#TargetWindow.TargetWindow.add_instance"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TargetWindow.TargetWindow.add_instance</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance</SPAN>)<SPAN CLASS="OneLiner"> # add a new instance to the window</SPAN>
+    <A CLASS="DocLink" HREF="#TargetWindow.TargetWindow.delete_instance"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TargetWindow.TargetWindow.delete_instance</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance</SPAN>)<SPAN CLASS="OneLiner"> # notify TargetWindow that an editor instance has been deleted</SPAN>
+    <A CLASS="DocLink" HREF="#TargetWindow.TargetWindow.instance_names"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TargetWindow.TargetWindow.instance_names</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TargetWindow.TargetWindow.instances"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TargetWindow.TargetWindow.instances</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TargetWindow.TargetWindow.known_instance"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TargetWindow.TargetWindow.known_instance</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance</SPAN>)<SPAN CLASS="OneLiner"> # is instance known?</SPAN>
+    <A CLASS="DocLink" HREF="#TargetWindow.TargetWindow.module_name"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TargetWindow.TargetWindow.module_name</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns the module name corresponding to this window</SPAN>
+    <A CLASS="DocLink" HREF="#TargetWindow.TargetWindow.shared"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TargetWindow.TargetWindow.shared</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TargetWindow.TargetWindow.single_display"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TargetWindow.TargetWindow.single_display</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TargetWindow.TargetWindow.verify_new_instance"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TargetWindow.TargetWindow.verify_new_instance</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">title</SPAN>, <SPAN CLASS="Argument">instance</SPAN>, <SPAN CLASS="Argument">editors</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+
+</PRE><H2>Description</H2><P>
+abstract class defining interface for finding the active editor
+application corresponding to a known window</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> window
+<DD>unique integer identifying this window to 
+the operating system
+<DT>
+<EM>STR</EM> module
+<DD>name of the executable module associated with this
+window
+<DT>
+<EM>[STR]</EM> window_instances
+<DD>list of associated instance names, sorted in 
+the order of instances most recently known to be active
+<DT>
+<EM>BOOL</EM> single_window_display
+<DD>indicates whether the window is
+associated with a module which displays multiple remote windows in a
+single local window
+</DL>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TargetWindow.TargetWindow.__init__" CLASS="Method">TargetWindow.TargetWindow.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>, <SPAN CLASS="Argument">module</SPAN>, <SPAN CLASS="Argument">instance=None</SPAN>, <SPAN CLASS="Argument">single_display=0</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+abstract class, so this is only called by subclass
+constructor.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> window
+<DD>unique integer identifying this window to 
+the operating system
+<DT>
+<EM>STR</EM> module
+<DD>name of the executable module associated with this
+window
+<DT>
+<EM>STR</EM> instance
+<DD>name of initial instance associated with this window
+(or None if no initial instance)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TargetWindow.TargetWindow.activate_instance" CLASS="Method">TargetWindow.TargetWindow.activate_instance(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance</SPAN>)</H2>
+<P>None</P>
+
+<P>
+raise instance to front of list of most recently active instances 
+for this window</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> instance
+<DD>name of the application instance 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if instance is known (otherwise, does
+nothing)
+
+</DL>
+<H2 ID="TargetWindow.TargetWindow.active_instance" CLASS="Method">TargetWindow.TargetWindow.active_instance(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">title</SPAN>, <SPAN CLASS="Argument">editors</SPAN>, <SPAN CLASS="Argument">default_to_recent=1</SPAN>)</H2>
+<P>None</P>
+
+<P>
+attempts to determine the name of the active instance
+currently associated with this window</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> title
+<DD>the current title of the window
+<DT>
+<EM>AppMgr</EM> editors
+<DD>application manager for associating instance
+names with applications
+<DT>
+<EM>BOOL</EM> default_to_recent
+<DD>controls behavior of 
+active_instance when it is unable to determine which instance is
+active.  If true, active_instance will
+default to the most recently known active instance.  Otherwise,
+it will return none.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>the active instance name, or None if no known
+instance appears to be active in this window
+
+</DL>
+<H2 ID="TargetWindow.TargetWindow.add_instance" CLASS="Method">TargetWindow.TargetWindow.add_instance(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance</SPAN>)</H2>
+<P>add a new instance to the window</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> instance
+<DD>name of the editor instance
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the instance was added successfully
+
+</DL>
+<H2 ID="TargetWindow.TargetWindow.delete_instance" CLASS="Method">TargetWindow.TargetWindow.delete_instance(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance</SPAN>)</H2>
+<P>notify TargetWindow that an editor instance has been deleted</P>
+
+<P>
+    <STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> instance
+<DD>name of the editor instance
+</DL>
+<P>
+    <STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if instance was known to be associated with this
+    window
+    
+</DL>
+<H2 ID="TargetWindow.TargetWindow.instance_names" CLASS="Method">TargetWindow.TargetWindow.instance_names(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns the list of known instances associated with the
+window, in order of the most recently active instance</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR]</EM>
+<DD>the instance names
+
+</DL>
+<H2 ID="TargetWindow.TargetWindow.instances" CLASS="Method">TargetWindow.TargetWindow.instances(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns the number of known instances associated with the
+window</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>how many instances are associated with this window
+
+</DL>
+<H2 ID="TargetWindow.TargetWindow.known_instance" CLASS="Method">TargetWindow.TargetWindow.known_instance(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance</SPAN>)</H2>
+<P>is instance known?</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> instance
+<DD>name of the application instance 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if instance is known 
+
+</DL>
+<H2 ID="TargetWindow.TargetWindow.module_name" CLASS="Method">TargetWindow.TargetWindow.module_name(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns the module name corresponding to this window</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>the module name
+
+</DL>
+<H2 ID="TargetWindow.TargetWindow.shared" CLASS="Method">TargetWindow.TargetWindow.shared(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+can this window be shared by multiple instances, or is it a
+dedicated editor window?  <STRONG>Note:</STRONG> shared should return true if
+the window is a shareable shell window, even if there is only
+one instance currently associated with the window.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>is window shareable?
+
+</DL>
+<H2 ID="TargetWindow.TargetWindow.single_display" CLASS="Method">TargetWindow.TargetWindow.single_display(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+does this module display multiple remote windows in this single 
+local window?  <STRONG>Note:</STRONG> single_display is not consistent with a
+dedicated module.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> window
+<DD>handle of the local window
+<DT>
+<EM>STR</EM> title
+<DD>title of the local window
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>is this a single-window display?
+
+</DL>
+<H2 ID="TargetWindow.TargetWindow.verify_new_instance" CLASS="Method">TargetWindow.TargetWindow.verify_new_instance(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">title</SPAN>, <SPAN CLASS="Argument">instance</SPAN>, <SPAN CLASS="Argument">editors</SPAN>)</H2>
+<P>None</P>
+
+<P>
+attempt to verify whether this window belongs to
+the named instance.  </P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> title
+<DD>title of the window 
+<DT>
+<EM>STR</EM> instance
+<DD>name of the editor instance
+<DT>
+<EM>AppMgr</EM> editors
+<DD>the AppMgr object
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if verify_new_instance was able to determine that the
+window was associated with the named instance, false if it
+was able to determine that the window was not associated
+with the instance, and None if it was unable to determine.
+
+</DL>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

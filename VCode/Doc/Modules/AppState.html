@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sun Dec 29 21:36:10 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module AppState</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module AppState</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="AppState.AS_UpdCloseBuffer.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">AS_UpdCloseBuffer</SPAN></A>(<A CLASS="DocLink" HREF="AppState.AS_Update.html">AS_Update</A>)</SPAN><SPAN CLASS="OneLiner"> # Update class for closing a buffer.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="AppState.AS_UpdCurrBufferName.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">AS_UpdCurrBufferName</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # Update indicating the current buffer name</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="AppState.AS_UpdNewWindow.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">AS_UpdNewWindow</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # Update indicating that the editor has opened a new window</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="AppState.AS_UpdOpenBuffer.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">AS_UpdOpenBuffer</SPAN></A>(<A CLASS="DocLink" HREF="AppState.AS_Update.html">AS_Update</A>)</SPAN><SPAN CLASS="OneLiner"> # Update class for opening a buffer.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="AppState.AS_UpdRenameBuffer.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">AS_UpdRenameBuffer</SPAN></A>(<A CLASS="DocLink" HREF="AppState.AS_Update.html">AS_Update</A>)</SPAN><SPAN CLASS="OneLiner"> # Update class for renaming a buffer.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="AppState.AS_Update.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">AS_Update</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="AppState.AppCbkHandler.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">AppCbkHandler</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="AppState.AppState.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">AppState</SPAN></A>(<A CLASS="DocLink" HREF="Object.OwnerObject.html">OwnerObject</A>)</SPAN><SPAN CLASS="OneLiner"> # Interface to the programming environment.    </SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="AppState.ForwardToBuffer.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ForwardToBuffer</SPAN></A></SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="AppState.SB_UpdDelete.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SB_UpdDelete</SPAN></A>(<A CLASS="DocLink" HREF="AppState.SB_Update.html">SB_Update</A>)</SPAN><SPAN CLASS="OneLiner"> # Update class for a deletion.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="AppState.SB_UpdInsert.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SB_UpdInsert</SPAN></A>(<A CLASS="DocLink" HREF="AppState.SB_Update.html">SB_Update</A>)</SPAN><SPAN CLASS="OneLiner"> # Update class for an insertion.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="AppState.SB_UpdPosSelection.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SB_UpdPosSelection</SPAN></A>(<A CLASS="DocLink" HREF="AppState.SB_Update.html">SB_Update</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="AppState.SB_Update.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SB_Update</SPAN></A>(<A CLASS="DocLink" HREF="AppState.AS_Update.html">AS_Update</A>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#create_update"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">create_update</SPAN></A>(<SPAN CLASS="Argument">upd_descr</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#use_update_class"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">use_update_class</SPAN></A>(<SPAN CLASS="Argument">action</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Returns the class to be used for a particular type of update action.</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Mediator\\AppState.pyc'</SPAN></SPAN>
+</PRE><H2 ID="create_update" CLASS="Function">create_update(<SPAN CLASS="Argument">upd_descr</SPAN>)</H2>
+<P></P>
+
+<P>
+Creates an AS_Update object based on the description of the
+update to be created.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+{STR: ANY} <EM>upd_descr</EM>
+<DD>A description of the update object
+to be created. We assume that there is at least an <CODE>action</CODE> key
+(used to decide which class of updates to generate).
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="use_update_class" CLASS="Function">use_update_class(<SPAN CLASS="Argument">action</SPAN>)</H2>
+<P>Returns the class to be used for a particular type of update action.</P>
+
+<P>
+    <STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+STR <EM>action</EM>
+<DD>Name of the update action 
+</DL>
+<P>
+    <STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+CLASS <EM>upd_class</EM>
+<DD>The class object (not an instannce) for
+    <EM>action</EM>. Assumed to be a subclass of [AS_Update].
+</DL>
+<P>
+    ..[AS_Update] AppState.AS_Update.html</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

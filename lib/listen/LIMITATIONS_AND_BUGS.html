@@ -1,0 +1,149 @@
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <h1>Limitations and Bugs</h1>
+
+    <h2>General Design Issues</h2>
+
+    <ul>
+      <li>
+	<strong>The performance of NaturallySpeaking on ShortTalk is
+	  suboptimal.
+	</strong>
+	It is actually amazing that the current solution works at
+	all.  Very often, however, misrecognition  will occur that
+	is plainly impossible had the speech recognizer been engineered
+	with the  ShortTalk grammar in mind.  I have no
+	doubt that very substantial improvements are possible.  An
+	excellent project in an academic setting!   
+      </li>
+
+      <li><strong>EmacsListen only ShortTalk-enables Emacs.</strong>
+	This is a serious limitation of course.  EmacsListen is only a
+	proof of concept.  Moreover, it is not obvious how to even
+	formulate a strategy for enabling other applications at the level
+	of perfection that EmacsListen offers and that is so crucial for
+	speech recognition to be usable.  Perfect consistency among
+	applications can probably be obtained only if one common text
+	engine (for calculating text intervals, normalization of spaces,
+	lines, and capitalization) underlies all applications.  Choosing
+	EmacsListen as such an engine might be viable.  It does not entail
+	that users have to learn anything about Emacs, of course.
+
+      <li>
+	<strong>Documentation could be much better.</strong>
+      </li>
+      
+      <li><strong>The code for spacing and capitalization should be completely
+	  rewritten.</strong> And, probably the new functionality should
+	be based on probabilistically identified rules.  An excellent
+	student project!</li>
+      <li><strong>The concept of listen event and the modifications to the
+	  command loop are horribly complex.</strong> Yes, there are two
+	reasons for this: (1) although ubiquitous, the concept of queuing
+	events in queues is fundamentally flawed if events may be defined in
+	terms of events (as is a case with keyboard macros and command
+	sequences in Emacs).  [A better way to handle is to queue them in
+	trees, similar to the call trees of procedural abstractions.] (2) It
+	did not seem possible to avoid using them; in particular, the
+	concept of 'tair' (mouse-position) seems to call for command
+	sequences.  Additionally, the undo mechanism also relies on
+	seq
+uences of events.  Much of the complexity stems from the
+	requirements of perfect undoability.
+      <li><strong>The code for identifying balanced
+	  structures (parentheses, terms, quotations) is too
+	  'hardwired'.</strong> The solutions that Emacs offers are 
+	inadequate because they are tied to the concept of mode.  However,
+	in practice, we now find mixture of modes everywhere: LaTeX snippets
+	in e-mail, EcmaScript in XML, XML in comments in C, etc.  The
+	current code is not perfect: a general model of flexible,
+	context-dependent parsing of text should be developed. 
+      </li>
+      
+
+      <li><strong>Phonetic, morphological, and semantic choices in
+      ShortTalk.</strong></li>
+	
+    </ul>
+
+
+
+    <h2>Specific Bugs</h2>
+
+    <ul>
+      
+      <li><strong>Tab keys are not displayed correctly the listen
+	  buffer.</strong>
+	They confuse VR-mode.  Use "toob" instead.
+      </li>
+      
+      <li><strong>pc-select or delete-selection mode not
+	  tested.</strong>These modes must be loaded before listen-mode
+	(since the listen-mode pre-command-hook must be executed before
+	any changes to the buffer by other hooks). [These modes have not
+	been tested with EmacsListen.] Instead, cua-mode is recommeded.
+      </li>
+
+
+      <li><strong>Brown color extends everywhere.</strong> The mechanism
+	EmacsListen uses for indicating mairk and loost is a little
+	problematic.  Sometimes, the indication for mark stretches over many
+	characters.  There is probably a specific bug to be fixed.  However,
+	with the new display facilities of Emacs 21, this code
+	should probably be totally reengineered.
+      </li>
+
+      <li><strong>The function fill-paragraph mode in XML does not always
+	  work as expected.</strong> This is not a problem with
+	EmacsListen.
+      </li>
+
+      <li><strong>The number of $-signs is sometimes not correctly counted for
+	  LaTeX-awareness.</strong>
+	In the paragraph below:
+	<pre>Words $w$ and $w'$ that interpret all variables in the same way satisfy the
+	  same set o   f formulas: if for all $i$, $1\leq i \leq K$,
+	</pre>
+	The ShortTalk command <em>save term tair</em>, with the mouse over
+	the beginning of <tt>$1\leq</tt>..., does not recognize the whole
+	expression <tt>$1\leq i \leq K$</tt>.
+      </li>
+
+      <li><strong>The command <em>go aift loon twain</em> does not go to a
+	  blank line as expected.</strong> This functionality used to work.
+
+      </li>
+
+      <li><strong><em>snex hotel numeral 2</em> or <em>snex H2</em> asks
+	  for attribute in minibuffer</strong> This is an issue with html-mode.
+      </li>
+
+      <li><strong>Lack of generalization <em>vox menu tair</em></strong>
+	When ShortTalk encounters the language instinct, forms of commands
+	may be spoken that are not yet implemented.  This is one such
+	example.</li>
+
+      <li><strong>Spacing for URLs.</strong> This doesn't always work: for
+	example, saying ``A T T dot com'' results in
+	<tt>ATT.  Com</tt>.
+      </li>
+
+      <li><strong>Spacing after <tt>p.</tt></strong> There should be one
+	space, not two.     
+      </li>	 
+
+
+      <li><strong>Listen peek windows get mixed up.</strong>Sometimes
+	other applications within Emacs steal these windows.</li> 
+
+      <li><strong><tt>listen-conventional-undo</tt> is buggy. Problem is
+      bad when listen-mode has not been activated. <em>This has been
+	    corrected NK 9/7.</em></li>
+      
+    </ul>					
+  </body>
+  
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:13:22 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module config_helpers</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module config_helpers</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="config_helpers.LeftRightPunctuation.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">LeftRightPunctuation</SPAN></A>(<A CLASS="DocLink" HREF="config_helpers.PairedPunctuation.html">PairedPunctuation</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="config_helpers.PairedPunctuation.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">PairedPunctuation</SPAN></A>(<A CLASS="DocLink" HREF="config_helpers.PunctuationSet.html">PunctuationSet</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="config_helpers.PairedQuotes.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">PairedQuotes</SPAN></A>(<A CLASS="DocLink" HREF="config_helpers.PairedPunctuation.html">PairedPunctuation</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="config_helpers.PunctuationSet.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">PunctuationSet</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="config_helpers.SinglePunctuation.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SinglePunctuation</SPAN></A>(<A CLASS="DocLink" HREF="config_helpers.PunctuationSet.html">PunctuationSet</A>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#add_backspacing"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">add_backspacing</SPAN></A>(<SPAN CLASS="Argument">commands</SPAN>, <SPAN CLASS="Argument">max_count=5</SPAN>, <SPAN CLASS="Argument">primary='back space'</SPAN>, <SPAN CLASS="Argument">alternate='delete backwards'</SPAN>, <SPAN CLASS="Argument">context=None</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # add CSCs for repeatable backspacing commands.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#add_escaped_characters"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">add_escaped_characters</SPAN></A>(<SPAN CLASS="Argument">commands</SPAN>, <SPAN CLASS="Argument">back_slash='back slash'</SPAN>, <SPAN CLASS="Argument">alphabet='abcdefghijklmnopqrstuvwxyz'</SPAN>, <SPAN CLASS="Argument">name_map={'z': 'zulu', 'x': 'xray', 'y': 'yankee', 'v': 'victor', 'w': 'whiskey', 't': 'tango', 'u': 'uniform', 'r': 'romeo', 's': 'sierra', 'p': 'papa', 'q': 'quebec', 'n': 'november', 'o': 'oscar', 'l': 'lima', 'm': 'mike', 'j': 'juliett', 'k': 'kilo', 'h': 'hotel', 'i': 'india', 'f': 'foxtrot', 'g': 'golf', 'd': 'delta', 'e': 'echo', 'b': 'bravo', 'c': 'charlie', 'a': 'alpha'}</SPAN>, <SPAN CLASS="Argument">cap='cap'</SPAN>, <SPAN CLASS="Argument">context=None</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # define CSCs for characters escaped with backslashes</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#add_repeats"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">add_repeats</SPAN></A>(<SPAN CLASS="Argument">commands</SPAN>, <SPAN CLASS="Argument">max_count=10</SPAN>, <SPAN CLASS="Argument">context=None</SPAN>, <SPAN CLASS="Argument">again=None</SPAN>, <SPAN CLASS="Argument">time='time'</SPAN>, <SPAN CLASS="Argument">times='times'</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # add CSCs for repeating commands.</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Config\\config_helpers.pyc'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">dictionary</SPAN> <SPAN CLASS="VariableName">alpha_bravo</SPAN> = <SPAN CLASS="VariableValue">{'a': 'alpha', 'b': 'bravo', 'c': 'charlie', 'd': 'delta', ...}</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">anonymous_action_curr_num</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">binary_operator</SPAN> = <SPAN CLASS="VariableValue">4096</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">comparison_operator</SPAN> = <SPAN CLASS="VariableValue">65536</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">end_sentence</SPAN> = <SPAN CLASS="VariableValue">1024</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_braces_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_brackets_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_parens_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_quotes_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_single_quotes_pair</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_single_quotes_pair_after</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionInsert instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_translation_off</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSwitchTranslation instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">instance</SPAN> <SPAN CLASS="VariableName">gen_translation_on</SPAN> = <SPAN CLASS="VariableValue">actions_gen.ActionSwitchTranslation instance</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hard_new_line</SPAN> = <SPAN CLASS="VariableValue">128</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hard_paragraph</SPAN> = <SPAN CLASS="VariableValue">256</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hard_space</SPAN> = <SPAN CLASS="VariableValue">64</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hard_tab</SPAN> = <SPAN CLASS="VariableValue">512</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">joins_identifier</SPAN> = <SPAN CLASS="VariableValue">32</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">letters_and_digits</SPAN> = <SPAN CLASS="VariableValue">16</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">like_backslash</SPAN> = <SPAN CLASS="VariableValue">3</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">like_bang</SPAN> = <SPAN CLASS="VariableValue">8192</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">like_close_paren</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">like_close_quote</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">like_comma</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">like_dot</SPAN> = <SPAN CLASS="VariableValue">3</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">like_function_of</SPAN> = <SPAN CLASS="VariableValue">3</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">like_hyphen</SPAN> = <SPAN CLASS="VariableValue">3</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">like_open_paren</SPAN> = <SPAN CLASS="VariableValue">34</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">like_open_quote</SPAN> = <SPAN CLASS="VariableValue">2</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">like_point</SPAN> = <SPAN CLASS="VariableValue">18</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">like_slash</SPAN> = <SPAN CLASS="VariableValue">3</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">no_space_after</SPAN> = <SPAN CLASS="VariableValue">2</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">no_space_before</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">no_space_off</SPAN> = <SPAN CLASS="VariableValue">8</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">no_space_on</SPAN> = <SPAN CLASS="VariableValue">4</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">no_spaces</SPAN> = <SPAN CLASS="VariableValue">3</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">normal_spacing</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">pre_or_postfix</SPAN> = <SPAN CLASS="VariableValue">32768</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">unary_operator</SPAN> = <SPAN CLASS="VariableValue">8192</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">unary_or_binary</SPAN> = <SPAN CLASS="VariableValue">16384</SPAN></SPAN>
+</PRE><H2 ID="add_backspacing" CLASS="Function">add_backspacing(<SPAN CLASS="Argument">commands</SPAN>, <SPAN CLASS="Argument">max_count=5</SPAN>, <SPAN CLASS="Argument">primary='back space'</SPAN>, <SPAN CLASS="Argument">alternate='delete backwards'</SPAN>, <SPAN CLASS="Argument">context=None</SPAN>)</H2>
+<P>add CSCs for repeatable backspacing commands.</P>
+
+<P>
+Note: NaturallySpeaking (at least version 6) has a backspace command
+and a backspace 2 to 20 command.  Since they are defined as command
+grammars, they will take precedence over our "back space" dictation
+commands (except if you say the latter immediately before/after
+something else)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>CSCmdSet commands</EM>
+<DD>set to which to add the context-sensitive
+commands
+<DT>
+<EM>INT</EM> max_count
+<DD>generate commands for backspace and backspace 2
+through max_count
+<DT>
+<EM>STR</EM> primary
+<DD>primary spoken form
+<DT>
+<EM>STR</EM> alternate
+<DD>alternate spoken form, or None to omit
+<DT>
+<EM>Context</EM> context
+<DD>the context in which the CSCs should apply, or
+None for ContAny()
+
+</DL>
+<H2 ID="add_escaped_characters" CLASS="Function">add_escaped_characters(<SPAN CLASS="Argument">commands</SPAN>, <SPAN CLASS="Argument">back_slash='back slash'</SPAN>, <SPAN CLASS="Argument">alphabet='abcdefghijklmnopqrstuvwxyz'</SPAN>, <SPAN CLASS="Argument">name_map={'z': 'zulu', 'x': 'xray', 'y': 'yankee', 'v': 'victor', 'w': 'whiskey', 't': 'tango', 'u': 'uniform', 'r': 'romeo', 's': 'sierra', 'p': 'papa', 'q': 'quebec', 'n': 'november', 'o': 'oscar', 'l': 'lima', 'm': 'mike', 'j': 'juliett', 'k': 'kilo', 'h': 'hotel', 'i': 'india', 'f': 'foxtrot', 'g': 'golf', 'd': 'delta', 'e': 'echo', 'b': 'bravo', 'c': 'charlie', 'a': 'alpha'}</SPAN>, <SPAN CLASS="Argument">cap='cap'</SPAN>, <SPAN CLASS="Argument">context=None</SPAN>)</H2>
+<P>define CSCs for characters escaped with backslashes</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>CSCmdSet commands</EM>
+<DD>set to which to add the context-sensitive
+commands
+<DT>
+<EM>STR</EM> back_slash
+<DD>spoken form for the backslash
+<DT>
+<EM>STR</EM> alphabet
+<DD>set of letters for which to define escaped
+characters
+<DT>
+<EM>{STR: STR}</EM>
+<DD>map from letters to an alternate spoken form (e.g.
+the military alphabet), or None to omit
+<DT>
+<EM>STR</EM> cap
+<DD>spoken form indicating that the letter should be
+capitalized, or None to omit capitalized forms
+<DT>
+<EM>Context</EM> context
+<DD>the context in which the CSCs should apply, or
+None for ContAny()
+
+</DL>
+<H2 ID="add_repeats" CLASS="Function">add_repeats(<SPAN CLASS="Argument">commands</SPAN>, <SPAN CLASS="Argument">max_count=10</SPAN>, <SPAN CLASS="Argument">context=None</SPAN>, <SPAN CLASS="Argument">again=None</SPAN>, <SPAN CLASS="Argument">time='time'</SPAN>, <SPAN CLASS="Argument">times='times'</SPAN>)</H2>
+<P>add CSCs for repeating commands.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>CSCmdSet commands</EM>
+<DD>set to which to add the context-sensitive
+commands
+<DT>
+<EM>INT</EM> max_count
+<DD>generate commands for repeating 1 through
+max_count times
+<DT>
+<EM>Context</EM> context
+<DD>the context in which the CSCs should apply, or
+None for ContLastActionWas([ActionRepeatable])
+<DT>
+<EM>[STR]</EM> again
+<DD>list of prefix strings for again/repeat n times, or
+None for ['again', 'repeat']
+<DT>
+<EM>STR</EM> time
+<DD>singular string for 1 time
+<DT>
+<EM>STR</EM> times
+<DD>plural string for n times
+
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

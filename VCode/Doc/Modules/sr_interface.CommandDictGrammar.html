@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:14:09 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class CommandDictGrammar</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class CommandDictGrammar - A grammar for mixing continuous dictation and commands.</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="sr_interface.html">sr_interface</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">sr_interface.CommandDictGrammar<BR>
+&nbsp;&nbsp;natlinkutils.DictGramBase<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">CommandDictGrammar</SPAN>(<A CLASS="DocLink" HREF="natlinkutils.DictGramBase.html">DictGramBase</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CommandDictGrammar.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app=None</SPAN>, <SPAN CLASS="Argument">interpreter=None</SPAN>, <SPAN CLASS="Argument">window=0</SPAN>, <SPAN CLASS="Argument">exclusive=0</SPAN>, <SPAN CLASS="Argument">allResults=0</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CommandDictGrammar.activate</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CommandDictGrammar.cleanup</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CommandDictGrammar.deactivate</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CommandDictGrammar.gotBegin</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">moduleInfo</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CommandDictGrammar.gotResultsObject</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">recogType</SPAN>, <SPAN CLASS="Argument">results</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from natlinkutils.GramClassBase</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.__del__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.activate</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window=0</SPAN>, <SPAN CLASS="Argument">exclusive=None</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.beginCallback</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">moduleInfo</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.callIfExists</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">funcName</SPAN>, <SPAN CLASS="Argument">argList</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.deactivate</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.hypothesisCallback</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">words</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.load</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grammar</SPAN>, <SPAN CLASS="Argument">allResults=0</SPAN>, <SPAN CLASS="Argument">hypothesis=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.setExclusive</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">exclusive</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.unload</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from natlinkutils.DictGramBase</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.DictGramBase.load</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">allResults=0</SPAN>, <SPAN CLASS="Argument">hypothesis=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.DictGramBase.makeGrammar</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.DictGramBase.resultsCallback</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">wordsAndNums</SPAN>, <SPAN CLASS="Argument">resObj</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.DictGramBase.setContext</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">beforeText=''</SPAN>, <SPAN CLASS="Argument">afterText=''</SPAN>)
+
+</PRE><H2>Description</H2><P>
+This is basically a [DictGramBase] dictation grammar that forwards
+the dictation result to a command interpreter that parses it and
+executes it.</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+[AppState] <EM>app</EM>
+<DD>interface to the editor application
+</DL>
+<P>
+[CmdInterp] *interpreter*-- Command interpreter used to and execute the
+recognised dictation utterances.</P>
+
+<DL>
+
+<DT>
+<EM>INT window = 0</EM>
+<DD>MSW window handle of the window which must be in the
+foreground for the grammar to be activated, or 0 to make the grammar
+global
+<DT>
+<EM>0-1 exclusive = 0</EM>
+<DD>Indicates whether the grammar is activated as an
+exclusive (1) or non-exclusive grammar (0)
+<DT>
+<EM>0-1 allResults = 0</EM>
+<DD>Indicates if the grammar should be loaded so as
+to get all results (even those intercepted by other grammars)
+<DT>
+<EM>SpokenUtterance last</EM>
+<DD>stores the last recognized dictation utterance
+<DT>
+BOOL <EM>dictation_allowed</EM>
+<DD><EM>true</EM> iif editor allows dictation in
+current buffer.
+</DL>
+<P>
+CLASS ATTRIBUTES**</P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

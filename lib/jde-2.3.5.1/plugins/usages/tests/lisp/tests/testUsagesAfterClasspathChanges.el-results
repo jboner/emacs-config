@@ -1,0 +1,1883 @@
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           both
+                                           "testproject.ASuper")
+("testproject/ASuper" ("testproject/A" "testproject/A$C")
+ "testproject/AClass")
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           implementers
+                                           "testproject.ASuper")
+("testproject/ASuper" ("testproject/A" "testproject/A$C")
+ "testproject/AClass")
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           subclasses
+                                           "testproject.ASuper")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           both
+                                           "testproject.ASuperSuper")
+("testproject/ASuperSuper" ("testproject/ASuper" ("testproject/A" "testproject/A$C")
+                            "testproject/AClass"))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           implementers
+                                           "testproject.ASuperSuper")
+("testproject/ASuperSuper" ("testproject/ASuper" ("testproject/A" "testproject/A$C")
+                            "testproject/AClass"))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           subclasses
+                                           "testproject.ASuperSuper")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs both "testproject.A")
+("testproject/A" "testproject/A$C")
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           implementers
+                                           "testproject.A")
+("testproject/A" "testproject/A$C")
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           subclasses
+                                           "testproject.A")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           both
+                                           "testproject.ASuperInt")
+(["testproject/ASuperInt" interface] ("testproject/ASuper" ("testproject/A" "testproject/A$C")
+                                      "testproject/AClass"))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           implementers
+                                           "testproject.ASuperInt")
+(["testproject/ASuperInt" interface] ("testproject/ASuper" ("testproject/A" "testproject/A$C")
+                                      "testproject/AClass"))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           subclasses
+                                           "testproject.ASuperInt")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs both "testproject.Main")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           implementers
+                                           "testproject.Main")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           subclasses
+                                           "testproject.Main")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs both "testproject.AInt")
+(["testproject/AInt" interface] ("testproject/A" "testproject/A$C")
+ "testproject/AClass")
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           implementers
+                                           "testproject.AInt")
+(["testproject/AInt" interface] ("testproject/A" "testproject/A$C")
+ "testproject/AClass")
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           subclasses
+                                           "testproject.AInt")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           both
+                                           "testproject.AClass")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           implementers
+                                           "testproject.AClass")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           subclasses
+                                           "testproject.AClass")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-class-list)
+("A (in testproject)" "AClass (in testproject)"
+ "AInt (in testproject)"
+ "ASuper (in testproject)"
+ "ASuperInt (in testproject)"
+ "ASuperSuper (in testproject)"
+ "B (in testproject.A$)"
+ "C (in testproject.A$)"
+ "D (in testproject.A$)"
+ "I (in testproject.A$)"
+ "Main (in testproject)")
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.Main"
+                                                     "test"
+                                                     nil
+                                                     nil))
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.Main"
+                                                     "<init>"
+                                                     nil
+                                                     nil))
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.ASuperSuper"
+                                                     "method2"
+                                                     nil
+                                                     nil))
+(("testproject/ASuperSuper")
+ ("testproject/ASuper" ("testproject/A") ("testproject/AClass")))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.ASuper"
+                                                     "method1"
+                                                     nil
+                                                     nil))
+(("testproject/ASuper")
+ ("testproject/A")
+ ("testproject/AClass"))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.ASuper"
+                                                     "<init>"
+                                                     nil
+                                                     nil))
+(("testproject/ASuper")
+ (("testproject/A")
+  ("testproject/A$C"))
+ ("testproject/AClass"))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.AInt"
+                                                     "method3"
+                                                     nil
+                                                     nil))
+(("testproject/AInt")
+ ("testproject/A")
+ ("testproject/AClass"))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.AInt"
+                                                     "method1"
+                                                     nil
+                                                     nil))
+(("testproject/AInt")
+ ("testproject/A")
+ ("testproject/AClass"))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.AClass"
+                                                     "method4"
+                                                     nil
+                                                     nil))
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.AClass"
+                                                     "method3"
+                                                     nil
+                                                     nil))
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.AClass"
+                                                     "method2"
+                                                     nil
+                                                     nil))
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.AClass"
+                                                     "method1"
+                                                     nil
+                                                     nil))
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.Main"
+                                                     "test"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.Main"
+                                                     "test"
+                                                     nil
+                                                     nil)
+                                           :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.Main"
+                                                     "<init>"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.Main"
+                                                     "<init>"
+                                                     nil
+                                                     nil)
+                                           :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.ASuperSuper"
+                                                     "method2"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+(("testproject.Main" "test" "<void>" nil 24 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 23 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.ASuperSuper"
+                                                     "method2"
+                                                     nil
+                                                     nil)
+                                           :strict)
+(("testproject.Main" "test" "<void>" nil 24 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.ASuper"
+                                                     "method1"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+(("testproject.Main" "test" "<void>" nil 22 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.ASuper"
+                                                     "method1"
+                                                     nil
+                                                     nil)
+                                           :strict)
+(("testproject.Main" "test" "<void>" nil 22 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.ASuper"
+                                                     "<init>"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+(("testproject.AClass" "<init>" "<void>" nil 3 nil 0)
+ ("testproject.A" "<init>" "<void>" nil 3 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.ASuper"
+                                                     "<init>"
+                                                     nil
+                                                     nil)
+                                           :strict)
+(("testproject.AClass" "<init>" "<void>" nil 3 nil 0)
+ ("testproject.A" "<init>" "<void>" nil 3 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.AInt"
+                                                     "method3"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+("testproject.AClass" ("testproject.Main" "test" "<void>" nil 20 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.AInt"
+                                                     "method3"
+                                                     nil
+                                                     nil)
+                                           :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.AInt"
+                                                     "method1"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+("testproject.AClass" ("testproject.Main" "test" "<void>" nil 18 nil 0)
+ "testproject.AInt"
+ ("testproject.Main" "test" "<void>" nil 25 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.AInt"
+                                                     "method1"
+                                                     nil
+                                                     nil)
+                                           :strict)
+(("testproject.Main" "test" "<void>" nil 25 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.AClass"
+                                                     "method4"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+(("testproject.Main" "test" "<void>" nil 21 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.AClass"
+                                                     "method4"
+                                                     nil
+                                                     nil)
+                                           :strict)
+(("testproject.Main" "test" "<void>" nil 21 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.AClass"
+                                                     "method3"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+(("testproject.Main" "test" "<void>" nil 20 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.AClass"
+                                                     "method3"
+                                                     nil
+                                                     nil)
+                                           :strict)
+(("testproject.Main" "test" "<void>" nil 20 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.AClass"
+                                                     "method2"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+(("testproject.Main" "test" "<void>" nil 19 nil 0)
+ "testproject.ASuperSuper"
+ ("testproject.Main" "test" "<void>" nil 24 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 23 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.AClass"
+                                                     "method2"
+                                                     nil
+                                                     nil)
+                                           :strict)
+(("testproject.Main" "test" "<void>" nil 19 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.AClass"
+                                                     "method1"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+(("testproject.Main" "test" "<void>" nil 18 nil 0)
+ "testproject.AInt"
+ ("testproject.Main" "test" "<void>" nil 25 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 22 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.AClass"
+                                                     "method1"
+                                                     nil
+                                                     nil)
+                                           :strict)
+(("testproject.Main" "test" "<void>" nil 18 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (variable "testproject.AClass"
+                                                     "foo"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+(("testproject.AClass" "method1" "<void>" nil 8 t 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (variable "testproject.AClass"
+                                                     "foo"
+                                                     nil
+                                                     nil)
+                                           :strict)
+(("testproject.AClass" "method1" "<void>" nil 8 t 0))
+
+
+(TEST-usages-after-changing-classpath TEST-subs both "testproject.ASuper")
+("testproject/ASuper" "testproject/AClass")
+
+
+(TEST-usages-after-changing-classpath TEST-subs
+                                      implementers
+                                      "testproject.ASuper")
+("testproject/ASuper" "testproject/AClass")
+
+
+(TEST-usages-after-changing-classpath TEST-subs
+                                      subclasses
+                                      "testproject.ASuper")
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs
+                                      both
+                                      "testproject.ASuperSuper")
+("testproject/ASuperSuper" ("testproject/ASuper" "testproject/AClass"))
+
+
+(TEST-usages-after-changing-classpath TEST-subs
+                                      implementers
+                                      "testproject.ASuperSuper")
+("testproject/ASuperSuper" ("testproject/ASuper" "testproject/AClass"))
+
+
+(TEST-usages-after-changing-classpath TEST-subs
+                                      subclasses
+                                      "testproject.ASuperSuper")
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs both "testproject.A")
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs implementers "testproject.A")
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs subclasses "testproject.A")
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs both "testproject.ASuperInt")
+(["testproject/ASuperInt" interface] ("testproject/ASuper" "testproject/AClass"))
+
+
+(TEST-usages-after-changing-classpath TEST-subs
+                                      implementers
+                                      "testproject.ASuperInt")
+(["testproject/ASuperInt" interface] ("testproject/ASuper" "testproject/AClass"))
+
+
+(TEST-usages-after-changing-classpath TEST-subs
+                                      subclasses
+                                      "testproject.ASuperInt")
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs both "testproject.Main")
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs
+                                      implementers
+                                      "testproject.Main")
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs
+                                      subclasses
+                                      "testproject.Main")
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs both "testproject.AInt")
+(["testproject/AInt" interface] "testproject/AClass")
+
+
+(TEST-usages-after-changing-classpath TEST-subs
+                                      implementers
+                                      "testproject.AInt")
+(["testproject/AInt" interface] "testproject/AClass")
+
+
+(TEST-usages-after-changing-classpath TEST-subs
+                                      subclasses
+                                      "testproject.AInt")
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-class-list)
+("AClass (in testproject)" "AInt (in testproject)"
+ "ASuper (in testproject)"
+ "ASuperInt (in testproject)"
+ "ASuperSuper (in testproject)"
+ "Main (in testproject)")
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.Main"
+                                                "test"
+                                                nil
+                                                nil))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.Main"
+                                                "<init>"
+                                                nil
+                                                nil))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.ASuperSuper"
+                                                "method2"
+                                                nil
+                                                nil))
+(("testproject/ASuperSuper")
+ ("testproject/ASuper" ("testproject/AClass")))
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.ASuper"
+                                                "method1"
+                                                nil
+                                                nil))
+(("testproject/ASuper")
+ ("testproject/AClass"))
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.ASuper"
+                                                "<init>"
+                                                nil
+                                                nil))
+(("testproject/ASuper")
+ ("testproject/AClass"))
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.AInt"
+                                                "method3"
+                                                nil
+                                                nil))
+(("testproject/AInt")
+ ("testproject/AClass"))
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.AInt"
+                                                "method1"
+                                                nil
+                                                nil))
+(("testproject/AInt")
+ ("testproject/AClass"))
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.AClass"
+                                                "method4"
+                                                nil
+                                                nil))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.AClass"
+                                                "method3"
+                                                nil
+                                                nil))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.AClass"
+                                                "method2"
+                                                nil
+                                                nil))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.AClass"
+                                                "method1"
+                                                nil
+                                                nil))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.Main"
+                                                "test"
+                                                nil
+                                                nil)
+                                      :notstrict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.Main"
+                                                "test"
+                                                nil
+                                                nil)
+                                      :strict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.Main"
+                                                "<init>"
+                                                nil
+                                                nil)
+                                      :notstrict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.Main"
+                                                "<init>"
+                                                nil
+                                                nil)
+                                      :strict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.ASuperSuper"
+                                                "method2"
+                                                nil
+                                                nil)
+                                      :notstrict)
+(("testproject.Main" "test" "<void>" nil 24 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 23 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.ASuperSuper"
+                                                "method2"
+                                                nil
+                                                nil)
+                                      :strict)
+(("testproject.Main" "test" "<void>" nil 24 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.ASuper"
+                                                "method1"
+                                                nil
+                                                nil)
+                                      :notstrict)
+(("testproject.Main" "test" "<void>" nil 22 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.ASuper"
+                                                "method1"
+                                                nil
+                                                nil)
+                                      :strict)
+(("testproject.Main" "test" "<void>" nil 22 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.ASuper"
+                                                "<init>"
+                                                nil
+                                                nil)
+                                      :notstrict)
+(("testproject.AClass" "<init>" "<void>" nil 3 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.ASuper"
+                                                "<init>"
+                                                nil
+                                                nil)
+                                      :strict)
+(("testproject.AClass" "<init>" "<void>" nil 3 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.AInt"
+                                                "method3"
+                                                nil
+                                                nil)
+                                      :notstrict)
+("testproject.AClass" ("testproject.Main" "test" "<void>" nil 20 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.AInt"
+                                                "method3"
+                                                nil
+                                                nil)
+                                      :strict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.AInt"
+                                                "method1"
+                                                nil
+                                                nil)
+                                      :notstrict)
+("testproject.AClass" ("testproject.Main" "test" "<void>" nil 18 nil 0)
+ "testproject.AInt"
+ ("testproject.Main" "test" "<void>" nil 25 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.AInt"
+                                                "method1"
+                                                nil
+                                                nil)
+                                      :strict)
+(("testproject.Main" "test" "<void>" nil 25 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.AClass"
+                                                "method4"
+                                                nil
+                                                nil)
+                                      :notstrict)
+(("testproject.Main" "test" "<void>" nil 21 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.AClass"
+                                                "method4"
+                                                nil
+                                                nil)
+                                      :strict)
+(("testproject.Main" "test" "<void>" nil 21 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.AClass"
+                                                "method3"
+                                                nil
+                                                nil)
+                                      :notstrict)
+(("testproject.Main" "test" "<void>" nil 20 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.AClass"
+                                                "method3"
+                                                nil
+                                                nil)
+                                      :strict)
+(("testproject.Main" "test" "<void>" nil 20 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.AClass"
+                                                "method2"
+                                                nil
+                                                nil)
+                                      :notstrict)
+(("testproject.Main" "test" "<void>" nil 19 nil 0)
+ "testproject.ASuperSuper"
+ ("testproject.Main" "test" "<void>" nil 24 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 23 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.AClass"
+                                                "method2"
+                                                nil
+                                                nil)
+                                      :strict)
+(("testproject.Main" "test" "<void>" nil 19 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.AClass"
+                                                "method1"
+                                                nil
+                                                nil)
+                                      :notstrict)
+(("testproject.Main" "test" "<void>" nil 18 nil 0)
+ "testproject.AInt"
+ ("testproject.Main" "test" "<void>" nil 25 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 22 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.AClass"
+                                                "method1"
+                                                nil
+                                                nil)
+                                      :strict)
+(("testproject.Main" "test" "<void>" nil 18 nil 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (variable "testproject.AClass"
+                                                "foo"
+                                                nil
+                                                nil)
+                                      :notstrict)
+(("testproject.AClass" "method1" "<void>" nil 8 t 0))
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (variable "testproject.AClass"
+                                                "foo"
+                                                nil
+                                                nil)
+                                      :strict)
+(("testproject.AClass" "method1" "<void>" nil 8 t 0))
+
+
+(TEST-usages-after-changing-classpath TEST-subs both "testproject.AClass")
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs
+                                      implementers
+                                      "testproject.AClass")
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs
+                                      subclasses
+                                      "testproject.AClass")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs both "testproject.A$C")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           implementers
+                                           "testproject.A$C")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           subclasses
+                                           "testproject.A$C")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs both "testproject.A$I")
+(["testproject/A$I" interface] "testproject/A$C")
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           implementers
+                                           "testproject.A$I")
+(["testproject/A$I" interface] "testproject/A$C")
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           subclasses
+                                           "testproject.A$I")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs both "testproject.A$B")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           implementers
+                                           "testproject.A$B")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           subclasses
+                                           "testproject.A$B")
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.A$I"
+                                                "methodI"
+                                                "int"
+                                                ("B")))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.A$C"
+                                                "methodI"
+                                                "int"
+                                                ("B")))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.A$B"
+                                                "methodB"
+                                                "A"
+                                                nil))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.A"
+                                                "method4"
+                                                nil
+                                                nil))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.A"
+                                                "method3"
+                                                nil
+                                                nil))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.A"
+                                                "method2"
+                                                nil
+                                                nil))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.A"
+                                                "method1"
+                                                nil
+                                                nil))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (variable "testproject.A$I"
+                                                "b"
+                                                nil
+                                                nil)
+                                      :notstrict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (variable "testproject.A$I"
+                                                "b"
+                                                nil
+                                                nil)
+                                      :strict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A$I"
+                                                "methodI"
+                                                "int"
+                                                ("B"))
+                                      :notstrict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A$I"
+                                                "methodI"
+                                                "int"
+                                                ("B"))
+                                      :strict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (variable "testproject.A$C"
+                                                "b"
+                                                nil
+                                                nil)
+                                      :notstrict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (variable "testproject.A$C"
+                                                "b"
+                                                nil
+                                                nil)
+                                      :strict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A$C"
+                                                "methodI"
+                                                "int"
+                                                ("B"))
+                                      :notstrict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A$C"
+                                                "methodI"
+                                                "int"
+                                                ("B"))
+                                      :strict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A$B"
+                                                "methodB"
+                                                "A"
+                                                nil)
+                                      :notstrict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A$B"
+                                                "methodB"
+                                                "A"
+                                                nil)
+                                      :strict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A"
+                                                "method4"
+                                                nil
+                                                nil)
+                                      :notstrict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A"
+                                                "method4"
+                                                nil
+                                                nil)
+                                      :strict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A"
+                                                "method3"
+                                                nil
+                                                nil)
+                                      :notstrict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A"
+                                                "method3"
+                                                nil
+                                                nil)
+                                      :strict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A"
+                                                "method2"
+                                                nil
+                                                nil)
+                                      :notstrict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A"
+                                                "method2"
+                                                nil
+                                                nil)
+                                      :strict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A"
+                                                "method1"
+                                                nil
+                                                nil)
+                                      :notstrict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.A"
+                                                "method1"
+                                                nil
+                                                nil)
+                                      :strict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (variable "testproject.A"
+                                                "foo"
+                                                nil
+                                                nil)
+                                      :notstrict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (variable "testproject.A"
+                                                "foo"
+                                                nil
+                                                nil)
+                                      :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.A$I"
+                                                     "methodI"
+                                                     "int"
+                                                     ("B")))
+(("testproject/A$I")
+ ("testproject/A$C"))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.A$C"
+                                                     "methodI"
+                                                     "int"
+                                                     ("B")))
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.A$B"
+                                                     "methodB"
+                                                     "A"
+                                                     nil))
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.A"
+                                                     "method4"
+                                                     nil
+                                                     nil))
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.A"
+                                                     "method3"
+                                                     nil
+                                                     nil))
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.A"
+                                                     "method2"
+                                                     nil
+                                                     nil))
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.A"
+                                                     "method1"
+                                                     nil
+                                                     nil))
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (variable "testproject.A$I"
+                                                     "b"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (variable "testproject.A$I"
+                                                     "b"
+                                                     nil
+                                                     nil)
+                                           :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A$I"
+                                                     "methodI"
+                                                     "int"
+                                                     ("B"))
+                                           :notstrict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A$I"
+                                                     "methodI"
+                                                     "int"
+                                                     ("B"))
+                                           :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (variable "testproject.A$C"
+                                                     "b"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (variable "testproject.A$C"
+                                                     "b"
+                                                     nil
+                                                     nil)
+                                           :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A$C"
+                                                     "methodI"
+                                                     "int"
+                                                     ("B"))
+                                           :notstrict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A$C"
+                                                     "methodI"
+                                                     "int"
+                                                     ("B"))
+                                           :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A$B"
+                                                     "methodB"
+                                                     "A"
+                                                     nil)
+                                           :notstrict)
+("testproject.A$B" ("testproject.A$C" "methodI"
+                    "int"
+                    ("testproject.A$B")
+                    32
+                    nil
+                    0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A$B"
+                                                     "methodB"
+                                                     "A"
+                                                     nil)
+                                           :strict)
+("testproject.A$B" ("testproject.A$C" "methodI"
+                    "int"
+                    ("testproject.A$B")
+                    32
+                    nil
+                    0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A"
+                                                     "method4"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A"
+                                                     "method4"
+                                                     nil
+                                                     nil)
+                                           :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A"
+                                                     "method3"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A"
+                                                     "method3"
+                                                     nil
+                                                     nil)
+                                           :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A"
+                                                     "method2"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+("testproject.ASuperSuper" ("testproject.Main" "test" "<void>" nil 24 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 23 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A"
+                                                     "method2"
+                                                     nil
+                                                     nil)
+                                           :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A"
+                                                     "method1"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+("testproject.AInt" ("testproject.Main" "test" "<void>" nil 25 nil 0)
+ "testproject.ASuper"
+ ("testproject.Main" "test" "<void>" nil 22 nil 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.A"
+                                                     "method1"
+                                                     nil
+                                                     nil)
+                                           :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (variable "testproject.A"
+                                                     "foo"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+("testproject.A" ("testproject.A" "method1" "<void>" nil 8 t 0))
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (variable "testproject.A"
+                                                     "foo"
+                                                     nil
+                                                     nil)
+                                           :strict)
+("testproject.A" ("testproject.A" "method1" "<void>" nil 8 t 0))
+
+
+(TEST-usages-after-changing-classpath TEST-subs-implementing-method
+                                      (function "testproject.ASuper"
+                                                "method5"
+                                                nil
+                                                nil))
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.ASuper"
+                                                "method5"
+                                                nil
+                                                nil)
+                                      :notstrict)
+nil
+
+
+(TEST-usages-after-changing-classpath TEST-usages
+                                      (function "testproject.ASuper"
+                                                "method5"
+                                                nil
+                                                nil)
+                                      :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs-implementing-method
+                                           (function "testproject.ASuper"
+                                                     "method5"
+                                                     nil
+                                                     nil))
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.ASuper"
+                                                     "method5"
+                                                     nil
+                                                     nil)
+                                           :notstrict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-usages
+                                           (function "testproject.ASuper"
+                                                     "method5"
+                                                     nil
+                                                     nil)
+                                           :strict)
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs both "testproject.A$D")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           implementers
+                                           "testproject.A$D")
+nil
+
+
+(TEST-usages-after-adding-deleting-classes TEST-subs
+                                           subclasses
+                                           "testproject.A$D")
+nil
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

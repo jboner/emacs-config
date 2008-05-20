@@ -1,0 +1,7 @@
+#name : option match { case None => .. }
+# --
+${1:option} match {
+  case None => $0
+  case Some(res) => 
+
+}

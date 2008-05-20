@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:35:51 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module sb_services</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module sb_services</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sb_services.SB_Service.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SB_Service</SPAN></A>(<A CLASS="DocLink" HREF="Object.OwnerObject.html">OwnerObject</A>)</SPAN><SPAN CLASS="OneLiner"> # Support service for SourceBuff classes.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sb_services.SB_ServiceFullState.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SB_ServiceFullState</SPAN></A>(<A CLASS="DocLink" HREF="sb_services.SB_ServiceState.html">SB_ServiceState</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sb_services.SB_ServiceIndent.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SB_ServiceIndent</SPAN></A>(<A CLASS="DocLink" HREF="sb_services.SB_Service.html">SB_Service</A>)</SPAN><SPAN CLASS="OneLiner"> # Provides code indentation services.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sb_services.SB_ServiceLang.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SB_ServiceLang</SPAN></A>(<A CLASS="DocLink" HREF="sb_services.SB_Service.html">SB_Service</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sb_services.SB_ServiceLineManip.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SB_ServiceLineManip</SPAN></A>(<A CLASS="DocLink" HREF="sb_services.SB_Service.html">SB_Service</A>)</SPAN><SPAN CLASS="OneLiner"> # Provides line numbering services.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sb_services.SB_ServiceState.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SB_ServiceState</SPAN></A>(<A CLASS="DocLink" HREF="sb_services.SB_Service.html">SB_Service</A>)</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Mediator\\sb_services.pyc'</SPAN></SPAN>
+</PRE><H2>Description</H2><P>
+This module defines a series of services that can be used by various
+[SourceBuff] subclasses to implement concrete methods.</P>
+<P>
+The concrete behaviour is factored into services as opposed to being
+implemented directly as methods of [SourceBuff] subclasses. This is to
+allow more flexible mixin of implementation of behaviours than can be
+supported through subclassing.</P>
+<P>
+For example, class SourceBuffX may need to implement some methods like
+class SourceBuffY, but other methods like class SourceBuffZ. With
+subclassing, SourceBuffX would have to derive from both SourceBuffY and
+SourceBuffZ, which means that either SourceBuffY would have to derive from
+SourceBuffZ or vice-versa (can't use multiple inheritance to make
+SourceBuffX inherit from both SourceBuffY and SourceBuffZ because that would
+result in method name clashes). But maybe SourceBuffY and SourceBuffZ need
+to be on different branches of the inheritance hierarchy.</P>
+<P>
+By implementing variants of a given methods as variants of a given
+service, we make it possible for two classes to use the same variant
+of a method even if they are not on the same branch of the inheritance
+hierarchy. Without such an approach, the code implementing that
+variant would have to be cloned and copied to the two classes.</P>
+<P>
+..[SourceBuff] SourceBuff.SourceBuff.html</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

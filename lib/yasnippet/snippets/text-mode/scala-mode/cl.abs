@@ -1,0 +1,5 @@
+#name : abstract class T { .. }
+# --
+abstract class ${1:name} {
+  $0
+}

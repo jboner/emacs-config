@@ -1,0 +1,690 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:13:22 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class PairedQuotes</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class PairedQuotes</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="config_helpers.html">config_helpers</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">config_helpers.PairedQuotes<BR>
+&nbsp;&nbsp;<A HREF="config_helpers.PairedPunctuation.html">config_helpers.PairedPunctuation</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="config_helpers.PunctuationSet.html">config_helpers.PunctuationSet</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object.Object<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">PairedQuotes</SPAN>(<A CLASS="DocLink" HREF="config_helpers.PairedPunctuation.html">PairedPunctuation</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PairedQuotes.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#config_helpers.PairedQuotes._add_single"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PairedQuotes._add_single</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">aliases</SPAN>, <SPAN CLASS="Argument">i</SPAN>, <SPAN CLASS="Argument">open_spoken_forms</SPAN>, <SPAN CLASS="Argument">close_spoken_forms</SPAN>)
+    <A CLASS="DocLink" HREF="#config_helpers.PairedQuotes.add"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PairedQuotes.add</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">written_form</SPAN>, <SPAN CLASS="Argument">singular_spoken_forms</SPAN>, <SPAN CLASS="Argument">plural_spoken_forms</SPAN>, <SPAN CLASS="Argument">no_empty=0</SPAN>)<SPAN CLASS="OneLiner"> # add a type of quotes</SPAN>
+    <A CLASS="DocLink" HREF="#config_helpers.PairedQuotes.create"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PairedQuotes.create</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">interp</SPAN>, <SPAN CLASS="Argument">force=0</SPAN>, <SPAN CLASS="Argument">dictation_only=0</SPAN>)
+    <A CLASS="DocLink" HREF="#config_helpers.PairedQuotes.set_prefixes"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PairedQuotes.set_prefixes</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">open_prefixes=None</SPAN>, <SPAN CLASS="Argument">close_prefixes=None</SPAN>)<SPAN CLASS="OneLiner"> # set the prefixes for the open/begin and close/end spoken forms</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from config_helpers.PunctuationSet</SPAN>
+    <A CLASS="DocLink" HREF="#config_helpers.PunctuationSet.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PunctuationSet.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">name</SPAN>, <SPAN CLASS="Argument">language=None</SPAN>, <SPAN CLASS="Argument">context=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#config_helpers.PunctuationSet._add_lsa"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PunctuationSet._add_lsa</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">aliases</SPAN>, <SPAN CLASS="Argument">written</SPAN>, <SPAN CLASS="Argument">spoken_forms</SPAN>, <SPAN CLASS="Argument">spacing</SPAN>)
+    <A CLASS="DocLink" HREF="#config_helpers.PunctuationSet._add_navigation"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PunctuationSet._add_navigation</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">commands</SPAN>, <SPAN CLASS="Argument">expression</SPAN>, <SPAN CLASS="Argument">spoken_forms</SPAN>)
+    <A CLASS="DocLink" HREF="#config_helpers.PunctuationSet.set_context"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PunctuationSet.set_context</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">context</SPAN>)<SPAN CLASS="OneLiner"> # set the target language</SPAN>
+    <A CLASS="DocLink" HREF="#config_helpers.PunctuationSet.set_direction_words"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PunctuationSet.set_direction_words</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">prev_word='previous'</SPAN>, <SPAN CLASS="Argument">next_word='next'</SPAN>)
+    <A CLASS="DocLink" HREF="#config_helpers.PunctuationSet.set_language"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PunctuationSet.set_language</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">language</SPAN>)<SPAN CLASS="OneLiner"> # set the target language</SPAN>
+    <A CLASS="DocLink" HREF="#config_helpers.PunctuationSet.set_name"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PunctuationSet.set_name</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">name</SPAN>)<SPAN CLASS="OneLiner"> # change the name to be used when adding LSAs and CSCs as a set</SPAN>
+    <A CLASS="DocLink" HREF="#config_helpers.PunctuationSet.set_side_words"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PunctuationSet.set_side_words</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">before_word='before'</SPAN>, <SPAN CLASS="Argument">after_word='after'</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from config_helpers.PairedPunctuation</SPAN>
+    <A CLASS="DocLink" HREF="#config_helpers.PairedPunctuation.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PairedPunctuation.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">singular_pair=None</SPAN>, <SPAN CLASS="Argument">plural_pair=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#config_helpers.PairedPunctuation._add_between"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PairedPunctuation._add_between</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">commands</SPAN>, <SPAN CLASS="Argument">action</SPAN>, <SPAN CLASS="Argument">singular</SPAN>, <SPAN CLASS="Argument">plural</SPAN>)
+    <A CLASS="DocLink" HREF="#config_helpers.PairedPunctuation._add_empty"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PairedPunctuation._add_empty</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">aliases</SPAN>, <SPAN CLASS="Argument">written</SPAN>, <SPAN CLASS="Argument">plural</SPAN>, <SPAN CLASS="Argument">spacing</SPAN>)
+    <A CLASS="DocLink" HREF="#config_helpers.PairedPunctuation._add_jump_out"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PairedPunctuation._add_jump_out</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">commands</SPAN>, <SPAN CLASS="Argument">open_written</SPAN>, <SPAN CLASS="Argument">close_written</SPAN>, <SPAN CLASS="Argument">plural</SPAN>)
+    <A CLASS="DocLink" HREF="#config_helpers.PairedPunctuation.set_empty_prefixes"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PairedPunctuation.set_empty_prefixes</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">empty_prefixes=None</SPAN>)<SPAN CLASS="OneLiner"> # set the prefixes for the left/open and right/close spoken forms</SPAN>
+    <A CLASS="DocLink" HREF="#config_helpers.PairedPunctuation.set_jump_out_words"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PairedPunctuation.set_jump_out_words</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">out_of='out of'</SPAN>, <SPAN CLASS="Argument">back='back'</SPAN>)
+    <A CLASS="DocLink" HREF="#config_helpers.PairedPunctuation.set_pair_forms"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">config_helpers.PairedPunctuation.set_pair_forms</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">singular_pair=None</SPAN>, <SPAN CLASS="Argument">plural_pair=None</SPAN>)
+
+</PRE><H2>Description</H2><P>
+paired quotes with identical written forms for left/open vs. 
+right/close, used to define punctuation navigation commands and LSAs</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR]</EM> written_forms
+<DD>written forms for each type of quote
+<DT>
+<EM>[[STR]]</EM> singular_spoken_forms
+<DD>corresponding (lists of) spoken forms 
+for single symbols (omitting open-/begin-/close-/end-)
+<DT>
+<EM>[[STR]]</EM> plural_spoken_forms
+<DD>corresponding spoken forms for 
+plural symbols
+<DT>
+<EM>[BOOL]</EM> no_empty
+<DD>corresponding flags indicating whether to omit 
+empty quotes form
+<DT>
+<EM>[STR] open_prefixes</EM>
+<DD>prefixes for open-/begin- member of the pair
+<DT>
+<EM>[STR] close_prefixes</EM>
+<DD>prefixes for close-/end- member of the pair
+
+</DL>
+<H2 ID="config_helpers.PairedQuotes._add_single" CLASS="Method">config_helpers.PairedQuotes._add_single(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">aliases</SPAN>, <SPAN CLASS="Argument">i</SPAN>, <SPAN CLASS="Argument">open_spoken_forms</SPAN>, <SPAN CLASS="Argument">close_spoken_forms</SPAN>)</H2>
+<P>None</P>
+
+<P>
+private method to add LSAs for dictation of open and close
+quotes</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>LSAliasSet aliases</EM>
+<DD>set to which to add the language-specific
+aliases 
+<DT>
+<EM>INT i</EM>
+<DD>index into list of written forms
+<DT>
+<EM>[STR] open_spoken_forms</EM>
+<DD>the spoken forms for the left/open
+symbol
+<DT>
+<EM>[STR] close_spoken_forms</EM>
+<DD>the spoken forms for the
+right/close symbol
+
+</DL>
+<H2 ID="config_helpers.PairedQuotes.add" CLASS="Method">config_helpers.PairedQuotes.add(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">written_form</SPAN>, <SPAN CLASS="Argument">singular_spoken_forms</SPAN>, <SPAN CLASS="Argument">plural_spoken_forms</SPAN>, <SPAN CLASS="Argument">no_empty=0</SPAN>)</H2>
+<P>add a type of quotes</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> written_form
+<DD>written form
+<DT>
+<EM>[STR]</EM> spoken_forms
+<DD>list of corresponding spoken forms 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="config_helpers.PairedQuotes.create" CLASS="Method">config_helpers.PairedQuotes.create(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">interp</SPAN>, <SPAN CLASS="Argument">force=0</SPAN>, <SPAN CLASS="Argument">dictation_only=0</SPAN>)</H2>
+<P>None</P>
+
+<P>
+add LSAs for dictation of punctuation symbols and CSCs for
+punctuation navigation</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>CmdInterp interp</EM>
+<DD>command interpreter (or NewMediatorObject,
+which will forward to the interpreter) to which to add the LSAs
+and CSCs
+<DT>
+<EM>BOOL force</EM>
+<DD>if true, create aliases even when another alias
+with the same spoken form exists (normally, for standard forms,
+we do not do this).
+<DT>
+<EM>BOOL dictation_only</EM>
+<DD>if true, add only LSAs for dictation 
+of punctuation symbols, but not punctuation navigation commands
+
+</DL>
+<H2 ID="config_helpers.PairedQuotes.set_prefixes" CLASS="Method">config_helpers.PairedQuotes.set_prefixes(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">open_prefixes=None</SPAN>, <SPAN CLASS="Argument">close_prefixes=None</SPAN>)</H2>
+<P>set the prefixes for the open/begin and close/end spoken forms</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR] open_prefixes</EM>
+<DD>prefixes for open/begin member of the pair, 
+or None for ['open-', 'begin-']
+<DT>
+<EM>[STR] close_prefixes</EM>
+<DD>prefixes for close/end member of the pair,
+or None for ['close-', 'end-']
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises existing attributes, unless those attributes
+already exist</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="config_helpers.PunctuationSet.__init__" CLASS="Method">config_helpers.PunctuationSet.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">name</SPAN>, <SPAN CLASS="Argument">language=None</SPAN>, <SPAN CLASS="Argument">context=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+
+NOTE: These parameters can also be set later</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR name</EM>
+<DD>name of the LSAliasSet to use when adding LSAs.  The
+suffix " navigation" will be added to generat the name of the CSCmdSet
+when adding punctuation navigation 
+<DT>
+<EM>STR language</EM>
+<DD>language of the punctuation LSAs, or None to
+add language-independent aliases
+<DT>
+<EM>Context context</EM>
+<DD>context for punctuation navigation
+commands, or None for ContAny.
+
+</DL>
+<H2 ID="config_helpers.PunctuationSet._add_lsa" CLASS="Method">config_helpers.PunctuationSet._add_lsa(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">aliases</SPAN>, <SPAN CLASS="Argument">written</SPAN>, <SPAN CLASS="Argument">spoken_forms</SPAN>, <SPAN CLASS="Argument">spacing</SPAN>)</H2>
+<P>None</P>
+
+<P>
+private method to add an LSA for dictation of this 
+punctuation symbol</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>LSAliasSet aliases</EM>
+<DD>set to which to add the language-specific
+aliases 
+<DT>
+<EM>STR written</EM>
+<DD>the written form of the symbol
+<DT>
+<EM>[STR] spoken_forms</EM>
+<DD>the spoken forms
+<DT>
+<EM>INT spacing</EM>
+<DD>the spacing flags (see SpacingState.py)
+
+</DL>
+<H2 ID="config_helpers.PunctuationSet._add_navigation" CLASS="Method">config_helpers.PunctuationSet._add_navigation(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">commands</SPAN>, <SPAN CLASS="Argument">expression</SPAN>, <SPAN CLASS="Argument">spoken_forms</SPAN>)</H2>
+<P>None</P>
+
+<P>
+private method to add CSCs for navigation by this 
+punctuation symbol</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>CSCmdSet commands</EM>
+<DD>set to which to add the context-sensitive
+commands
+<DT>
+<EM>STR expression</EM>
+<DD>a regular expression matching the symbol
+<DT>
+<EM>[STR] spoken_forms</EM>
+<DD>the spoken forms
+
+</DL>
+<H2 ID="config_helpers.PunctuationSet.set_context" CLASS="Method">config_helpers.PunctuationSet.set_context(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">context</SPAN>)</H2>
+<P>set the target language</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>Context context</EM>
+<DD>context for punctuation navigation
+commands, or None for ContAny.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="config_helpers.PunctuationSet.set_direction_words" CLASS="Method">config_helpers.PunctuationSet.set_direction_words(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">prev_word='previous'</SPAN>, <SPAN CLASS="Argument">next_word='next'</SPAN>)</H2>
+<P>None</P>
+
+<P>
+set the values of direction words used in
+navigation-by-punctuation</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR prev_word, next_word</EM>
+<DD>prefixes for moving to 
+previous/next punctuation mark
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="config_helpers.PunctuationSet.set_language" CLASS="Method">config_helpers.PunctuationSet.set_language(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">language</SPAN>)</H2>
+<P>set the target language</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR language</EM>
+<DD>language of the punctuation LSAs, or None to
+add language-independent aliases
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="config_helpers.PunctuationSet.set_name" CLASS="Method">config_helpers.PunctuationSet.set_name(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">name</SPAN>)</H2>
+<P>change the name to be used when adding LSAs and CSCs as a set</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR name</EM>
+<DD>name of the LSAliasSet to use when adding LSAs.  The
+suffix " navigation" will be added to generat the name of the CSCmdSet
+when adding punctuation navigation 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="config_helpers.PunctuationSet.set_side_words" CLASS="Method">config_helpers.PunctuationSet.set_side_words(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">before_word='before'</SPAN>, <SPAN CLASS="Argument">after_word='after'</SPAN>)</H2>
+<P>None</P>
+
+<P>
+set the values of words indicating where the cursor should be
+placed in navigation-by-punctuation</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR before_word, after_word</EM>
+<DD>prefixes for 
+moving before/after the punctuation mark
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="config_helpers.PairedPunctuation.__init__" CLASS="Method">config_helpers.PairedPunctuation.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">singular_pair=None</SPAN>, <SPAN CLASS="Argument">plural_pair=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+<STRONG>INPUTS</STRONG>
+</P>
+<H2 ID="config_helpers.PairedPunctuation._add_between" CLASS="Method">config_helpers.PairedPunctuation._add_between(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">commands</SPAN>, <SPAN CLASS="Argument">action</SPAN>, <SPAN CLASS="Argument">singular</SPAN>, <SPAN CLASS="Argument">plural</SPAN>)</H2>
+<P>None</P>
+
+<P>
+private method to add CSCs for dictating a pair of symbols 
+and placing the cursor in the middle.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>CSCmdSet commands</EM>
+<DD>set to which to add the context-sensitive
+commands
+<DT>
+<EM>ActionInsert action</EM>
+<DD>action which adds the pair of
+symbols around the cursor
+<DT>
+<EM>[STR] singular</EM>
+<DD>list of singular spoken forms for the symbol
+<DT>
+<EM>[STR] plural</EM>
+<DD>list of plural spoken forms for the symbol
+
+</DL>
+<H2 ID="config_helpers.PairedPunctuation._add_empty" CLASS="Method">config_helpers.PairedPunctuation._add_empty(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">aliases</SPAN>, <SPAN CLASS="Argument">written</SPAN>, <SPAN CLASS="Argument">plural</SPAN>, <SPAN CLASS="Argument">spacing</SPAN>)</H2>
+<P>None</P>
+
+<P>
+private method to add LSAs for dictation of empty pairs 
+of symbols</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>LSAliasSet aliases</EM>
+<DD>set to which to add the language-specific
+aliases 
+<DT>
+<EM>STR written</EM>
+<DD>the written form of the empty pair
+<DT>
+<EM>[STR] plural</EM>
+<DD>list of plural spoken forms for the symbol
+<DT>
+<EM>INT spacing</EM>
+<DD>the spacing flags (see SpacingState.py)
+
+</DL>
+<H2 ID="config_helpers.PairedPunctuation._add_jump_out" CLASS="Method">config_helpers.PairedPunctuation._add_jump_out(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">commands</SPAN>, <SPAN CLASS="Argument">open_written</SPAN>, <SPAN CLASS="Argument">close_written</SPAN>, <SPAN CLASS="Argument">plural</SPAN>)</H2>
+<P>None</P>
+
+<P>
+private method to add CSCs for jumping out of a pair of
+symbols.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>CSCmdSet commands</EM>
+<DD>set to which to add the context-sensitive
+commands
+<DT>
+<EM>STR open_written</EM>
+<DD>written form for the opening symbol of the pair
+<DT>
+<EM>STR close_written</EM>
+<DD>written form for the closing symbol of the pair
+<DT>
+<EM>[STR] plural</EM>
+<DD>list of plural spoken forms for the symbol
+
+</DL>
+<H2 ID="config_helpers.PairedPunctuation.set_empty_prefixes" CLASS="Method">config_helpers.PairedPunctuation.set_empty_prefixes(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">empty_prefixes=None</SPAN>)</H2>
+<P>set the prefixes for the left/open and right/close spoken forms</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR] empty_prefixes</EM>
+<DD>list of prefixes to singular form(s) for 
+dictating an empty pair of symbols
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="config_helpers.PairedPunctuation.set_jump_out_words" CLASS="Method">config_helpers.PairedPunctuation.set_jump_out_words(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">out_of='out of'</SPAN>, <SPAN CLASS="Argument">back='back'</SPAN>)</H2>
+<P>None</P>
+
+<P>
+set the values of words used in commands to jump out of a
+pair of symbols</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR out_of</EM>
+<DD>prefix for commands to jump forward out of a 
+pair of symbols
+<DT>
+<EM>STR back</EM>
+<DD>prefix to out_of for commands to jump back out 
+of a pair of symbols
+<STRONG>OUTPUTS</STRONG>
+</DL>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="config_helpers.PairedPunctuation.set_pair_forms" CLASS="Method">config_helpers.PairedPunctuation.set_pair_forms(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">singular_pair=None</SPAN>, <SPAN CLASS="Argument">plural_pair=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+set the format strings for spoken forms for dictating pairs 
+of symbols.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR] singular_pair</EM>
+<DD>list of format strings (containing %s for
+which the singular form of the symbol name will be substituted)
+to create spoken forms for dictating a pair of symbols 
+and placing the cursor in the middle.
+<DT>
+<EM>[STR] plural_pair</EM>
+<DD>list of format strings (containing %s for
+which the plural form of the symbol name will be substituted)
+to create spoken forms for dictating a pair of symbols 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

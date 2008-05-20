@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed May 08 13:05:44 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class HelloTest</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class HelloTest</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="unit_testing.html">unit_testing</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">unit_testing.HelloTest<BR>
+&nbsp;&nbsp;unittest.TestCase<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">HelloTest</SPAN>(<A CLASS="DocLink" HREF="unittest.TestCase.html">TestCase</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unit_testing.HelloTest.test_1</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unit_testing.HelloTest.test_hello</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from unittest.TestCase</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.__call__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">result=None</SPAN>)
+    <A CLASS="DocLink" HREF="#unittest.TestCase.__exc_info"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.__exc_info</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#unittest.TestCase.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">methodName='runTest'</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.__repr__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.__str__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.countTestCases</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.debug</SPAN>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # Run the test without collecting errors in a TestResult</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.defaultTestResult</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.fail</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)<SPAN CLASS="OneLiner"> # Fail immediately, with the given message.</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.failIf</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">expr</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)<SPAN CLASS="OneLiner"> # Fail the test if the expression is true.</SPAN>
+    <A CLASS="DocLink" HREF="#unittest.TestCase.failIfEqual"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.failIfEqual</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)
+    <A CLASS="DocLink" HREF="#unittest.TestCase.failIfEqual"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.failIfEqual</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)
+    <A CLASS="DocLink" HREF="#unittest.TestCase.failIfEqual"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.failIfEqual</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.failUnless</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">expr</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)<SPAN CLASS="OneLiner"> # Fail the test unless the expression is true.</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.failUnless</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">expr</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)<SPAN CLASS="OneLiner"> # Fail the test unless the expression is true.</SPAN>
+    <A CLASS="DocLink" HREF="#unittest.TestCase.failUnlessEqual"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.failUnlessEqual</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)
+    <A CLASS="DocLink" HREF="#unittest.TestCase.failUnlessEqual"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.failUnlessEqual</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)
+    <A CLASS="DocLink" HREF="#unittest.TestCase.failUnlessEqual"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.failUnlessEqual</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)
+    <A CLASS="DocLink" HREF="#unittest.TestCase.failUnlessRaises"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.failUnlessRaises</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">excClass</SPAN>, <SPAN CLASS="Argument">callableObj</SPAN>, <SPAN CLASS="Argument">*args</SPAN>, <SPAN CLASS="Argument">**kwargs</SPAN>)
+    <A CLASS="DocLink" HREF="#unittest.TestCase.failUnlessRaises"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.failUnlessRaises</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">excClass</SPAN>, <SPAN CLASS="Argument">callableObj</SPAN>, <SPAN CLASS="Argument">*args</SPAN>, <SPAN CLASS="Argument">**kwargs</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.id</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.run</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">result=None</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.setUp</SPAN>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # Hook method for setting up the test fixture before exercising it.</SPAN>
+    <A CLASS="DocLink" HREF="#unittest.TestCase.shortDescription"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.shortDescription</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">unittest.TestCase.tearDown</SPAN>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # Hook method for deconstructing the test fixture after testing it.</SPAN>
+
+</PRE><H2 ID="unittest.TestCase.__exc_info" CLASS="Method">unittest.TestCase.__exc_info(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Return a version of sys.exc_info() with the traceback frame
+minimised; usually the top level of the traceback frame is not
+needed.
+        </P>
+<H2 ID="unittest.TestCase.__init__" CLASS="Method">unittest.TestCase.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">methodName='runTest'</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Create an instance of the class that will use the named test
+method when executed. Raises a ValueError if the instance does
+not have a method with the specified name.
+        </P>
+<H2 ID="unittest.TestCase.failIfEqual" CLASS="Method">unittest.TestCase.failIfEqual(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Fail if the two objects are equal as determined by the <CODE>==</CODE>
+operator.
+        </P>
+<H2 ID="unittest.TestCase.failIfEqual" CLASS="Method">unittest.TestCase.failIfEqual(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Fail if the two objects are equal as determined by the <CODE>==</CODE>
+operator.
+        </P>
+<H2 ID="unittest.TestCase.failIfEqual" CLASS="Method">unittest.TestCase.failIfEqual(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Fail if the two objects are equal as determined by the <CODE>==</CODE>
+operator.
+        </P>
+<H2 ID="unittest.TestCase.failUnlessEqual" CLASS="Method">unittest.TestCase.failUnlessEqual(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Fail if the two objects are unequal as determined by the <CODE>!=</CODE>
+operator.
+        </P>
+<H2 ID="unittest.TestCase.failUnlessEqual" CLASS="Method">unittest.TestCase.failUnlessEqual(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Fail if the two objects are unequal as determined by the <CODE>!=</CODE>
+operator.
+        </P>
+<H2 ID="unittest.TestCase.failUnlessEqual" CLASS="Method">unittest.TestCase.failUnlessEqual(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>, <SPAN CLASS="Argument">msg=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Fail if the two objects are unequal as determined by the <CODE>!=</CODE>
+operator.
+        </P>
+<H2 ID="unittest.TestCase.failUnlessRaises" CLASS="Method">unittest.TestCase.failUnlessRaises(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">excClass</SPAN>, <SPAN CLASS="Argument">callableObj</SPAN>, <SPAN CLASS="Argument">*args</SPAN>, <SPAN CLASS="Argument">**kwargs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Fail unless an exception of class excClass is thrown
+by callableObj when invoked with arguments args and keyword
+arguments kwargs. If a different type of exception is
+thrown, it will not be caught, and the test case will be
+deemed to have suffered an error, exactly as for an
+unexpected exception.
+        </P>
+<H2 ID="unittest.TestCase.failUnlessRaises" CLASS="Method">unittest.TestCase.failUnlessRaises(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">excClass</SPAN>, <SPAN CLASS="Argument">callableObj</SPAN>, <SPAN CLASS="Argument">*args</SPAN>, <SPAN CLASS="Argument">**kwargs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Fail unless an exception of class excClass is thrown
+by callableObj when invoked with arguments args and keyword
+arguments kwargs. If a different type of exception is
+thrown, it will not be caught, and the test case will be
+deemed to have suffered an error, exactly as for an
+unexpected exception.
+        </P>
+<H2 ID="unittest.TestCase.shortDescription" CLASS="Method">unittest.TestCase.shortDescription(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Returns a one-line description of the test, or None if no
+description has been provided.</P>
+<P>
+The default implementation of this method returns the first line of
+the specified test method's docstring.
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

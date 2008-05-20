@@ -1,0 +1,5 @@
+#name : intercept(classOf[T]) { ..}
+# --
+intercept(classOf[${1:Exception]}) {
+  $0
+}

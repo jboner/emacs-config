@@ -1,0 +1,9 @@
+#name : def act = { ..}
+# --
+def act = {
+  loop {
+    react {
+      $0
+    }
+  }
+}

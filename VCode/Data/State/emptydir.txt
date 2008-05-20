@@ -1,0 +1,3 @@
+This file is just a placeholder to ensure that cvs checkout creates this
+directory, which is required for VoiceCode to function properly, even 
+though it contains no files in the archive.

@@ -1,0 +1,5 @@
+#name : while(cond) { .. }
+# --
+while (${1:condition}) {
+  $0
+}

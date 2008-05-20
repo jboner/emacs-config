@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Dec 25 16:41:09 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class SelectionBuffer</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class SelectionBuffer</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="TextBuffer.html">TextBuffer</A></P>
+
+
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SelectionBuffer</SPAN>:
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SelectionBuffer.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SelectionBuffer.get_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SelectionBuffer.get_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SelectionBuffer.set_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SelectionBuffer.set_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">range=(0, -1)</SPAN>)
+
+</PRE><H2>Description</H2><P>
+abstract base class describing additional interfaces for a
+(hidden) speech buffers with Select xyz</P>
+<P>
+Note: Generally, a concrete class will inherit from TextBuffer (or a
+subclass), SpeechBuffer (or a subclass) and SelectionBuffer.  
+In order to facilitate mixing and matching different subclasses of
+TextBuffer and SpeechBuffer, with or without SelectionBuffer,
+SelectionBuffer does not inherit from either, although deriving a
+concrete class from SpeechBuffer without the TextBuffer interface
+for setting and reading the buffer contents doesn't make much sense.</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SelectionBuffer.get_visible" CLASS="Method">TextBuffer.SelectionBuffer.get_visible(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns the current visible range
+which should be available to Select XYZ.  If ta concrete
+subclass of SpeechBufferSelection does not support returning the
+current visible range, then get_visible should return None.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM> range
+<DD>visible character range.  None means ehat
+the concrete implementation of SpeechBufferSelection does not
+support reporting the current visible range.  An empty range
+means that Select xyz is disabled.  A range of (0, -1) means the
+entire buffer is visible.  
+</DL>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SelectionBuffer.set_visible" CLASS="Method">TextBuffer.SelectionBuffer.set_visible(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">range=(0, -1)</SPAN>)</H2>
+<P>None</P>
+
+<P>
+tells the SpeechBufferSelection the current visible range
+which should be available to Select XYZ.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM> range
+<DD>character range which the buffer should
+is visible and therefore selectable.  If the end of the range is
+less than the start (as in the default), the entire buffer will 
+be considered visible.  Select xyz can be disabled by setting
+the range to (0, 0)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

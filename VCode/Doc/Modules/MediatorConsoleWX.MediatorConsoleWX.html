@@ -1,0 +1,935 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:42:31 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class MediatorConsoleWX</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class MediatorConsoleWX</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="MediatorConsoleWX.html">MediatorConsoleWX</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">MediatorConsoleWX.MediatorConsoleWX<BR>
+&nbsp;&nbsp;MediatorConsole.MediatorConsole<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">MediatorConsoleWX</SPAN>(<A CLASS="DocLink" HREF="MediatorConsole.MediatorConsole.html">MediatorConsole</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsoleWX.MediatorConsoleWX.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">main_frame</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsoleWX.MediatorConsoleWX.raise_active_window"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsoleWX.MediatorConsoleWX.raise_active_window</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsoleWX.MediatorConsoleWX.raise_wxWindow"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsoleWX.MediatorConsoleWX.raise_wxWindow</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)<SPAN CLASS="OneLiner"> # makes the given wxWindow the foreground one (for the system)</SPAN>
+    <A CLASS="DocLink" HREF="#MediatorConsoleWX.MediatorConsoleWX.show_correction_box"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsoleWX.MediatorConsoleWX.show_correction_box</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">utterance</SPAN>, <SPAN CLASS="Argument">can_reinterpret</SPAN>, <SPAN CLASS="Argument">should_adapt=1</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsoleWX.MediatorConsoleWX.show_modal_dialog"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsoleWX.MediatorConsoleWX.show_modal_dialog</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">dialog</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsoleWX.MediatorConsoleWX.show_recent_utterances"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsoleWX.MediatorConsoleWX.show_recent_utterances</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">utterances</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsoleWX.MediatorConsoleWX.user_message"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsoleWX.MediatorConsoleWX.user_message</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">message</SPAN>, <SPAN CLASS="Argument">instance=None</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.OwnerObject</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject._cleanup_object"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject._cleanup_object</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">object</SPAN>)<SPAN CLASS="OneLiner"> # attempt to call cleanup on object</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_grandparent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_grandparent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grandparent</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_owned"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_owned</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)<SPAN CLASS="OneLiner"> # append a new attribute name to the list of owned objects</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_owned_list"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_owned_list</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)<SPAN CLASS="OneLiner"> # append new attribute names to the list of owned objects</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.cleanup"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.cleanup</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.name_parent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.name_parent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">parent=None</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.owned_by"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.owned_by</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns the name of the parent attribute</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.remove_other_references"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.remove_other_references</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from MediatorConsole.MediatorConsole</SPAN>
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">main_frame_handle</SPAN>, <SPAN CLASS="Argument">win_sys</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.already_modal"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.already_modal</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # does the console already have a modal dialog running?</SPAN>
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.correct_recent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.correct_recent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">utterances</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.correct_utterance"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.correct_utterance</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">utterance</SPAN>, <SPAN CLASS="Argument">can_reinterpret</SPAN>, <SPAN CLASS="Argument">should_adapt=1</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.dismiss_modal"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.dismiss_modal</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.pop_modal"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.pop_modal</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.push_modal"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.push_modal</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">dismiss_event</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.raise_active_window"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.raise_active_window</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.set_gram_factory"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.set_gram_factory</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">gram_factory</SPAN>)<SPAN CLASS="OneLiner"> # assigns a parent mediator to the console</SPAN>
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.set_mediator"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.set_mediator</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">mediator</SPAN>)<SPAN CLASS="OneLiner"> # assigns a parent mediator to the console</SPAN>
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.show_correction_box"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.show_correction_box</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">utterance</SPAN>, <SPAN CLASS="Argument">can_reinterpret</SPAN>, <SPAN CLASS="Argument">should_adapt=1</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.show_recent_utterances"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.show_recent_utterances</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">utterances</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.store_foreground_window"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.store_foreground_window</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorConsole.MediatorConsole.user_message"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorConsole.MediatorConsole.user_message</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">message</SPAN>, <SPAN CLASS="Argument">instance=None</SPAN>)
+
+</PRE><H2>Description</H2><P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>wxFrame main_frame</EM>
+<DD>the main frame window of the console, which
+will be the parent for most modal dialogs
+<DT>
+<EM>(INT, INT) corr_box_pos</EM>
+<DD>most recent position of the correction
+box
+<DT>
+<EM>(INT, INT) corr_recent_pos</EM>
+<DD>most recent position of the correct
+recent box
+</DL>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM> 
+</P>
+<H2 ID="MediatorConsoleWX.MediatorConsoleWX.raise_active_window" CLASS="Method">MediatorConsoleWX.MediatorConsoleWX.raise_active_window(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+makes the active window (within the current process) the
+foreground one (for the system)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="MediatorConsoleWX.MediatorConsoleWX.raise_wxWindow" CLASS="Method">MediatorConsoleWX.MediatorConsoleWX.raise_wxWindow(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)</H2>
+<P>makes the given wxWindow the foreground one (for the system)</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="MediatorConsoleWX.MediatorConsoleWX.show_correction_box" CLASS="Method">MediatorConsoleWX.MediatorConsoleWX.show_correction_box(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">utterance</SPAN>, <SPAN CLASS="Argument">can_reinterpret</SPAN>, <SPAN CLASS="Argument">should_adapt=1</SPAN>)</H2>
+<P>None</P>
+
+<P>
+display a correction box for correction a complete, recent
+utterance, accept user corrections, allow the user to
+approve or cancel, and adapt the speech engine.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR editor_name</EM>
+<DD>name of the editor instance
+<DT>
+<EM>SpokenUtterance utterance</EM>
+<DD>the utterance itself
+<DT>
+<EM>BOOL can_reinterpret</EM>
+<DD>flag indicating whether the utterance
+could be reinterpreted upon correction, allowing the correction
+box to give some visual feedback to the user to indictate this.
+Whether the utterance can actually be reinterpreted may change
+between the call to this method and its return, so there is no
+guarantee that reinterpretation will take place.
+<DT>
+<EM>BOOL should_adapt</EM>
+<DD>flag indicating whether correct_utterance
+should adapt the speech engine according to user corrections (if
+the user approves), or if the caller will handle that later.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the user made changes and approved them
+
+</DL>
+<H2 ID="MediatorConsoleWX.MediatorConsoleWX.show_modal_dialog" CLASS="Method">MediatorConsoleWX.MediatorConsoleWX.show_modal_dialog(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">dialog</SPAN>)</H2>
+<P>None</P>
+
+<P>
+shows a dismissable modal dialog box, and handles the push/pop modal 
+bookkeeping</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>Dismissable, OwnerObject dialog</EM>
+<DD>the dialog to show
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>the return code from ShowModal 
+
+</DL>
+<H2 ID="MediatorConsoleWX.MediatorConsoleWX.show_recent_utterances" CLASS="Method">MediatorConsoleWX.MediatorConsoleWX.show_recent_utterances(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">utterances</SPAN>)</H2>
+<P>None</P>
+
+<P>
+display a correct recent dialog box for to allow the user to 
+select a recent utterance to correct</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR editor_name</EM>
+<DD>name of the editor instance
+<DT>
+<EM>[(SpokenUtterance, INT, BOOL)] utterances</EM>
+<DD>the n most recent 
+dictation utterances (or all available if &lt; n), sorted most recent 
+last, each with a corresponding utterance number and a flag 
+indicating if the utterance can be undone and re-interpreted.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[INT]</EM>
+<DD>the utterance numbers of 
+those utterances which were corrected by the user, or None if
+none were corrected
+
+</DL>
+<H2 ID="MediatorConsoleWX.MediatorConsoleWX.user_message" CLASS="Method">MediatorConsoleWX.MediatorConsoleWX.user_message(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">message</SPAN>, <SPAN CLASS="Argument">instance=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+displays a user message (usually on a MediatorConsole status 
+line, but Natspeak-style tooltips might also be a possibility)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR message</EM>
+<DD>the message
+<DT>
+<EM>STR instance_name</EM>
+<DD>the editor from which the message
+originated, or None if it is not associated with a specific
+editor.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the MediatorConsole implementation has a means
+of displaying user messages 
+
+</DL>
+<H2 ID="Object.OwnerObject._cleanup_object" CLASS="Method">Object.OwnerObject._cleanup_object(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">object</SPAN>)</H2>
+<P>attempt to call cleanup on object</P>
+
+<P>
+<STRONG>INPUTS*</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>OwnerObject object</EM>
+<DD>note: class of object is the expected
+class, but _cleanup_object doesn't assume this is correct, nor
+does it check whether the object is a subclass of
+OwnerObject, only that it is a class instance and that it
+has a cleanup attribute
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>reason for error (or None if no error).
+
+</DL>
+<H2 ID="Object.OwnerObject.add_grandparent" CLASS="Method">Object.OwnerObject.add_grandparent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grandparent</SPAN>)</H2>
+<P>None</P>
+
+<P>
+specify the name of the attribute containing a reference to 
+this object's grandparent (or great-grandparent, etc.)
+(Actually, any other reference which needs to be del'ed but not
+cleaned up)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR grandparent</EM>
+<DD>names of owned attributes
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.add_owned" CLASS="Method">Object.OwnerObject.add_owned(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)</H2>
+<P>append a new attribute name to the list of owned objects</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR owned</EM>
+<DD>names of owned attributes
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.add_owned_list" CLASS="Method">Object.OwnerObject.add_owned_list(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)</H2>
+<P>append new attribute names to the list of owned objects</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR] owned</EM>
+<DD>names of owned attributes
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.cleanup" CLASS="Method">Object.OwnerObject.cleanup(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+method to cleanup circular references by cleaning up 
+any children, and then removing the reference to the parent</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.name_parent" CLASS="Method">Object.OwnerObject.name_parent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">parent=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+specify the name of the attribute containing a reference to 
+this object's parent.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR parent</EM>
+<DD>name of the parent, or None if none
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.owned_by" CLASS="Method">Object.OwnerObject.owned_by(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns the name of the parent attribute</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>name of the parent, or None if none
+
+</DL>
+<H2 ID="Object.OwnerObject.remove_other_references" CLASS="Method">Object.OwnerObject.remove_other_references(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+additional cleanup to ensure that this object's references to
+its owned objects are the last remaining references</P>
+<P>
+<STRONG>NOTE:</STRONG> subclasses must call their parent class's 
+remove_other_references method, after performing their own duties.
+Also, a class inheriting from two OwnerObject classes MUST
+define remove_other_references and call both subclasses'
+versions</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises existing attributes, unless those attributes
+already exist</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="MediatorConsole.MediatorConsole.__init__" CLASS="Method">MediatorConsole.MediatorConsole.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">main_frame_handle</SPAN>, <SPAN CLASS="Argument">win_sys</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT main_frame_handle</EM>
+<DD>the window-system specific ID for the
+main frame of the mediator application
+<DT>
+*WinSystem win_sys
+<DD>WinSystem interface to
+window-system specific functions
+
+</DL>
+<H2 ID="MediatorConsole.MediatorConsole.already_modal" CLASS="Method">MediatorConsole.MediatorConsole.already_modal(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>does the console already have a modal dialog running?</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if a modal dialog is active
+
+</DL>
+<H2 ID="MediatorConsole.MediatorConsole.correct_recent" CLASS="Method">MediatorConsole.MediatorConsole.correct_recent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">utterances</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Store the current foreground window,
+display a correct recent dialog box for to allow the user to 
+select a recent utterance to correct.  Finally, restore
+the original window to the foreground</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR editor_name</EM>
+<DD>name of the editor instance
+<DT>
+<EM>[(SpokenUtterance, BOOL)] utterances</EM>
+<DD>the n most recent dictation 
+utterances (or all available if &lt; n), sorted most recent last, 
+with corresponding flags indicating if the utterance can be 
+undone and re-interpreted, or None if no utterances are stored.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[INT]</EM>
+<DD>the utterance numbers of 
+those utterances which were corrected by the user, or None if
+none were corrected
+
+</DL>
+<H2 ID="MediatorConsole.MediatorConsole.correct_utterance" CLASS="Method">MediatorConsole.MediatorConsole.correct_utterance(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">utterance</SPAN>, <SPAN CLASS="Argument">can_reinterpret</SPAN>, <SPAN CLASS="Argument">should_adapt=1</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Store the current foreground window,
+display a correction box for correction of a complete, recent
+utterance, accept user corrections, allow the user to
+approve or cancel, and adapt the speech engine.  Finally, restore
+the original window to the foreground</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR editor_name</EM>
+<DD>name of the editor instance
+<DT>
+<EM>SpokenUtterance utterance</EM>
+<DD>the utterance itself
+<DT>
+<EM>BOOL can_reinterpret</EM>
+<DD>flag indicating whether the utterance
+could be reinterpreted upon correction, allowing the correction
+box to give some visual feedback to the user to indictate this.
+Whether the utterance can actually be reinterpreted may change
+between the call to this method and its return, so there is no
+guarantee that reinterpretation will take place.
+<DT>
+<EM>BOOL should_adapt</EM>
+<DD>flag indicating whether correct_utterance
+should adapt the speech engine according to user corrections (if
+the user approves), or if the caller will handle that later.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the user made changes and approved them
+
+</DL>
+<H2 ID="MediatorConsole.MediatorConsole.dismiss_modal" CLASS="Method">MediatorConsole.MediatorConsole.dismiss_modal(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+dismisses the topmost modal dialog box currently shown by the
+console.  Control will return to the next topmost dialog, 
+which is expected to return as well, and so on down the line</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the modal dialog box was sucessfully dismissed
+(or if there wasn't one to start with)
+
+</DL>
+<H2 ID="MediatorConsole.MediatorConsole.pop_modal" CLASS="Method">MediatorConsole.MediatorConsole.pop_modal(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+pops a DismissModalEvent off the stack after the
+corresponding modal dialog has returned</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if there was a modal dialog on the stack
+
+</DL>
+<H2 ID="MediatorConsole.MediatorConsole.push_modal" CLASS="Method">MediatorConsole.MediatorConsole.push_modal(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">dismiss_event</SPAN>)</H2>
+<P>None</P>
+
+<P>
+push a DismissModalEvent onto the stack before showing the
+corresponding modal dialog</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>DismissModalEvent dismiss_event</EM>
+<DD>DismissModalEvent which can be used
+to dismiss the modal dialog
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="MediatorConsole.MediatorConsole.raise_active_window" CLASS="Method">MediatorConsole.MediatorConsole.raise_active_window(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+makes the active window (within the current process) the
+foreground one (for the system)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="MediatorConsole.MediatorConsole.set_gram_factory" CLASS="Method">MediatorConsole.MediatorConsole.set_gram_factory(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">gram_factory</SPAN>)</H2>
+<P>assigns a parent mediator to the console</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>WinGramFactory gram_factory</EM>
+<DD>the grammar factory used to add
+speech grammars to dialog boxes
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="MediatorConsole.MediatorConsole.set_mediator" CLASS="Method">MediatorConsole.MediatorConsole.set_mediator(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">mediator</SPAN>)</H2>
+<P>assigns a parent mediator to the console</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>NewMediatorObject mediator</EM>
+<DD>the parent mediator which will
+own the console
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="MediatorConsole.MediatorConsole.show_correction_box" CLASS="Method">MediatorConsole.MediatorConsole.show_correction_box(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">utterance</SPAN>, <SPAN CLASS="Argument">can_reinterpret</SPAN>, <SPAN CLASS="Argument">should_adapt=1</SPAN>)</H2>
+<P>None</P>
+
+<P>
+display a correction box for correction of a complete, recent
+utterance, accept user corrections, allow the user to
+approve or cancel, and adapt the speech engine.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR editor_name</EM>
+<DD>name of the editor instance
+<DT>
+<EM>SpokenUtterance utterance</EM>
+<DD>the utterance itself
+<DT>
+<EM>BOOL can_reinterpret</EM>
+<DD>flag indicating whether the utterance
+could be reinterpreted upon correction, allowing the correction
+box to give some visual feedback to the user to indictate this.
+Whether the utterance can actually be reinterpreted may change
+between the call to this method and its return, so there is no
+guarantee that reinterpretation will take place.
+<DT>
+<EM>BOOL should_adapt</EM>
+<DD>flag indicating whether correct_utterance
+should adapt the speech engine according to user corrections (if
+the user approves), or if the caller will handle that later.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the user made changes and approved them
+
+</DL>
+<H2 ID="MediatorConsole.MediatorConsole.show_recent_utterances" CLASS="Method">MediatorConsole.MediatorConsole.show_recent_utterances(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">utterances</SPAN>)</H2>
+<P>None</P>
+
+<P>
+display a correct recent dialog box for to allow the user to 
+select a recent utterance to correct</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR editor_name</EM>
+<DD>name of the editor instance
+<DT>
+<EM>[(SpokenUtterance, BOOL)] utterances</EM>
+<DD>the n most recent dictation 
+utterances (or all available if &lt; n), sorted most recent last, 
+with corresponding flags indicating if the utterance can be 
+undone and re-interpreted, or None if no utterances are stored.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[INT]</EM>
+<DD>the utterance numbers of 
+those utterances which were corrected by the user, or None if
+none were corrected
+
+</DL>
+<H2 ID="MediatorConsole.MediatorConsole.store_foreground_window" CLASS="Method">MediatorConsole.MediatorConsole.store_foreground_window(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+detect the current foreground window, and store it in a
+WasForegroundWindow object, so that the window can later
+be restored to the foreground</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>WasForegroundWindow</EM>
+<DD>the object which can be used to restore
+the window to the foreground
+
+</DL>
+<H2 ID="MediatorConsole.MediatorConsole.user_message" CLASS="Method">MediatorConsole.MediatorConsole.user_message(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">message</SPAN>, <SPAN CLASS="Argument">instance=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+displays a user message (usually on a MediatorConsole status 
+line, but Natspeak-style tooltips might also be a possibility)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR message</EM>
+<DD>the message
+<DT>
+<EM>STR instance_name</EM>
+<DD>the editor from which the message
+originated, or None if it is not associated with a specific
+editor.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the MediatorConsole implementation has a means
+of displaying user messages 
+
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

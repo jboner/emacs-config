@@ -1,0 +1,61 @@
+<project name="xref" default="help">
+
+<target name="help">
+	   <echo message="  ----------------------------------------------------------" />
+	   <echo message="  |  Targets                                               |" />
+	   <echo message="  ----------------------------------------------------------" />
+	   <echo message="  | help   : this help message                             |" />
+	   <echo message="  | build  : compiles the test suite and test project files|" />
+	   <echo message="  | jar    : creates the testproject.jar file              |" />
+<!-- 	   <echo message="  | test    : runs all the unit tests                       |" /> -->
+           <echo message="  ----------------------------------------------------------" />
+</target>
+
+<target name="init">
+  <mkdir dir="classes" />
+  <path id="build.classpath">
+    <pathelement location="classes" />
+    <pathelement location="../classes" />
+    <pathelement location="../lib/usages.jar" />
+    <pathelement location="../../../jde/java/lib/jde.jar" />
+    <pathelement location="../../../jde/java/lib/junit.jar" />
+  </path>
+  <property name="src" value="src/" />
+  <property name="classes" value="classes" />
+</target>
+
+<target name="depend" >
+    <depend srcdir="${src}" destdir="${classes}" classpath="${build.classpath}"/>
+</target>
+
+<target name="build" depends="init,depend">
+  <javac srcdir="${src}" destdir="${classes}" debug="on">
+    <classpath refid="build.classpath"/>
+  </javac>
+</target>
+
+
+<target name="jar" depends="build">
+    <mkdir dir="lib" />
+    <jar destfile="lib/testproject.jar"  basedir="classes" />
+</target>
+
+
+<target name="clean">
+  <delete dir="classes" />
+  <delete file="lib/testproject.jar" />
+</target>
+
+
+<target name="clean-classes">
+  <delete dir="classes" />
+</target>
+
+<!-- <target name="test" depends="build"> -->
+<!--   <junit showoutput="true" printsummary="true"> -->
+<!--     <classpath refid="build.classpath"/> -->
+<!--     <test name="jde.util.usages.tests.TestUsages" outfile="result" /> -->
+<!--   </junit> -->
+<!-- </target> -->
+
+</project>

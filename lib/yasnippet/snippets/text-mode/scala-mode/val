@@ -1,0 +1,3 @@
+#name : val name = ..
+# --
+val ${1:name} = ${2:obj} $0

@@ -1,0 +1,1478 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Dec 25 16:41:26 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class TextBufferWX</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class TextBufferWX - TextBufferChangeSpecify wrapper for wxTextCtrl</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="TextBufferWX.html">TextBufferWX</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">TextBufferWX.TextBufferWX<BR>
+&nbsp;&nbsp;TextBuffer.TextBufferChangeSpecify<BR>
+&nbsp;&nbsp;TextBuffer.VisibleBuffer<BR>
+&nbsp;&nbsp;TextBuffer.StoreableTextBuffer<BR>
+&nbsp;&nbsp;TextBuffer.NumberedLines<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">TextBufferWX</SPAN>(<A CLASS="DocLink" HREF="TextBuffer.TextBufferChangeSpecify.html">TextBufferChangeSpecify</A>, <A CLASS="DocLink" HREF="TextBuffer.VisibleBuffer.html">VisibleBuffer</A>, <A CLASS="DocLink" HREF="TextBuffer.StoreableTextBuffer.html">StoreableTextBuffer</A>, <A CLASS="DocLink" HREF="TextBuffer.NumberedLines.html">NumberedLines</A>):
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">underlying_control</SPAN>, <SPAN CLASS="Argument">carriage_return_bug=1</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)<SPAN CLASS="OneLiner"> # wraps underlying wxPython wxTextCtrl</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX._on_evt_text</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">event</SPAN>)<SPAN CLASS="OneLiner"> # handler for wxEVT_COMMAND_TEXT_UPDATED.</SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.cur_pos"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.cur_pos</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns current position  (= end of the current selection)</SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.external_to_internal"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.external_to_internal</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.get_length</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.get_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.get_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # retrieves range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.get_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.get_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # retrieves a portion of the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.get_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.get_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.goto_line"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.goto_line</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>, <SPAN CLASS="Argument">where=-1</SPAN>)<SPAN CLASS="OneLiner"> # Go to a particular line in a buffer.</SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.internal_to_external"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.internal_to_external</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.len"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.len</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns length of buffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.line_height"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.line_height</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # get number of lines per screen</SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.line_length"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.line_length</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>)<SPAN CLASS="OneLiner"> # returns the length of the specified line</SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.line_num_of"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.line_num_of</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pos=None</SPAN>)<SPAN CLASS="OneLiner"> # find line number of position pos</SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.line_nums_of_range"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.line_nums_of_range</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">range=None</SPAN>)<SPAN CLASS="OneLiner"> # find line numbers of a range of positions</SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.line_range_external"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.line_range_external</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.line_range_internal"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.line_range_internal</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.lines"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.lines</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # return number of lines in the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.load_file"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.load_file</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">f_path</SPAN>)<SPAN CLASS="OneLiner"> # load the buffer from a file (erasing the current contents)</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.make_position_visible</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.modified"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.modified</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.position_of_line"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.position_of_line</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>, <SPAN CLASS="Argument">where=-1</SPAN>)<SPAN CLASS="OneLiner"> # returns the position of the start or end of the specified line </SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.range_defaults"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.range_defaults</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.range_of_line"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.range_of_line</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.range_of_lines"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.range_of_lines</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first_line</SPAN>, <SPAN CLASS="Argument">last_line</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.ranges_of_lines"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.ranges_of_lines</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first_line</SPAN>, <SPAN CLASS="Argument">last_line</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.save_file"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.save_file</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">f_path</SPAN>)<SPAN CLASS="OneLiner"> # save the buffer to a file</SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.set_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.set_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#TextBufferWX.TextBufferWX.set_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBufferWX.TextBufferWX.set_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes a portion of the buffer</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.TextBuffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)<SPAN CLASS="OneLiner"> # abstract base class - no arguments</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.cur_pos"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.cur_pos</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.get_length"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.get_length</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns the length of the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.get_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.get_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # retrieves range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.get_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.get_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # retrieves a portion of the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.len"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.len</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns length of buffer </SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.set_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.set_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.set_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.set_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes a portion of the buffer</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.StoreableTextBuffer</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.StoreableTextBuffer.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.StoreableTextBuffer.load_file"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.StoreableTextBuffer.load_file</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">f_path</SPAN>)<SPAN CLASS="OneLiner"> # load the buffer from a file (erasing the current contents)</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.StoreableTextBuffer.modified"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.StoreableTextBuffer.modified</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.StoreableTextBuffer.save_file"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.StoreableTextBuffer.save_file</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">f_path</SPAN>)<SPAN CLASS="OneLiner"> # save the buffer to a file</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.VisibleBuffer</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.VisibleBuffer.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.VisibleBuffer.get_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.VisibleBuffer.get_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.VisibleBuffer.make_position_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.VisibleBuffer.make_position_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">position=None</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.VisibleBuffer.refresh"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.VisibleBuffer.refresh</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.TextBufferChangeSpecify</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeSpecify.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeSpecify.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeSpecify._on_change_specification"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeSpecify._on_change_specification</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">selection_start</SPAN>, <SPAN CLASS="Argument">selection_end</SPAN>, <SPAN CLASS="Argument">program_initiated</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeSpecify.get_change_callback"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeSpecify.get_change_callback</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeSpecify.set_change_callback"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeSpecify.set_change_callback</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>)<SPAN CLASS="OneLiner"> # changes the callback to a new function</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.NumberedLines</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.NumberedLines.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.NumberedLines.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)<SPAN CLASS="OneLiner"> # abstract base class - no arguments</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.NumberedLines.get_line"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.NumberedLines.get_line</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.NumberedLines.goto_line"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.NumberedLines.goto_line</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>, <SPAN CLASS="Argument">where=-1</SPAN>)<SPAN CLASS="OneLiner"> # Go to a particular line in a buffer.</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.NumberedLines.line_length"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.NumberedLines.line_length</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>)<SPAN CLASS="OneLiner"> # returns the length of the specified line</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.NumberedLines.line_num_of"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.NumberedLines.line_num_of</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pos=None</SPAN>)<SPAN CLASS="OneLiner"> # find line number of position pos</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.NumberedLines.line_nums_of_range"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.NumberedLines.line_nums_of_range</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">range=None</SPAN>)<SPAN CLASS="OneLiner"> # find line numbers of a range of positions</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.NumberedLines.lines"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.NumberedLines.lines</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # return number of lines in the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.NumberedLines.position_of_line"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.NumberedLines.position_of_line</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>, <SPAN CLASS="Argument">where=-1</SPAN>)<SPAN CLASS="OneLiner"> # returns the position of the start or end of the specified line </SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.NumberedLines.range_of_line"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.NumberedLines.range_of_line</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.NumberedLines.range_of_lines"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.NumberedLines.range_of_lines</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first_line</SPAN>, <SPAN CLASS="Argument">last_line</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.NumberedLines.ranges_of_lines"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.NumberedLines.ranges_of_lines</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first_line</SPAN>, <SPAN CLASS="Argument">last_line</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+
+</PRE><H2>Description</H2><P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>wxTextCtrl</EM> underlying
+<DD>underlying text control - a wxPython
+text control object
+<DT>
+<EM>BOOL</EM> program_initiated
+<DD>flag used internally to indicate to the
+whether the text changed event was due to a program-initiated change
+or to a user-initiated change.
+<DT>
+<EM>BOOL</EM> carriage_return_bug
+<DD>flag specifying whether the current
+version of wxPython requires a workaround for the carriage return
+bug.  (see comments below)
+<DT>
+<EM>STR</EM> crnl
+<DD>rep of CR-NL pair in underlying buffer
+<DT>
+<EM>STR</EM> nl
+<DD>rep of new line externally and in contents
+<DT>
+<EM>INT</EM> delta_width
+<DD>difference in lengths of crnl and nl
+<DT>
+<EM>STR</EM> contents_internal
+<DD>copy of contents of the buffer, with CR-LF
+<DT>
+<EM>STR</EM> contents_external
+<DD>copy of contents of the buffer, with only NL
+</DL>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.__init__" CLASS="Method">TextBufferWX.TextBufferWX.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">underlying_control</SPAN>, <SPAN CLASS="Argument">carriage_return_bug=1</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>wraps underlying wxPython wxTextCtrl</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>wxTextCtrl</EM> underlying_control
+<DD>underlying text control - a wxPython
+text control object
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBufferWX.TextBufferWX.cur_pos" CLASS="Method">TextBufferWX.TextBufferWX.cur_pos(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns current position  (= end of the current selection)</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>the offset into the buffer of the current cursor
+position.
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.external_to_internal" CLASS="Method">TextBufferWX.TextBufferWX.external_to_internal(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)</H2>
+<P>None</P>
+
+<P>
+converts a range of external positions (NL only) to
+internal positions (in the underlying
+buffer which uses CR-LF)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>start of range (external)
+<DT>
+<EM>INT</EM> end
+<DD>end of range (external)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>corresponding character range 
+internally, using CR-LF
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.get_selection" CLASS="Method">TextBufferWX.TextBufferWX.get_selection(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>retrieves range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM> --</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> (start, end)
+<DD>start is the offset into the buffer of 
+the start of the current
+selection.  end is the offset into the buffer of the character 
+following the selection (this matches Python's slice convention).
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.get_text" CLASS="Method">TextBufferWX.TextBufferWX.get_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>retrieves a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>the start of the region returned.
+Defaults to start of buffer.
+<DT>
+<EM>INT</EM> end
+<DD>the offset into the buffer of the character following 
+the region to be returned (this matches Python's slice convention).
+Defaults to end of buffer.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>contents of specified range of the buffer
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.get_visible" CLASS="Method">TextBufferWX.TextBufferWX.get_visible(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+ get start and end offsets of the currently visible region of
+the buffer.  End is the offset of the first character not
+visible (matching Python's slice convention)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM> --</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> (start, end)
+<DD>visible range
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.goto_line" CLASS="Method">TextBufferWX.TextBufferWX.goto_line(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>, <SPAN CLASS="Argument">where=-1</SPAN>)</H2>
+<P>Go to a particular line in a buffer.</P>
+
+
+<DL>
+
+<DT>
+<EM>INT line</EM>
+<DD>line number (starting with 0).  Defaults to current line.
+If line is greater than the number of lines, goes to the end of
+the buffer.
+</DL>
+<P>
+<EM>INT where</EM> indicates if the cursor should go at the end
+ (*where &gt; 0*) or at the beginning (*where &lt; 0*) of the line.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBufferWX.TextBufferWX.internal_to_external" CLASS="Method">TextBufferWX.TextBufferWX.internal_to_external(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)</H2>
+<P>None</P>
+
+<P>
+converts a range of internal positions (in the underlying
+buffer which uses CR-LF) to external positions (NL only)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>start of range (internal)
+<DT>
+<EM>INT</EM> end
+<DD>end of range (internal)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>corresponding character range 
+externally, assuming only newlines
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.len" CLASS="Method">TextBufferWX.TextBufferWX.len(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns length of buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>the length of the buffer
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.line_height" CLASS="Method">TextBufferWX.TextBufferWX.line_height(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>get number of lines per screen</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>number of lines which fit on the screen at a time
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.line_length" CLASS="Method">TextBufferWX.TextBufferWX.line_length(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>)</H2>
+<P>returns the length of the specified line</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT line</EM>
+<DD>line number (starting with 0).  Defaults to current line.
+If line is out of range, returns None.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>length of start of that line.
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.line_num_of" CLASS="Method">TextBufferWX.TextBufferWX.line_num_of(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pos=None</SPAN>)</H2>
+<P>find line number of position pos</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT pos</EM>
+<DD>the offset into the buffer of the desired position. 
+ Defaults to the current position.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>corresponding line number (starting with 0)
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.line_nums_of_range" CLASS="Method">TextBufferWX.TextBufferWX.line_nums_of_range(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">range=None</SPAN>)</H2>
+<P>find line numbers of a range of positions</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT) range</EM>
+<DD>range of character offsets into the buffer. 
+ Defaults to the current selection.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>corresponding pair of line numbers (starting with 0)
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.line_range_external" CLASS="Method">TextBufferWX.TextBufferWX.line_range_external(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)</H2>
+<P>None</P>
+
+<P>
+find line numbers of a range of external positions within
+contents_external</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>character offset into contents_external of start of range
+<DT>
+<EM>INT</EM> end 
+<DD>character offset into contents_external of end of range
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>corresponding range of line numbers
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.line_range_internal" CLASS="Method">TextBufferWX.TextBufferWX.line_range_internal(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>)</H2>
+<P>None</P>
+
+<P>
+find line numbers of a range of internal positions within
+contents_internal</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>character offset into contents_internal of start of range
+<DT>
+<EM>INT</EM> end 
+<DD>character offset into contents_internal of end of range
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>corresponding range of line numbers
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.lines" CLASS="Method">TextBufferWX.TextBufferWX.lines(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>return number of lines in the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>int</EM>
+<DD>number of lines in the buffer (incomplete lines are
+counted, so this is always &gt; 0
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.load_file" CLASS="Method">TextBufferWX.TextBufferWX.load_file(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">f_path</SPAN>)</H2>
+<P>load the buffer from a file (erasing the current contents)</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR f_path</EM>
+<DD>full path of the file
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the file was loaded successfully
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.modified" CLASS="Method">TextBufferWX.TextBufferWX.modified(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+has the buffer been modified since the last time it was
+saved?</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the buffer has been modified since the last
+save (or load)
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.position_of_line" CLASS="Method">TextBufferWX.TextBufferWX.position_of_line(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>, <SPAN CLASS="Argument">where=-1</SPAN>)</H2>
+<P>returns the position of the start or end of the specified line </P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT line</EM>
+<DD>line number (starting with 0).  Defaults to current line.
+If line is out of range, returns position of end of buffer.
+</DL>
+<P>
+<EM>INT where</EM> indicates whether the position of the end
+ (*where &gt; 0*) or at the beginning (*where &lt; 0*) of the line
+ should be returned.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>position of start/end of that line.
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.range_defaults" CLASS="Method">TextBufferWX.TextBufferWX.range_defaults(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+translates from TextBuffer defaults for specifying start and
+end of a range to the appropriate values for wxTextCtrl (except
+that we use external offsets here)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>external offset of start of range, or None to
+default to the beginning of the buffer
+<DT>
+<EM>INT</EM> end
+<DD>external offset of character following end of 
+range, or None to default to the end of the buffer
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>external offsets
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.range_of_line" CLASS="Method">TextBufferWX.TextBufferWX.range_of_line(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns the character range corresponding to the specified line 
+(not including the newline)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT line</EM>
+<DD>line number (starting with 0).  Defaults to current line.
+If line is out of range, last line is used.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>offsets into the buffer of the start and end of
+the line.
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.range_of_lines" CLASS="Method">TextBufferWX.TextBufferWX.range_of_lines(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first_line</SPAN>, <SPAN CLASS="Argument">last_line</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns the character range corresponding to the specified range
+of lines (not including the final newline)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT first_line, second_line</EM>
+<DD>line numbers (starting with 0)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>offsets into the buffer of the start and end of
+the range of lines.
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.ranges_of_lines" CLASS="Method">TextBufferWX.TextBufferWX.ranges_of_lines(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first_line</SPAN>, <SPAN CLASS="Argument">last_line</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns a list of the character ranges corresponding to the 
+specified range of lines (not including the final newline of
+each line)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT first_line, second_line</EM>
+<DD>line numbers (starting with 0)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[(INT, INT), ...]</EM>
+<DD>offsets into the buffer of the start and end of
+the each line in the range of lines.
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.save_file" CLASS="Method">TextBufferWX.TextBufferWX.save_file(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">f_path</SPAN>)</H2>
+<P>save the buffer to a file</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR f_path</EM>
+<DD>full path of the file
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the file was saved successfully
+
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.set_selection" CLASS="Method">TextBufferWX.TextBufferWX.set_selection(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>the start of the region to be selected.
+Defaults to start of buffer.
+<DT>
+<EM>INT</EM> end
+<DD>the offset into the buffer of the character following 
+the region to be selected (this matches Python's slice convention).
+Defaults to end of buffer.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="TextBufferWX.TextBufferWX.set_text" CLASS="Method">TextBufferWX.TextBufferWX.set_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> text
+<DD>the new text.
+<DT>
+<EM>INT</EM> start
+<DD>the offset into the buffer of the text to the
+replaced.  Defaults to start of buffer.
+<DT>
+<EM>INT</EM> end
+<DD>the offset into the buffer of the character following 
+the text to be replaced (this matches Python's slice convention).
+Defaults to end of buffer.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="TextBuffer.TextBuffer.__init__" CLASS="Method">TextBuffer.TextBuffer.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>abstract base class - no arguments</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.TextBuffer.cur_pos" CLASS="Method">TextBuffer.TextBuffer.cur_pos(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns current position (either the start or end of
+the current selection, and usually the end)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>the offset into the buffer of the current cursor
+position.
+
+</DL>
+<H2 ID="TextBuffer.TextBuffer.get_length" CLASS="Method">TextBuffer.TextBuffer.get_length(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns the length of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>INT</EM> number of characters in the buffer</P>
+<H2 ID="TextBuffer.TextBuffer.get_selection" CLASS="Method">TextBuffer.TextBuffer.get_selection(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>retrieves range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>INT</EM> (start, end)</P>
+<P>
+start is the offset into the buffer of the start of the current
+selection.  end is the offset into the buffer of the character 
+following the selection (this matches Python's slice convention).
+</P>
+<H2 ID="TextBuffer.TextBuffer.get_text" CLASS="Method">TextBuffer.TextBuffer.get_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>retrieves a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT start</EM> is the start of the region returned.
+Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the region to be returned (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>contents of specified range of the buffer
+
+</DL>
+<H2 ID="TextBuffer.TextBuffer.len" CLASS="Method">TextBuffer.TextBuffer.len(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns length of buffer </P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>the length of the buffer
+
+</DL>
+<H2 ID="TextBuffer.TextBuffer.set_selection" CLASS="Method">TextBuffer.TextBuffer.set_selection(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT start</EM> is the start of the region to be selected.
+Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the region to be selected (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.TextBuffer.set_text" CLASS="Method">TextBuffer.TextBuffer.set_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>STR text</EM> is the new text.</P>
+<P>
+<EM>INT start</EM> is the offset into the buffer of the text to the
+replaced.  Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the text to be replaced (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.StoreableTextBuffer.load_file" CLASS="Method">TextBuffer.StoreableTextBuffer.load_file(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">f_path</SPAN>)</H2>
+<P>load the buffer from a file (erasing the current contents)</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR f_path</EM>
+<DD>full path of the file
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the file was loaded successfully
+
+</DL>
+<H2 ID="TextBuffer.StoreableTextBuffer.modified" CLASS="Method">TextBuffer.StoreableTextBuffer.modified(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+has the buffer been modified since the last time it was
+saved?</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the buffer has been modified since the last
+save (or load)
+
+</DL>
+<H2 ID="TextBuffer.StoreableTextBuffer.save_file" CLASS="Method">TextBuffer.StoreableTextBuffer.save_file(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">f_path</SPAN>)</H2>
+<P>save the buffer to a file</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR f_path</EM>
+<DD>full path of the file
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the file was saved successfully
+
+</DL>
+<H2 ID="TextBuffer.VisibleBuffer.get_visible" CLASS="Method">TextBuffer.VisibleBuffer.get_visible(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+ get start and end offsets of the currently visible region of
+the buffer.  End is the offset of the first character not
+visible (matching Python's slice convention)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>INT</EM> (start, end)
+</P>
+<H2 ID="TextBuffer.VisibleBuffer.make_position_visible" CLASS="Method">TextBuffer.VisibleBuffer.make_position_visible(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">position=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+scroll buffer (if necessary) so that  the specified position
+is visible.  Position defaults to the current cursor position.
+Note: if a particular subclass of VisibleBuffer cannot support
+this method, it should just leave it as a no-op.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT</EM> position</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.VisibleBuffer.refresh" CLASS="Method">TextBuffer.VisibleBuffer.refresh(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+force a refresh of the buffer.
+Note: if a particular subclass of VisibleBuffer cannot support
+this method, it should just leave it as a no-op.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.TextBufferChangeSpecify.__init__" CLASS="Method">TextBuffer.TextBufferChangeSpecify.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> change_callback
+<DD>change_callback( <EM>INT</EM> start, <EM>INT</EM> end, <EM>STR</EM> text, 
+<EM>INT</EM> selection_start,
+<EM>INT</EM> selection_end, TextBufferChangeSpecify buffer,
+<EM>BOOL</EM> program_initiated) 
+see TextBufferChangeSpecify documentation for details.
+
+</DL>
+<H2 ID="TextBuffer.TextBufferChangeSpecify._on_change_specification" CLASS="Method">TextBuffer.TextBufferChangeSpecify._on_change_specification(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">selection_start</SPAN>, <SPAN CLASS="Argument">selection_end</SPAN>, <SPAN CLASS="Argument">program_initiated</SPAN>)</H2>
+<P>None</P>
+
+<P>
+internal function which triggers the
+change_callback.  Only the concrete subclass of 
+TextBufferChangeSpecify implementing change specification
+should call this function</P>
+<H2 ID="TextBuffer.TextBufferChangeSpecify.get_change_callback" CLASS="Method">TextBuffer.TextBufferChangeSpecify.get_change_callback(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+return change callback function (used by wrappers like
+TextBufferCRToNL)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> change_callback
+<DD>change_callback( <EM>INT</EM> start, <EM>INT</EM> end, <EM>STR</EM> text, 
+<EM>INT</EM> selection_start, <EM>INT</EM> selection_end, 
+<EM>TextBufferChangeSpecify</EM> buffer, <EM>BOOL</EM> program_initiated) 
+
+</DL>
+<H2 ID="TextBuffer.TextBufferChangeSpecify.set_change_callback" CLASS="Method">TextBuffer.TextBufferChangeSpecify.set_change_callback(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>)</H2>
+<P>changes the callback to a new function</P>
+
+<P>
+<STRONG>INPUTS</STRONG>
+<EM>FCT</EM> change_callback --
+change_callback( <EM>INT</EM> start, <EM>INT</EM> end, <EM>STR</EM> text, 
+<EM>INT</EM> selection_start, <EM>INT</EM> selection_end, 
+<EM>TextBufferChangeSpecify</EM> buffer, <EM>BOOL</EM> program_initiated) 
+see TextBufferChangeSpecify documentation for details.
+-- function to be called on change to
+the underlying buffer.  
+see TextBufferChangeSpecify documentation for details.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.NumberedLines.__init__" CLASS="Method">TextBuffer.NumberedLines.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>abstract base class - no arguments</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.NumberedLines.get_line" CLASS="Method">TextBuffer.NumberedLines.get_line(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns the contents of the specified line 
+(not including the newline)
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT line</EM>
+<DD>line number (starting with 0).  Defaults to current line.
+If line is out of range, last line is used.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>offsets into the buffer of the start and end of
+the line.
+
+</DL>
+<H2 ID="TextBuffer.NumberedLines.goto_line" CLASS="Method">TextBuffer.NumberedLines.goto_line(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>, <SPAN CLASS="Argument">where=-1</SPAN>)</H2>
+<P>Go to a particular line in a buffer.</P>
+
+
+<DL>
+
+<DT>
+<EM>INT line</EM>
+<DD>line number (starting with 0).  Defaults to current line.
+If line is greater than the number of lines, goes to the end of
+the buffer.
+</DL>
+<P>
+<EM>INT where</EM> indicates if the cursor should go at the end
+ (*where &gt; 0*) or at the beginning (*where &lt; 0*) of the line.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.NumberedLines.line_length" CLASS="Method">TextBuffer.NumberedLines.line_length(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>)</H2>
+<P>returns the length of the specified line</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT line</EM>
+<DD>line number (starting with 0).  Defaults to current line.
+If line is out of range, returns None.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>length of start of that line.
+
+</DL>
+<H2 ID="TextBuffer.NumberedLines.line_num_of" CLASS="Method">TextBuffer.NumberedLines.line_num_of(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pos=None</SPAN>)</H2>
+<P>find line number of position pos</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT pos</EM>
+<DD>the offset into the buffer of the desired position. 
+ Defaults to the current position.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>corresponding line number (starting with 0)
+
+</DL>
+<H2 ID="TextBuffer.NumberedLines.line_nums_of_range" CLASS="Method">TextBuffer.NumberedLines.line_nums_of_range(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">range=None</SPAN>)</H2>
+<P>find line numbers of a range of positions</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT) range</EM>
+<DD>range of character offsets into the buffer. 
+ Defaults to the current selection.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>corresponding pair of line numbers (starting with 0)
+
+</DL>
+<H2 ID="TextBuffer.NumberedLines.lines" CLASS="Method">TextBuffer.NumberedLines.lines(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>return number of lines in the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>int</EM>
+<DD>number of lines in the buffer (incomplete lines are
+counted, so this is always &gt; 0
+
+</DL>
+<H2 ID="TextBuffer.NumberedLines.position_of_line" CLASS="Method">TextBuffer.NumberedLines.position_of_line(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>, <SPAN CLASS="Argument">where=-1</SPAN>)</H2>
+<P>returns the position of the start or end of the specified line </P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT line</EM>
+<DD>line number (starting with 0).  Defaults to current line.
+If line is out of range, returns position of end of buffer.
+</DL>
+<P>
+<EM>INT where</EM> indicates whether the position of the end
+ (*where &gt; 0*) or at the beginning (*where &lt; 0*) of the line
+ should be returned.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>position of start/end of that line.
+
+</DL>
+<H2 ID="TextBuffer.NumberedLines.range_of_line" CLASS="Method">TextBuffer.NumberedLines.range_of_line(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">line=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns the character range corresponding to the specified line 
+(not including the newline)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT line</EM>
+<DD>line number (starting with 0).  Defaults to current line.
+If line is out of range, last line is used.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>offsets into the buffer of the start and end of
+the line.
+
+</DL>
+<H2 ID="TextBuffer.NumberedLines.range_of_lines" CLASS="Method">TextBuffer.NumberedLines.range_of_lines(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first_line</SPAN>, <SPAN CLASS="Argument">last_line</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns the character range corresponding to the specified range
+of lines (not including the final newline)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT first_line, second_line</EM>
+<DD>line numbers (starting with 0)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>offsets into the buffer of the start and end of
+the range of lines.
+
+</DL>
+<H2 ID="TextBuffer.NumberedLines.ranges_of_lines" CLASS="Method">TextBuffer.NumberedLines.ranges_of_lines(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">first_line</SPAN>, <SPAN CLASS="Argument">last_line</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns a list of the character ranges corresponding to the 
+specified range of lines (not including the final newline of
+each line)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT first_line, second_line</EM>
+<DD>line numbers (starting with 0)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[(INT, INT), ...]</EM>
+<DD>offsets into the buffer of the start and end of
+the each line in the range of lines.
+
+</DL>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

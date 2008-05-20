@@ -1,0 +1,644 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:13:48 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class Object</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class Object - A generic base class for all objects.</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="Object.html">Object</A></P>
+
+
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">Object</SPAN>:
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+</PRE><H2>Description</H2><P>
+<STRONG>INSTANCE ATTRIBUTE</STRONG></P>
+<P>
+<EM>none</EM> --</P>
+<P>
+<STRONG>CLASS ATTRIBUTE</STRONG></P>
+<P>
+<EM>none</EM> --</P>
+<P>
+This class implements useful behaviors for generic
+objects, such as:</P>
+
+<UL>
+
+<LI>safe attribute setting
+<LI>pretty printing (not implemented yet)
+<LI>"standard" constructor that:
+<UL>
+
+<LI>automatically invoke constructors of all ancestor classes
+
+<LI>automatically "declares" valid attributes (for use with safe __setattr__)
+
+<LI>allows a subclass' constructor to inherit arguments (with default
+     values if any) from the constructors of its ancestor clases
+</UL>
+
+</UL>
+<P>
+Below is a more detailed description of the various features of the class.</P>
+<P>
+<STRONG>SAFE ATTRIBUTE SETTING</STRONG></P>
+<P>
+When getting the value of an attribute, Python will issue an
+<EM>AttributeError</EM> if that attribute doesn't exist. However, it
+doesn't do that when trying to set the value of an inexistant
+attribute.</P>
+<P>
+The [Object] class defines a safe <EM>__setattr__</EM> method, which
+raises an exception when trying to set the value of an undeclared
+attribute (see below for instructions on how to declare an
+attribute).</P>
+<P>
+For performance reasons, these safe attribute setting methods are
+only invoked if environment variable <EM>$PY_DEBUG_OBJECT=1</EM>.</P>
+<P>
+Note that [Object] does not define a safe <EM>__getattr__</EM>
+method because Python already raises an exception when trying to
+get the value of an inexistant attribute.</P>
+<P>
+Profile tests on NT indicate that:</P>
+
+<UL>
+
+<LI>the speed of constructors for Object and non-Object instances
+  are the same
+<LI>the speed of attribute <EM>gets</EM> is the same for Object and
+  non-Object instances
+<LI>when <EM>$PY_DEBUG_OBJECT=0</EM>, the performance of attribute <EM>sets</EM>
+  is the same for Object and non-Object instances
+<LI>when <EM>$PY_DEBUG_OBJECT=1</EM>, attribute <EM>sets</EM> are slower by a
+  factor of about 15 for Object instances than for non-Object
+  instances
+</UL>
+<P>
+<STRONG>"DECLARING" VALID ATTRIBUTES</STRONG></P>
+<P>
+In order to use the safe <EM>__setattr__</EM> method, we need a way to tell it
+what the valid attributes are.</P>
+<P>
+You can do this simply by setting the attribute directly through
+<EM>__dict__</EM>. You can also use the <A HREF="Object.Object.html#Object.Object.decl_attrs">decl_attrs</A> method to declare a
+series of valid attributes with less typing.</P>
+<P>
+Typically, valid attributes should be set in this way, only in the
+<EM>__init__</EM> method. The rest of the time, they should be set in the
+normal way (or through [init_attrs]), so that the safe __setattr_
+method can intercept access to undeclared attributes..</P>
+
+<H3>Example:</H3>
+<PRE CLASS="Example">
+   #
+   # declare like this inside __init__
+   #
+   self.__dict__['attr_name'] = None
+   self.__dict__['an_other_attr_name'] = None   #
+   # or like this if you don't like brainless repetitive typing
+   # 
+   self.decl_attrs({'attr_name': None, <CODE>an_other_attr_name</CODE>: None})   # 
+   # set like this the rest of the time
+   # 
+   self.attr_name = None
+   self.an_other_attr_name = None   # 
+   # or like this
+   # 
+   self.init_attrs({'attr_name': None, <CODE>an_other_attr_name</CODE>: None})</PRE>
+<P>
+Note that you don't need to declare attributes which you pass to <A HREF="Object.Object.html#Object.Object.deep_construct">deep_construct</A>
+through its <EM>attrs_this_class</EM> argument, because <A HREF="Object.Object.html#Object.Object.deep_construct">deep_construct</A>
+will declare them automatically for you.</P>
+<P>
+<STRONG>STANDARD CONSTRUCTORS</STRONG></P>
+<P>
+The method <A HREF="Object.Object.html#Object.Object.deep_construct">deep_construct</A> can be used to define standard
+constructors with the following properties:</P>
+
+<UL>
+
+<LI>automatically invokes constructors of all ancestor classes
+<LI>automatically "declares" valid attributes (for use with safe *__setattr__*)
+<LI>allows a subclass' constructor to inherit arguments (with
+  default values if any) from the constructors of its ancestor
+  classes
+</UL>
+<P>
+This has many advantages.</P>
+
+<H3>Example:</H3>
+<PRE CLASS="Example">
+   class Person(Object):
+      def __init__(self, name=None, age=None, **args_super):
+          etc...
+   class Employee(Person):
+       def __init__(self, salary=None, **args_super):
+           etc...   some_employee = Employee(name='Alain', salary='not enough')</PRE>
+<P>
+Note how I was able to feed the <EM>name</EM> to <EM>Employee.__init__</EM>,
+eventhough it doesn't explicitly define that argument. That's
+because <EM>Employee.__init__</EM> "inherited" that argument from
+<EM>Person.__init__</EM>.</P>
+<P>
+Note also that I didn't have to specify the <EM>age</EM>
+argument. Although it's not obvious from the example, the standard
+constructor automatically sets it to the default <EM>None</EM>
+inherited from <EM>Person.__init__</EM>.</P>
+<P>
+Below are a series of examples showing how to use <A HREF="Object.Object.html#Object.Object.deep_construct">deep_construct</A>
+to build different standard constructors.</P>
+<P>
+Note that the file <EM>Admin/python.el</EM> defines some Emacs-Lisp
+macros for writing template code for standard constructors.</P>
+<P>
+<STRONG>EXAMPLE 1: Simple case</STRONG></P>
+<P>
+Let's start with a simple case.</P>
+<P>
+Suppose I want to create a standard class <EM>Person</EM> with attributes
+<EM>name</EM>, <EM>citizenship</EM>, and a standard subclass <EM>Employee</EM> with
+additional attribute <EM>salary</EM>. This would be done as follows.</P>
+
+<H3>Example:</H3>
+<PRE CLASS="Example">
+   class Person(Object):
+      def __init__(self, name, citizenship=None, **args_super):
+         self.deep_construct(Person, {'name': name, <CODE>citizenship</CODE>: citizenship}, args_super)   class Employee(Person):
+       def __init__(self, salary=None, **args_super):
+         self.deep_construct(Employee, {'salary': salary}, args_super)   #
+   # This is OK
+   #
+   some_employee = Employee(name='Alain', salary='not enough')   #
+   # This raises an exception because we don't give a value for
+   # compulsory argument name, which is inherited from Person.__init__
+   #
+   some_other_employee = Employee(salary='not enough')</PRE>
+<P>
+Simple no?</P>
+<P>
+Note how I was able to set attribute <EM>name</EM> through
+<EM>Employee.__init__</EM>, eventhough it is not an argument of that
+constructor.</P>
+<P>
+Note also that I didn't have to specify a value for
+<EM>citizenship</EM>, because that's only an optional argument inherited from 
+<EM>Person.__init__</EM>.</P>
+<P>
+Finally, note how construction of <EM>some_other_employee</EM> fails
+because I didn't specify a value for <EM>name</EM>, which is a compulsory
+argument inherited from <EM>Person.__init__</EM>.</P>
+<P>
+<STRONG>EXAMPLE 2: Caution regarding compulsory constructor arguments</STRONG></P>
+<P>
+Because compulsory constructor arguments are inherited by
+subclasses, one should be careful not to create too many of
+them. Otherwise, the constructor of subclasses deep in the inheritance
+hierarchy can end up with a great number of compulsory
+arguments. For example, suppose we have a chain of 10 subclasses,
+each adding 3 new compulsory constructor arguments. The
+constructor of the 10th subclass in the chain would end up with 30
+compulsory arguments! The situation becomes even worse in the case
+of multiple inheritance.</P>
+<P>
+In general, it is better to define constructor arguments to be
+optional, except in cases where the argument has no sensible
+default value. Even in such cases, it's usually pretty safe to use
+<EM>None</EM> as the default value. Remember, this is Python, not C or C++. The
+worst that can happen is that the programer may at some point
+access the argument as though it was not a <EM>None</EM> value, in
+which case he/she will get a nice error message which will allow
+him/her to quickly identify the source of the problem.</P>
+<P>
+For example, consider the code below.</P>
+
+<H3>Example:</H3>
+<PRE CLASS="Example">
+   class Person(Object):
+      def __init__(self, age=None):
+         self.deep_construct(Person, {'age': age}, args_super)   #
+   # This results in the following error message:
+   #
+   # Traceback (innermost last):
+   #    File "test.py", line 7, in ?
+   #      a_person.age = a_person.age + 1
+   #  TypeError: bad operand type(s) for +
+   #
+   a_person = Person()
+   a_person.age = a_person.age + 1</PRE>
+<P>
+To identify the source of the problem, all the user has to do then
+is to print the content of <EM>a_person.age</EM> (using a trace or
+debugger) to figure out that it was left at its default of <EM>None</EM>.</P>
+<P>
+<STRONG>EXAMPLE 3: Changing default of an ancestor constructor argument</STRONG></P>
+<P>
+Sometimes, you may want a subclass' constructor to use a default
+value for a constructor argument, which is different from the default
+value defined for the same argument in the constructor of some
+ancestor class.</P>
+<P>
+For example, suppose I know that 99% of the instances of <EM>Person</EM>
+I create will have canadian citizenship. I would like to create a
+standard subclass <EM>MyPerson</EM> whose default value for <EM>citizenship</EM>
+is <EM>'Canadian eh?'</EM>.</P>
+<P>
+You can do this simply by including <EM>citizenship</EM> and its new
+default value in the argument <EM>new_default</EM> of
+[Object.deep_construct].</P>
+<P>
+Note that you should use the <EM>new_default</EM> argument only to
+specify default values of arguments defined in some ancestor's
+constructor. To specify the default of an argument defined in the
+current class' constructor, assign a default value in the list of
+arguments to the current class' constructor.</P>
+
+<H3>Example:</H3>
+<PRE CLASS="Example">
+   class Person(Object):
+      def __init__(self, name=None, citizenship=None, **args_super):
+         self.deep_construct(Person, {'name': name, <CODE>citizenship</CODE>: citizenship}, args_super)   class MyPerson(Person):
+       #
+       # Note that MyPerson.__init__ defines a new argument age. Its
+       # default value is defined in MyPerson.__init__'s list of formal
+       # arguments, NOT in new_default
+       #
+       def __init__(self, age=None, **args_super):
+         #
+         # Because citizenship is an argument of the ancestor Person,
+         # we redefine its default using new_default argument.
+         #
+         self.deep_construct(MyPerson, {'age': age}, args_super, new_default={'citizenship': 'Canadian eh?'})   #
+   # This person is Canadian by default
+   #
+   some_person = MyPerson(name='Alain')   #
+   # But I can still override that in the call to MyPerson.__init__
+   #
+   some_other_person = MyPerson(name='Alain', citizenship='US citizen')</PRE>
+<P>
+<STRONG>EXAMPLE 4: Enforcing value of an ancestor constructor argument</STRONG></P>
+<P>
+Sometimes, you may want to force the value of an argument defined
+in an ancestor's constructor. This is different from changing the
+default value (as in above example), because here, the user simply
+cannot call the constructor with a value different from the
+enforced value.</P>
+<P>
+In the above example, any instance of <EM>MyPerson</EM> will be Canadian,
+but only by defaul. I can still override that value to create, say
+a US citizens. Now suppose I want to create a class <EM>Canadian</EM>
+where it wasn't possible to override the default value of
+<EM>citizenship='Canadian eh?'</EM>.</P>
+<P>
+All I have to do is to list <EM>citizenship</EM> and its enforced value
+of <EM>'Canadian eh?'</EM> in the <EM>enforce_value</EM> argument to
+<A HREF="Object.Object.html#Object.Object.deep_construct">deep_construct</A>. If <EM>$PY_DEBUG_OBJECT=1</EM>, this will raise a
+EnforcedConstrArg exception if the programmer calls the
+constructor with a value that's different from the enforced value.</P>
+<P>
+Note that if the enforced argument happens to be an attribute,
+enforcing its value in the constructor does not prevent the user
+from changing the attribute's value after construction. This is 
+exemplified by the last two lines in the code below.</P>
+
+<H3>Example:</H3>
+<PRE CLASS="Example">
+   class Person(Object):
+      def __init__(self, name=None, citizenship=None, **args_super):
+         self.deep_construct(Person, {'name': name, <CODE>citizenship</CODE>: citizenship}, args_super)   class Canadian(Person):
+      def __init__(self, **args_super):
+         self.deep_construct(Canadian, {}, args_super, enforce_value={'citizenship': 'Canadian eh?'})   #
+   # This works
+   #
+   some_canadian = Canadian(name='Alain')   #
+   # This raises an exception because I try to override the enforced
+   # value for citizenship.
+   #
+   pseudo_canadian = Canadian(name='Alain', citizenship='US citizen')   #
+   # But unfortunately, this still manages to create an instance of
+   # Canadian with citizenship='US citizen'
+   #
+   pseudo_canadian = Canadian(name='Alain')
+   pseudo_canadian.citizenship = <CODE>US citizen</CODE></PRE>
+<P>
+<STRONG>EXAMPLE 5: Arguments which are not attributes</STRONG>       </P>
+<P>
+Some of the constructor arguments may not correspond to attributes
+of the class. For example, suppose I want to be able to provide a
+file from which to read initial specification of a <EM>Person</EM> object. I
+don't want this file to be stored as an attribute of the object
+because then the file handle could not be released until the
+object is garbage collected.</P>
+<P>
+In such cases, all you have to do is to <EM>NOT</EM> pass the argument to 
+[deep_construct]'s <EM>attrs_this_class</EM> argument. </P>
+
+<H3>Example:</H3>
+<PRE CLASS="Example">
+   class Person(Object):
+      def __init__(self, name=None, citizenship=None, init_file=None, **args_super):
+        #
+        # Note: deep_construct will not create a init_file attribute
+        #       because it's not in its attrs_this_class argument.
+        #
+        self.deep_construct(Person, {'name': name, <CODE>citizenship</CODE>: citizenship}, args_super)
+        if init_file: self.init_from_file(init_file)   # Person doesn't get a init_file attribute
+   a_person = Person(init_file=open('C:/temp.txt', 'r'))
+   try:
+       x = a_person.init_file
+   except:
+       print <CODE>See, a_person has no attribute called *init_file*</CODE></PRE>
+<P>
+<STRONG>EXAMPLE 6: Private attributes</STRONG></P>
+<P>
+Some attributes are private, that is they are not supposed to be
+manipulated directly by the user.</P>
+<P>
+In the above example, suppose I want to be able to determine if the
+initialisation file has changed since the last time I initialised
+the instance of <EM>Person</EM>. I would do that by adding an attribute
+<EM>date_last_read</EM> which stores the date at which the instance was
+last initialised from file. Obviously, I don't want the programmer
+to set this value through constructor arguments.</P>
+<P>
+In this case, all I have to do is to exclude <EM>date_last_read</EM> from
+*Person.__init__*'s list of arguments, and declare it directly in
+<EM>__init__</EM> using <A HREF="Object.Object.html#Object.Object.decl_attrs">decl_attrs</A>.</P>
+
+<H3>Example:</H3>
+<PRE CLASS="Example">
+   class Person(Object):
+      #
+      # Note how date_last_read is absent from list of arguments
+      #
+      def __init__(self, name=None, citizenship=None, init_file=None, **args_super):
+         #
+         # Instead, date_last_read attribute is declared directly here.
+         #
+         self.decl_attrs({'date_last_read': localtime()})
+         #
+         # No need to pass date_last_read to deep_construct, because it
+         # was already declared above.
+         # 
+         self.deep_construct(Person, {'name': name, <CODE>citizenship</CODE>: citizenship}, args_super)
+         if init_file: self.init_from_file(init_file)
+   #
+   # This works, and date_last_read ends up being set at current time.
+   # 
+   a_person = Person(init_file=FileObject(path='C:/person.dat'))
+   #
+   # This raises an exception because date_last_read is not a constructor
+   # argument
+   #
+   a_person = Person(init_file=FileObject(path='C:/person.dat'), date_last_read=231233)</PRE>
+<P>
+<STRONG>EXAMPLE 7: Doing other initialisation besides attribute setting</STRONG></P>
+<P>
+Often, a constructor needs to do more than just set attribute
+values. To do this, simply add code after the call to <A HREF="Object.Object.html#Object.Object.deep_construct">deep_construct</A>.</P>
+<P>
+In the previous example, we added code for conditionally calling
+<EM>self.init_from_file(init_file)</EM> after <A HREF="Object.Object.html#Object.Object.deep_construct">deep_construct</A>.</P>
+<P>
+<STRONG>EXAMPLE 8: Subclassing from non-standard classes</STRONG></P>
+<P>
+Sometimes you will want to create a standard class which is a
+subclass of a non-standard class, that is, a class that doesn't
+have a standard constructor.</P>
+<P>
+In such cases, you would simply add the non-standard class
+to the <EM>exclude_bases</EM> argument of <A HREF="Object.Object.html#Object.Object.deep_construct">deep_construct</A>, and invoke
+the non-standard constructor manually in <EM>__init__</EM>.</P>
+<P>
+For example, suppose I want <EM>Person</EM> to also be a subclass of
+<EM>AnimatedCharacter</EM>, but <EM>AnimatedCharacter.__init__</EM> is not a
+standard constructor. </P>
+
+<H3>Example:</H3>
+<PRE CLASS="Example">
+   class AnimatedCharacter():
+      def __init__(self, animation_file, frames_per_sec=40):
+          etc...   class Person(Object):
+      def __init__(self, name=None, citizenship=None, **args_super):
+          etc...   class AnimatedPerson(Person, AnimatedCharacter)
+      def __init__(self, , animation_file, frames_per_sec=40, **args_super):
+         self.deep_construct(AnimatedPerson, {'animation_file': animation_file, <CODE>frames_per_sec</CODE>: frames_per_sec}, args_super, exclude_bases={AnimatedCharacter: 1})
+         AnimatedCharacter.__init__(self, animation_file, frames_per_sec=frames_per_sec)   an_animated_person = AnimatedPerson(name='Alain', animation_file='C:/People/Alain.dat')</PRE>
+<P>
+Note that the only reason we have to exclude <EM>AnimatedCharacter</EM>
+from the list of automatically built superclasses, is that
+<EM>AnimatedCharacter.__init__</EM> doesn't have a catch-all argument
+*\*\*args_super*. If <EM>AnimatedCharacter.__init__</EM> DID have such a
+catch-all argument, we wouldn't have to exclude it, even if it
+didn't make use of the other aspects of the standard constructor.</P>
+<P>
+Note also that I still get all of the benefits from the standard
+constructor of <EM>Person</EM>, i.e. I can inherit the arguments of
+<EM>Person.__init__</EM> without additional work.</P>
+<P>
+However, if I want to inherit the arguments of
+<EM>AnimatedCharacter.__init__</EM>, I have to repeat them in the list of
+arguments for <EM>AnimatedPerson.__init__</EM> and then pass them to
+<EM>AnimatedCharacter.__init__</EM> manually.</P>
+<P>
+Note also that in <EM>exclude_bases</EM>, I specify the class object
+itself, not the name of the classe, that is:</P>
+<P>
+<EM>exclude_bases = {AnimatedPerson: 1}</EM></P>
+<P>
+as opposed to</P>
+<P>
+<EM>exclude_bases = {'AnimatedPerson': 1}</EM></P>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises existing attributes, unless those attributes
+already exist</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

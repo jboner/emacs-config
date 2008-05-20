@@ -1,0 +1,1145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Dec 25 16:43:26 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class VoiceDictBuffer</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class VoiceDictBuffer</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="VoiceDictBuffer.html">VoiceDictBuffer</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">VoiceDictBuffer.VoiceDictBuffer<BR>
+&nbsp;&nbsp;TextBuffer.TextBufferChangeSpecify<BR>
+&nbsp;&nbsp;TextBuffer.SpeechBufferRecogStart<BR>
+&nbsp;&nbsp;TextBuffer.LockableSpeechBuffer<BR>
+&nbsp;&nbsp;TextBuffer.SelectionBuffer<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">VoiceDictBuffer</SPAN>(<A CLASS="DocLink" HREF="TextBuffer.TextBufferChangeSpecify.html">TextBufferChangeSpecify</A>, <A CLASS="DocLink" HREF="TextBuffer.SpeechBufferRecogStart.html">SpeechBufferRecogStart</A>, <A CLASS="DocLink" HREF="TextBuffer.LockableSpeechBuffer.html">LockableSpeechBuffer</A>, <A CLASS="DocLink" HREF="TextBuffer.SelectionBuffer.html">SelectionBuffer</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.__del__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer._on_begin"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer._on_begin</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app_and_window</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer._on_voice_change"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer._on_voice_change</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">selection_start</SPAN>, <SPAN CLASS="Argument">selection_end</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.activate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.activate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">dict_globally=0</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.cur_pos"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.cur_pos</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns current position (= end of the current selection)</SPAN>
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.deactivate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.deactivate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # disable dictation into the SpeechBuffer</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.get_length</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.get_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.get_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # retrieves range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.get_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.get_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # retrieves a portion of the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.get_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.get_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.has_been_activated"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.has_been_activated</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.is_activated"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.is_activated</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.is_active"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.is_active</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.is_global"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.is_global</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.range_defaults"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.range_defaults</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.reactivate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.reactivate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.set_lock"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.set_lock</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">state</SPAN>)
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.set_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.set_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.set_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.set_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes a portion of the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#VoiceDictBuffer.VoiceDictBuffer.set_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">VoiceDictBuffer.VoiceDictBuffer.set_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">range=(0, -1)</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.TextBufferChangeSpecify</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeSpecify.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeSpecify.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeSpecify._on_change_specification"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeSpecify._on_change_specification</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">selection_start</SPAN>, <SPAN CLASS="Argument">selection_end</SPAN>, <SPAN CLASS="Argument">program_initiated</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeSpecify.get_change_callback"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeSpecify.get_change_callback</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBufferChangeSpecify.set_change_callback"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBufferChangeSpecify.set_change_callback</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>)<SPAN CLASS="OneLiner"> # changes the callback to a new function</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.TextBuffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)<SPAN CLASS="OneLiner"> # abstract base class - no arguments</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.cur_pos"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.cur_pos</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.get_length"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.get_length</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns the length of the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.get_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.get_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # retrieves range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.get_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.get_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # retrieves a portion of the buffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.len"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.len</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns length of buffer </SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.set_selection"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.set_selection</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes range of current selection</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.TextBuffer.set_text"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.TextBuffer.set_text</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)<SPAN CLASS="OneLiner"> # changes a portion of the buffer</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.SpeechBufferRecogStart</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBufferRecogStart.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBufferRecogStart.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">recog_start_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBufferRecogStart._on_recog_start"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBufferRecogStart._on_recog_start</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window_matches</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBufferRecogStart.set_recog_start_callback"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBufferRecogStart.set_recog_start_callback</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">recog_start_callback=None</SPAN>)<SPAN CLASS="OneLiner"> # changes the callback to a new function</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.LockableSpeechBuffer</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.LockableSpeechBuffer.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.LockableSpeechBuffer.set_lock"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.LockableSpeechBuffer.set_lock</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">state</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.SpeechBuffer</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.activate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.activate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">dict_globally=0</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.deactivate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.deactivate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # disable dictation into the SpeechBuffer</SPAN>
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.has_been_activated"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.has_been_activated</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.is_activated"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.is_activated</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.is_active"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.is_active</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.is_global"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.is_global</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SpeechBuffer.reactivate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SpeechBuffer.reactivate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from TextBuffer.SelectionBuffer</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SelectionBuffer.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SelectionBuffer.get_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SelectionBuffer.get_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#TextBuffer.SelectionBuffer.set_visible"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">TextBuffer.SelectionBuffer.set_visible</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">range=(0, -1)</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+
+</PRE><H2>Description</H2><P>
+concrete implementation of TextBufferChangeSpecify, 
+SpeechBufferRecogStart, SelectionBuffer, and LockableSpeechBuffer,
+using the DictObj class from Joel Gould's
+natlink python interface to NaturallySpeaking.</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>DictObj</EM> underlying
+<DD>underlying Natlink DictObj (exported from C)
+<DT>
+<EM>BOOL</EM> was_activated
+<DD>has underlying DictObj been activated
+<DT>
+<EM>BOOL</EM> activated
+<DD>is underlying DictObj currently activated
+<DT>
+<EM>BOOL</EM> dict_globally
+<DD>is DictObj activated globally
+<DT>
+<EM>BOOL</EM> window_handle
+<DD>handle of window for window-specific
+activation (or 0 if global or unset)
+<DT>
+<EM>BOOL</EM> program_initiated
+<DD>flag which indicates whether a
+change was initiated by the program (i.e. by a call to set_text) or
+by voice
+</DL>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.__init__" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer._on_begin" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer._on_begin(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app_and_window</SPAN>)</H2>
+<P>None</P>
+
+<P>
+private method.  Should only be called by callback from
+underlying DictObj.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(STR, STR, INT)</EM> app_and_window
+<DD>full path to module of active application, title of active
+window, window handle of active window
+
+</DL>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer._on_voice_change" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer._on_voice_change(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">selection_start</SPAN>, <SPAN CLASS="Argument">selection_end</SPAN>)</H2>
+<P>None</P>
+
+<P>
+private method.  Should only be called by callback from
+underlying DictObj.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start, <EM>INT</EM> end
+<DD>character range of region replaced or deleted of region.  
+(start == end means text was simply inserted
+<DT>
+<EM>STR</EM> text
+<DD>inserted text
+<DT>
+<EM>INT</EM> selection_start, <EM>INT</EM> selection_end
+<DD>the selection range after insertion
+
+</DL>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.activate" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.activate(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">dict_globally=0</SPAN>)</H2>
+<P>None</P>
+
+<P>
+activates the speech buffer for dictation, either globally or
+tied to the current window.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM> dict_globally
+<DD>if true, activate globally, otherwise
+note the current window and activate only when it is the active window.
+Additional conditions can be placed on the activation by
+activating or deactivating manually or on recognition starting
+(see SpeechBufferRecogStart below)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.cur_pos" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.cur_pos(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns current position (= end of the current selection)</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>the offset into the buffer of the current cursor
+position.
+
+</DL>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.deactivate" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.deactivate(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>disable dictation into the SpeechBuffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.get_selection" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.get_selection(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>retrieves range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>INT</EM> (start, end)</P>
+<P>
+start is the offset into the buffer of the start of the current
+selection.  end is the offset into the buffer of the character 
+following the selection (this matches Python's slice convention).
+</P>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.get_text" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.get_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>retrieves a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT start</EM> is the start of the region returned.
+Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the region to be returned (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>contents of specified range of the buffer
+
+</DL>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.get_visible" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.get_visible(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns the current visible range
+which should be available to Select XYZ.  If ta concrete
+subclass of SpeechBufferSelection does not support returning the
+current visible range, then get_visible should return None.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM> range
+<DD>visible character range.  None means ehat
+the concrete implementation of SpeechBufferSelection does not
+support reporting the current visible range.  An empty range
+means that Select xyz is disabled.  A range of (0, -1) means the
+entire buffer is visible.  
+</DL>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.has_been_activated" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.has_been_activated(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+indicates whether the activate method has been invoked, or
+whether it needs to be called to activate dictation.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>returns true if activate was previously called, and
+the SpeechBuffer is still active, or can be reactivated with a
+call to reactivate (instead of a new call to activate).
+</DL>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.is_activated" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.is_activated(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+indicates whether the  SpeechBuffer is currently activated or
+deactivated (not whether it is active)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>returns true iff the buffer is currently activated.
+Note that if the buffer was activated for a specific window,
+but that window is not active, is_activated will still return
+true.  To see if dictation is active now, use is_active.
+
+</DL>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.is_active" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.is_active(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+indicates whether dictation into the SpeechBuffer is currently 
+active (activated globally, or activated with the current
+window)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>returns true iff dictation into the buffer is 
+currently active.
+
+</DL>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.is_global" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.is_global(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+tells whether the buffer (when activated) is activated
+globally.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>is buffer set for global dictation.
+
+</DL>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.range_defaults" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.range_defaults(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+translates from TextBuffer defaults for specifying start and
+end of a range to the appropriate values for DictObj</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> start
+<DD>offset of start of range, or None to
+default to the beginning of the buffer
+<DT>
+<EM>INT</EM> end
+<DD>offset of character following end of 
+range, or None to default to the end of the buffer
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM>
+<DD>DictObj offsets
+</DL>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.reactivate" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.reactivate(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+reactivate dictation using the same window (or globally).
+This method should not be called, unless the buffer has
+previously been activated and then deactivate.</P>
+<P>
+(for VoiceDictBuffer, if never activated, this is equivalent 
+to activate with current window.)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.set_lock" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.set_lock(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">state</SPAN>)</H2>
+<P>None</P>
+
+<P>
+locks/unlocks changes to the contents of a hidden speech 
+buffer, to ensure consistency between multiple get operations.
+When the buffer is
+locked, all speech-initiated changes to the buffer will be 
+deferred until it is unlocked.  No speech should be lost.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT</EM> state</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.set_selection" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.set_selection(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT start</EM> is the start of the region to be selected.
+Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the region to be selected (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.set_text" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.set_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>STR text</EM> is the new text.</P>
+<P>
+<EM>INT start</EM> is the offset into the buffer of the text to the
+replaced.  Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the text to be replaced (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="VoiceDictBuffer.VoiceDictBuffer.set_visible" CLASS="Method">VoiceDictBuffer.VoiceDictBuffer.set_visible(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">range=(0, -1)</SPAN>)</H2>
+<P>None</P>
+
+<P>
+tells the SpeechBufferSelection the current visible range
+which should be available to Select XYZ.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM> range
+<DD>character range which the buffer should
+is visible and therefore selectable.  If the end of the range is
+less than the start (as in the default), the entire buffer will 
+be considered visible.  Select xyz can be disabled by setting
+the range to (0, 0)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.TextBufferChangeSpecify.__init__" CLASS="Method">TextBuffer.TextBufferChangeSpecify.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> change_callback
+<DD>change_callback( <EM>INT</EM> start, <EM>INT</EM> end, <EM>STR</EM> text, 
+<EM>INT</EM> selection_start,
+<EM>INT</EM> selection_end, TextBufferChangeSpecify buffer,
+<EM>BOOL</EM> program_initiated) 
+see TextBufferChangeSpecify documentation for details.
+
+</DL>
+<H2 ID="TextBuffer.TextBufferChangeSpecify._on_change_specification" CLASS="Method">TextBuffer.TextBufferChangeSpecify._on_change_specification(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start</SPAN>, <SPAN CLASS="Argument">end</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">selection_start</SPAN>, <SPAN CLASS="Argument">selection_end</SPAN>, <SPAN CLASS="Argument">program_initiated</SPAN>)</H2>
+<P>None</P>
+
+<P>
+internal function which triggers the
+change_callback.  Only the concrete subclass of 
+TextBufferChangeSpecify implementing change specification
+should call this function</P>
+<H2 ID="TextBuffer.TextBufferChangeSpecify.get_change_callback" CLASS="Method">TextBuffer.TextBufferChangeSpecify.get_change_callback(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+return change callback function (used by wrappers like
+TextBufferCRToNL)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> change_callback
+<DD>change_callback( <EM>INT</EM> start, <EM>INT</EM> end, <EM>STR</EM> text, 
+<EM>INT</EM> selection_start, <EM>INT</EM> selection_end, 
+<EM>TextBufferChangeSpecify</EM> buffer, <EM>BOOL</EM> program_initiated) 
+
+</DL>
+<H2 ID="TextBuffer.TextBufferChangeSpecify.set_change_callback" CLASS="Method">TextBuffer.TextBufferChangeSpecify.set_change_callback(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>)</H2>
+<P>changes the callback to a new function</P>
+
+<P>
+<STRONG>INPUTS</STRONG>
+<EM>FCT</EM> change_callback --
+change_callback( <EM>INT</EM> start, <EM>INT</EM> end, <EM>STR</EM> text, 
+<EM>INT</EM> selection_start, <EM>INT</EM> selection_end, 
+<EM>TextBufferChangeSpecify</EM> buffer, <EM>BOOL</EM> program_initiated) 
+see TextBufferChangeSpecify documentation for details.
+-- function to be called on change to
+the underlying buffer.  
+see TextBufferChangeSpecify documentation for details.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.TextBuffer.__init__" CLASS="Method">TextBuffer.TextBuffer.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>abstract base class - no arguments</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.TextBuffer.cur_pos" CLASS="Method">TextBuffer.TextBuffer.cur_pos(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns current position (either the start or end of
+the current selection, and usually the end)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>the offset into the buffer of the current cursor
+position.
+
+</DL>
+<H2 ID="TextBuffer.TextBuffer.get_length" CLASS="Method">TextBuffer.TextBuffer.get_length(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns the length of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>INT</EM> number of characters in the buffer</P>
+<H2 ID="TextBuffer.TextBuffer.get_selection" CLASS="Method">TextBuffer.TextBuffer.get_selection(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>retrieves range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>INT</EM> (start, end)</P>
+<P>
+start is the offset into the buffer of the start of the current
+selection.  end is the offset into the buffer of the character 
+following the selection (this matches Python's slice convention).
+</P>
+<H2 ID="TextBuffer.TextBuffer.get_text" CLASS="Method">TextBuffer.TextBuffer.get_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>retrieves a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT start</EM> is the start of the region returned.
+Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the region to be returned (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>contents of specified range of the buffer
+
+</DL>
+<H2 ID="TextBuffer.TextBuffer.len" CLASS="Method">TextBuffer.TextBuffer.len(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns length of buffer </P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>the length of the buffer
+
+</DL>
+<H2 ID="TextBuffer.TextBuffer.set_selection" CLASS="Method">TextBuffer.TextBuffer.set_selection(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes range of current selection</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT start</EM> is the start of the region to be selected.
+Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the region to be selected (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.TextBuffer.set_text" CLASS="Method">TextBuffer.TextBuffer.set_text(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>, <SPAN CLASS="Argument">start=None</SPAN>, <SPAN CLASS="Argument">end=None</SPAN>)</H2>
+<P>changes a portion of the buffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>STR text</EM> is the new text.</P>
+<P>
+<EM>INT start</EM> is the offset into the buffer of the text to the
+replaced.  Defaults to start of buffer.</P>
+<P>
+<EM>INT end</EM> is the offset into the buffer of the character following 
+the text to be replaced (this matches Python's slice convention).
+Defaults to end of buffer.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SpeechBufferRecogStart.__init__" CLASS="Method">TextBuffer.SpeechBufferRecogStart.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">recog_start_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+abstract class initialization, but does common handling of
+the recog_start_callback</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> recog_start_callback
+<DD>recog_start_callback(
+<EM>SpeechBuffer</EM> buffer, <EM>BOOL</EM> window_matches) 
+callback which indicates the start of
+recognition.  
+</DL>
+<P>
+This callback can activate or deactivate the
+SpeechBuffer (allowing more specific activation conditions than
+just the active window).  </P>
+<P>
+If necessary it should also update the
+state of the internal SpeechBuffer to match the corresponding
+editor buffer.  (This is necessary if the SpeechBuffer is not
+immediately updated whenever the editor buffer changes).</P>
+<P>
+If the SpeechBuffer is set to be active only when a specific
+window is active, window_matches will return true only if this
+is the case.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SpeechBufferRecogStart._on_recog_start" CLASS="Method">TextBuffer.SpeechBufferRecogStart._on_recog_start(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window_matches</SPAN>)</H2>
+<P>None</P>
+
+<P>
+internal function which triggers the
+recog_start_callback.  Only the concrete subclass of
+SpeechBufferRecogStart implementing the change notification 
+should call this function</P>
+<H2 ID="TextBuffer.SpeechBufferRecogStart.set_recog_start_callback" CLASS="Method">TextBuffer.SpeechBufferRecogStart.set_recog_start_callback(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">recog_start_callback=None</SPAN>)</H2>
+<P>changes the callback to a new function</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> recog_start_callback
+<DD>recog_start_callback(
+<EM>SpeechBuffer</EM> buffer, <EM>BOOL</EM> window_matches) 
+callback which indicates the start of
+recognition.  This callback can activate or deactivate the
+SpeechBuffer (allowing more specific activation conditions than
+just the active window).  If necessary it should also update the
+state of the internal SpeechBuffer to match the corresponding
+editor buffer.  (This is necessary if the SpeechBuffer is not
+immediately updated whenever the editor buffer changes).
+</DL>
+<P>
+If the SpeechBuffer is set to be active only when a specific
+window is active, window_matches will return true only if this
+is the case.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.LockableSpeechBuffer.set_lock" CLASS="Method">TextBuffer.LockableSpeechBuffer.set_lock(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">state</SPAN>)</H2>
+<P>None</P>
+
+<P>
+locks/unlocks changes to the contents of a hidden speech 
+buffer, to ensure consistency between multiple get operations.
+When the buffer is
+locked, all speech-initiated changes to the buffer will be 
+deferred until it is unlocked.  No speech should be lost.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>INT</EM> state</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SpeechBuffer.activate" CLASS="Method">TextBuffer.SpeechBuffer.activate(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">dict_globally=0</SPAN>)</H2>
+<P>None</P>
+
+<P>
+activates the speech buffer for dictation, either globally or
+tied to the current window.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM> dict_globally
+<DD>if true, activate globally, otherwise
+note the current window and activate only when it is the active window.
+Additional conditions can be placed on the activation by
+activating or deactivating manually or on recognition starting
+(see SpeechBufferRecogStart below)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SpeechBuffer.deactivate" CLASS="Method">TextBuffer.SpeechBuffer.deactivate(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>disable dictation into the SpeechBuffer</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SpeechBuffer.has_been_activated" CLASS="Method">TextBuffer.SpeechBuffer.has_been_activated(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+indicates whether the activate method has been invoked, or
+whether it needs to be called to activate dictation.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>returns true if activate was previously called, and
+the SpeechBuffer is still active, or can be reactivated with a
+call to reactivate (instead of a new call to activate).
+</DL>
+<H2 ID="TextBuffer.SpeechBuffer.is_activated" CLASS="Method">TextBuffer.SpeechBuffer.is_activated(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+indicates whether the  SpeechBuffer is currently activated or
+deactivated (not whether it is active)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>returns true iff the buffer is currently activated.
+Note that if the buffer was activated for a specific window,
+but that window is not active, is_activated will still return
+true.  To see if dictation is active now, use is_active.
+
+</DL>
+<H2 ID="TextBuffer.SpeechBuffer.is_active" CLASS="Method">TextBuffer.SpeechBuffer.is_active(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+indicates whether dictation into the SpeechBuffer is currently 
+active (activated globally, or activated with the current
+window)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>returns true iff dictation into the buffer is 
+currently active.
+
+</DL>
+<H2 ID="TextBuffer.SpeechBuffer.is_global" CLASS="Method">TextBuffer.SpeechBuffer.is_global(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+tells whether the buffer (when activated) is activated
+globally.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>is buffer set for global dictation.
+
+</DL>
+<H2 ID="TextBuffer.SpeechBuffer.reactivate" CLASS="Method">TextBuffer.SpeechBuffer.reactivate(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+reactivate dictation using the same window (or globally).
+This method should not be called, unless the buffer has
+previously been activated and then deactivate.</P>
+<P>
+Otherwise, its effect is undefined (although the concrete
+subclass of SpeechBuffer should still attempt to do something
+sensible)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SelectionBuffer.get_visible" CLASS="Method">TextBuffer.SelectionBuffer.get_visible(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns the current visible range
+which should be available to Select XYZ.  If ta concrete
+subclass of SpeechBufferSelection does not support returning the
+current visible range, then get_visible should return None.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM> range
+<DD>visible character range.  None means ehat
+the concrete implementation of SpeechBufferSelection does not
+support reporting the current visible range.  An empty range
+means that Select xyz is disabled.  A range of (0, -1) means the
+entire buffer is visible.  
+</DL>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="TextBuffer.SelectionBuffer.set_visible" CLASS="Method">TextBuffer.SelectionBuffer.set_visible(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">range=(0, -1)</SPAN>)</H2>
+<P>None</P>
+
+<P>
+tells the SpeechBufferSelection the current visible range
+which should be available to Select XYZ.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(INT, INT)</EM> range
+<DD>character range which the buffer should
+is visible and therefore selectable.  If the end of the range is
+less than the start (as in the default), the entire buffer will 
+be considered visible.  Select xyz can be disabled by setting
+the range to (0, 0)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

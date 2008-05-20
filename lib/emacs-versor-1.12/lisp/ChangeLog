@@ -1,0 +1,205 @@
+2008-01-22  John Sturdy  <jcgs@ezekiel.csis.ul.ie>
+
+	* languide-c-like.el (class): Start definition of C++ class
+	construct.
+
+2008-01-17  John Sturdy  <jcgs@ezekiel.csis.ul.ie>
+
+	* versor-base-moves.el (versor-backward-phrase): Use
+	versor-add-to-current-item instead of a lower-level interface.
+
+2007-12-31  John Sturdy  <jcgs@hosea>
+
+	* versor-base-moves.el (versor-row-starter): Move closing bracket
+	to include argument in calls to `error'.
+
+2007-12-11  John Sturdy  <jcgs@hosea>
+
+	* versor-commands.el (versor-select-surrounding): Made it use an
+	action provided with the dimension, if one is available; to DTRT
+	with languages like C, where using the surrounding s-expression
+	isn't enough.
+	(versor-extend-item-forwards): Add a extension-offset mechanism to
+	allow a dimension to use a related dimension for extending the
+	selection -- for example, when the minor dimension is
+	statement-parts, you would probably want extension to be by
+	statements.
+
+	* statement-parts.el (locate-this-container): New function, like
+	navigate-this-container but without the versor motion framework.
+	Made for calling from inside things.
+
+	* languide-lisp-like.el (languide-region-type): Added some more
+	recognizers and return values.
+
+	* languide-edits.el (languide-make-iterative): Fixed and completed
+	making regions conditional or iterative.
+
+2007-12-08  John Sturdy  <jcgs@hosea>
+
+	* versor-commands.el (insert-active): consistent way of returning
+	start and end positions; also simplified the structure
+	(versor-replace): general fixing
+
+2007-12-07  John Sturdy  <jcgs@hosea>
+
+	* versor-selection.el (versor-hiding-middle-banner): allowed a
+	function for versor-hiding-middle-banner
+
+2007-11-20  John Sturdy  <jcgs@hosea>
+
+	* versor-selection.el (versor-indicate-current-item): improve
+	display of selections larger than the window
+
+	* versor-trim-whitespace.el (versor-what-is-following): fix
+	recognition of following blank line
+
+	* versor-selection.el (versor-window-split-transiently): Completed
+	automatic splitting of window to show both ends of item.
+
+	* versor-commands.el (versor-extend-item-backwards-regardless): 
+	* versor-joystick.el (versor-joystick-bindings): made it possible
+	to extend selection in both directions together --- I hadn't
+	previously thought this useful, as the user can select whichever
+	end they want to start from, but it should be useful when
+	extending the result of a "surround" operation.
+
+2007-11-13  John Sturdy  <jcgs@hosea>
+
+	* versor-trim-whitespace.el (versor-adjust-whitespace): improve
+	newlining for inserting at line ends things which came from line
+	starts
+
+2007-11-12  John Sturdy  <jcgs@hosea>
+
+	* versor-joystick.el (possibly-other-window-versor-copy): Made
+	commands for copying and yanking that work on the other window if
+	the most recent command was an other-window one.
+
+2007-11-10  John Sturdy  <jcgs@hosea>
+
+	* versor-commands.el (versor-get-insertable): tell the joystick
+	system to allow even apparently unbound keystrokes, while reading
+	the type of insertion (which uses a keymap data structure, but not
+	in quite the conventional way)
+
+	* versor-joystick.el (versor-joystick-bindings): improve statement
+	insertion
+	
+2007-11-05  John Sturdy  <jcgs@hosea>
+
+	* versor-trim-whitespace.el (versor-deferred-just-one-space):
+	Tidying up both of what to delete, and how to delete it.
+
+2007-11-02  John Sturdy  <jcgs@hosea>
+
+	* versor-commands.el (versor-read-insertable-event): throw away
+	the hat-center event when reading a type of insertion
+
+2007-10-27  John Sturdy  <jcgs@hosea>
+
+	* versor-joystick.el (versor-joystick-bindings): added
+	versor-search-backward, and made gamepad bindings for them
+
+2007-10-25  John Sturdy  <jcgs@hosea>
+
+	* versor-trim-whitespace.el: rename `delayed' to 'deferred'.
+
+	* versor-base-moves.el (versor-backward-paragraph): Stop getting
+	stuck at start of buffer.
+
+2007-10-18  John Sturdy  <jcgs@hosea>
+
+	* versor-base-moves.el (versor-backward-paragraph): Improve
+	paragraph motion and selection for LaTeX.
+
+2007-10-07  John Sturdy  <jcgs@hosea>
+
+	* versor-alter-item.el (versor-altering-mode): Make
+	versor-altering into a minor mode, so it gets a minor mode keymap,
+	which is much better than poking the current keymaps and hoping to
+	get them back afterwards.
+
+2007-09-25  John Sturdy  <jcgs@hosea>
+
+	* versor-base-moves.el (versor-end-of-word): stop
+	versor-end-of-word getting stuck when it is already at the end of
+	a word --- for consistency with other such functions, it should
+	move to the end of the next word.
+
+2007-09-24  John Sturdy  <jcgs@hosea>
+
+	* languide-c-like.el (languide-c-back-to-possible-ender): fix the
+	skipping of possible statement terminators that are in comments
+
+	* versor-base-moves.el (versor-backward-paragraph): stop it
+	getting stuck on comment paragraphs
+
+	* versor-joystick.el (versor-joystick-setup): Add other-window
+	movements, based on those in the non-versor joystick code.  This
+	lets you put to good use the second analog stick on a gamepad.
+
+2007-07-25  John C G Sturdy  <jcgs@hosea>
+
+	* versor-demo.el (versor-lisp-demo-1): revision and debugging of
+	the demo (also leading to debugging things that it uses -- I may
+	start using it as a regular test)
+
+	* versor-selection.el (versor-last-item-first): more debugging
+	messages for the motion framework
+
+	* languide.el (region-type-description): suppress output of
+	unknown region types, even when other information is present
+
+	* versor.el (versor-setup): output messages during setup, to
+	confirm what was set up
+
+	* versor-commands.el (versor-transpose): allow lists of items to
+	be passed in by the motion framework; use this for versor-kill
+
+2007-07-20  John C G Sturdy  <jcgs@hosea>
+
+	* versor-menu.el (versor-dynamic-menu): Re-arranged dynamic menu.
+
+2007-07-19  John C G Sturdy  <jcgs@hosea>
+
+	* versor-base-moves.el (last-sexp): put up messages for depth of
+	nesting at point, for in/out-level commands.
+
+2007-07-16  John C G Sturdy  <jcgs@hosea>
+
+	* versor-status.el (versor-set-status-display): Tried to suppress
+	the dimension messages on changing buffer.
+
+	* versor-local.el (versor-buffer-change-function): there was an
+	error in switching buffer; it was trying to use the dimension
+	number as a dimension name
+
+2007-07-15  John C G Sturdy  <jcgs@hosea>
+
+	* versor-trim-whitespace.el: improvements to whitespace adjustment
+
+2007-07-04  John C G Sturdy  <jcgs@HOSEA>
+
+	* versor-commands.el (versor-definesert): quote the command
+	function being run by a defined insertion
+
+2007-07-02  John C G Sturdy  <jcgs@HOSEA>
+
+	* versor-base-moves.el (next-texp): try sentence-end as a function
+	if available (as in Emacs 23) and if not available, try as a
+	variable as in older Emacsen.
+
+	* versor-local.el (versor-buffer-change-function): Use the
+	per-buffer values of meta-level and level only when they are
+	valid.
+
+2007-06-20  John C G Sturdy  <john.sturdy@ul.ie>
+
+	* versor-tlc.el (versor-tlc-display-all-diagram): Wrote function
+	to display all versor-tlc keymaps, as popping them up one at a
+	time isn't working well, at least on windows-emacs.
+	(versor-tlc-do-map): Fix looking up next key read while displaying
+	diagrams on the fly.
+	
+

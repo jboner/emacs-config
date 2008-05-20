@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Dec 26 23:44:31 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module messaging</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module messaging</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="messaging.LightSleeper.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">LightSleeper</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="messaging.MessEncoder.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">MessEncoder</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # Encoding scheme for messages.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="messaging.MessEncoderWDDX.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">MessEncoderWDDX</SPAN></A>(<A CLASS="DocLink" HREF="messaging.MessEncoder.html">MessEncoder</A>)</SPAN><SPAN CLASS="OneLiner"> # WDDX (an XML based protocol) Encoding scheme for messages.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="messaging.MessEncoder_LenPrefArgs.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">MessEncoder_LenPrefArgs</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # Encoding scheme for messages with length prefixed argument values.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="messaging.MessPackager.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">MessPackager</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # <CODE>Shipping and receiving department</CODE> for messages.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="messaging.MessPackager_FixedLenSeq.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">MessPackager_FixedLenSeq</SPAN></A>(<A CLASS="DocLink" HREF="messaging.MessPackager.html">MessPackager</A>)</SPAN><SPAN CLASS="OneLiner"> # "Packages messages as a sequence of fixed length chunks.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="messaging.MessTransporter.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">MessTransporter</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # Used to send/receive strings on a connection.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="messaging.MessTransporter_Socket.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">MessTransporter_Socket</SPAN></A>(<A CLASS="DocLink" HREF="messaging.MessTransporter.html">MessTransporter</A>)</SPAN><SPAN CLASS="OneLiner"> # Used to send/receive strings on a Socket connection.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="messaging.Messenger.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">Messenger</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="messaging.MessengerBasic.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">MessengerBasic</SPAN></A>(<A CLASS="DocLink" HREF="messaging.Messenger.html">Messenger</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="messaging.MixedMessenger.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">MixedMessenger</SPAN></A>(<A CLASS="DocLink" HREF="messaging.Messenger.html">Messenger</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="messaging.SocketError.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SocketError</SPAN></A>(<A CLASS="DocLink" HREF="exceptions.RuntimeError.html">RuntimeError</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="messaging.WokenUp.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">WokenUp</SPAN></A></SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#messarg2int"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">messarg2int</SPAN></A>(<SPAN CLASS="Argument">messarg</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Converts a message argument to an int.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#messarg2intlist"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">messarg2intlist</SPAN></A>(<SPAN CLASS="Argument">messarg</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Converts a message argument to a list of integers.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#messarg2inttuple"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">messarg2inttuple</SPAN></A>(<SPAN CLASS="Argument">messarg</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Converts a message argument to a tuple of integers.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#messenger_factory"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">messenger_factory</SPAN></A>(<SPAN CLASS="Argument">sock</SPAN>, <SPAN CLASS="Argument">sleep=None</SPAN>, <SPAN CLASS="Argument">sleeper=None</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Creates a messenger from proper compenents</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Mediator\\messaging.pyc'</SPAN></SPAN>
+</PRE><H2 ID="messarg2int" CLASS="Function">messarg2int(<SPAN CLASS="Argument">messarg</SPAN>)</H2>
+<P>Converts a message argument to an int.</P>
+
+
+<H3>Convert the message argument to the value <EM>None</EM> if it is one of the
+following:</H3>
+   <EM>''</EM> (the string)
+   <EM>'None'</EM> (the string)
+   <EM>'[]'</EM> (the list, not the string... this corresponds to the EmacsLisp
+   <EM>nil</EM> value)<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+STR <EM>messarg</EM>
+<DD>The message argument to be converted.
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+INT | None <EM>as_int</EM>
+<DD>The message argument converted to int.
+
+</DL>
+<H2 ID="messarg2intlist" CLASS="Function">messarg2intlist(<SPAN CLASS="Argument">messarg</SPAN>)</H2>
+<P>Converts a message argument to a list of integers.</P>
+
+If the message argument is the string <EM>'None'</EM>, convert it to
+the <EM>None</EM> object.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<CODE>None</CODE> | [STR] <EM>messarg</EM>
+<DD>The message argument to be converted.
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+None | [INT] <EM>as_intlist</EM>
+<DD>The message argument converted a list of ints.
+
+</DL>
+<H2 ID="messarg2inttuple" CLASS="Function">messarg2inttuple(<SPAN CLASS="Argument">messarg</SPAN>)</H2>
+<P>Converts a message argument to a tuple of integers.</P>
+
+If the message argument is the string <EM>'None'</EM>, convert it to
+the <EM>None</EM> object.<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<CODE>None</CODE> | [STR] <EM>messarg</EM>
+<DD>The message argument to be converted.
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+None | [INT] <EM>as_intlist</EM>
+<DD>The message argument converted a list of ints.
+
+</DL>
+<H2 ID="messenger_factory" CLASS="Function">messenger_factory(<SPAN CLASS="Argument">sock</SPAN>, <SPAN CLASS="Argument">sleep=None</SPAN>, <SPAN CLASS="Argument">sleeper=None</SPAN>)</H2>
+<P>Creates a messenger from proper compenents</P>
+
+<STRONG>INPUTS</STRONG>
+<DL>
+
+<DT>
+<EM>socket sock</EM>
+<DD>Socket to use for creating the messenger
+</DL>
+<STRONG>OUTPUTS</STRONG>
+<DL>
+
+<DT>
+[Messenger] <EM>a_messenger</EM>
+<DD>The created [Messenger] instance
+</DL>
+..[Messenger] messaging.Messenger.html
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

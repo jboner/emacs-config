@@ -1,0 +1,152 @@
+<html>
+  <head>
+    <style type="text/css"> 
+      @import url(../klarlund.css);  <!-- non-netscape 4-->
+    </style>
+  </head>
+  <body>
+  <h1>Installation</h1>
+
+  <h2>Requirements</h2>
+
+  <ul>
+    <li>Windows XP or Windows 2000
+    </li>
+    <li>NaturallySpeaking 7 Preferred (or Professional) edition (or perhaps lower)
+    </li>
+    <li>GNU Emacs &gt; 21.3 (or perhaps 21.3). 
+    </li>
+    <li>AUCLaTeX for LaTeX support (only if necessary)</li>
+  </ul>
+
+  <h2>Install software</h2>
+  <ul>
+    <li>Unpack the distribution into a directory (folder), say
+      <tt>c:\Emacs</tt>.  This will create a subdirectory
+      <tt>c:\Emacs\listen</tt>.
+    </li>
+    <li>In your <tt>.emacs</tt> file, add the following:
+      
+      <pre style="font-family: Courier;">
+	(when (eq window-system 'w32)
+
+          ;; ADJUST THIS PATH IF NECESSARY ---&gt;
+	  (setq listen-path "c:/Emacs/listen")
+	  (setq-default load-path (cons listen-path load-path))
+
+	  ;; EmacsListen will turn it on anyway; best to get used to it
+  	  (transient-mark-mode 1)
+
+	  ;; LOAD VR-MODE
+
+	  (load (concat listen-path "/vr-mode/vr"))
+
+	  ;; These commands below may not be desired if you are
+	  ;; already using vr-mode's voice commands
+
+	  (setq vr-activate-minibuffer nil)
+	  (setq vr-activation-list nil)
+	  (setq vr-voice-command-list nil)
+	  (setq vr-command (concat listen-path "/vr-mode/vr.exe"))
+
+	  ;;; LOAD EMACSLISTEN
+
+	  (require 'listen-mode)
+
+	  ;; Load speech engine specific interface, here Barry Jaspan's vr-mode
+	  ;; for ScanSoft NaturallySpeaking as modified to work with EmacsListen
+	  (require 'listen-vr-additions)
+
+	  ;; (Optional) Load listen-peek (display of yank, search histories,
+	  ;; and color coded excerpts of recent views of files)
+	  (require 'listen-peek)
+
+	  ;; (Optional) Activate listen-peek mode
+	  (listen-peek-mode 1)
+
+	  ;; (Optional) Load key and mouse definitions
+	  (load "listen-keys")
+
+	  ;; Recommended (make garbage collection occur less often)
+	  (setq gc-cons-threshold 10000000)
+	)
+      </pre>
+    </li>
+    <li>For e-mail support, you must change the appropriate bindings
+      in the <tt>grammar.elg</tt> file (for example,
+      replace <tt>'my-read-all-e-mail</tt> with <tt>'rmail</tt>).
+      And, issue <tt>M-x listen-load-grammar</tt> to compile and load
+      your changes.
+    </li>
+    <li>
+      For LaTeX letterwriting, you might want to use the <tt>tech
+      write letter</tt> command, which initializes a buffer with your
+      personal information.  Customize the
+      variable <tt>listen-tex-letter-template</tt> for this purpose.
+    <li>
+    <li>Note that <strong>everything you say</strong> (while
+      EmacsListen is listening) ends up in the file named
+      <tt>listen-transcript-file</tt> (the default
+      is <tt>transcript.xml</tt> in your <tt>listen-path</tt>
+      directory).  Set this variable to <tt>nil</tt> if this potential
+      privacy-intrusive behavior is not desired.
+    </li>
+	
+  </ul>
+  
+  <h2>Setting up NaturallySpeaking</h2>
+
+  <ul>
+
+    <li>Backup your user file or make a copy of the folder (presumably
+      while NaturallySpeaking is not running; this folder is perhaps to be
+      found in <tt>C:\Documents and Settings/All
+	Users/Application Data/ScanSoft/NaturallySpeaking/Users</tt>).
+    </li>
+
+    <li>Now, NaturallySpeaking must learn about the ShortTalk words that
+      are not part of English.  In NaturallySpeaking, choose
+      <strong>Words --&gt; Import</strong>, and select the file:
+      <tt><a href="ShortTalk-wordlist.txt">c:\Emacs\listen\ShortTalk-wordlist.txt</a></tt>
+    </li>
+
+
+    <li>These words should now be trained.  Use <strong>Words --&gt;
+	View/Edit</strong> and in the Display field, choose "Custom words
+      only".  Unless you already have a lot of custom words, just select
+      all of them.  Then click on "Train" to provide your pronunciation
+      for each of them.  In case you do have a lot of custom words, you
+      may have to chase down individual words manually.
+    </li>
+
+
+    <li>We can now import the definition of the word sequences that form
+      ShortTalk commands.  Apparently, NaturallySpeaking with infer the
+      pronunciation of the sequences now that we have provided a
+      pronunciation of each ShortTalk constituent.  So, in
+      NaturallySpeaking, choose <strong>Words --&gt; Import</strong>, and select the file:
+      <tt>c:\Emacs\listen\grammar.txt</tt>.  This file is very big and it
+      does not contain all possible ShortTalk commands.
+    </li>
+
+    <li>(Optional) It might be useful to build language models that
+      reflect ShortTalk usage.  I am not sure about what is the best
+      approach.  One idea is to take the transcript files that
+      ShortTalk produces in order to gather a personalized corpus.
+      The XSLT program <tt>trainingset.xslt</tt>
+      in <tt>transcript-programs</tt> might be useful.  It is also
+      possible that the adaptive algorithms of NaturallySpeaking are
+      sufficient for satisfactory performance.  In fact, it may even
+      be possible that the vocabulary building process may hamper
+      performance. 
+    </li>
+    
+    <li>That's all.  Now power up Emacs and issue <tt>M-x
+	listen-mode</tt>.  That will start <tt>vr-mode</tt> so that all
+      output from NaturallySpeaking is directed to
+      the <tt>*EmacsListen*</tt> buffer, where EmacsListen parses the
+      text into dictation and commands.</li>
+
+  </ul>
+  </body>
+</html>

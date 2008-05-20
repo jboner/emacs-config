@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:37:26 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module util</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module util</H1>
+<PRE><SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#bell"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">bell</SPAN></A>(<SPAN CLASS="Argument">length=3</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Plays a bell sound for a time proportional to INT length.</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">common_path</SPAN>(<SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#dict_merge"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">dict_merge</SPAN></A>(<SPAN CLASS="Argument">dict1</SPAN>, <SPAN CLASS="Argument">dict2</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Merges two dictionaries</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">find_common</SPAN>(<SPAN CLASS="Argument">a</SPAN>, <SPAN CLASS="Argument">b</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">full_split</SPAN>(<SPAN CLASS="Argument">path</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#gopt"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">gopt</SPAN></A>(<SPAN CLASS="Argument">opt_defs</SPAN>, <SPAN CLASS="Argument">cmd=['-i', '-f', 'HTML4', '-d', 'H:\\Projects\\VoiceCode\\VCode\\Doc\\Modules', 'H:\\Projects\\VoiceCode\\VCode\\Mediator\\util.py']</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # High level wrapper around <EM>getopt.getop</EM>.</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">islist</SPAN>(<SPAN CLASS="Argument">instance</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Returns true iif <EM>instance</EM> is a list.</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">istuple</SPAN>(<SPAN CLASS="Argument">instance</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Returns true iif <EM>instance</EM> is a tuple.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#last_mod"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">last_mod</SPAN></A>(<SPAN CLASS="Argument">f_name</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Returns the time at which a file was last modified.</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">relative_name</SPAN>(<SPAN CLASS="Argument">path</SPAN>, <SPAN CLASS="Argument">head</SPAN>, <SPAN CLASS="Argument">prefix=''</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">remove_common</SPAN>(<SPAN CLASS="Argument">first</SPAN>, <SPAN CLASS="Argument">second</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#request_console_be"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">request_console_be</SPAN></A>(<SPAN CLASS="Argument">active=1</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#stdin_read_from_string"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">stdin_read_from_string</SPAN></A>(<SPAN CLASS="Argument">string</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Redirects process' own stdin so it reads from a string</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">within_VCode</SPAN>(<SPAN CLASS="Argument">path</SPAN>)</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Mediator\\util.pyc'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">may_switch_win_during_tests</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">file</SPAN> <SPAN CLASS="VariableName">redirected_stdin</SPAN> = <SPAN CLASS="VariableValue">&lt;open fi...t 7efd70&gt;</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">redirected_stdin_fname</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Data\\Tmp\\user_input.dat'</SPAN></SPAN>
+</PRE><H2 ID="bell" CLASS="Function">bell(<SPAN CLASS="Argument">length=3</SPAN>)</H2>
+<P>Plays a bell sound for a time proportional to INT length.</P>
+
+<P>
+Note: This function doesn't seem to work if the output of the script 
+is redirected to a file.</P>
+<H2 ID="dict_merge" CLASS="Function">dict_merge(<SPAN CLASS="Argument">dict1</SPAN>, <SPAN CLASS="Argument">dict2</SPAN>)</H2>
+<P>Merges two dictionaries</P>
+
+<P>
+Merges <EM>{ANY: ANY} dict1</EM> and <EM>{ANY: ANY} dict2</EM> and returns the
+result <EM>{ANY: ANY} dict3</EM>.</P>
+<P>
+If a key exists in both <EM>dict1</EM> and <EM>dict2</EM>, the value in <EM>dict1</EM>
+will be used for <EM>dict3</EM>
+</P>
+<H2 ID="gopt" CLASS="Function">gopt(<SPAN CLASS="Argument">opt_defs</SPAN>, <SPAN CLASS="Argument">cmd=['-i', '-f', 'HTML4', '-d', 'H:\\Projects\\VoiceCode\\VCode\\Doc\\Modules', 'H:\\Projects\\VoiceCode\\VCode\\Mediator\\util.py']</SPAN>)</H2>
+<P>High level wrapper around <EM>getopt.getop</EM>.</P>
+
+<P>
+*removes first argument from <EM>cmd</EM> when parsing from <EM>sys.argv</EM></P>
+<P>
+*returned options are stored in a dictionary</P>
+<P>
+*dashes ('-') are removed from the option name in that dictionary</P>
+<P>
+*returns None and outputs error messages if invalid option</P>
+<P>
+*allows to define default values for options</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR]</EM> cmd=sys.argv[1:]
+<DD>list of options and arguments to be parsed. 
+<DT>
+<EM>[STR, ANY, ...]</EM> opt_defs
+<DD>defines the valid options (short and
+long). The list is an alternate sequence of option name and
+default value. If the name ends with <EM>=</EM>, it means the option
+requires a value. If the name is a single letter, it's a short
+option. The defaul value is compulsory, even for options that
+don't require a value (can be used to set the switch to on or
+off by default).
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>opts, args</EM>
+<DD><EM>opts</EM> is a dictionary of options names and
+values. <EM>args</EM> is the list of arguments.
+
+</DL>
+<H2 ID="last_mod" CLASS="Function">last_mod(<SPAN CLASS="Argument">f_name</SPAN>)</H2>
+<P>Returns the time at which a file was last modified.</P>
+
+<P>
+<EM>STR f_name</EM> is the path of the file.</P>
+<P>
+if <EM>f_name</EM> doesn't exist, returns 0.
+</P>
+<H2 ID="request_console_be" CLASS="Function">request_console_be(<SPAN CLASS="Argument">active=1</SPAN>)</H2>
+<P></P>
+
+<P>
+During regression testing, there are times where the console window
+must absolutely be the active window (e.g. when processing a
+NavigateByPseudoCode command).</P>
+<P>
+In such cases, this method is called with active=1, to ask the
+user to make it so.</P>
+<P>
+Once we don't need the console to be the active window, the method is
+called with active=0 to notify the user that he/she can make the window
+inactive again</P>
+<H2 ID="stdin_read_from_string" CLASS="Function">stdin_read_from_string(<SPAN CLASS="Argument">string</SPAN>)</H2>
+<P>Redirects process' own stdin so it reads from a string</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR] string</EM>
+<DD>String from which to read stdin
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FILE old_stdin</EM>
+<DD>Stream that stdin was originally assigned to.
+
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+BODY {background-color: #dddddd; color: black;font-family: Verdana, Helvetica, sans-serif}
+TD.leftmenu P {padding: 0}
+TD.topon {background-color: #225566; color:#F8BF24; font-weight:bold;text-align:center}
+TD.topon a:link {background-color: #225566; color:#F8BF24}
+TD.topon  a:visited {background-color: #225566; color:#F8BF24}
+TD.topon a:active {background-color: #225566; color:#F8BF24}
+TD.topoff {background-color: #999999; color:#F8BF24; font-weight:bold; text-align:center}
+TD.topoff a:link {background-color: #999999;  color:#F8BF24}
+TD.topoff a:visited {background-color: #999999;  color:#F8BF24}
+TD.topoff a:active {background-color: #999999;  color:#F8BF24}
+p.lefton { padding:1 2 1 7; 
+           color:white;font-weight:bold; text-decoration: none}
+p.lefton a:active {color:white ;font-weight:bold; text-decoration: none}
+p.lefton a:visited{color:gray ;font-weight:bold; text-decoration: none}
+p.lefton a:link {color:white;font-weight:bold; text-decoration: none}
+p.leftoff {padding:1 2 1 7;color:#F8BF24 ; text-decoration: none}
+p.leftoff a:visited {color:gray; text-decoration: none}
+p.leftoff a:link {color:#F8BF24; text-decoration: none}
+p.leftoff a:active {color:red; text-decoration: none}
+TD.back {background-color: #aaaaaa}
+TD.navline {background-color: #669999;padding:10 0 5 0}
+TD.copyright {background-color: #dddddd;
+   font-size: xx-small; text-align: right; padding: 5px}
+
+TD.body {background-color:#999999;padding: 20px; border:5px solid #225566; vertical-align: top}
+TD.body a:link {color: black} 
+TD.body a:visited {color: black} 
+TD.body a:active {color: black} 
+TD.body0 {vertical-align: top}
+TD.bannertext {width:100%; padding: 0 0 0 0;vertical-align:top}
+TD.bannerim {padding: 0 50 0 0}
+
+td.spoken0  {padding:0 0 0 20}
+td.written0 {padding:0 10 0 10;background-color:#eeeeff}
+td.written00 {padding:0 10 0 10; background-color:#eeeeee}
+td.written01 {padding:0 10 0 10; background-color:#EFEDED}
+td.written10 {background-color:#eeeeef;padding:0 10 0 10}
+td.written11 {background-color:#dddddd;padding:0 10 0 10}
+td.written1 {background-color:#cccccc;padding:0 10 0 10}
+td.spoken1  {background-color:#eeeeee;padding:0 0 0 20}
+
+TD.leftmenu {padding: 5 0 5 5 ; background-color: #225566; vertical-align:top; width: 30%}
+TD.banner {background-color:#669999; text-align:left; color:black; font-weight: bold; font-size:xx-large} 
+DIV.header {background-color: #669999}
+DIV.footer {background-color: #eeeeee}
+DIV.body {background-color: #cc9933}
+
+td.bannerim {border-bottom:15px solid #dddddd}
+table.header{background-image:url("waveform.gif");background-repeat: repeat-x;padding:20 0 0 0}

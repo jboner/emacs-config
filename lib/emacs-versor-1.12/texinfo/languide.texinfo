@@ -1,0 +1,886 @@
+\input texinfo   @c -*-texinfo-*-
+@c %**start of header
+@setfilename languide.info
+@settitle Languide manual
+@direntry
+* Languide::			Language-guided editing.
+@end direntry
+@iftex
+@finalout
+@afourpaper
+@end iftex
+@c %**end of header
+@c  Status: in progress
+@titlepage
+@sp 10
+@title{Languide}
+@subtitle{Language-guided editing}
+@author{by J. C. G. Sturdy}
+@c The following two commands start the copyright page.
+@page
+@vskip 0pt plus 1filll
+Copyright @copyright{} 2005, 2006 John C. G. Sturdy
+
+Published by John C. G. Sturdy.
+
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+
+The research for which this software was written has been supported by
+the Science Foundation Ireland Investigator Programme, B4-STEP
+(Building a Bi-Directional Bridge Between Software ThEory and
+Practice).
+@end titlepage
+@node Top, Introduction, (dir), (dir)
+@top Languide -- language-guided editing
+
+@c store these by makeinfo, copying them into subdirs of htdocs, tarring them up and doing 
+@c scp htdocs.tar.gz jcg_sturdy@emacs-versor.sourceforge.net:/home/groups/e/em/emacs-versor 
+@ifinfo
+This file documents languide, the language-guided editing system.
+
+This document applies to version 1 of languide.
+@end ifinfo
+
+Languide provides high-level editing commands, such as turning an
+in-line block of code into a procedure, and substituting a call to the
+procedure for the original code.
+
+Languide uses a ``plugin'' model to provide definitions for different
+programming languages, according to the current major mode. The
+initial release comes with definitions for the Lisp family of
+languages, and the C family. Support is planned for Perl, Shell,
+Haskell and Python, but any others could be added readily enough;
+@ref{Language definitions}.
+
+Languide is one of a pair of companion packages. The other one,
+Versor, provides flexible keybindings which can be used to navigate
+code in terms of its structure.  Part of Versor's functionality is
+provided by the lower-level parts (@pxref{Navigation}) of Languide.
+
+Most of Languide's functionality can be, and normally would be,
+accessed through Versor, but it is possible to use Languide commands
+directly. This manual describes the direct use of them; for use
+through Versor,
+@xref{Versor and Languide, , , versor, Versor: versatile cursors for GNUemacs}.
+
+@menu
+* Introduction::                What it's all about
+* Concepts::                    Languide works at a more abstract level than
+                                most editor commands.
+                                Its commands will probably make more sense
+                                if you understand the abstractions it uses.
+* Commands::                    Things Languide can do
+* Region types::                Region types
+* Setup::                       How to install and configure Languide
+* Extension::                   How to define languages and statements
+* Languide and Versor::         Interface to a companion package
+                                providing easy access to commands
+* Known problems::              Known problems
+* Command Index::               Command Index
+* Concept Index::               Concept Index
+
+@detailmenu
+ --- The Detailed Node Listing ---
+
+Commands
+
+* Alterations::                 Altering the selection
+* Expression handling::         Expression handling, expressions, and functions
+* Statement handling::          Statement handling
+* Navigation::                  Navigation
+
+Expression handling, expressions, and functions
+
+* Employ variable::             Employ variable
+                                Given an existing variable definition,
+                                this finds any existing use of that
+                                value, and substitutes the variable. 
+* Convert to variable::         Convert region to variable
+                                Given a region containing an
+                                expression, this sets up a variable
+                                initialised to that expression, and
+                                replaces the original expression with
+                                that variable.
+* Convert to function::         Convert region to function
+                                This takes the selected region,
+                                defines a new function just before the
+                                one containing the region, and
+                                replaces the original region with a
+                                call to the new function.
+* Surround with call::          Surround region with call
+                                This wraps the current region with a
+                                call to a function.
+* Remove call::                 Remove surrounding call
+                                This removes the function call
+                                surrounding point.
+* Create function::             Create function for call
+                                This creates an empty function definition
+                                to suit the function call around point.
+
+Statement handling
+
+* Unify Statements::            Unify Statements
+                                This makes the selected region into a
+                                compound statement. 
+* Make conditional::            Make the selected code conditional
+* Make repeating::              Make the selected code iterative
+* Scoping point::               Move to enclosing scoping point
+                                This moves point to the most nearly
+                                enclosing scoping point, that is, a
+                                suitable place for putting new variables.
+* Decision point::              Move to enclosing decision point
+                                This moves point to the most nearly
+                                enclosing decision point, that is, a
+                                suitable place for putting a new condition.
+
+Navigation
+
+* statement-beginning::         beginning-of-statement
+* statement-end::               end-of-statement
+* previous-statement::          previous-statement
+* next-statement::              next-statement
+* whole statement::             navigate-this-whole
+* statement head::              navigate-this-head
+* statement body::              navigate-this-body
+* statement tail::              navigate-this-tail
+* statement framework::         navigate-this-framework
+* Container of statement::      navigate-this-container
+* Next part of statement::      statement-navigate-parts-next
+* Previous part of statement::  statement-navigate-parts-previous
+
+Setup
+
+* Configuration::               Configuring Languide
+
+Configuration
+
+* Auto-edit overlay face::      How to draw attention to changes away
+                                  from point
+* Whole statement as container::  On selecting a container, whether to
+                                  make that the whole statement
+* Cyclic::                      Whether statement part selection
+                                  should be cyclic
+* IncludeContainer::            Whether statement containers count
+                                  as selectable statement parts
+* Make variables interactively::  Make variables interactively
+
+Extending Languide
+
+* Defining languages and statements::  How to define languages and statements
+* Adding commands::             Adding editing commands
+
+How to define languages and statements
+
+* Language definitions::        The interface for language definitions
+* Defining statements::         Defining statement navigation for another language
+
+@end detailmenu
+@end menu
+
+@node Introduction, Concepts, Top, Top
+@chapter Introduction
+
+Text editors have traditionally operated in terms of lines and
+characters.
+
+Languide takes a step above that, providing operations in terms of
+the syntactic units (statements, expressions) that make up source
+files in typical programming languages.
+
+It aims to provide as single commands many of the routine high-level
+editing actions that normally take many manual editing operations, for
+example, taking a block of code and turning it into a function,
+leaving a call to that function where the code originally was.
+Although complex, these actions are completely stereotyped, and
+therefore ripe for automation, as they do not really require human
+intelligence to perform them. It is hoped that automating them will
+not only reduce the workload for the user's fingers, but may also be
+more reliable, and provide a more productive and relaxing working
+environment.
+
+In an attempt to break the tie with keyboard and mouse, on the whole
+the commands are designed to work well with voice input. It should be
+possible to work with very little need to type or pronounce syntactic
+punctuation characters; these are detail that the computer should be
+able to deal with, leaving the programmer to get on with the abstract
+thinking. The need to issue a sequence of commands with no punctuation
+leads naturally to an RPN-style semantics (which should be already
+comfortable to users of HP-style calculators, Forth, and PostScript).
+There is, for example, provision for selecting a statement type and
+then searching for it, or inserting a template for it.
+
+@node Concepts, Commands, Introduction, Top
+@chapter Concepts
+
+@cindex Statements
+@cindex Compound statements
+@cindex Expressions
+
+This package is built around the ideas of statements, compound
+statements, and expressions.
+
+We have a general model of statements, in which a statement can have
+head, body, and optionally tail parts -- for example, the three parts
+of an if-then-else statement.
+
+We also use the idea that each statement (except for a top-level
+definition) is in a container, which is another statement.
+
+Languide provides language guided editing for a variety of languages.
+To provide equivalent functionality across the range of supported
+language modes, we use a modal functions package which lets us give a
+function separate definitions in each major mode.
+
+Languide has two groups of commands:
+@itemize
+@item  high-level editing
+@item  movement by statements (which you can use directly, or through
+    Versor (@pxref{Versor and Languide,,,versor}), and which are used by
+    the high-level editing commands)
+@end itemize
+
+@node Commands, Region types, Concepts, Top
+@chapter Commands
+
+You can access Languide's commands directly with M-x, or through a
+keymap, or through a menu.  This manual will describe the commands by
+their names, as used with M-x. 
+
+Languide commands come in three groups, those substituting the
+contents of the current selection with something of the same nature,
+those acting on variables, expressions, and functions; and those
+acting on statements.
+
+@menu
+* Alterations::                 Altering the selection
+* Expression handling::         Expression handling, expressions, and functions
+* Statement handling::          Statement handling
+* Navigation::                  Navigation
+@end menu
+
+@node  Alterations, Expression handling, Commands, Commands
+@comment  node-name,  next,  previous,  up
+@section Alterations
+
+The ``alteration'' facility is always accessed through the Versor
+package, although Languide provides the underlying data.
+
+@node  Expression handling, Statement handling, Alterations, Commands
+@comment  node-name,  next,  previous,  up
+@section Expression handling, expressions, and functions
+
+This group of commands manipulates value handling constructs in source
+code.  For example, you can select an expression (using the Versor
+selection), and turn it into a variable, so that you can re-use the
+same value.  Likewise, you can convert an expression into a function,
+so that you can call it elsewhere. 
+
+@menu
+* Employ variable::             Employ variable
+                                Given an existing variable definition,
+                                this finds any existing use of that
+                                value, and substitutes the variable. 
+* Convert to variable::         Convert region to variable
+                                Given a region containing an
+                                expression, this sets up a variable
+                                initialised to that expression, and
+                                replaces the original expression with
+                                that variable.
+* Convert to function::         Convert region to function
+                                This takes the selected region,
+                                defines a new function just before the
+                                one containing the region, and
+                                replaces the original region with a
+                                call to the new function.
+* Surround with call::          Surround region with call
+                                This wraps the current region with a
+                                call to a function.
+* Remove call::                 Remove surrounding call
+                                This removes the function call
+                                surrounding point.
+* Create function::             Create function for call
+                                This creates an empty function definition
+                                to suit the function call around point.
+@end menu
+
+@node  Employ variable, Convert to variable, Expression handling, Expression handling
+@subsection Employ variable
+@findex Employ variable
+The command @command{languide-employ-variable}, given an existing
+variable definition, finds any existing uses of that value, and
+substitutes the variable for them.
+
+@node  Convert to variable, Convert to function, Employ variable, Expression handling
+@subsection Convert region to variable
+@findex Convert region to variable
+
+The command @command{languide-convert-region-to-variable}, given a
+region containing an expression, sets up a variable initialised to
+that expression, and replaces the original expression with that
+variable.
+
+If @code{languide-make-variables-interactively} is non-nil, the
+users chooses the scope using an interface similar to @code{isearch};
+otherwise, it uses the following rules:
+@itemize
+@item
+With no prefix arg, this tries to find the widest scope in which all
+the necessary variables are bound, thus making the value re-usable
+over as much code as possible. However, it does not (in the current
+version of Versor/Languide) take note of assignments to those
+variables, so this may not be the one you want. Future versions of the
+software should handle this correctly.
+@item
+With a non-numeric prefix arg, it takes the nearest binding scope.
+@item
+With a positive numeric prefix arg, it goes out that number of binding scopes.
+@item
+With a negative prefix arg, it lets the user choose interactively,
+just as though @code{languide-make-variables-interactively} were non-nil.
+@end itemize
+
+@node  Convert to function, Surround with call, Convert to variable, Expression handling
+@subsection Convert region to function
+
+The command @command{languide-convert-region-to-function} takes the
+selected region, defines a new function just before the one containing
+the region, and replaces the original region with a call to the new
+function. It examines the region and the surrounding code, to find any
+variables referred to in the region but defined outside it, and makes
+those into arguments to the new function.
+
+The changes it makes are highlighted until the next user input, so you
+can check what it has done.
+
+@node  Surround with call, Remove call, Convert to function, Expression handling
+@subsection Surround region with call
+
+The command @command{surround-region-with-call} wraps the current
+region with a call to a specified function, such that the region
+becomes the argument list of the function.
+
+@node  Remove call, Create function, Surround with call, Expression handling
+@subsection Remove surrounding call
+
+The command @command{remove-surrounding-call} removes the function
+call surrounding point. This leaves the function arguments in place of
+the call.
+
+@node  Create function,  , Remove call, Expression handling
+@comment  node-name,  next,  previous,  up
+@subsection Create function for call
+
+With point positioned inside a function call (currently with some
+restrictions, such as not within a string literal argument to it, and
+not within an inner call in creating the argument list),
+@command{languide-create-function-for-call} creates an empty function
+definition to suit that call, just before the current function
+definition.
+
+This lets you type a call to a function that doesn't yet exist, and
+then go and create the function without having to do all of the
+completely predictable manual text entry or pasting for it.
+
+@node  Statement handling, Navigation, Expression handling, Commands
+@comment  node-name,  next,  previous,  up
+@section Statement handling
+
+This group of commands acts mostly on imperative statements. 
+
+@menu
+* Unify Statements::            Unify Statements
+                                This makes the selected region into a
+                                compound statement. 
+* Make conditional::            Make the selected code conditional
+* Make repeating::              Make the selected code iterative
+* Scoping point::               Move to enclosing scoping point
+                                This moves point to the most nearly
+                                enclosing scoping point, that is, a
+                                suitable place for putting new variables.
+* Decision point::              Move to enclosing decision point
+                                This moves point to the most nearly
+                                enclosing decision point, that is, a
+                                suitable place for putting a new condition.
+@end menu
+
+@node  Unify Statements, Make conditional, Statement handling, Statement handling
+@subsection Unify Statements
+
+The command @command{languide-unify-statements} makes the statement
+that point, and the following N statements (where N is the prefix
+argument) into a compound statement.
+
+@node  Make conditional, Make repeating, Unify Statements, Statement handling
+@comment  node-name,  next,  previous,  up
+@subsection Make conditional
+
+The command @command{versor:make-conditional} makes the current Versor
+selection conditional, and positions point ready for filling in the
+condition. If the selection is already the body of a conditional
+construct, an @code{and} construct is wrapped around the existing
+condition (unless it already has one) and point is positioned for
+adding a further condition.
+
+@node  Make repeating, Scoping point, Make conditional, Statement handling
+@comment  node-name,  next,  previous,  up
+@subsection Make repeating
+
+The command @command{versor:make-repeating} makes the current Versor
+selection be the body of a repeating construct, and positions point
+ready for filling in the repeat condition.
+
+@node  Scoping point, Decision point, Make repeating, Statement handling
+@subsection Enclosing scoping point
+
+The command @command{languide-enclosing-scoping-point} moves point to
+the most nearly enclosing scoping point, that is, a suitable place
+for putting new variables. This is largely used as an internal
+function by Languide, but is also exposed for direct use in case it
+is useful. 
+
+@node  Decision point,  , Scoping point, Statement handling
+@subsection Enclosing decision point
+
+The command @command{languide-enclosing-decision-point} moves point to
+the most nearly enclosing decision point, that is, a suitable place
+for putting a new condition. This is largely used as an internal
+function by Languide, but is also exposed for direct use in case it is
+useful.
+
+@node  Navigation,  , Statement handling, Commands
+@comment  node-name,  next,  previous,  up
+@section Navigation
+
+Languide provides a unified interface to navigating source code in a
+variety of programming languages.  this functionality will normally be
+accessed through the ``program'' dimensions of versor;
+@ref{Program,Program coordinates,Program coordinates,versor,Versor:
+versatile cursors for GNUemacs}.
+
+The following commands are available:
+
+@menu
+* statement-beginning::         beginning-of-statement
+* statement-end::               end-of-statement
+* previous-statement::          previous-statement
+* next-statement::              next-statement
+* whole statement::             navigate-this-whole
+* statement head::              navigate-this-head
+* statement body::              navigate-this-body
+* statement tail::              navigate-this-tail
+* statement framework::         navigate-this-framework
+* Container of statement::      navigate-this-container
+* Next part of statement::      statement-navigate-parts-next
+* Previous part of statement::  statement-navigate-parts-previous
+@end menu
+
+@node statement-beginning, statement-end, Navigation, Navigation
+@subsection beginning-of-statement
+
+The command @code{beginning-of-statement} moves to the beginning of
+the current statement.
+
+@node statement-end, previous-statement, statement-beginning, Navigation
+@subsection end-of-statement
+
+The command @code{end-of-statement} moves to the end of the current statement.
+
+@node previous-statement, next-statement, statement-end, Navigation
+@subsection previous-statement
+
+The command @code{previous-statement} selects the previous statement.
+
+@node next-statement, whole statement, previous-statement, Navigation
+@subsection next-statement
+
+The command @code{next-statement} selects the next statement.
+
+@node whole statement, statement head, next-statement, Navigation
+@subsection navigate-this-whole
+
+The command @code{navigate-this-whole} selects the whole of the
+current statement.
+
+@node statement head, statement body, whole statement, Navigation
+@subsection navigate-this-head
+
+The command @code{navigate-this-head} selects the head of the current
+statement, for example, the condition of an @code{if} statement.
+
+@node statement body, statement tail, statement head, Navigation
+@subsection navigate-this-body
+
+The command @code{navigate-this-body} selects the body of the current
+statement, for example, the code governed by an @code{if} statement.
+
+@node statement tail, statement framework, statement body, Navigation
+@subsection navigate-this-tail
+
+The command @code{navigate-this-tail} selects the tail of the current
+statement, for example, the @code{else} clause of an
+@code{if-then-else} statement.
+
+@node statement framework, Container of statement, statement tail, Navigation
+@subsection navigate-this-framework
+
+The command @code{navigate-this-framework} selects the framework of
+the current statement, that is, the syntax that holds the statement
+together, such as keywords and brackets. 
+
+@node Container of statement, Next part of statement, statement framework, Navigation
+@subsection navigate-this-container
+
+The command @code{navigate-this-container} selects the container of
+the current statement, that is, the compound statement containing it,
+if any. 
+
+@node Next part of statement, Previous part of statement, Container of statement, Navigation
+@subsection statement-navigate-parts-next
+
+The command @code{statement-navigate-parts-next} selects the next part
+of the current statement. The list of parts is controlled by the
+variable @code{statement-navigate-parts-include-container}; if this is
+non-nil, it includes the container of the statement; otherwise, it is:
+@code{("framework" "whole" "head" "body" "tail")}.
+
+@node Previous part of statement,  , Next part of statement, Navigation
+@subsection statement-navigate-parts-previous
+
+The command @code{statement-navigate-parts-previous} selects the
+previous part of the current statement. The list of parts is controlled by the
+variable @code{statement-navigate-parts-include-container}; if this is
+non-nil, it includes the container of the statement; otherwise, it is:
+@code{("framework" "whole" "head" "body" "tail")}. 
+
+@node  Region types, Setup, Commands, Top
+@comment  node-name,  next,  previous,  up
+@chapter Region types
+
+Languide can spot some characteristics of a region, for example,
+whether it is suitable to have a conditional statement wrapped around
+it. This is normally displayed at the end of each versor command, if
+this is enabled; see @ref{Languide Feedback,Feedback from
+Languide,Feedback from Languide,versor,Versor: versatile cursors for
+GNUemacs}. This may turn out to be useful for Emacspeak, too.
+
+@node Setup, Extension, Region types, Top
+@chapter Setup
+
+To install Languide, unpack the tarball into a suitable directory, and
+put that directory on your load-path.
+
+@menu
+* Configuration::               Configuring Languide
+@end menu
+
+@node  Configuration,  , Setup, Setup
+@comment  node-name,  next,  previous,  up
+@section Configuration
+
+@menu
+* Auto-edit overlay face::      How to draw attention to changes away
+                                  from point
+* Whole statement as container::  On selecting a container, whether to
+                                  make that the whole statement
+* Cyclic::                      Whether statement part selection
+                                  should be cyclic
+* IncludeContainer::            Whether statement containers count
+                                  as selectable statement parts
+* Make variables interactively::  Make variables interactively
+@end menu
+
+@node Auto-edit overlay face, Whole statement as container, Configuration, Configuration
+@comment  node-name,  next,  previous,  up
+@subsection Auto-edit overlay face
+
+Variable: languide-auto-edit-overlay-face
+
+Type: face
+
+Default value: '@code{((t (:background "orange")))}
+
+How to draw attention to what languide has done.
+When languide does something that involves changes away from point,
+it shows the changed text in this face, until the next user input.
+
+@node Whole statement as container, Cyclic, Auto-edit overlay face, Configuration
+@comment  node-name,  next,  previous,  up
+@subsection Whole statement as container
+
+Variable: navigate-container-whole-statement
+
+Type: boolean
+
+Default value: @code{t}
+
+Whether to include the whole statement as the container.
+If this is non-nil, when you select the container of a statement,
+the whole containing statement is selected, rather than just the
+part of it containing the statement. For example, if you have
+  if (a) @{
+    b;
+    c;
+  @}
+and are on ``b'' and select the container of b, you will get the
+whole if statement, rather than just the block body.
+
+@node Cyclic, IncludeContainer, Whole statement as container, Configuration
+@comment  node-name,  next,  previous,  up
+@subsection Navigate statement parts cyclically
+
+Variable: statement-navigate-parts-cyclic
+
+Type: boolean
+
+Default value: @code{nil}
+
+Whether to step forwards from body (or tail if present) back round to head.
+
+@node IncludeContainer, Make variables interactively, Cyclic, Configuration
+@comment  node-name,  next,  previous,  up
+@subsection Navigate Statement Parts includes container
+
+Variable: statement-navigate-parts-cyclic
+
+Type: boolean
+
+Default value: @code{}t
+
+Whether to step forwards from body (or tail if present) or back from head, to container.
+
+@node  Make variables interactively,  , IncludeContainer, Configuration
+@comment  node-name,  next,  previous,  up
+@subsection Make variables interactively
+
+When @code{languide-make-variables-interactively} is non-nil,
+@command{languide-convert-region-to-variable} will interact with the
+user to choose a binding scope.
+
+@node Extension, Languide and Versor, Setup, Top
+@chapter Extending Languide
+
+Languide is designed as a framework with some initial contents.  You
+can and your own definitions, both of languages and of new editing
+commands, and have them operate smoothly with the existing framework.
+This also makes it easy to make available through Versor, the
+companion package to Languide that makes it more readily accessible
+through the keyboard or other forms of input. 
+
+@menu
+* Defining languages and statements::  How to define languages and statements
+* Adding commands::             Adding editing commands
+@end menu
+
+@node  Defining languages and statements, Adding commands, Extension, Extension
+@comment  node-name,  next,  previous,  up
+@section How to define languages and statements
+
+Languide comes with definitions of common statement types for several
+programming languages. You can add more, and of course contribute them
+for public use should you so wish.
+
+@menu
+* Language definitions::        The interface for language definitions
+* Defining statements::         Defining statement navigation for another language
+@end menu
+
+@node  Language definitions, Defining statements, Defining languages and statements, Defining languages and statements
+@comment  node-name,  next,  previous,  up
+@subsection The interface for language definitions
+
+Languide uses a pair of macros, @code{defmodel} and @code{defmodal},
+to define functions which behave differently in each major mode. To
+extend Languide to cover a mode fully, the following definitions for
+it should be given, using @code{defmodal} for that mode:
+
+@table @code
+@item binding-around (whereat)
+@item variables-in-scope (whereat)
+@item variable-reference (varname)
+@item move-to-enclosing-scope-last-variable-definition (&optional allow-conversions)
+@item insert-variable-declaration (name type initial-value)
+@item insert-global-variable-declaration (name type initial-value)
+@item adapt-binding-point ()
+@item languide-find-surrounding-call ()
+@item compound-statement-open ()
+@item compound-statement-close ()
+@item insert-function-declaration (name result-type arglist body &optional docstring)
+@item function-call-string (name arglist where)
+@item deduce-expression-type (value-text where)
+@item add-expression-term (operator argument from to)
+@item languide-trim-whitespace (syntax-before syntax-after)
+@item beginning-of-statement-internal ()
+@item move-into-previous-statement ()
+@item identify-statement (default)
+@item versor-get-language-constants (where)
+@end table
+
+@node  Defining statements,  , Language definitions, Defining languages and statements
+@comment  node-name,  next,  previous,  up
+@subsection Defining statement navigation for another language
+
+The file statement-nav-directions.el implements the basic movements
+needed to navigate around statements. Directions for specific
+statement parts in various programming languages are defined in such
+files as languide-lisp-like.el, languide-c-like.el and so forth;
+languide-c-like is a fairly rich source of examples.
+
+Normally, a sequence of directions is followed, and the last one is
+taken as the result, that is, the thing to leave selected. To allow
+multipart selections, as versor does, you can indicate a step of
+the directions as selecting what it moves over, by wrapping it in a
+call to ``@code{remember}''.
+
+Strings in the directions are searched for (as regexps) and moved
+over.
+
+Any elisp function calls may be used in the directions, and their
+effect on point will be, but those listed on
+@code{statement-navigate-list-selector-functions} are treated
+specially: they are expected to return a cons of the start and end
+positions of the piece of text they describe. Thus, only such
+functions should be used as the last step of a set of directions, and
+only these should be given as the argument to ``remember''. You can
+write your own functions of this nature, but you must add them to
+@code{statement-navigate-list-selector-functions} for them to work
+properly.
+
+The selection functions are as follows:
+
+@table @code
+@item expression
+
+Selects the following s-exp.
+
+@item expressions
+
+Selects as many following s-exps as possible at the current level of nesting.
+
+@item expression-contents
+
+Selects the contents of the following s-exp (but not its brackets).
+
+@item preceding-expression
+
+Selects the preceding s-exp.
+
+@item statement
+
+Selects the following statement. This is defined by
+``@code{defmodal}'' definitions for the major mode concerned, for the
+functions @code{move-into-previous-statement},
+@code{move-into-next-statement},
+@code{beginning-of-statement-internal}, and
+@code{end-of-statement-internal}. (If you define these, you should
+also define @code{identify-statement}, @code{compound-statement-open},
+@code{compound-statement-close},
+@code{insert-compound-statement-open}, and
+@code{insert-compound-statement-close}.)
+
+@item statements
+
+Selects as many following statements as possible, at the current level
+of nesting.
+
+@item statement-contents
+
+If the following statement is a simple statement, select it. If it is
+a compound statement, select the statements that it is made of, but
+not the bracketing that groups them together.
+
+@item from-start-of-statement
+
+Select from the start of the statement up to point.
+
+@item (upto pattern)
+
+Selects from point up to the start of the pattern.
+
+@item start-of-match
+@item rest-of-line
+
+Select from point up to the end of the line.
+
+@item block-at-this-depth
+
+Select from point up to the last line at the same or deeper indentation.
+
+@end table    
+
+@node  Adding commands,  , Defining languages and statements, Extension
+@comment  node-name,  next,  previous,  up
+@section Adding editing commands
+
+Probably the main things to note in writing new languide commands are:
+
+@itemize
+@item
+Languide is often accessed through Versor, and so you should
+probably add a Versor wrapper command for your new Languide command.
+
+@item
+Languide draws attention to complicated things it has done by
+highlighting them until the next user input.
+
+@item
+
+Languide uses a ``plugin'' model for language definitions, and you
+should write your editing commands using the ``model'' functions that
+each mode support definition fills in, so that your new commands will
+do equivalent things in a range of major modes.
+@end itemize
+
+Versor wrappers for Languide commands are in
+@file{versor-language-edits.el}, and you can find plenty of examples
+in there. 
+
+Insertions done in languide editing commands should generally be done
+through the function @code{languide-insert}, which is like the
+GNUemacs @code{insert} function, but also highlights what has
+inserted, and put the highlighting on a list to be removed by a
+pre-command-hook function. 
+
+@node Languide and Versor, Known problems, Extension, Top
+@chapter Languide and Versor
+
+Although you can use languide commands directly, in which case they
+act on the GNUemacs region as necessary, it will often be more
+convenient to access the through the companion package, versor, which
+provides a highlighted selection cursor (distinct from the GNUemacs
+region) and a set of commands calling Languide to act on the selection. 
+
+In particular, versor attaches to the cursor keys forms of movement of
+the right granularity to select the kind of text area that Languide
+operates on. 
+
+@xref{Versor and Languide, , , versor, Versor: versatile cursors for GNUemacs},
+for Versor's view of this connection. 
+
+@node  Known problems, Command Index, Languide and Versor, Top
+@comment  node-name,  next,  previous,  up
+@chapter Known problems
+
+Versor is still in its early days as a released package, and there are
+sure to be some bugs that the author has not yet hit in his own use of
+it.
+
+Problems known to the author include:
+
+@enumerate
+@item
+The ``previous statement'' movement in C is a bit erratic.
+@end enumerate
+
+@node Command Index, Concept Index, Known problems, Top
+@unnumbered Command Index
+@printindex fn
+
+@node Concept Index,  , Command Index, Top
+@unnumbered Concept Index
+@printindex cp
+
+@contents
+
+@bye

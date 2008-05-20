@@ -1,0 +1,3 @@
+#name : case pattern => 
+# --
+case ${1:pattern} => $0

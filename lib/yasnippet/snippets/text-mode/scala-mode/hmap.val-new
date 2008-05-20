@@ -1,0 +1,3 @@
+#name : val m = new HashMap[K, V]
+# --
+val ${1:m} = new HashMap[${2:key}, ${3:value}] $0

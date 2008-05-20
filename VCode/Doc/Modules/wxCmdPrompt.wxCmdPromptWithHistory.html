@@ -1,0 +1,679 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Dec 25 16:47:20 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class wxCmdPromptWithHistory</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class wxCmdPromptWithHistory</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="wxCmdPrompt.html">wxCmdPrompt</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">wxCmdPrompt.wxCmdPromptWithHistory<BR>
+&nbsp;&nbsp;CmdPrompt.CmdPromptWithHistory<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">wxCmdPromptWithHistory</SPAN>(<A CLASS="DocLink" HREF="CmdPrompt.CmdPromptWithHistory.html">CmdPromptWithHistory</A>):
+    <A CLASS="DocLink" HREF="#wxCmdPrompt.wxCmdPromptWithHistory.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxCmdPrompt.wxCmdPromptWithHistory.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">underlying</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#wxCmdPrompt.wxCmdPromptWithHistory._on_command_char"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxCmdPrompt.wxCmdPromptWithHistory._on_command_char</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">key_event</SPAN>)<SPAN CLASS="OneLiner"> # internal command to handle wxWindows key events</SPAN>
+    <A CLASS="DocLink" HREF="#wxCmdPrompt.wxCmdPromptWithHistory._on_command_enter"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxCmdPrompt.wxCmdPromptWithHistory._on_command_enter</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">event</SPAN>)
+    <A CLASS="DocLink" HREF="#wxCmdPrompt.wxCmdPromptWithHistory.edited"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxCmdPrompt.wxCmdPromptWithHistory.edited</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#wxCmdPrompt.wxCmdPromptWithHistory.in_progress"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxCmdPrompt.wxCmdPromptWithHistory.in_progress</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#wxCmdPrompt.wxCmdPromptWithHistory.restore_edited"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxCmdPrompt.wxCmdPromptWithHistory.restore_edited</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # restore previously saved partially edited new command.</SPAN>
+    <A CLASS="DocLink" HREF="#wxCmdPrompt.wxCmdPromptWithHistory.save_edited"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">wxCmdPrompt.wxCmdPromptWithHistory.save_edited</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # store partially edited new command.</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from CmdPrompt.CmdPrompt</SPAN>
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPrompt.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPrompt.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPrompt._on_command"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPrompt._on_command</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPrompt.set_command_callback"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPrompt.set_command_callback</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command_callback=None</SPAN>)<SPAN CLASS="OneLiner"> # changes the callback to a new function</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from CmdPrompt.CmdPromptWithHistory</SPAN>
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPromptWithHistory.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPromptWithHistory.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">max_stack=None</SPAN>, <SPAN CLASS="Argument">saved_stack=None</SPAN>, <SPAN CLASS="Argument">cursor_always_on_top=1</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)<SPAN CLASS="OneLiner"> # create a new history stack</SPAN>
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPromptWithHistory._on_command"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPromptWithHistory._on_command</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPromptWithHistory._raw_push"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPromptWithHistory._raw_push</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)<SPAN CLASS="OneLiner"> # push a command onto the stack, without changing stack_index</SPAN>
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPromptWithHistory.depth"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPromptWithHistory.depth</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # current depth of stack</SPAN>
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPromptWithHistory.edited"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPromptWithHistory.edited</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPromptWithHistory.in_progress"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPromptWithHistory.in_progress</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPromptWithHistory.index"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPromptWithHistory.index</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPromptWithHistory.next"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPromptWithHistory.next</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPromptWithHistory.peek"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPromptWithHistory.peek</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">index</SPAN>)<SPAN CLASS="OneLiner"> # peek at command at index from last command in stack</SPAN>
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPromptWithHistory.previous"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPromptWithHistory.previous</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPromptWithHistory.push"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPromptWithHistory.push</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPromptWithHistory.restore_edited"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPromptWithHistory.restore_edited</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#CmdPrompt.CmdPromptWithHistory.save_edited"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">CmdPrompt.CmdPromptWithHistory.save_edited</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+
+</PRE><H2>Description</H2><P>
+concrete implementation of CmdPromptWithHistory using a single
+line wxTextCtrl.  Up and down arrows move through the history,
+and enter enters the currently edited command.</P>
+<P>
+Note: to receive notification that a command has been entered, the
+command_callback argument must be supplied to CmdPrompt.</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>wxTextCtrl</EM> text
+<DD>underlying wxTextCtrl 
+<DT>
+<EM>STR</EM> stored
+<DD>storage for partially edited command line buffer
+when we move back through the command history.
+<DT>
+<EM>(INT, INT)</EM> stored_selection
+<DD>storage for current selection in 
+partially edited command line buffer when we move back through 
+the command history.
+</DL>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="wxCmdPrompt.wxCmdPromptWithHistory.__init__" CLASS="Method">wxCmdPrompt.wxCmdPromptWithHistory.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">underlying</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>wxTextCtrl</EM> underlying
+<DD>existing wxTextCtrl.  Must have
+wxTE_PROCESS_ENTER style, and be a single line control 
+(not wxTE_MULTILINE)
+
+</DL>
+<H2 ID="wxCmdPrompt.wxCmdPromptWithHistory._on_command_char" CLASS="Method">wxCmdPrompt.wxCmdPromptWithHistory._on_command_char(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">key_event</SPAN>)</H2>
+<P>internal command to handle wxWindows key events</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>wxKeyEvent</EM> key_event
+<DD>the wxKeyEvent which triggered this
+handler.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="wxCmdPrompt.wxCmdPromptWithHistory._on_command_enter" CLASS="Method">wxCmdPrompt.wxCmdPromptWithHistory._on_command_enter(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">event</SPAN>)</H2>
+<P>None</P>
+
+<P>
+internal command to handle wxWindows 
+wxEVT_COMMAND_TEXT_ENTER events</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>wxEvent</EM> event
+<DD>the event which triggered this handler.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="wxCmdPrompt.wxCmdPromptWithHistory.edited" CLASS="Method">wxCmdPrompt.wxCmdPromptWithHistory.edited(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+contents of saved command line past the last command in the
+stack, if it has previously been saved. 
+Unlike restore_edited, this method returns only the string
+contents in the saved command line.</P>
+<P>
+<STRONG>INPUT</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>partial command previously stored with save_edited, 
+or None if there is none.
+
+</DL>
+<H2 ID="wxCmdPrompt.wxCmdPromptWithHistory.in_progress" CLASS="Method">wxCmdPrompt.wxCmdPromptWithHistory.in_progress(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+contents of command line currently being edited (not the one
+stored by save_edited)
+A concrete subclass of CmdPromptWithHistory must define this method.</P>
+<P>
+<STRONG>INPUT</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>partial command currently being edited
+
+</DL>
+<H2 ID="wxCmdPrompt.wxCmdPromptWithHistory.restore_edited" CLASS="Method">wxCmdPrompt.wxCmdPromptWithHistory.restore_edited(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>restore previously saved partially edited new command.</P>
+
+<P>
+<STRONG>INPUT</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="wxCmdPrompt.wxCmdPromptWithHistory.save_edited" CLASS="Method">wxCmdPrompt.wxCmdPromptWithHistory.save_edited(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>store partially edited new command.</P>
+
+<P>
+<STRONG>INPUT</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="CmdPrompt.CmdPrompt.__init__" CLASS="Method">CmdPrompt.CmdPrompt.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command_callback=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT BOOL</EM> command_callback
+<DD>command_callback( <EM>CmdPrompt</EM> cmd_line, <EM>STR</EM> command)
+-- function to be called when the user enters a command.  cmd_line
+is the CmdPrompt object.  command is the text of the command entered
+the underlying buffer.  The function should return true if the command 
+was valid.  (This is not used by CmdPrompt, but may be used by 
+subclasses)
+
+</DL>
+<H2 ID="CmdPrompt.CmdPrompt._on_command" CLASS="Method">CmdPrompt.CmdPrompt._on_command(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)</H2>
+<P>None</P>
+
+<P>
+internal function which triggers the
+entry_callback.  Only the concrete subclass of
+CmdPrompt implementing the command entry
+should call this function</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> command
+<DD>text of the command entered (without newline)
+
+</DL>
+<H2 ID="CmdPrompt.CmdPrompt.set_command_callback" CLASS="Method">CmdPrompt.CmdPrompt.set_command_callback(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command_callback=None</SPAN>)</H2>
+<P>changes the callback to a new function</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT BOOL</EM> command_callback
+<DD>command_callback( <EM>CmdPrompt</EM> cmd_line, <EM>STR</EM> command)
+-- function to be called when the user enters a command.  cmd_line
+is the CmdPrompt object.  command is the text of the command entered
+the underlying buffer.  The function should return true if the command 
+was valid.  (This is not used by CmdPrompt, but may be used by 
+subclasses)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="CmdPrompt.CmdPromptWithHistory.__init__" CLASS="Method">CmdPrompt.CmdPromptWithHistory.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">max_stack=None</SPAN>, <SPAN CLASS="Argument">saved_stack=None</SPAN>, <SPAN CLASS="Argument">cursor_always_on_top=1</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>create a new history stack</P>
+
+<P>
+<STRONG>INPUT</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> max_stack
+<DD>maximum size of stack (if None, unlimited)
+<DT>
+<EM>[STR]</EM> saved_stack
+<DD>initial stack
+</DL>
+<H2 ID="CmdPrompt.CmdPromptWithHistory._on_command" CLASS="Method">CmdPrompt.CmdPromptWithHistory._on_command(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)</H2>
+<P>None</P>
+
+<P>
+internal function which triggers the
+entry_callback.  Only the concrete subclass of
+CmdPrompt implementing the command entry
+should call this function</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> command
+<DD>text of the command entered (without newline)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="CmdPrompt.CmdPromptWithHistory._raw_push" CLASS="Method">CmdPrompt.CmdPromptWithHistory._raw_push(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)</H2>
+<P>push a command onto the stack, without changing stack_index</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> command
+<DD>text of the command entered (without newline)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+Note: the stack_index should normally be moved (either reset
+to 0 or increased by one) when a command is pushed onto the
+stack, but _raw_push does not perform this task </P>
+<P>
+Unless this is specifically desired, push
+should be used instead.
+</P>
+<H2 ID="CmdPrompt.CmdPromptWithHistory.depth" CLASS="Method">CmdPrompt.CmdPromptWithHistory.depth(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>current depth of stack</P>
+
+<P>
+<STRONG>INPUT</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>number of commands currently on the stack
+
+</DL>
+<H2 ID="CmdPrompt.CmdPromptWithHistory.edited" CLASS="Method">CmdPrompt.CmdPromptWithHistory.edited(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+contents of saved command line past the last command in the
+stack, if it has previously been saved.  A concrete subclass 
+of CmdPromptWithHistory must define this method.
+Unlike restore_edited, this method returns only the string
+contents in the saved command line.</P>
+<P>
+<STRONG>INPUT</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>partial command previously stored with save_edited, 
+or None if there is none.
+
+</DL>
+<H2 ID="CmdPrompt.CmdPromptWithHistory.in_progress" CLASS="Method">CmdPrompt.CmdPromptWithHistory.in_progress(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+contents of command line currently being edited (not the one
+stored by save_edited)
+A concrete subclass of CmdPromptWithHistory must define this method.
+<STRONG>INPUT</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>partial command currently being edited
+
+</DL>
+<H2 ID="CmdPrompt.CmdPromptWithHistory.index" CLASS="Method">CmdPrompt.CmdPromptWithHistory.index(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+current index into stack
+<STRONG>INPUT</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>index of command currently pointed to in stack
+
+</DL>
+<H2 ID="CmdPrompt.CmdPromptWithHistory.next" CLASS="Method">CmdPrompt.CmdPromptWithHistory.next(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+move pointer to next command in stack
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>text of the next command in the stack, or None if we pass
+the last command on the stack or are already past it.  The
+caller must check for None and avoid clearing the command-line
+buffer if it is returned, since restore_edited() will already
+have restored the buffer.
+
+</DL>
+<H2 ID="CmdPrompt.CmdPromptWithHistory.peek" CLASS="Method">CmdPrompt.CmdPromptWithHistory.peek(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">index</SPAN>)</H2>
+<P>peek at command at index from last command in stack</P>
+
+<P>
+<STRONG>INPUT</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> index
+<DD>how far from end of stack
+</DL>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>text of command pointed to by index
+
+</DL>
+<H2 ID="CmdPrompt.CmdPromptWithHistory.previous" CLASS="Method">CmdPrompt.CmdPromptWithHistory.previous(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+move pointer to previous command in stack
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>text of the previous command, or None if we
+have reached the first command in the stack 
+
+</DL>
+<H2 ID="CmdPrompt.CmdPromptWithHistory.push" CLASS="Method">CmdPrompt.CmdPromptWithHistory.push(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)</H2>
+<P>None</P>
+
+<P>
+push a (non-empty) command onto the stack, 
+and reset stack_index to zero.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> command
+<DD>text of the command entered (without newline)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<H2 ID="CmdPrompt.CmdPromptWithHistory.restore_edited" CLASS="Method">CmdPrompt.CmdPromptWithHistory.restore_edited(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+restore previously saved partially edited new command.
+A concrete subclass of CmdPromptWithHistory must define this method.
+Note: if appropriate, this command should restore additional data,
+such as the selection and insertion point.</P>
+<P>
+<STRONG>INPUT</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="CmdPrompt.CmdPromptWithHistory.save_edited" CLASS="Method">CmdPrompt.CmdPromptWithHistory.save_edited(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+store partially edited new command.  A concrete subclass
+of CmdPromptWithHistory must define this method.
+Note: if appropriate, this command should store additional data,
+such as the current selection and insertion point.</P>
+<P>
+<STRONG>INPUT</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+#name : def act(arg: T) = { ..}
+# --
+def act(${1:arg}: ${2:type}) = {
+  loop {
+    react {
+      $0
+    }
+  }
+}

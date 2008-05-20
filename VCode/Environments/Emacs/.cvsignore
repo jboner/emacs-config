@@ -1,0 +1,11 @@
+*.c#
+*.py~
+*.TAGS
+*~
+TAGS
+#vcode-with-overlays.el#
+#*
+ignorethisfile.tmp
+toto.py
+recentf.el
+setnu.el

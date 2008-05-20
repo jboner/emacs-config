@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Dec 25 17:01:15 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module InstanceSpace</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module InstanceSpace</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="InstanceSpace.InstanceSpace.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">InstanceSpace</SPAN></A></SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#make_regex"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">make_regex</SPAN></A>(<SPAN CLASS="Argument">s</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#selected_methods"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">selected_methods</SPAN></A>(<SPAN CLASS="Argument">the_class</SPAN>, <SPAN CLASS="Argument">include=None</SPAN>, <SPAN CLASS="Argument">exclude=None</SPAN>)</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VC...\Mediator\\InstanceSpace.pyc'</SPAN></SPAN>
+</PRE><H2>Description</H2><P>
+classes for doing fancy namespace manipulations
+</P>
+<H2 ID="make_regex" CLASS="Function">make_regex(<SPAN CLASS="Argument">s</SPAN>)</H2>
+<P></P>
+
+<P>
+given a string or compiled regular expression object
+(re.RegexObject), return a compiled regular expression object</P>
+
+<DL>
+
+<DT>
+<EM>STR or re.RegexObject s</EM>
+<DD>regulare expression to convert, or None
+for a regular expression which matches anything
+
+</DL>
+<H2 ID="selected_methods" CLASS="Function">selected_methods(<SPAN CLASS="Argument">the_class</SPAN>, <SPAN CLASS="Argument">include=None</SPAN>, <SPAN CLASS="Argument">exclude=None</SPAN>)</H2>
+<P></P>
+
+<P>
+returns a list of the methods of a given class matching the
+include regular expression and not matching the exclude regular
+expression.</P>
+<P>
+<STRONG>NOTE:</STRONG> this function will not return methods of any superclasses,
+only the class itself.  It must be called explicitly for each
+superclass whose methods are desired</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>CLASS the_class</EM>
+<DD>class object 
+<DT>
+<EM>STR or re.RegexObject include</EM>
+<DD>include only methods 
+whose names match this regex, or None to include all except those
+matching exclude.  Note: we use re.search, so if you want to match
+characters at the start of the method name, you need an explicit
+<CODE>^</CODE>.
+<DT>
+<EM>STR or re.RegexObject exclude</EM>
+<DD>exclude methods whose 
+names match this regex, or None to include all methods matching
+include.  Note: we use re.search, so if you want to match characters
+at the start of the method name, you need an explicit <CODE>^</CODE>.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+[STR]
+<DD>names of the methods
+
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

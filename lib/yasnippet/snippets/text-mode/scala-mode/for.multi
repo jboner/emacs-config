@@ -1,0 +1,8 @@
+#name : for {x <- xs \ y <- ys} { yield }
+# --
+for {
+  ${1:x} <- ${2:xs}
+  ${3:x} <- ${4:xs}
+} {
+  yield $0
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:12:05 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module auto_test</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module auto_test</H1>
+<PRE><SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#add_suite"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">add_suite</SPAN></A>(<SPAN CLASS="Argument">name</SPAN>, <SPAN CLASS="Argument">*patterns</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Adds a new test suite to the registry.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#add_test"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">add_test</SPAN></A>(<SPAN CLASS="Argument">name</SPAN>, <SPAN CLASS="Argument">fct</SPAN>, <SPAN CLASS="Argument">desc=''</SPAN>, <SPAN CLASS="Argument">order=0</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Add a test to the test registry.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#expand_suite"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">expand_suite</SPAN></A>(<SPAN CLASS="Argument">suite_name</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Returns list of tests in a suite.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#find_tests"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">find_tests</SPAN></A>(<SPAN CLASS="Argument">name</SPAN>, <SPAN CLASS="Argument">is_regexp=None</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Find all tests matching a name or regexp.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#run"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">run</SPAN></A>(<SPAN CLASS="Argument">to_run</SPAN>, <SPAN CLASS="Argument">profile_prefix=None</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#test_header"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">test_header</SPAN></A>(<SPAN CLASS="Argument">name</SPAN>, <SPAN CLASS="Argument">desc</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Returns the header of a test</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tests_names_by_priority_and_name</SPAN>(<SPAN CLASS="Argument">tests_to_do</SPAN>)</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Admin\\auto_test.pyc'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">dictionary</SPAN> <SPAN CLASS="VariableName">suite_reg</SPAN> = <SPAN CLASS="VariableValue">{'all': ['.*'], 'cibefore': ['CmdInterp', 'automatic_abbreviations'], 'edbefore': ['EdSim', 'automatic_abbreviations'], 'fabfour': ['SymDict', 'automatic_abbreviations', 'mediator_console', 'python'], ...}</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">test_header_fmt</SPAN> = <SPAN CLASS="VariableValue">'\012\012*******************...********************\012\012'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">dictionary</SPAN> <SPAN CLASS="VariableName">test_reg</SPAN> = <SPAN CLASS="VariableValue">{}</SPAN></SPAN>
+</PRE><H2>Description</H2><P>
+This file contains functions for defining and running automated
+regression tests.
+</P>
+<H2 ID="add_suite" CLASS="Function">add_suite(<SPAN CLASS="Argument">name</SPAN>, <SPAN CLASS="Argument">*patterns</SPAN>)</H2>
+<P>Adds a new test suite to the registry.</P>
+
+<P>
+<EM>STR name</EM> is the name of the suite, <EM>[STR] patterns</EM> is the list of tests
+in the suite, where each entry is either the name of a test or a
+regexp to be matched against test names.
+</P>
+<H2 ID="add_test" CLASS="Function">add_test(<SPAN CLASS="Argument">name</SPAN>, <SPAN CLASS="Argument">fct</SPAN>, <SPAN CLASS="Argument">desc=''</SPAN>, <SPAN CLASS="Argument">order=0</SPAN>)</H2>
+<P>Add a test to the test registry.</P>
+
+<P>
+Adds a test with name <EM>STR name</EM> and function <EM>FCT fct</EM> to the
+tests registry. An optional description string <EM>STR desc</EM> can also
+be specified.</P>
+<P>
+WARNING: if <EM>fct</EM> uses <EM>profile.run</EM>, then this doesn't work. For
+some reason, <EM>profile.run</EM> seems to be running the code in the
+name space of <EM>auto_test</EM> instead of whatever module <EM>fct</EM> was
+defined in.
+</P>
+<H2 ID="expand_suite" CLASS="Function">expand_suite(<SPAN CLASS="Argument">suite_name</SPAN>)</H2>
+<P>Returns list of tests in a suite.</P>
+
+<P>
+<EM>STR suite_name</EM> may be the name of a test or the name of a test
+suite, or a regexp to be matched against test names.</P>
+<H2 ID="find_tests" CLASS="Function">find_tests(<SPAN CLASS="Argument">name</SPAN>, <SPAN CLASS="Argument">is_regexp=None</SPAN>)</H2>
+<P>Find all tests matching a name or regexp.</P>
+
+<P>
+Returns a list of tests whose names match name or regexp *STR
+name*. Entries in the list are of the form <EM>[STR name, FCT fct]</EM></P>
+<P>
+If <EM>is_regexp</EM> is false, then <EM>name</EM> is treated as an actual test name,
+otherwise it is treated as a regexp against which to match test names.</P>
+<P>
+Returns <EM>None</EM> if no tests were found.
+</P>
+<H2 ID="run" CLASS="Function">run(<SPAN CLASS="Argument">to_run</SPAN>, <SPAN CLASS="Argument">profile_prefix=None</SPAN>)</H2>
+<P></P>
+
+<P>
+
+Runs a series of test suites.</P>
+<P>
+Runs all test suites defined in <EM>[STR] to_run</EM>. Each entry
+in *to_run*is either the name of a test or the name of a test suite, or a
+regexp to be matched against test names.</P>
+<P>
+If profile_prefix is specified, use the profile module to run each
+test, sending the outputs to a file
+profile_prefix + <CODE>.</CODE> + testname + <CODE>.dat</CODE>
+</P>
+<H2 ID="test_header" CLASS="Function">test_header(<SPAN CLASS="Argument">name</SPAN>, <SPAN CLASS="Argument">desc</SPAN>)</H2>
+<P>Returns the header of a test</P>
+
+<P>
+... with test name <EM>STR test_name</EM> and description <EM>STR desc</EM>.
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>jde-usages</title>
+    <link rel="stylesheet" title="Default" href="style.css" />
+  </head>
+  
+  <body >
+
+    <center><h1 style="font-family:cursive;background:lightgreen">jde-usages</h1>
+
+      <a href="http://sourceforge.net">
+ 	<img    src="http://sourceforge.net/sflogo.php?group_id=103724&amp;type=1" align="right" width="88" height="31" border="0" alt="SourceForge.net Logo" />
+      </a>
+    </center>
+    <table cellspacing="10" cellpadding="0">
+      <tr>
+	<td width="150" valign="top" >
+	  <div class="leftmenu" style="background:lightblue;padding:10;border-style:solid;border-width:1;border-color:blue">
+	    <h3><a style="text-decoration:none"  href="http://jde-usages.sourceforge.net">jde-usages</a></h3>
+	    <div style="padding-left:5">
+	    <h4><a href="index.html#Download">Download</a></h4>
+	    <h4><a href="index.html#Requirements">Requirements</a></h4>
+	    <h4><a href="commands.html">Docs</a></h4>
+	    <h4><a href="screenshots.html">Screenshots</a></h4>
+	    <h4><a href="index.html#UsefulKeybindings">Keybindings</a></h4>
+	    <h4><a href="index.html#Notes">Notes</a></h4>
+	    <h4><a href="index.html#Help">Help</a></h4>
+	    <h4>&#xA0;</h4>
+	    </div>
+	  </div>
+
+	</td>
+	<td>
+    <p>
+    <b>jde-usages</b> is a plugin for the <a href="http://jdee.sunsite.dk/">Java Development
+      Environment for Emacs</a> (JDEE) that uses the <a href="http://asm.objectweb.org/">ASM</a>
+      bytecode library to provide usage (eg: find all the callers of a method) and other useful
+      information about your Java classes.
+    </p>
+    <p>
+      This plugin is based on the ideas in jde-xref.el that is
+      distributed with JDEE but it is better because it is:</p>
+      <ul>
+	<li><p><b>Faster.</b> Initial setup is <a a href="#Notes">faster</a>. Parsing byte-code is also much faster when done in
+	java instead if elisp.</p></li>
+	<li><p><b>More Accurate. </b>
+	  The usage information <b>jde-usages</b> provides is as up to
+	  date as the class files and jars in the classpath. You are
+	  not required to rebuild the database after compiling.</p></li>
+	<li><p><b>Easier to setup</b> 
+	  No extra configuration is required. <b>jde-usages</b> examines all the classes in
+	  jde-global-classpath and therefore doesn't require a separate classpath of generated
+	  files or a prefix list.</p></li>
+      </ul>
+      
+      <b>jde-usages</b> also uses the information it gathers to
+      provide some useful <a href="commands.html#other">commands</a>.<br />
+
+      <h2 id="Requirements">Requirements</h2> 
+      <p>To use <b>jde-usages</b> you need to have customized <code>jde-global-classpath</code> and
+      <code>jde-sourcepath</code> for your project. The classpath provides a set of classes to search in
+      when looking for usages while the sourcepath is used when navigating to the exact location of
+      a usage. You will also need to have your JDK set up correctly so that bsh can start
+      up. If you've gotten JDEE completion to work, you should be fine.</p>
+
+      <h2 id="Download">Download</h2> An installable plugin binary of
+      version 0.10 released on Feb 27, 2006 is available
+      <a
+      href="http://prdownloads.sourceforge.net/jde-usages/jde-usages-0.10.zip?download">here</a>
+      along with <a href="ReleaseNotes">release notes</a> and the
+      detailed <a href="ChangeLog">ChangeLog</a>.  This file
+      also includes all the source files used to build the plugin.
+      <p>
+        The source is also available via anonymous CVS <a
+      href="http://sourceforge.net/cvs/?group_id=103724">here</a>. </p>
+
+      <h2 id="Installation">Installation</h2>
+      <p><b>Using the binary: (jde-usages.zip)</b> </p>
+	<ol>
+	  <li>Unzip the plugin zip file in the JDEE plugin directory,
+	  if you haven't customized <i>jde-plugins-directory</i> this
+	  is the <i>plugins</i> directory under the JDEE install
+	  directory. Unzipping the plugin will create a directory
+	  called <i>usages</i> under <i>plugins</i>.</li>
+          <li> Restart emacs. </li>
+	</ol>
+        OR <br />
+        you could accomplish the same thing from within emacs:
+        <ol>
+	  <li>Copy the file plugin zip file to the JDEE plugin
+	  directory. Delete any old <b>jde-usages</b> plugin zip or
+	  <i>usages</i> subdirectory.</li>
+
+          <li> Then say M-x jde-pi-install-plugins. This will only
+          work if you have the "jar" executable in your
+          exec-path.</li>  
+
+          <li>Kill any running beanshell process by saying M-x jde-bsh-exit.
+
+          <li> Finally say M-x jde-pi-load-plugins to load the plugin.
+            This will however not give you the new menu items for
+            <b>jde-usages</b>. You have to restart for that.</li>
+	</ol>
+
+      <p><b>From CVS:</b> The source is structured to look like an expanded plugin and so can be
+      installed directly into the plugins directory.</p>
+	<ol>
+	  <li>Check out the sources into your JDEE plugin
+	  directory. This will create a folder called
+      <i>usages</i> under <i>plugins</i>.</li>
+	  <li> Go to the <i>usages</i> directory and say "ant build". This populates the
+      <i>usages/classes</i> directory. Typing just "ant" without any targets will print out help
+      about the other targets that can be built.</li>
+	  <li> Restart emacs. You can also say M-x jde-pi-load-plugins
+	  to load the plugin but the plugin submenu will not show up
+	  until emacs is restarted.</li>
+	</ol>
+
+      <h2 id="UsefulKeybindings">Useful Keybindings</h2> I find the following Keybindings useful in
+      addition to the menu bar commands. <br/><b>Note:</b> The bindings use "M-u" as a prefix command,
+      overriding its default binding of 'upcase-word, which I almost never use. YMMV.
+      <blockquote><pre>
+(define-key jde-mode-map "\M-u" nil)
+(define-key jde-mode-map "\M-up" 'jde-usages-display-call-tree-for-thing-at-point) ;; p = point
+(define-key jde-mode-map "\M-ui" 'jde-usages-display-call-tree-for-specified-class) ;; i = interactive
+(define-key jde-mode-map "\M-uc" 'jde-usages-display-call-tree) ;; c = callers
+
+(define-key jde-mode-map "\M-ut" 'jde-usages-display-type-hierarchy) ;; t = types
+(define-key jde-mode-map "\M-ur" 'jde-usages-display-subs-implementing-method) ;; r = reimplements
+(define-key jde-mode-map "\M-ud" 'jde-usages-display-subs-and-implementers) ;; d = descendants
+(define-key jde-mode-map "\M-ua" 'jde-usages-display-superclasses) ;; a = ancestors
+
+(define-key jde-mode-map "\M-un" 'jde-usages-next-pos)
+(define-key jde-mode-map "\M-ul" 'jde-usages-locate-class)
+
+
+(global-set-key [(meta n)]  (lambda ()
+                              (interactive)
+                              (jde-load-project-file)
+                              (jde-open-class-source-with-completion)))</pre></blockquote>
+      <h2 id="Notes">Notes</h2>
+
+      <h3>Setup</h3>
+      <p id="setup"> During the setup phase <b>jde-usages</b> looks at the constant
+      table for every class to determine which other classes it refers to and uses this info. to
+      create a dependency table which maps a class to all classes that <b>might</b> call that
+      class. It's critical that this stage be as fast as possible. It is much faster than jde-xref
+      ,which in its setup phase parses the byte-code of all methods to create the final usage
+      table and then writes this data structure to disk, but it won't hurt to make it faster.</p>
+	
+	<h3>Caching:</h3>
+	<p id="Cache"> Directory classpath entries take longer to process than jars because reading many small
+	files turns out to be much slower than reading one large one. To mitigate this problem there
+	is some experimental support to cache the processing results for directory classpath entries
+	between runs. To enable this caching create a directory called ".jde-usages" in your home
+	directory. To find out what java thinks is your home directory type </p>
+	<blockquote><pre>print (System.getProperty("user.home"));</pre></blockquote> in the *bsh*
+	buffer. If the ~/.jde-usages directory exists cache files will we written there just before
+	the JVM quits. To ensure that the java process is allowed to shut down completely when
+	quitting emacs add the following code to your .emacs file.
+	  
+	  <blockquote>
+	    <pre>
+(defun jde-bsh-exit-nicely ()
+  "Tells the beanshell process to terminate and waits until the process finishes up."
+  (interactive)
+  (if (jde-bsh-running-p)
+      (let ((process (bsh-get-process (oref 'jde-bsh the-bsh))))
+	(message "Shutting down beanshell process")
+        (if (and
+             (boundp 'jde-ant-invocation-method) ;; ant package may not be loaded.
+             (string= (car jde-ant-invocation-method) "Ant Server"))
+            (bsh-eval (oref 'jde-bsh the-bsh) "jde.util.JdeUtilities.exit();\n")
+	  (bsh-eval (oref 'jde-bsh the-bsh) "exit();\n"))
+	(message ""))))
+
+(add-hook 'kill-emacs-hook 'jde-bsh-exit-nicely)</pre></blockquote>
+
+	<h3>Debugging</h3>
+	<p> A special buffer called <code>*jde-beanshell-scratch*</code> records the
+	  data returned by calls the java code in jde.util.Usages. When reporting bugs the contents
+	  of this buffer would be useful. This buffer is not truncated right now and so could get to
+	  be very large.</p>
+	<p>Setting <code>jde.util.Usages.DEBUG</code> to <code>true</code> in the beanshell buffer will make
+	  <b>jde-usages</b> report some timing information.</p>
+
+      <h2 id="Help">Help</h2>To report bugs, request features, or heap
+      accolades, send <a href="mailto:sacharya@cs.indiana.edu">me
+      (Suraj Acharya)</a>
+      an email. I also monitor the <a
+      href="mailto:jde@sunsite.dk">JDEE mailing list</a> pretty
+      closely.
+
+
+	</td>
+      </tr>
+    </table>
+  </body>
+</html>

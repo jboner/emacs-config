@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:42:05 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module sr_grammars</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module sr_grammars</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_grammars.BasicCorrectionWinGram.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">BasicCorrectionWinGram</SPAN></A>(<A CLASS="DocLink" HREF="sr_grammars.WinGram.html">WinGram</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_grammars.BasicCorrectionWinGramDummy.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">BasicCorrectionWinGramDummy</SPAN></A>(<A CLASS="DocLink" HREF="sr_grammars.BasicCorrectionWinGram.html">BasicCorrectionWinGram</A>)</SPAN><SPAN CLASS="OneLiner"> # dummy implementation of window-specific basic correction grammar </SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_grammars.ChoiceGram.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ChoiceGram</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # abstract base class for correction window Choose n grammar</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_grammars.DictWinGram.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">DictWinGram</SPAN></A>(<A CLASS="DocLink" HREF="sr_grammars.WinGram.html">WinGram</A>)</SPAN><SPAN CLASS="OneLiner"> # abstract base class for window-specific dictation grammar interfaces</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_grammars.DictWinGramDummy.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">DictWinGramDummy</SPAN></A>(<A CLASS="DocLink" HREF="sr_grammars.DictWinGram.html">DictWinGram</A>)</SPAN><SPAN CLASS="OneLiner"> # dummy implementation of window-specific dictation grammar </SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_grammars.MilitarySpelling.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">MilitarySpelling</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # abstract base class for military (alpha-bravo-charlie) spelling grammar </SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_grammars.NaturalSpelling.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">NaturalSpelling</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_grammars.SelectWinGram.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SelectWinGram</SPAN></A>(<A CLASS="DocLink" HREF="sr_grammars.WinGram.html">WinGram</A>)</SPAN><SPAN CLASS="OneLiner"> # abstract base class for selection grammar interfaces</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_grammars.SelectWinGramDummy.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SelectWinGramDummy</SPAN></A>(<A CLASS="DocLink" HREF="sr_grammars.SelectWinGram.html">SelectWinGram</A>)</SPAN><SPAN CLASS="OneLiner"> # dummy implementation of window-specific selection grammar </SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_grammars.SimpleSelection.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SimpleSelection</SPAN></A>(<A CLASS="DocLink" HREF="sr_grammars.WinGram.html">WinGram</A>)</SPAN><SPAN CLASS="OneLiner"> # abstract base class for simple selection grammars</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_grammars.WinGram.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">WinGram</SPAN></A>(<A CLASS="DocLink" HREF="Object.OwnerObject.html">OwnerObject</A>)</SPAN><SPAN CLASS="OneLiner"> # abstract base class for window-specific grammar interfaces</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_grammars.WinGramFactory.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">WinGramFactory</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_grammars.WinGramFactoryDummy.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">WinGramFactoryDummy</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Mediator\\sr_grammars.pyc'</SPAN></SPAN>
+</PRE><H2>Description</H2><P>
+abstract interfaces for dictation and selection grammars
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

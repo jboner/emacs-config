@@ -1,0 +1,5 @@
+#name : def f(arg: T): R = {...}
+# --
+def ${1:name}(${2:args}): ${3:Unit} = {
+  $0
+}

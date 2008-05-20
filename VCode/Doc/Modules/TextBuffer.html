@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Dec 25 16:41:09 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module TextBuffer</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module TextBuffer</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="TextBuffer.LockableSpeechBuffer.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">LockableSpeechBuffer</SPAN></A></SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="TextBuffer.NumberedLines.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">NumberedLines</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="TextBuffer.SelectionBuffer.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SelectionBuffer</SPAN></A></SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="TextBuffer.SelectionTextBufferCRToNL.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SelectionTextBufferCRToNL</SPAN></A>(<A CLASS="DocLink" HREF="TextBuffer.TextBufferCRToNL.html">TextBufferCRToNL</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="TextBuffer.SpeechBuffer.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SpeechBuffer</SPAN></A></SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="TextBuffer.SpeechBufferRecogStart.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SpeechBufferRecogStart</SPAN></A>(<A CLASS="DocLink" HREF="TextBuffer.SpeechBuffer.html">SpeechBuffer</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="TextBuffer.StoreableTextBuffer.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">StoreableTextBuffer</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="TextBuffer.TextBuffer.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">TextBuffer</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # abstract class defining basic text buffer interface.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="TextBuffer.TextBufferCRToNL.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">TextBufferCRToNL</SPAN></A>(<A CLASS="DocLink" HREF="TextBuffer.TextBufferChangeSpecify.html">TextBufferChangeSpecify</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="TextBuffer.TextBufferChangeNotify.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">TextBufferChangeNotify</SPAN></A>(<A CLASS="DocLink" HREF="TextBuffer.TextBuffer.html">TextBuffer</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="TextBuffer.TextBufferChangeSpecify.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">TextBufferChangeSpecify</SPAN></A>(<A CLASS="DocLink" HREF="TextBuffer.TextBuffer.html">TextBuffer</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="TextBuffer.TextBufferSpecifyFromNotify.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">TextBufferSpecifyFromNotify</SPAN></A>(<A CLASS="DocLink" HREF="TextBuffer.TextBufferChangeSpecify.html">TextBufferChangeSpecify</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="TextBuffer.VisibleBuffer.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">VisibleBuffer</SPAN></A></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Mediator\\TextBuffer.pyc'</SPAN></SPAN>
+</PRE><H2>Description</H2><P>
+TextBuffer is an abstract interface which is used
+as a wrapper around various text/edit controls, usually either visible 
+(GUI) text controls or hidden (speech) edit controls like the VDct.</P>
+<P>
+It is a fairly simple, lightweight interface.  You can find the length
+of the buffer.  You can set/get the text.  You can set/get the
+selection.  That's about it.</P>
+<P>
+Various subclasses add additional functionality, such as notification or
+specification of changes.  Also, there are other abstract add-in classes
+which add specific functionality (get_visible for VisibleBuffer,
+activate for SpeechBuffer, set_visible for SelectionBuffers).  In order
+to allow the user to mix and match these additional functionality
+without running into problems with multiple inheritance due to
+ambiguity, these add-in classes are not derived from TextBuffer,
+although it doesn't make much sense to create a concrete class which
+inherits from VisibleBuffer and not from TextBuffer (or a subclass of
+TextBuffer).</P>
+<P>
+Then there are concrete subclasses, like TextBufferWX which implements
+TextBufferChangeSpecify and VisibleBuffer using a wxTextCtrl, or
+VoiceDictBuffer which implements TextBufferChangeSpecify,
+SpeechBufferRecogStart, LockableSpeechBuffer, and SelectionBuffer using the
+natlink.DictObj.</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

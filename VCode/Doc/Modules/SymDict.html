@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:17:25 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module SymDict</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module SymDict</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="SymDict.SpokenFormInfo.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SpokenFormInfo</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # Stores information about a spoken form for a parsed symbol.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="SymDict.SymDict.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SymDict</SPAN></A>(<A CLASS="DocLink" HREF="PickledObject.PickledObject.html">PickledObject</A>)</SPAN><SPAN CLASS="OneLiner"> # Known symbols dictionary.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="SymDict.SymbolInfo.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SymbolInfo</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # Stores information about a parsed symbol.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="SymDict.SymbolMatch.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SymbolMatch</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#fmt_cap"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">fmt_cap</SPAN></A>(<SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Format symbol as XxxYxxZzz.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#fmt_join"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">fmt_join</SPAN></A>(<SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Format symbol as xxxyyyzzz</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#fmt_lower_cap"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">fmt_lower_cap</SPAN></A>(<SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Format symbol as xxxYyyZzz.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#fmt_lower_under"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">fmt_lower_under</SPAN></A>(<SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Format symbol as xxx_yyy_zzz.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#fmt_upper_join"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">fmt_upper_join</SPAN></A>(<SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Format symbol as XXXYYYZZZ</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#fmt_upper_under"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">fmt_upper_under</SPAN></A>(<SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Format symbol as XXX_YYY_ZZZ</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#pluralize"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">pluralize</SPAN></A>(<SPAN CLASS="Argument">word</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Finds the plural form of a word</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:/Projects/VoiceCode/VCode/Mediator\\SymDict.pyc'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">dictionary</SPAN> <SPAN CLASS="VariableName">language_definitions</SPAN> = <SPAN CLASS="VariableValue">{}</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">min_abbreviation_len</SPAN> = <SPAN CLASS="VariableValue">2</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">list</SPAN> <SPAN CLASS="VariableName">symbol_formats</SPAN> = <SPAN CLASS="VariableValue">[&lt;functio...t 8d9b80&gt;, &lt;functio...t 8d9d10&gt;, &lt;functio...t 8d9d70&gt;, &lt;functio...t 8d9dd0&gt;, &lt;functio...t 8d9e30&gt;, &lt;functio...t 8d9ea0&gt;]</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">vocabulary_symbols_with_written_form</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+</PRE><H2>Description</H2><P>
+Classes for dealing with programming symbols and their spoken forms.
+</P>
+<H2 ID="fmt_cap" CLASS="Function">fmt_cap(<SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</H2>
+<P>Format symbol as XxxYxxZzz.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR pseudo_symbol</EM>
+<DD>Pseudo symbol to be formatted as a native symbol
+<DT>
+<EM>[STR]</EM> words
+<DD>Words in <EM>pseudo_symbol</EM> (to avoid redundant splitting)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="fmt_join" CLASS="Function">fmt_join(<SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</H2>
+<P>Format symbol as xxxyyyzzz</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR pseudo_symbol</EM>
+<DD>Pseudo symbol to be formatted as a native symbol
+<DT>
+<EM>[STR]</EM> words
+<DD>Words in <EM>pseudo_symbol</EM> (to avoid redundant splitting)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="fmt_lower_cap" CLASS="Function">fmt_lower_cap(<SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</H2>
+<P>Format symbol as xxxYyyZzz.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR pseudo_symbol</EM>
+<DD>Pseudo symbol to be formatted as a native symbol
+<DT>
+<EM>[STR]</EM> words
+<DD>Words in <EM>pseudo_symbol</EM> (to avoid redundant splitting)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="fmt_lower_under" CLASS="Function">fmt_lower_under(<SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</H2>
+<P>Format symbol as xxx_yyy_zzz.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR pseudo_symbol</EM>
+<DD>Pseudo symbol to be formatted as a native symbol
+<DT>
+<EM>[STR]</EM> words
+<DD>Words in <EM>pseudo_symbol</EM> (to avoid redundant splitting)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="fmt_upper_join" CLASS="Function">fmt_upper_join(<SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</H2>
+<P>Format symbol as XXXYYYZZZ</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR pseudo_symbol</EM>
+<DD>Pseudo symbol to be formatted as a native symbol
+<DT>
+<EM>[STR]</EM> words
+<DD>Words in <EM>pseudo_symbol</EM> (to avoid redundant splitting)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="fmt_upper_under" CLASS="Function">fmt_upper_under(<SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</H2>
+<P>Format symbol as XXX_YYY_ZZZ</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR pseudo_symbol</EM>
+<DD>Pseudo symbol to be formatted as a native symbol
+<DT>
+<EM>[STR]</EM> words
+<DD>Words in <EM>pseudo_symbol</EM> (to avoid redundant splitting)
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="pluralize" CLASS="Function">pluralize(<SPAN CLASS="Argument">word</SPAN>)</H2>
+<P>Finds the plural form of a word</P>
+
+<P>
+    <STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> word
+<DD>the word to be pluralized 
+</DL>
+<P>
+    <STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR plural</EM>
+<DD>plural of <EM>word</EM>
+    
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

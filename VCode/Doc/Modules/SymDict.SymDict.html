@@ -1,0 +1,1050 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:17:25 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class SymDict</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class SymDict - Known symbols dictionary.</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="SymDict.html">SymDict</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">SymDict.SymDict<BR>
+&nbsp;&nbsp;PickledObject.PickledObject<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SymDict</SPAN>(<A CLASS="DocLink" HREF="PickledObject.PickledObject.html">PickledObject</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pickle_fname=None</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.abbreviations_cleanup"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.abbreviations_cleanup</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # Removes all known abbreviations from the symbols dictionary.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.accept_symbol_match"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.accept_symbol_match</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">the_match</SPAN>)<SPAN CLASS="OneLiner"> # Accepts a match between a pseudo symbol and its native form.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.add_abbreviation"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.add_abbreviation</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">abbreviation</SPAN>, <SPAN CLASS="Argument">expansions</SPAN>, <SPAN CLASS="Argument">user_added=1</SPAN>, <SPAN CLASS="Argument">resave=0</SPAN>)<SPAN CLASS="OneLiner"> # Adds an abbreviation to the symbol dictionary.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.add_symbol"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.add_symbol</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symbol</SPAN>, <SPAN CLASS="Argument">user_supplied_spoken_forms=[]</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>, <SPAN CLASS="Argument">resave=0</SPAN>)<SPAN CLASS="OneLiner"> # Add a symbol to the dictionary</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.cleanup"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.cleanup</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">clean_sr_voc=0</SPAN>, <SPAN CLASS="Argument">clean_symdict=1</SPAN>, <SPAN CLASS="Argument">resave=1</SPAN>)<SPAN CLASS="OneLiner"> # Cleans up the symbol dictionary.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.collapse_consec_single_chars"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.collapse_consec_single_chars</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">words</SPAN>, <SPAN CLASS="Argument">auxilliary_words=None</SPAN>)<SPAN CLASS="OneLiner"> # Takes a list of words and collapse consecutive single-char words into single words</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.expand_possible_forms"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.expand_possible_forms</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">partial_forms</SPAN>, <SPAN CLASS="Argument">further_extensions</SPAN>)<SPAN CLASS="OneLiner"> # Returns a list of possible spoken forms for a symbol.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.expand_word"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.expand_word</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">word</SPAN>, <SPAN CLASS="Argument">symbol</SPAN>)<SPAN CLASS="OneLiner"> # Expands a word from a symbol to its possible spoken forms.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.format_as_symbol"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.format_as_symbol</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.get_language_by_filename"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.get_language_by_filename</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_name</SPAN>)<SPAN CLASS="OneLiner"> # Gets the name of the language associated with a source file.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.get_language_definition"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.get_language_definition</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">language_name</SPAN>)<SPAN CLASS="OneLiner"> # Gets the definition of the language associated with a source file.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.get_language_definition_by_filename"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.get_language_definition_by_filename</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_name</SPAN>)<SPAN CLASS="OneLiner"> # Gets the definition of the language associated with a source file.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.get_spoken_forms"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.get_spoken_forms</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symbol</SPAN>)<SPAN CLASS="OneLiner"> # Returns a list of possible spoken forms for a symbol.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.init_from_file"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.init_from_file</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.match_pseudo_symbol"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.match_pseudo_symbol</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pseudo_symbol</SPAN>)
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.parse_standard_symbols"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.parse_standard_symbols</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)<SPAN CLASS="OneLiner"> # Parse standard symbols for the various programming languages.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.parse_symbols"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.parse_symbols</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">contents</SPAN>, <SPAN CLASS="Argument">language_name</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.parse_symbols_from_file"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.parse_symbols_from_file</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_name</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)<SPAN CLASS="OneLiner"> # Parse symbols from a source file.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.parse_symbols_from_files"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.parse_symbols_from_files</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_list</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)<SPAN CLASS="OneLiner"> # Parse symbols from a series of source files</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.peek_at_unresolved"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.peek_at_unresolved</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.print_abbreviations</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">show_unresolved=0</SPAN>)<SPAN CLASS="OneLiner"> # Prints the known and unresolved abbreviations.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.print_symbols"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.print_symbols</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symbols=None</SPAN>)<SPAN CLASS="OneLiner"> # Print the content of the symbols dictionary.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.reg_pseudo_to_native_symbol"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.reg_pseudo_to_native_symbol</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">words</SPAN>)
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.strip_source"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.strip_source</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">source</SPAN>, <SPAN CLASS="Argument">language_definition</SPAN>)<SPAN CLASS="OneLiner"> # Removes all parts of a source file that don't contain symbols.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.symbols_as_one_string"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.symbols_as_one_string</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # Returns a string that lists all the native known symbols.</SPAN>
+    <A CLASS="DocLink" HREF="#SymDict.SymDict.update_spoken_forms"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">SymDict.SymDict.update_spoken_forms</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symbol</SPAN>, <SPAN CLASS="Argument">resave=0</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)<SPAN CLASS="OneLiner"> # Updates the spoken forms of a native symbol.</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from PickledObject.PickledObject</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">PickledObject.PickledObject.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pickle_fname=None</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#PickledObject.PickledObject.pickle"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">PickledObject.PickledObject.pickle</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">alt_file=None</SPAN>)<SPAN CLASS="OneLiner"> # Saves the object to file.</SPAN>
+    <A CLASS="DocLink" HREF="#PickledObject.PickledObject.unpickle"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">PickledObject.PickledObject.unpickle</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">alt_file=None</SPAN>)<SPAN CLASS="OneLiner"> # Reads the object from file.</SPAN>
+
+</PRE><H2>Description</H2><P>
+This class stores information about symbols defined in source files
+that the user is working on.</P>
+<P>
+It has methods for parsing symbols and adding pronounceable
+phrases for those symbols to the Speech Recognition system's vocabulary.</P>
+<P>
+Also has methods for matching a pseudo symbol to a native symbol
+(e.g. "a new symbol" -&gt; aNewSym)</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR:</EM> <A HREF="SymDict.SymbolInfo.html">SymbolInfo</A> <EM>)}</EM> symbol_info={}
+<DD>Dictionary of known
+ symbols. Key is the native written form of the symbol and the
+ value is the information about that symbol.
+<DT>
+<EM>{STR:</EM> <A HREF="SymDict.SpokenFormInfo.html">SpokenFormInfo</A> <EM>}</EM> spoken_form_info={}
+<DD>Dictionary of
+ resolved spoken forms for known symbols. The key is a resolved
+ spoken form and the value is the list of written native symbols
+ with that spoken form.
+<DT>
+<EM>{STR: [STR]}</EM> abbreviations={}
+<DD>Dictionary of
+ abbreviations. The key is the abbreviation and the value is a
+ list of possible expansions. It contains both resolved and
+ unresolved abbreviations.
+<DT>
+<EM>{STR: {STR: 1}}</EM> unresolved_abbreviations={}
+<DD>Dictionary of
+ unresolved abbreviations. These are abbreviations that have
+ appeared in at least one compiled symbol, yet are neither a word
+ in the speech vocabulary or a known abbreviation. Values are
+ dictionnaries that list the symbols containing the unresolved
+ abbreviation.
+<DT>
+<EM>STR</EM> _cached_symbols_as_one_string=''
+<DD>Caches the last value
+ returned by method <A HREF="SymDict.SymDict.html#symbols_as_one_string">symbols_as_one_string</A>. A value of <EM>None</EM>
+ indicates that the string needs to be regenerated by
+ <A HREF="SymDict.SymDict.html#symbols_as_one_string">symbols_as_one_string</A>.
+<DT>
+<EM>[STR] standard_symbol_sources</EM>
+<DD>List of files in which standard
+ symbols for different languages are defined.
+<DL>
+
+<DT>
+<EM>BOOL</EM> sr_symbols_cleansed = 1
+<DD>If true, then all symbols have
+  been removed from the SR vocabulary.
+<DT>
+<EM>STR</EM> pickle_fname=None'
+<DD>Name
+ of the file where dictionary object is to be saved/read from. If <EM>None</EM>,
+ it means the object should never be saved to/read from file.
+<DT>
+[SB_ServiceLang] <EM>lang_name_srv</EM>
+<DD>Service used by SymDict to
+ determine a buffer's programming language.
+</DL>
+
+</DL>
+<P>
+CLASS ATTRIBUTES**</P>
+
+<DL>
+
+<DT>
+*{STR: * <A HREF="LangDef.LangDef.html">LangDef</A> <EM>}</EM> language_definitions={}
+<DD>Key is the name
+ of a language and the value is a language definition object which
+ defines rules for parsing symbols in that language.
+</DL>
+<H2 ID="SymDict.SymDict.abbreviations_cleanup" CLASS="Method">SymDict.SymDict.abbreviations_cleanup(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>Removes all known abbreviations from the symbols dictionary.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="SymDict.SymDict.accept_symbol_match" CLASS="Method">SymDict.SymDict.accept_symbol_match(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">the_match</SPAN>)</H2>
+<P>Accepts a match between a pseudo symbol and its native form.</P>
+
+<P>
+Adds the new written\spoken symbol to the SR vocabulary and
+adds new abbreviations which are used in the match.</P>
+<P>
+Also, adds written\spoken symbols for symbols that contain
+those new abbreviations and whose spoken form can now be
+resolved because of those new abbreviations.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<A HREF="SymDict.SymbolMatch.html">SymbolMatch</A> the_match
+<DD>The match to be accepted
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM> --</P>
+<H2 ID="SymDict.SymDict.add_abbreviation" CLASS="Method">SymDict.SymDict.add_abbreviation(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">abbreviation</SPAN>, <SPAN CLASS="Argument">expansions</SPAN>, <SPAN CLASS="Argument">user_added=1</SPAN>, <SPAN CLASS="Argument">resave=0</SPAN>)</H2>
+<P>Adds an abbreviation to the symbol dictionary.</P>
+
+<P>
+If the abbreviation already exists, adds to the list of
+expansions for that abbreviation.</P>
+<P>
+If the length of the abbreviations is less than
+<EM>min_abbreviation_len</EM>, then it is not added to the dictionary (unless
+*user_added=1*). In such cases, the system also automatically adds a
+spelled expansion (e.g. <CODE>os</CODE> -&gt; 'O. S.'), because short abbreviations
+are very likely to be spelled by the user. However, this is not done if
+the abbreviation is actually an in-vocabulary pronounceable word
+(e.g. don't generate <CODE>is</CODE> -&gt; 'I. S.').</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> abbreviation
+<DD>the abbreviation 
+<DT>
+<EM>[STR]</EM> expansions
+<DD>list of possible expansions
+<DT>
+<EM>BOOL user_added</EM>
+<DD>If true, then this abbreviation was added
+ explicitely by the user in the configuration file. In such
+ cases, add the abbreviation even if its lenght is shorter
+ than <EM>min_abbreviation_len</EM>.
+<DT>
+<EM>BOOL resave</EM>
+<DD>If true, resave the dictionary to disk after
+ adding the abbreviation.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="SymDict.SymDict.add_symbol" CLASS="Method">SymDict.SymDict.add_symbol(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symbol</SPAN>, <SPAN CLASS="Argument">user_supplied_spoken_forms=[]</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>, <SPAN CLASS="Argument">resave=0</SPAN>)</H2>
+<P>Add a symbol to the dictionary</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> symbol
+<DD>Symbol to add
+<DT>
+<EM>BOOL</EM> add_sr_entries = 1
+<DD>If true, adds symbol to the SR vocabulary.
+<DT>
+<EM>BOOL resave</EM>
+<DD>If true, resave the dictionary to disk after
+ adding the symbol.
+<DT>
+<EM>[STR] user_supplied_spoken_forms</EM>
+<DD>Spoken forms for the
+ symbol which were supplied explicitly by the user. These
+ forms are added even if they are not generated automaticly by
+ <A HREF="SymDict.SymDict.html#update_spoken_forms">update_spoken_forms</A>. This is useful in cases where the user
+ has explicitly supplied spoken forms for a symbol that contains very
+ short abbreviations (i.e. abbreviations that are rejected by
+ [add_abbreviation]). In such cases, the spoken form wouldn't
+ automaticaly be generated by [updated_spoken_forms] and must
+ therefore be added explictely by add_symbol.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="SymDict.SymDict.cleanup" CLASS="Method">SymDict.SymDict.cleanup(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">clean_sr_voc=0</SPAN>, <SPAN CLASS="Argument">clean_symdict=1</SPAN>, <SPAN CLASS="Argument">resave=1</SPAN>)</H2>
+<P>Cleans up the symbol dictionary.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM> clean_sr_voc=0
+<DD>If true, then remove symbols from SR
+vocabulary
+<DT>
+<EM>BOOL</EM> clean_symdict=1
+<DD>If true, then removes symbols from
+ the symbol dictionary.
+<DT>
+<EM>BOOL resave = 1</EM>
+<DD>If true, symbol dictionary is
+resaved to disk after cleanup.        
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="SymDict.SymDict.collapse_consec_single_chars" CLASS="Method">SymDict.SymDict.collapse_consec_single_chars(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">words</SPAN>, <SPAN CLASS="Argument">auxilliary_words=None</SPAN>)</H2>
+<P>Takes a list of words and collapse consecutive single-char words into single words</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR]</EM> words
+<DD>List of words
+<DT>
+<EM>[STR]</EM> auxilliary_words = None
+<DD>List of words of the same
+ length as <EM>words</EM>. Each word in list <EM>words</EM> corresponds to a
+ word in list <EM>auxilliary_words</EM> and they are collapsed in
+ sync. If None, set to be the same as <EM>words</EM>        
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+Returns tuple (collapsed_words, collapsed_auxilliary_words)</P>
+
+<DL>
+
+<DT>
+<EM>[STR]</EM> collapsed_words
+<DD>List with consecutive single-char words collapsed.
+<DT>
+<EM>[STR]</EM> collapsed_auxilliary_words
+<DD>List with consecutive
+ single-char words collapsed as per what was done to
+ <EM>collapsed_words</EM>.
+</DL>
+<H2 ID="SymDict.SymDict.expand_possible_forms" CLASS="Method">SymDict.SymDict.expand_possible_forms(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">partial_forms</SPAN>, <SPAN CLASS="Argument">further_extensions</SPAN>)</H2>
+<P>Returns a list of possible spoken forms for a symbol.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR]</EM> partial_forms
+<DD>a list of partially completed spoken
+ forms. 
+<DT>
+<EM>[[STR]]</EM> further_extensions
+<DD>a list of possibilities for
+ further extending the spoken forms in <EM>partal_forms</EM>.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR]</EM>
+<DD>List of all possible spoken forms for the symbol.
+</DL>
+<H2 ID="SymDict.SymDict.expand_word" CLASS="Method">SymDict.SymDict.expand_word(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">word</SPAN>, <SPAN CLASS="Argument">symbol</SPAN>)</H2>
+<P>Expands a word from a symbol to its possible spoken forms.</P>
+
+<P>
+If <EM>word</EM> is an in-vocabulary word simply returns <EM>[word]</EM></P>
+<P>
+If it's a known abbreviation returns the list of possible expansions
+for that abbreviation or the list of their plural forms.</P>
+<P>
+If it's the plural of a known abbreviation, returns the plural
+form of the abbreviation's expansions.</P>
+<P>
+Otherwise, it tries to split <EM>word</EM> into substrings that are
+in-vocabulary words or known abbreviations (*NOT IMPLEMENTED
+AT THE MOMENT).</P>
+<P>
+If that doesn't work either logs <EM>word</EM> in
+<EM>self.unresolved_abbreviations</EM> and log <EM>symbol</EM> as one of the symbol
+where it occured.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> abbreviation
+<DD>Abbreviation to be expanded 
+<DT>
+<EM>STR</EM> symbol
+<DD>Symbol in which the word appeared
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+*[STR] expansions *
+<DD>list of possible expansions of the word.
+
+</DL>
+<H2 ID="SymDict.SymDict.format_as_symbol" CLASS="Method">SymDict.SymDict.format_as_symbol(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pseudo_symbol</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Returns a list of alternative ways to format a pseudo
+symbol as a new native symbol.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> pseudo_symbol
+<DD>Pseudo symbol to be formatted
+<DT>
+*[STR] words
+<DD>Words in <EM>pseudo_symbol</EM> (to avoid redundant splitting        
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="SymDict.SymDict.get_language_by_filename" CLASS="Method">SymDict.SymDict.get_language_by_filename(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_name</SPAN>)</H2>
+<P>Gets the name of the language associated with a source file.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> file_name
+<DD>name of the file 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>name of the language.  Returns <EM>None</EM> if there doesn'
+t exist a proper language definition, or if can't tell what 
+language the source file is written in.
+</DL>
+<H2 ID="SymDict.SymDict.get_language_definition" CLASS="Method">SymDict.SymDict.get_language_definition(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">language_name</SPAN>)</H2>
+<P>Gets the definition of the language associated with a source file.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> file_name
+<DD>name of the file 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+[LangDef]
+<DD>definition of the language <EM>file_name</EM> is written
+in. Returns <EM>None</EM> if there doesn't exist a proper language
+definition, or if can't tell what language the source file is
+written in.
+</DL>
+<P>
+..[LangDef] LangDef.LangDef.html</P>
+<H2 ID="SymDict.SymDict.get_language_definition_by_filename" CLASS="Method">SymDict.SymDict.get_language_definition_by_filename(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_name</SPAN>)</H2>
+<P>Gets the definition of the language associated with a source file.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> file_name
+<DD>name of the file 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+[LangDef]
+<DD>definition of the language <EM>file_name</EM> is written
+in. Returns <EM>None</EM> if there doesn't exist a proper language
+definition, or if can't tell what language the source file is
+written in.
+</DL>
+<P>
+..[LangDef] LangDef.LangDef.html</P>
+<H2 ID="SymDict.SymDict.get_spoken_forms" CLASS="Method">SymDict.SymDict.get_spoken_forms(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symbol</SPAN>)</H2>
+<P>Returns a list of possible spoken forms for a symbol.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> symbol
+<DD>the symbol in question 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR]</EM>
+<DD>returns a list of spoken forms
+
+</DL>
+<H2 ID="SymDict.SymDict.init_from_file" CLASS="Method">SymDict.SymDict.init_from_file(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises the symbol dictionary from a persistent version
+stored on file.</P>
+<P>
+The file is <EM>self.pickle_fname</EM>. If <EM>None</EM>, don't reinitialise.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="SymDict.SymDict.match_pseudo_symbol" CLASS="Method">SymDict.SymDict.match_pseudo_symbol(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">pseudo_symbol</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Returns a prioritized list of all known native symbols that
+match a given pseudo symbol.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> pseudo_symbol
+<DD>The pseudo symbol to be matched. 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[</EM> <A HREF="SymDict.SymbolMatch.html">SymbolMatch</A> <EM>]</EM>
+<DD>Prioritized list of symbol matches.
+</DL>
+<H2 ID="SymDict.SymDict.parse_standard_symbols" CLASS="Method">SymDict.SymDict.parse_standard_symbols(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)</H2>
+<P>Parse standard symbols for the various programming languages.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM> add_sr_entries = 1
+<DD>If true, then add symbols to the
+ SR vocabulary.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="SymDict.SymDict.parse_symbols" CLASS="Method">SymDict.SymDict.parse_symbols(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">contents</SPAN>, <SPAN CLASS="Argument">language_name</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Parse symbols from a string representing the contents of a 
+source file.</P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> contents
+<DD>the contents of the source file
+<DT>
+<EM>STR</EM> language_name
+<DD>the name of the language of the source
+file
+<DT>
+<EM>BOOL</EM> add_sr_entries = 1
+<DD>If true, add symbols to the SR vocabulary
+</DL>
+<P>
+Parsed symbols are stored in the <EM>symbol_info</EM> and
+<EM>spoken_forms2symbol</EM> attributes.
+</P>
+<H2 ID="SymDict.SymDict.parse_symbols_from_file" CLASS="Method">SymDict.SymDict.parse_symbols_from_file(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_name</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)</H2>
+<P>Parse symbols from a source file.</P>
+
+
+<DL>
+
+<DT>
+<EM>STR</EM> file_name
+<DD>The path of the file.
+<DT>
+<EM>BOOL</EM> add_sr_entries = 1
+<DD>If true, add symbols to the SR vocabulary
+</DL>
+<P>
+Parsed symbols are stored in the <EM>symbol_info</EM> and
+<EM>spoken_forms2symbol</EM> attributes.
+</P>
+<H2 ID="SymDict.SymDict.parse_symbols_from_files" CLASS="Method">SymDict.SymDict.parse_symbols_from_files(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_list</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)</H2>
+<P>Parse symbols from a series of source files</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+*[STR] file_list
+<DD>List of files to be compiled
+<DT>
+<EM>BOOL</EM> add_sr_entries = 1
+<DD>If true, add symbols to the SR vocabulary
+</DL>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="SymDict.SymDict.peek_at_unresolved" CLASS="Method">SymDict.SymDict.peek_at_unresolved(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns a reference to the dictionary of unresolved abbreviations
+and the symbols containing those abbreviations.</P>
+<P>
+<STRONG>NOTE:</STRONG> This method is intended only for diagnostic testing
+purpose.  The caller must not modify the dictionary returned</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: {STR: 1}}</EM> unresolved_abbreviations={}
+<DD>Dictionary of
+unresolved abbreviations. These are abbreviations that have
+appeared in at least one compiled symbol, yet are neither a word
+in the speech vocabulary or a known abbreviation. Values are
+dictionnaries that list the symbols containing the unresolved
+abbreviation.
+
+</DL>
+<H2 ID="SymDict.SymDict.print_symbols" CLASS="Method">SymDict.SymDict.print_symbols(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symbols=None</SPAN>)</H2>
+<P>Print the content of the symbols dictionary.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR] symbols</EM>
+<DD>list of symbols to print, or None to print
+the whole dictionary
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="SymDict.SymDict.reg_pseudo_to_native_symbol" CLASS="Method">SymDict.SymDict.reg_pseudo_to_native_symbol(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">words</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Returns a compiled regular expression that matches all possible
+native forms of a pseudo symbol.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR]</EM> words
+<DD>Words in the pseudo symbol to be matched.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>regexp</EM>
+<DD>The regular expression. This regexp requires that
+the first character of every word in <EM>words</EM> be
+matched. Non alphanumeric characters are allowed between
+words. Matches for each word in <EM>words</EM> are put into
+groups.        
+
+</DL>
+<H2 ID="SymDict.SymDict.strip_source" CLASS="Method">SymDict.SymDict.strip_source(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">source</SPAN>, <SPAN CLASS="Argument">language_definition</SPAN>)</H2>
+<P>Removes all parts of a source file that don't contain symbols.</P>
+
+<P>
+This includes comments and quoted strings.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> source
+<DD>the source
+<DT>
+<EM>BOOL</EM> add_sr_entries = 1
+<DD>If true, add symbols to the SR vocabulary.
+<DT>
+<A HREF="LangDef.LangDef.html">LangDef</A> language_definition
+<DD>the definition of the
+language that <EM>source</EM> is written in.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> stripped_source
+<DD>source stripped of all non-symbols chunks
+</DL>
+<H2 ID="SymDict.SymDict.symbols_as_one_string" CLASS="Method">SymDict.SymDict.symbols_as_one_string(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>Returns a string that lists all the native known symbols.</P>
+
+<P>
+This string is used for matching pseudo-symbols to known
+native symbols, because it's much faster than looping through
+keys of <EM>symbol_info</EM>.</P>
+<P>
+To avoid regenerating this string everytime, the last value
+returned is cached in <A HREF="SymDict.SymDict.html">self._cached_symbols_as_one_string</A></P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM> --</P>
+<H2 ID="SymDict.SymDict.update_spoken_forms" CLASS="Method">SymDict.SymDict.update_spoken_forms(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symbol</SPAN>, <SPAN CLASS="Argument">resave=0</SPAN>, <SPAN CLASS="Argument">add_sr_entries=1</SPAN>)</H2>
+<P>Updates the spoken forms of a native symbol.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> symbol
+<DD>Native symbol for which we want to update the
+ spoken forms.
+<DL>
+
+<DT>
+<EM>BOOL</EM> add_sr_entries = 1
+<DD>If true, add written\spoken
+  symbols to the SR vocabulary.
+</DL>
+
+<DT>
+<EM>BOOL resave</EM>
+<DD>If true, resave dictionary to disk after the update.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises existing attributes, unless those attributes
+already exist</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="PickledObject.PickledObject.pickle" CLASS="Method">PickledObject.PickledObject.pickle(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">alt_file=None</SPAN>)</H2>
+<P>Saves the object to file.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR alt_file</EM>
+<DD>name of file to which to save the object, or
+None to use the default of self.pickle_fname.  If alt_file is omitted 
+and self.pickle_fname is None, don't write to file.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="PickledObject.PickledObject.unpickle" CLASS="Method">PickledObject.PickledObject.unpickle(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">alt_file=None</SPAN>)</H2>
+<P>Reads the object from file.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR alt_file</EM>
+<DD>name of file from which to restore the object, or
+None to use the default of self.pickle_fname.  If alt_file is omitted 
+and self.pickle_fname is None, leave the object unchanged
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

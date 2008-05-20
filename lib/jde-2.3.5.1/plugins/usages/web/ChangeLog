@@ -1,0 +1,951 @@
+2006-02-28  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages-eval-type-of.el:
+	Added helper functions for jde-usages-parse-eval-type-of
+
+2006-02-16  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages-util.el (jde-usages-find-class-source):
+	only pick the class tags from semantic
+	when trying to locate the class definitions - this used to also catch
+	import statments and method names.
+	Handle inner classes correctly.
+
+	* lisp/jde-usages-class-completion.el (jde-usages-complete-invoke-get-class-info):
+	corrected doc string
+
+2006-02-08  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* tests/lisp/jde-usages-etest.el:
+	and the result of multiple tests to get the composite result
+
+2006-02-07  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages-util.el, src/jde/util/Usages.java:
+	Usages.getClassWithSignatureDefinition: return nil when a class with
+	the definition cannot be found
+	(jde-usages-goto-definition-of-thing-at-point): defer to
+	jde-open-class-at-point when Usages.getClassWithSignatureDefinition
+	returns nil.
+
+2006-02-06  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages-call-trees.el, lisp/jde-usages-util.el, src/jde/util/Usages.java, src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathManager.java:
+	Added IUsages.getClassWithSignatureDefinition to get the class in which a
+	signature is defined. It looks all the super classes and super
+	interfaces of the class in the signature to find the closest
+	definition of the method or field in the signature.
+	Also added the implementation in ASMUsages, helper methods in Usages
+	and lisp function jde-usages-get-class-which-defines-sig to call it.
+
+	(ASMUsages.classes, ClassPathManager.MyClassLoader.getQualifiedNames)
+	: also catch NoClassDefFoundError
+
+	ClassPathManager.getClassReader: made "Can't find" message shorter
+	when not in debug mode
+
+	ASMUsages.TIME_BETWEEN_REFRESHES: Increased to 10 seconds
+
+	ASMUsages.lastRefreshTime: initialize this to Long.MAX_VALUE to
+	always trigger the first refresh
+
+	Usages: added a configurable mimimum time when reporting timing
+	statistics in DEBUG mode
+
+	(jde-usages-goto-definition-of-thing-at-point): a replacement for
+	jde-open-class-at-point
+	(jde-usages-goto-sig): handle field members correctly
+
+2006-01-28  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java:
+	use ClassName.makeClassName() everywhere to create ClassName objects instead of
+	using a String
+	maintain a ClassName->String map for the cases where we need to
+	convert the ClassName object to a String
+	(cacheCPE):use a BufferedOutputStream, write out to the cache file only if the
+	object in memory is newer
+	ClassPathEntry.{_classNameMap, _classpaths, _orders}: made them
+	transient, so they don't require nulling before persisting the object
+
+	* src/jde/util/usages/Completion.java:
+	listClassInfo: handler the case where a null ClassReader is returned from getClassReader
+	addIfNew: allow running this code in the 1.3 JDK also
+
+	* src/jde/util/usages/ClassName.java:
+	code reorg, we now have 3 implementations of the ClassName.I
+	interface. InternedString, HashInt and MD5. Only InternedString works
+	right now, still have to tweak the others.
+
+2006-01-27  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/Usages.java, src/jde/util/usages/ASMUsages.java:
+	Usages.classExists now returns the correct name of the class if the
+	does exist, ie if it is called with foo.bar.A.B and B is a inner class
+	defined in A then "foo.bar.A$B" is returned.
+
+	* src/jde/util/JdeUtilities.java:
+	JdeUtilities.classExists: fixed bug, return after calling Usages
+	classExists method.
+
+	* src/jde/util/usages/ASMCodeVisitor.java, src/jde/util/usages/NoOpClassVisitor.java:
+	use a NoOpAnnotationVistor instead of null
+
+	* lisp/jde-usages-util.el (jde-usages-class-and-token-to-signature, jde-usages-get-unqualified-name):
+	handle template-specifiers by
+	treating them as class Object
+
+	(jde-usages-goto-first-pos):add backward agrument - fix by Jesse Byler
+	<jbyler@eml.cc>
+
+	(jde-usages-goto-sig, jde-usages-goto-and-highlight): use
+	jde-usages-goto-and-highlight function which navigates to a tag and
+	highlights its name
+
+	* lisp/jde-usages.el (jde-usages-locate-class):
+	use jde-usages-read-class-with-completion
+	to read the class name from the user
+
+	* lisp/jde-usages-class-trees.el:
+	(jde-usages-display-subs-and-implementers,
+	jde-usages-display-superclasses, jde-usages-display-type-hierarchy):
+	use jde-usages-read-class-with-completion when reading in class names
+	from the user
+
+	* lisp/jde-usages-call-trees.el (jde-usages-get-signature-of-thing-at-point):
+	handle "return field;" fixed by Dag H. Wanvik <Dag.Wanvik@sun.com>
+
+	* lisp/jde-usages-class-completion.el (jde-usages-old-completing-read):
+	new method to check if we have the
+	new completing-read function - check the doc string for the new type
+	that completing-read can take
+	(jde-usages-read-class-with-completion): takes prompt and
+	initial-value arguments now. This function also handles converting the
+	initial class name to the Foo|com.bar. style name and converting the
+	class name selected by the completing-read function back to a regular
+	class name.
+	(jde-open-class-source-with-completion): use new argument styles for
+	jde-usages-read-class-with-completion
+
+2005-12-21  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/JdeUtilities.java, src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathManager.java:
+	JdeUtilities.classExists now just calls Usages.classExists which prints out the return values. This is a little more consistent with the way getQualifiedName works in JdeUtilites and Usages. ASMUsages.getRealName and ClassPathManager.isSubclass are now publically accessible.
+
+2005-12-14  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/org/objectweb/asm/AnnotationVisitor.java, src/org/objectweb/asm/AnnotationWriter.java, src/org/objectweb/asm/Attribute.java, src/org/objectweb/asm/FieldVisitor.java, src/org/objectweb/asm/FieldWriter.java, src/org/objectweb/asm/MethodAdapter.java, src/org/objectweb/asm/MethodVisitor.java, src/org/objectweb/asm/MethodWriter.java, src/org/objectweb/asm/Opcodes.java:
+	missing classes from ASM 2.0
+
+2005-11-08  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/Usages.java, src/jde/util/usages/Completion.java, lisp/jde-usages-class-completion.el:
+	use jde-usages for method/field completion
+
+2005-06-07  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages-class-completion.el:
+	(jde-usages-get-all-known-classes):munge the class list if old
+	completing-read function (not the one in CVS today) is in use.
+	(jde-open-class-source-with-completion):fix the regexp which checks if
+	there is a period in the class name
+
+2005-05-21  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/usages/ASMCodeVisitor.java, src/jde/util/usages/ASMSignature.java, src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathManager.java, src/jde/util/usages/NoOpClassVisitor.java:
+	ASM 2.0 changes
+	use visitLineNumber changes to reduce memory usage: (it is now called
+	soon after the corresponding setLabel, so we don't have to wait till
+	the end of the method to know what line number a reference is on)
+
+2005-05-20  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/org/objectweb/asm/ClassVisitor.java, src/org/objectweb/asm/ClassWriter.java, src/org/objectweb/asm/CodeAdapter.java, src/org/objectweb/asm/CodeVisitor.java, src/org/objectweb/asm/CodeWriter.java, src/org/objectweb/asm/Constants.java, src/org/objectweb/asm/Edge.java, src/org/objectweb/asm/Item.java, src/org/objectweb/asm/Label.java, src/org/objectweb/asm/Type.java, src/org/objectweb/asm/ByteVector.java, src/org/objectweb/asm/ClassAdapter.java, src/org/objectweb/asm/ClassReader.java, src/jde/util/Usages.java:
+	updated ASM sources to ASM 2.0
+	updated ConstantPoolVisitor and getClassName, getSuperClassName and
+	getImplementedInterfaces
+	use visitLineNumber changes to reduce memory usage: (it is now called
+	soon after the corresponding setLabel, so we don't have to wait till
+	the end of the method to know what line number a reference is on)
+
+2005-05-18  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages-redefines.el:
+	(bsh-eval):fixed ant server problem reported by Nascif Abousalh-Neto <Nascif.AbousalhNeto@sas.com>
+	(jde-usages-parse-get-qualified-name):
+	(bsh-snag-lisp-output): removed the set-process-filter at the end
+	since beanshell.el doesn't have it either
+
+	* lisp/jde-usages-call-trees.el, lisp/jde-usages-util.el:
+	moved jde-usages-profile to jde-usages-util from jde-usages-call-trees
+
+	* web/ChangeLog, web/ReleaseNotes, web/Usages.0.9.1.callers.gif, web/commands.html, web/index.html, web/screenshots.html:
+	site update for 0.9.1
+
+2005-05-17  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* build.xml: build JDK 1.3 compatible classes
+
+	* src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathEntry.java:
+	JDK 1.3 support
+
+	* lisp/jde-usages-class-trees.el, lisp/jde-usages-util.el, lisp/jde-usages-call-trees.el:
+	(jde-usages-display-call-tree,jde-usages-display-subs-implementing-method):
+	use jde-usages-goto-first-pos instead of jde-usages-goto-first-usage
+	(jde-usages-idle-timer-interval,jde-usages-highlight): made these
+	customizable in the 'jde-usages group.
+
+	* tests/src/testproject/Main.java, tests/src/testproject/A.java, tests/lisp/tests/testUsages.el, tests/lisp/tests/testUsages.el-results, tests/lisp/tests/testUsagesAfterClasspathChanges.el-results:
+	updated Main.java to include what looks like a matched method call in
+	a comment, string and a call to a method with the same name of an
+	unrelated class
+	recreated testUsages.el-results from scratch
+	(TEST-usages-at-point):skip over strings
+
+	* web/ReleaseNotes, web/Usages.0.9.1.callers.gif, web/Usages.0.9.1.ecb.gif, web/Usages.0.9.1.superclasses.gif, web/commands.html, web/index.html, web/screenshots.html:
+	site update for 0.9.1
+
+	* lisp/jde-usages-call-trees.el, lisp/jde-usages-class-completion.el, lisp/jde-usages.el:
+	set version to 0.9.1, added variable names to options menus
+	(jde-usages-always-check-callers)
+	(jde-usages-idle-timer-interval)
+	(jde-usages-highlight):
+	added to 'jde-usages customization group
+	(jde-open-class-source-with-completion):doc
+
+	* lisp/jde-usages-util.el (jde-usages-buffers-are-motion-sensitive):
+	turn on by default
+
+	* lisp/jde-usages-call-trees.el, lisp/jde-usages-class-trees.el, lisp/jde-usages-util.el:
+	(jde-usages-call-trees-help,jde-usages-class-trees-help)
+	(jde-usages-next-pos,jde-usages-goto-first-pos)>
+	(jde-usages-find-next-usage,jde-usages-buffers-next-pos)
+	(jde-usages-buffers-prev-pos):added next/previous key bindings to the call tree and usages buffers
+
+	* build.xml:
+	ignore all files in the classes directory when creating the plugin zip
+
+	* lisp/jde-usages-ecb.el:
+	(jde-usages-load-ecb-integration):moved (require 'ecb) to inside this
+	command to that ecb is not loaded unexpectedly early on init.
+
+2005-05-16  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* web/ReleaseNotes, web/index.html, web/jde-usages-05052004.zip, web/jde-usages-05062004.zip, web/screenshots.html:
+	removed old plugin binaries
+
+2005-05-15  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/Makefile, lisp/jde-usages-class-trees.el, lisp/jde-usages-util.el:
+	(jde-usages-get-class-around-tag):removed debug message
+	(jde-usages-create-classes-widget-tree): only highllight the class
+	name if the source file can be found, display a message otherwise
+
+	* lisp/jde-usages-class-trees.el:
+	(jde-usages-create-classes-widget-tree):highlight class name not
+	entire class
+
+	* lisp/jde-usages-util.el:
+	(jde-usages-buffers-are-motion-sensitive):doc
+	(jde-usages-open-buffers-when-idle):doc
+	(jde-usages-buffers):moved from jde-usages-ecb
+	(jde-usages-get-simple-class-name):added check for current-buffer
+	being the same as buf
+	(jde-usages-momentarily-highlight-tag): check if tag is nil
+
+	* lisp/jde-usages-ecb.el (jde-usages-buffers): moved to jde-usages-util
+
+	* lisp/jde-usages-class-trees.el:
+	(jde-usages-class-tree-keymap):Keymap for class tree (*type-hierarchy*,
+	*subclasses* and *superclasses*) buffers
+	(jde-usages-class-tree-keymap):use jde-usages-class-tree-keymap
+	instead of modifying widget-keymap, use jde-usages-erase-usages-buffer
+	to erase a class tree buffer instead of killing it
+
+	* lisp/jde-usages-call-trees.el (jde-usages-call-tree-keymap):
+	Keymap for *usages* buffers
+	(jde-usages-display-call-tree):use jde-usages-call-tree-keymap instead
+	of modifying widget-keymap
+
+	* lisp/jde-usages-class-completion.el:
+	(jde-usages-get-all-known-classes):sort* is not required, use sort
+	instead
+
+2005-05-13  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages.el:
+	updated jde-usages menu to use jde-usages-locate-class,
+	jde-usages-load-ecb-integration and allow setting of
+	jde-usages-buffers-are-motion-sensitive and jde-usages-highlight.
+
+	* lisp/jde-usages-call-trees.el, src/jde/util/usages/ASMUsages.java (jde-usages-related-classes):
+	Stores the list of "related" classes for
+	the last signature for which callers were found. Its value is set in
+	ASMUsages.findUsages(String,Usages.Signature,boolean).
+	(jde-usages-always-check-callers): To go to the exact location of a
+	method call on a line jde-usages-dct-goto-caller uses a regexp to
+	match the method name. If however there is more than one match on the
+	line jde-usages-dct-goto-caller uses jde-parse-java-variable-at-point
+	and jde-jde-usages-parse-eval-type-of to determine which location is
+	the correct method call. Seting `jde-usages-always-check-callers' to
+	non-nil enables these checks even if there is only one match on the
+	line for the method name. This is useful if the source file has
+	changed after compiling.
+	(jde-usages-display-call-tree): use jde-usages-always-check-callers
+	ASMUsages.findUsages(String,Usages.Signature,boolean): set the value
+	of jde-usages-related-classes
+
+	* lisp/jde-usages-class-trees.el:
+	(jde-usages-create-classes-widget-tree):use jde-usages-momentarily-highlight-tag
+
+	* lisp/jde-usages-ecb.el (jde-usages-load-ecb-integration):
+	function to load ecb integration
+
+	* lisp/jde-usages-util.el (jde-usages-ends-with):
+	define it before using it
+	(jde-usages-buffers-are-motion-sensitive): wrapped doc string
+	(jde-usages-motion-senstive-timer): Stores the idle timer object which
+	opens the source buffers for when
+	`jde-usages-buffers-are-motion-sensitive' is on.
+	(jde-usages-idle-timer-interval): moved here from jde-usages
+	(jde-usages-highlight):"Momentarily highlight a tag or method call
+	before moving to it. When `jde-usages-buffers-are-motion-sensitive' is
+	on the highlighting happens in the source buffer while moving around
+	in the usages buffer, which remains the current buffer.
+	(jde-usages-highlight-overlay,jde-usages-unhighlight-overlay)
+	(jde-usages-momentary-unhighlight-overlay,jde-usages-momentary-highlight-overlay)
+	(de-usages-momentarily-highlight-tag):helper functions for highlighting
+	(jde-usages-goto-sig): use de-usages-momentarily-highlight-tag
+
+	* src/bsh/commands/getClassLocation.bsh:
+	made message strings more informational
+
+	* TODO: use planner-mode
+	updated all the TODO items that were done
+
+2005-05-12  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* tests/lisp/tests/testUsages.el-results:
+	updated expected test results after the change to
+	jde-usages-get-superclasses which includes the type of the classes
+	(interface/abstract/regular) in the results.
+
+	* tests/lisp/tests/testUsages.el, tests/lisp/tests/testUsagesAfterClasspathChanges.el (tests-setup,testUsages-visit-tags):
+	use etest-find-file-revert
+	instead of find-file
+
+	* tests/lisp/jde-usages-etest.el (etest-find-file-revert):
+	Kill the buffer visiting FILE-NAME if any
+	and then open a new buffer visiting it.  This is basically to prevent
+	getting any "<file-name> has changed since it was last
+	visited. Revert?" prompts while running unit tests.
+
+	* lisp/jde-usages-class-trees.el (jde-usages-display-call-tree.jde-usages-dct-goto-caller):
+	added check
+	to prevent finding callers inside strings, don't use
+	jde-usages-profile by default - it displays a confusing message
+	(jde-usages-display-class-tree):use jde-usages-switch-to-buffer, key
+	bindings to display type-hierarchy/subclasses/superclasses for class
+	under point
+	(jde-usages-class-trees-help,jde-usages-class-trees-get-class)
+	(jde-usages-class-trees-display-subs,jde-usages-class-trees-display-supers)
+	(jde-usages-class-trees-display-type-hierarchy): new commands for
+	class tree buffer key bindindings
+	(jde-usages-display-subs-and-implementers,jde-usages-display-superclasses)
+	(jde-usages-display-type-hierarchy):
+	Prompt for a classname if the class-name param is nil, even if
+	dont-prompt is true
+	(jde-usages-create-classes-widget-tree): removed unnecessary local
+	function jde-usages-dsi-notify-goto-subclass, highlight class using
+	semantic-momentary-highlight-tag
+	(jde-usages-display-subs-implementing-method)::use
+	jde-usages-switch-to-buffer
+
+	* lisp/jde-usages-call-trees.el (jde-usages-display-call-tree.jde-usages-dct-goto-caller):
+	added check
+	to prevent finding callers inside strings, don't use
+	jde-usages-profile by default - it displays a confusing message
+
+	* lisp/jde-usages-util.el (jde-usages-at-comment-or-string):
+	Return non-nil if POS is in a
+	comment or string.
+	(jde-usages-goto-sig): highlight tag using
+	semantic-momentary-highlight-tag
+
+	* lisp/jde-usages-call-trees.el (jde-usages-profile):
+	Display the time required to run BODY.
+	(jde-usages-display-call-tree.jde-usages-dct-goto-caller):
+	navigate to calls to constructors correctly, use
+	jde-usages-parse-eval-type-of instead of jde-parse-eval-type-of
+	(jde-usages-display-call-tree): handle the case where
+	jde-usages-get-callers returns a message string instead of a usages
+	list. This happens when trying to get the usages for a static final
+	varable.
+
+	* src/jde/util/usages/NoOpClassVisitor.java, src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathManager.java, src/jde/util/Usages.java (Usages.findUsages):
+	Allow the IUsages.findUsages to return a null
+	object, in which case nothing is printed by this method. The
+	assumption is that IUsages.findUsages will have printed out a result
+	already. Right now this is used to signal the fact that findUsages was
+	called for a static final var.
+	(Usages.string): print an elisp expression which returns a quoted
+	string
+	NoOpClassVisitor: A ClassVisitor implementation that does
+	nothing. This is used as a base class to avoid repeating the empty
+	method definitions.
+	(ASMUsages.findUsagesInClass)
+	(ClassPathManager.getSupers,ClassPathManager.implementsMethod): use
+	NoOpClassVisitor
+	(ASMUsages.findUsages): return a message string if the user is trying
+	to get the usages for a static final variable.
+	(ClassPathManager.isStaticFinalVar): new method to check if a
+	signature represents a static final variable
+	(ClassPathManager.getClassObject):convert a class name string to a
+	class name object whose toString method returns a displayable string
+	for this class. This is used to visually differentiate between
+	interfaces, abstract classes and regular classes.
+	(ClassPathManager.getSupers): use getClassObject instead of the class
+	name string
+	(ClassPathManager.getSubs(String, boolean, boolean))
+	(ClassPathManager.getSubs(String, ASMUsages.Signature)):
+	use getClassObject
+
+	* lisp/jde-usages-util.el:
+	(jde-usages-switch-to-buffer):Switch to buffer BUF.  +If the current
+	buffer is a jde-usages buffer use the same window as it, otherwise use
+	the other window.
+	(jde-usages-ends-with):Return t if string STR ends with the string
+	SUBSTR.
+	(jde-usages-get-simple-class-name): Return the simple class name (with
+	no package or outer class) for FULLY-QUALIFIED-CLASS-NAME.
+	(jde-usages-class-and-token-to-signature): use
+	jde-usages-ends-with-class
+	(jde-usages-goto-sig): use jde-usages-get-simple-class-name. Display a
+	message if trying o go  the default constructor of a class since point
+	does not move to an actual constructor. Display a message when the
+	source file cannot be found.
+	(jde-usages-next-pos): use jde-usages-switch-to-buffer
+	(jde-usages-find-next-usage): added doc string
+	(jde-usages-run-tests): added commented code to run only
+	afterClasspathChanges tests
+
+	* lisp/jde-usages-eval-type-of.el, lisp/jde-usages.el:
+	jde-usages-eval-type-of: faster implementation of jde-parse-eval-type-of
+
+2005-05-09  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages-class-trees.el, src/bsh/commands/getTypeHierarchy.bsh (jde-usages-display-type-hierarchy):
+	when the class has no
+	superclasses or subclasses don't bring up the type hierary buffer,
+	just display a message.
+
+	* src/jde/util/Usages.java (print):
+	make these methods public so the bsh command getTypeHierarchy
+	can call them.
+
+2005-05-08  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages-ecb.el, lisp/jde-usages-util.el:
+	jde-usages-ecb.el : Tell ecb to treat jde-usages buffers like
+	compilation buffers
+	jde-usages-util (jde-usages-erase-usages-buffer) : empty a jde-usages
+	buffer by deleting the entire widget inside it. This function not yet used.
+
+	* lisp/jde-usages-class-completion.el:
+	(jde-open-class-source-with-completion) : fixed typo in defun
+
+	* lisp/jde-usages-ecb.el:
+	simple ecb mode integration - a jde-usages submenu for the ecb methods
+	buffer.
+
+	* lisp/Makefile:
+	hacky Makefile not guaranteed to work for anyone other than me. I use
+	it for the compilation errors and warnings.
+
+	* tests/lisp/tests/testUsages.el, tests/lisp/tests/testUsages.el-results:
+	new tests for the type hierarchy functionality
+
+	* lisp/jde-usages-bsh.el, lisp/jde-usages-call-trees.el, lisp/jde-usages-class-completion.el, lisp/jde-usages-class-trees.el, lisp/jde-usages-redefines.el, lisp/jde-usages-util.el, lisp/jde-usages.el:
+	split jde-usages.el into
+	 * jde-usages-bsh.el : convenience functions top of jde-jeval and
+	 jde-jeval-r which let you make calls like
+	   (jde-usages-jeval-r 'jde.util.Usages.findUsages class-name method-name args-str is-field-str strict-str 'System.out)
+	 instead of
+	   (jde-jeval-r (concat "jde.util.Usages.findUsages (\"" class-name "\" ,\"" method-name "\", " args-str "," is-field-str "," strict-str ", System.out);"))
+	* jde-usages-call-trees.el : usage (call tree) commands
+	* jde-usages-class-trees.el : subtype, supertype and type hierarchy
+	display commands
+	* jde-usages-class-completion.el : jde-open-class-source-with-completion and related functions
+	* jde-usages-redefines.el : redefinitions of some jde and beanshell
+	functions to fix bugs or add some required functionality
+	* jde-usages-util.el : miscellaneous functions that are used in
+	multiple modules and don't fit in any one place
+	* jde-usages.el : require's all the other modules and installs the
+	* plugin and its menus
+
+	* src/bsh/commands/getTypeHierarchy.bsh:
+	(bsh.commands.getTypeHierarchy) returns a type hierarchy tree of the
+	super classes and all the sub types of className.
+
+	* src/jde/util/usages/ASMUsages.java, src/jde/util/Usages.java:
+	(Usages.findSupers) boolean paramater includeInterfaces gives the
+	option of excluding interfaces from the output list.
+
+2005-04-24  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages.el, tests/lisp/tests/testUsages.el-results, tests/lisp/tests/testUsagesAfterClasspathChanges.el-results, tests/lisp/jde-usages-etest.el:
+	updated test results to reflect removal of the default class name in usages output
+	tests el cleanup, refactoring
+
+2005-04-12  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/bsh/commands/getClassLocation.bsh, lisp/jde-usages.el:
+	moved bsh commands back to bsh/commands, this path is added by the beanshell to it commands path while it is starting up. So we don't have to call importCommands when bsh starts up now
+
+	* lisp/jde-usages.el:
+	don't call jde-jeval during initialization, moved the call to importCommands to just before using the command
+
+	* build.xml, lisp/jde-usages.el:
+	created bshcommands package, just one command for now - getClassLocation
+
+2005-04-09  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages.el:
+	make changing jde-usages-motion-sensitive-buffers-data take effect immediately
+
+2005-03-28  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages.el:
+	Motion sensitive buffers now use a idle-timer function to browse to the source-line, this helps when trying to move rapidly around the buffer. Pruned usages menu and added some more doc strings
+
+2005-02-21  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/usages/ASMUsages.java:
+	When returning a usage list, omit the leading class name string entry
+	when the class name is the same as the input class name to this method
+	and it is the first entry in the list. Currently the *usages* buffer
+	ends up repeating the class name twice because it is also mentioned in
+	the root node of the tree.
+
+2005-02-20  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/usages/ASMSignature.java:
+	replace . in input class names by /
+
+	* src/jde/util/Usages.java, src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathManager.java, tests/lisp/tests/testUsages.el, tests/lisp/tests/testUsages.el-results:
+	Added "show superclasses" functionality, with unit tests
+
+	* src/jde/util/Usages.java, src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ThreadPoolManager.java:
+	Previous check-in made a call to waitTillAllDone synchronized as
+	suggested by find-bugs
+	In this checkin:
+	Changed to unix style file-coding-system, like all the other source files.
+
+	* lisp/jde-usages.el:
+	* Fixed missing brace in the call to jde-pi-register
+	* Fixed jde-usages-next-pos to work for both usage and class buffers.
+	* Ran the file through chedckdoc.
+
+2005-02-19  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages.el:
+	previous checkin-log was erroneus, this mostly empty check has the log
+	for the changes from the previous check-in
+	usage buffers are motion sentive now, moving point to a usage or class
+	line will make the other window change to the file and location
+	represented by the line. `jde-usages-buffers-are-motion-sensitive'
+	will turn it off.
+
+	added jde-usages-display-superclasses to display a superclass tree
+
+	* TODO, lisp/jde-usages.el, src/jde/util/Usages.java, src/jde/util/usages/ASMSignature.java, src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java, src/jde/util/usages/ThreadPoolManager.java, tests/lisp/jde-usages-etest.el, tests/lisp/tests/testUsages.el, tests/lisp/tests/testUsages.el-results, web/ReleaseNotes:
+	accomodate new load-history format
+
+2005-02-02  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages.el, src/jde/util/Usages.java, src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassName.java, src/jde/util/usages/ClassPathManager.java, tests/lisp/tests/testUsages.el, tests/lisp/tests/testUsages.el-results, tests/lisp/tests/testUsagesAfterClasspathChanges.el-results, tests/src/testproject/A.java, tests/src/testproject/ASuper.java, tests/src/testproject/Main.java:
+	* use ido-completing-read in jde-open-class-source-with-completion when ido-mode is active
+	*  Usages.getAllClasses returns a list of strings, instead of a list of
+	pairs of mangled fully qualified class name (with the class name at
+	the beginning for better completion) and real class name. The function
+	jde-usages-get-fq-class-name-from-all-classes-list takes you from the
+	mangled name to the proper name. The code and tests that call this
+	function have changed accordingly.
+	* Half done code to use an abstract class name representaion in an
+	attempt to reduce cache file loading times.
+	* Bugfix: When Usages.findUsages was called with with a class that was
+	in the system class path ASMUsages.getRealName did not return the
+	correct value which resulted in it appearing that this class did not
+	have any superclasses. A test case has been added.
+	* Bugfix: ClassPathManager.getSubs getSubs (String, ASMUsages.Signature, Collection)
+	has been always adding nothing to collect since SubClassNoOpVisitor
+	was made to extend SubClassVisitor2 instead of SubClassVisitor because
+	of a difference in the contracts of the two subclass visitors. No test
+	case was exercising this, one has now been added.
+
+	* web/index.html: fixed typo
+
+2005-02-01  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/JdeUtilities.java: Sync with file in jde 2.3.5
+
+	* src/jde/util/Usages.java:
+	Omit anonymous inner classes in the list of all classes.
+
+2004-12-17  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* TODO: some more TODO ideas
+
+	* tests/lisp/tests/testUsagesAfterClasspathChanges.el-results, tests/src/testproject/Main.java, lisp/jde-usages.el, src/jde/util/usages/ASMCodeVisitor.java, src/jde/util/usages/ASMUsages.java, tests/lisp/tests/testUsages.el-results, src/jde/util/Usages.java:
+	count the number of usages per line; some simple lisp code to move to the usages within the line (handling multiple usages on the same line)
+
+	* lib/usages.jar: removed jar from cvs
+
+	* tests/lib/testproject.jar: removed jar file from cvs
+
+2004-10-16  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/usages/ASMUsages.java:
+	bug fix: call getRealName in List findSubs (String className, boolean getSubs, boolean getImpls)
+
+2004-10-15  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/usages/ASMUsages.java, src/jde/util/Usages.java:
+	Allow classname inputs to the Usages.* methods to use either $ or . to separate inner class names
+
+	* lisp/jde-usages.el:
+	smarter logic to get to the first usages in the *usages* buffer
+
+	* src/jde/util/usages/ClassPathManager.java:
+	call InputStream.read() in a loop for files too
+
+	* src/jde/util/usages/ASMUsages.java:
+	make classExists work with classes in the system classpath
+
+2004-10-12  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* tests/src/testproject/A.java, tests/src/testproject/Main.java:
+	correct java files for the test results
+
+	* tests/src/testproject/Main.java, tests/lisp/tests/testUsages.el, tests/lisp/tests/testUsages.el-results, tests/lisp/tests/testUsagesAfterClasspathChanges.el-results:
+	added some inner classes
+
+2004-10-11  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* tests/lisp/tests/AClass.java, tests/lisp/tests/NewMain.java:
+	missing java test files
+
+2004-10-10  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages.el, src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java, tests/lib/testproject.jar, tests/lisp/tests/testUsages.el, tests/lisp/tests/testUsages.el-results, tests/lisp/tests/testUsagesAfterClasspathChanges.el, tests/lisp/tests/testUsagesAfterClasspathChanges.el-results, src/jde/util/Usages.java:
+	finish ClassPathEntry.Dir changes for reading/writing cache files, made getAllClasses work again, new tests and test results
+
+2004-10-09  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* tests/lisp/jde-usages-etest.el: be less verbose
+
+	* tests/src/testproject/ASuper.java, tests/src/testproject/ASuperInt.java, tests/src/testproject/ASuperSuper.java, tests/src/testproject/AInt.java, tests/build.xml, tests/prj.el:
+	formatting
+
+	* lisp/jde-usages.el: prompt to save new tests
+
+	* build.xml: Formatting changes
+
+2004-10-05  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* tests/build.xml, tests/lisp/framework.el, tests/lisp/jde-usages-etest.el, tests/lisp/tests/testUsage.el, tests/lisp/tests/testUsage.el-results, tests/lisp/tests/testUsages.el, tests/lisp/tests/testUsages.el-results, tests/prj.el, lisp/jde-usages.el:
+	test framework plus a initial set of tests
+
+	* web/commands.html, web/index.html: help
+
+2004-09-30  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* tests/lisp/framework.el, tests/lisp/tests/testUsage.el, tests/lisp/tests/testUsage.el-results:
+	first cut of test framework
+
+	* tests/src/testproject/A.java: added a field
+
+2004-09-28  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages.el, TODO: make first line of *usages* clickable
+
+2004-09-25  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* web/index.html: 0.9 release
+
+	* web/ReleaseNotes, TODO: 0.9 release update
+
+	* web/commands.html:
+	Removed doc for class list refresh as this is done automatically now.
+
+2004-09-24  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* build.xml, prj.el:
+	add paths for location of the usages directory in jde/plugins/usages with jde in jde/jde, don't add JdeUtilities in the default jar built
+
+	* src/jde/util/usages/ClassPathManager.java, src/jde/util/usages/ASMUsages.java, src/jde/util/JdeUtilities.java, src/jde/util/Usages.java:
+	have a minimum time between calls to ASMUsages.refresh() - TIME_BETWEEN_REFRESHES, JdeUtilities.classExists() uses jde-usages now
+
+	* src/jde/util/usages/ClassPathManager.java, src/jde/util/usages/ClassPathEntry.java:
+	populate ClassPathEntry._cpeChildren correctly, refresh after setClassPathManagers in getCachedCPE
+
+	* lisp/jde-usages.el, src/jde/util/usages/ASMCodeVisitor.java, src/jde/util/usages/ASMSignature.java, src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java, src/jde/util/usages/ObjectToCollectionMap.java, src/jde/util/Usages.java:
+	set jde-usages-version to 0.9, added $ tags to usages java files
+
+	* lisp/jde-usages.el:
+	jde-usages-window-height, use labels to define helper functions so as not to pollute the global function namespace, add expression being evaluated to *jde-beanshell-scratch*
+
+	* src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java, src/jde/util/JdeUtilities.java:
+	sequence of operations is now setClassPathManagers -> refresh -> addEntryAndRebuildSubsAndDeps in both ClassPathManager and ClassPathEntry, fixed the slowdown when using multiple threads by grabbing the lock once around a loop which was calling setClassLocation for all the classes in the CPE, renamed addEntryAndRefresh to addEntryAndRebuildSubsAndDeps, getQualifiedNames also looks up classes in the system classloader
+
+	* src/jde/util/usages/ASMUsages.java:
+	got rid of loop around findUsages (was put in to measure performance ages ago),  cleaned up timing measurement code, added refresh for getQualifiedNames
+
+	* src/jde/util/Usages.java: formatting changes
+
+2004-08-21  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/usages/ClassPathEntry.java:
+	removed unnecessary looping for _classpaths in updateSubclassTable, with the changed behavior there are no entries in _classpaths the first time around and the subclasses relation wasn't being calculated at all
+
+	* src/jde/util/Usages.java, src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java:
+	1) changed Usages.DEBUG and ClasspathManager.POOL_SIZE back to defaults, my settings are in my .bshrc now 2) fixed minor bug - cpe._classpaths is initialized in its construtor so checks for null needed to be updated to checks for emptyness
+
+	* src/jde/util/Usages.java, src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java, TODO:
+	made classpath changing work again, added getQualifiedName (a replacement for a similar func in JdeUtilities), and put in a few javadocs
+
+2004-08-12  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages.el:
+	move point to the end of the scratch eval buffer before bsh-eval
+
+2004-08-04  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/usages/ThreadPoolManager.java, src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java:
+	allow use of a pool of threads to build the ClassPathEntry structures, pool size set 1 since that seems to work best on uniprocessor machines
+
+	* src/jde/util/Usages.java:
+	cleaned up timing code, allow printing of a stacktrace message
+
+2004-06-15  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages.el, src/jde/util/Usages.java:
+	always use the IUsage as the key in _allClassesListNeedsRefreshing.get
+
+	* lisp/jde-usages.el:
+	fixed bug in jde-usages-get-signature-of-thing-at-point which treated a function with no args as a variable
+
+	* web/ReleaseNotes, web/commands.html, web/index.html:
+	next-pos, jde-usages-known-classes update
+
+	* src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathManager.java, TODO, lisp/jde-usages.el, src/jde/util/Usages.java:
+	jde-open-class-source-with-completion keeps jde-usages-known-classes up to date
+
+	* web/commands.html, web/style.css: formatting changes
+
+2004-06-11  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/usages/ClassPathEntry.java: run in jdk 1.3 too
+
+	* web/ReleaseNotes, web/index.html: jdk 1.3
+
+2004-06-09  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/usages/ClassPathManager.java:
+	fixed getSubs for classes with no subclasses
+
+2004-05-26  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* web/commands.html, web/index.html: *** empty log message ***
+
+	* src/jde/util/usages/ClassPathEntry.java:
+	handle NPE on jar deletion, close zip file when done
+
+	* src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathEntry.java:
+	1) fixed new class handling code in refresh, 2) when finding usages for abstract methods (or for interface methods) look for usages of *all* subclasses, not just upto the first implementations
+
+	* src/jde/util/usages/ClassPathManager.java:
+	better messages when classes get deleted
+
+	* TODO: *** empty log message ***
+
+	* src/jde/util/usages/ClassPathManager.java:
+	fixed bug in getSubs, because className was always in collect it didn't add any new classes earlier
+
+	* src/jde/util/Usages.java:
+	uremoved main methods (were used for testing); added accessor for current IUsages object
+
+2004-05-21  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* web/ReleaseNotes: *** empty log message ***
+
+	* src/jde/util/usages/ClassPathManager.java:
+	handle wrong classname case
+
+	* src/jde/util/usages/ClassPathManager.java:
+	elements in the getSubs structure can also be AbstractClass or Interfaces objects
+
+2004-05-20  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* web/ReleaseNotes, web/index.html: formatting
+
+	* web/ReleaseNotes: member vars
+
+	* web/ReleaseNotes: fixed some typos
+
+	* web/commands.html, web/index.html: *** empty log message ***
+
+	* TODO: update
+
+	* src/jde/util/usages/ClassPathManager.java:
+	always check for nullness of the return value from getClassReader
+
+	* lisp/jde-usages.el, src/jde/util/usages/ASMCodeVisitor.java, src/jde/util/usages/ASMMethodSpec.java, src/jde/util/usages/ASMSignature.java, src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java, src/jde/util/Usages.java:
+	enable searching of fields
+
+2004-05-10  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* web/Usages.message.firstUsage.gif, web/Usages.message.gif, web/Usages.message.usageTree.gif, web/Usages.message.usages.gif:
+	screenshots
+
+	* web/style.css: added style file
+
+	* web/index.html, web/commands.html:
+	moved docs to a separate file + cleanup
+
+	* web/ReleaseNotes: release notes
+
+2004-05-09  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* web/index.html: fixed typos
+
+2004-05-08  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* web/commands.html: commands is separate file
+
+	* web/index.html: update
+
+2004-05-06  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* web/index.html, web/jde-usages-05062004.zip, web/screenshots.html:
+	updates
+
+	* src/jde/util/usages/ClassPathManager.java:
+	handle correctly the case where a class goes away from the classpath completely
+
+	* lisp/jde-usages.el:
+	allow for parameter modifiers and long class names in the method seach regexp
+
+	* lisp/jde-usages.el, src/jde/util/Usages.java, src/jde/util/usages/ASMCodeVisitor.java, src/jde/util/usages/ClassPathManager.java, src/org/objectweb/asm/ClassReader.java, TODO:
+	renamed many functions, elisp doesn't have lexical scoping for function names
+	the tree widgets now display a "(A)" next to abstract classes and a "(I)" next to interfaces
+	exclude abstract methods from the list of implementing/overriding classes
+	simplifed subclass visitor code (still have to do getSubs (String className, final ASMUsages.MethodSpec m)
+
+2004-05-05  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* web/Usages.message.PNG, web/Usages.message.firstUsage.PNG, web/Usages.message.usageTree.PNG, web/Usages.message.usages.PNG, web/index.html, web/jde-usages-05052004.zip, web/screenshots.html:
+	*** empty log message ***
+
+	* src/jde/util/usages/ClassPathEntry.java:
+	only print timing info when DEBUG is true
+
+	* src/jde/util/Usages.java, src/jde/util/usages/ClassPathManager.java:
+	fixed findSubs bug + always escape message string
+
+	* lisp/jde-usages.el:
+	position point at first usage/class n tree widget buffers + reorganized menus
+
+	* prj.el: incude jde sources in souce path
+
+	* build.xml: include classes dir but not contents
+
+	* TODO: diff b/w classes and interfaces
+
+2004-05-04  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages.el: kill bsh on emacs exit: forces cache write
+
+	* src/jde/util/usages/ClassPathManager.java: better messages
+
+	* TODO: caching
+
+	* src/jde/util/Usages.java, src/jde/util/usages/ASMUsages.java:
+	implement hook for caching classpath entries between runs
+
+	* src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java:
+	first shot at caching ClassPathEntry objects between runs
+
+	* lisp/jde-usages.el:
+	jde-usages-display-subs-and-implementers - added menu item + tree widget for this func displays the source in the other window (like the other funcs)
+
+	* lisp/jde-usages.el: always use *usages* buffer for usages
+
+	* src/jde/util/usages/ASMUsages.java:
+	rename repository to classpath and add a accesssor method for it
+
+	* src/jde/util/Usages.java:
+	allow public access of _usages, don't access Type class constants using a Type object
+
+	* src/jde/util/usages/ObjectToCollectionMap.java:
+	allow adding a collection to an entry
+
+2004-03-29  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* TODO, lisp/jde-usages.el:  don't create buffer if no usages are found
+
+2004-03-24  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* lisp/jde-usages.el: fixed typo
+
+	* src/jde/util/usages/ClassPathManager.java, lisp/jde-usages.el:
+	simplified output tree generating and handling code for jde-usages-display-subs-implementing-method
+
+2004-03-23  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* TODO: update TODO
+
+	* build.xml: exclude class files from the test directory
+
+	* lisp/jde-usages.el, src/jde/util/usages/ClassPathManager.java:
+	bugfixes for get subs implementing method and got find-class-source for inner classes
+
+	* src/jde/util/Usages.java, src/jde/util/usages/ASMMethodSpec.java, src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java, lisp/jde-usages.el:
+	Added functionality for "find subclasses re-implementing method".
+	Also added code to navigate to a particular method signature and classname.
+	This uses regexps, would be nice to use semantic.
+
+2004-03-12  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java:
+	implementation for new getSubs, use ArrayList instead of HashSet for dependency and subclass maps (saves a ton of space)
+
+	* src/jde/util/Usages.java:
+	added new findSubs method to IUsages, fixed bug where setProjectValues was called too often
+
+	* lisp/jde-usages.el:
+	ensure that bsh that the correct classpath before calling jde.util.Usages
+
+2004-03-11  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* TODO: added some dates
+
+	* lisp/jde-usages.el: xemacs workaround for make-temp-file
+
+	* src/jde/util/Usages.java: remove extra slash
+
+2004-03-10  Suraj Acharya  <sacharya@cs.indiana.edu>
+
+	* jde-usages.zip:
+	Delete class and backup files I didn't mean to checkin
+
+	* lib/usages.jar, lisp/jde-usages.el, src/jde/util/Usages.java, src/jde/util/usages/ASMCodeVisitor.java, src/jde/util/usages/ASMMethodSpec.java, src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java, src/jde/util/usages/ObjectToCollectionMap.java, src/org/objectweb/asm/ByteVector.java, src/org/objectweb/asm/ClassAdapter.java, src/org/objectweb/asm/ClassReader.java, src/org/objectweb/asm/ClassVisitor.java, src/org/objectweb/asm/ClassWriter.java, src/org/objectweb/asm/CodeAdapter.java, src/org/objectweb/asm/CodeVisitor.java, src/org/objectweb/asm/CodeWriter.java, src/org/objectweb/asm/ConstantPoolVisitor.java, src/org/objectweb/asm/Constants.java, src/org/objectweb/asm/Edge.java, src/org/objectweb/asm/Item.java, src/org/objectweb/asm/Label.java, src/org/objectweb/asm/Type.java, tests/build.xml, tests/lib/testproject.jar, tests/prj.el, tests/src/testproject/A.java, tests/src/testproject/AInt.java, tests/src/testproject/ASuper.java, tests/src/testproject/ASuperInt.java, tests/src/testproject/ASuperSuper.java, tests/src/testproject/Main.java:
+	Initial import.
+
+	* lib/usages.jar, lisp/jde-usages.el, src/jde/util/Usages.java, src/jde/util/usages/ASMCodeVisitor.java, src/jde/util/usages/ASMMethodSpec.java, src/jde/util/usages/ASMUsages.java, src/jde/util/usages/ClassPathEntry.java, src/jde/util/usages/ClassPathManager.java, src/jde/util/usages/ObjectToCollectionMap.java, src/org/objectweb/asm/ByteVector.java, src/org/objectweb/asm/ClassAdapter.java, src/org/objectweb/asm/ClassReader.java, src/org/objectweb/asm/ClassVisitor.java, src/org/objectweb/asm/ClassWriter.java, src/org/objectweb/asm/CodeAdapter.java, src/org/objectweb/asm/CodeVisitor.java, src/org/objectweb/asm/CodeWriter.java, src/org/objectweb/asm/ConstantPoolVisitor.java, src/org/objectweb/asm/Constants.java, src/org/objectweb/asm/Edge.java, src/org/objectweb/asm/Item.java, src/org/objectweb/asm/Label.java, src/org/objectweb/asm/Type.java, tests/build.xml, tests/lib/testproject.jar, tests/prj.el, tests/src/testproject/A.java, tests/src/testproject/AInt.java, tests/src/testproject/ASuper.java, tests/src/testproject/ASuperInt.java, tests/src/testproject/ASuperSuper.java, tests/src/testproject/Main.java:
+	New file.
+
+	* TODO, build.xml, jde-usages.zip, prj.el: Initial import.
+
+	* TODO, build.xml, jde-usages.zip, prj.el: New file.
+

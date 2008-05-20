@@ -1,0 +1,618 @@
+\documentclass[twocolumn,10pt]{article}
+\usepackage{times}
+\usepackage[latin1]{inputenc}
+\usepackage{epsfig}
+\newcommand{\iffull}{\iftrue}
+%\newcommand{\iffull}{\iffalse}
+
+\topmargin -.8 in
+\headheight 0pt             
+\headsep 0pt                
+\headheight 0pt                % Height of box containing running head.
+\headsep 0pt                   % Space between running head and text.
+
+%\textheight 9.75 in
+\textheight 10.3 in
+\textwidth 42pc         % Width of text line.
+                        % For two-column mode:
+\columnsep 2pc          %    Space between columns
+\columnseprule 0pt      %    Width of rule between columns.
+\hfuzz 1pt              % Allow some variation in column width, otherwise it's
+\parskip 0pt            
+
+ 
+\makeatletter
+\renewcommand{\subsection}{\@startsection
+  {subsection}{2}{0mm}{-.1\baselineskip}{-.1\baselineskip}%
+  {\normalfont\bfseries}}
+\renewcommand{\subsubsection}{\@startsection
+  {subsection}{3}{0mm}{-.1\baselineskip}{-.1\baselineskip}%
+  {\normalfont\bfseries}}
+\makeatother
+
+%\newcommand{\myadjust}{\vspace{-.5ex}}
+\newcommand{\myadjust}{\vspace{-.2ex}}
+\newcommand{\mykey}[1]{{\small $\langle$\textrm{#1}$\rangle$}}
+\newcommand{\spc}{\mbox{\mykey{spc}}}
+\newcommand{\vbar}{$\,|\,$}
+\newcommand{\opt}{$?$}
+\newcommand{\pause}{$\cdot\cdot$}
+\newcommand{\cursor}{$|$}
+\newcommand{\mousemove}{\textbf{mouse-precise-move}}
+\newcommand{\mousecircamove}{\textbf{mouse-circa-move}}
+\newcommand{\mousedrag}{\textbf{mouse-\linebreak[3]drag}}
+\newcommand{\mouseclick}{\textbf{mouse-click}}
+
+\newcommand{\command}[1]{\textsf{\textup{#1}}}
+\newcommand{\cmd}{\sffamily\upshape}
+\newcommand{\cat}[1]{\textrm{\textit{#1}}}
+
+\newcommand{\myexample}[1]{\emph{#1}}
+\newenvironment{mycenter}
+{\begin{trivlist}\item \begin{footnotesize}}
+{\end{footnotesize}\end{trivlist}}
+
+\newenvironment{myquote}{\begin{quote}\begin{small}}{\end{small}\end{quote}}
+ 
+\newcommand{\compparameters}{
+  \settowidth{\labelwidth}{ST:x}
+  \setlength{\leftmargin}{\labelwidth}
+  \addtolength{\leftmargin}{1ex}
+  \setlength{\itemsep}{0ex}
+  \setlength{\parsep}{0ex}
+  \setlength{\topsep}{.2ex}}
+
+%   \newcommand{\comparison}[2]{%
+%   \begin{list}{\compparameters}{}
+%     \item[NLT:\hfill] #1
+%     \item[ST:\hfill]  #2
+%   \end{list}
+%   }
+
+\newcommand{\comparison}[2]{%
+NLT: ``#1''. ST: ``#2''.}
+
+%\newcommand{\comparisonthree}[3]{%
+%\begin{list}{\compparameters}{}
+%  \item[NLT:\hfill] #1
+%  \item[ST:\hfill] #2
+%  \item[ST+Pred:\hfill] #3
+%\end{list}}
+
+\newcommand{\comparisonthree}[3]{%
+NLT: ``#1''. ST: ``#2''.  ST+Pred: ``#3''.}
+
+\begin{document}
+% \title{ShortTalk: Quick Reference}
+%  \author{
+%    Nils Klarlund\\
+%    \copyright Carnegie Mellon University, August 2004}
+% \maketitle
+\section*{ShortTalk: Quick Reference\\
+\normalsize{Nils Klarlund (\copyright Carnegie Mellon University, 2004)}}
+
+
+\subsection*{Numerals}
+\begin{mycenter}
+\begin{tabular}{ll}
+\cat{positive}   &= \cmd ane\vbar twain \vbar traio \vbar fairn \vbar faif\\
+\cat{negative}   &=  \cmd oon \vbar twoon \vbar truo \vbar foorn \vbar foof\\
+\cat{signed}     &=    \cmd \cat{positive} \vbar \cat{negative}\\
+\end{tabular}
+\end{mycenter} 
+
+\subsection*{Punctuation and special}
+\begin{mycenter}
+\begin{tabular}[t]{ll}
+\cat{letter} =  & \parbox[t]{.75\linewidth}{\cmd 
+alpha \vbar
+bravo \vbar charlie \vbar delta \vbar echo \vbar foxtrot \vbar
+golf \vbar hotel \vbar india \vbar juliett \vbar kilo
+\vbar lima \vbar mike \vbar november \vbar oscar \vbar papa \vbar
+quebec \vbar romeo \vbar sierra \vbar tango \vbar uniform \vbar victor
+\vbar whiskey \vbar x-ray \vbar yankee \vbar zulu}
+\end{tabular}
+\end{mycenter}
+\begin{mycenter}
+\begin{tabular}[t]{llll}
+\cat{symbol} =  & \cmd clam & \vbar & !\\
+& \cmd lat & \vbar  &  \symbol{64} \\
+& \cmd numb & \vbar  & \#\\
+& \cmd dall\vbar dollar & \vbar  & \$\\
+& \cmd per & \vbar  & \%\\
+& \cmd crat & \vbar  & \symbol{94}\\
+& \cmd amp & \vbar  & \&\\
+& \cmd star & \vbar  & *\\
+& \cmd laip & \vbar  & (\\
+& \cmd rye & \vbar  & )\\
+& \cmd plus & \vbar  & +\\
+& \cmd nus & \vbar  & -\\
+& \cmd eke & \vbar  & =\\
+& \cmd bar & \vbar  & \symbol{124}\\
+& \cmd lace & \vbar  & \{\\
+& \cmd race  & \vbar &  \}\\
+& \cmd lack & \vbar  & \symbol{91}\\
+\makebox[0ex][l]{\cat{phonetic}=\qquad\makebox[0ex][l]{\cmd \cat{symbol} \vbar \cat{letter} \vbar spooce
+\vbar toob \vbar loon}}
+\end{tabular} 
+\begin{tabular}[t]{llll}
+& \cmd rack  & \vbar & \symbol{93}\\
+& \cmd slash & \vbar  & /\\
+& \cmd beck & \vbar  & \symbol{92}\\
+& \cmd till & \vbar  & \symbol{126} \\
+& \cmd sem & \vbar  & ;\\
+& \cmd col  & \vbar  & :\\
+& \cmd cam \vbar comma & \vbar  & ,\\
+& \cmd doot & \vbar  & .\\
+& \cmd loos & \vbar  & $<$\\
+& \cmd groot & \vbar  & $>$\\
+& \cmd quest & \vbar  & ?\\
+& \cmd score & \vbar  & \_\\
+& \cmd hive & \vbar  & -\\
+& \cmd sing & \vbar  & '\\
+& \cmd quote & \vbar  & "\\
+& \cmd bing &   & `\\
+\end{tabular} 
+\end{mycenter} 
+{\small \cat{word} is an English word or a \cat{character command},
+which is
+\begin{mycenter}   \begin{tabular}{l@{}ll}
+    ~& \cat{phonetic}  
+(\cat{phonetic} \cat{signed}?)$^+$ 
+  \end{tabular} 
+\end{mycenter}
+Words may be followed by a \cat{common-pos}; in that case, they are
+inserted at \cat{common-pos}, not at cursor.  The \cat{phonetic}s
+\command{loon} or \command{spooce} can only occur by themselves or
+with a \cat{signed}.  \command{toob} can be combined only with
+\command{loon} or a \cat{signed}.}
+
+\subsection*{Keys, capitalization, and spacing}
+\begin{mycenter}
+\begin{tabular}[t]{lll}
+\cmd spooce \cat{positive}\opt & \mykey{space} $n$ times\\
+\cmd loon \cat{positive}\opt & \mykey{enter} $n$ times \\
+\cmd choook \cat{positive}\opt & \mykey{backspace} $n$ times\\
+\cmd chaiw \cat{positive}\opt & \mykey{delete}  $n$ times\\
+\cmd gloof \cat{positive}\opt & \mykey{left}  $n$ times\\
+\cmd graif \cat{positive}\opt & \mykey{right} $n$ times\\
+\cmd goop \cat{positive}\opt & \mykey{up} $n$ times\\
+\cmd gnaith \cat{positive}\opt &  \mykey{down} $n$ times\\
+\cmd toob \cat{positive}  & \mykey{tab} $n$ times\\
+\cmd speece & no space \\
+\cmd capi & capitalize\\
+\cmd coomel & camel, i.e.\ no space and capitalize\\ 
+\end{tabular}
+\end{mycenter}
+
+\subsection*{Common positions}
+\begin{mycenter}
+\begin{tabular}{lll}
+\cat{common-rng} =& \command{tisk}\vbar & between cursor and mouse\\ 
+& \command{tat} & selected region (between cursor and mark)\\
+\cat{common-pos}  =& \command{loost} \vbar & where last touched before cursor\\
+& \command{lairk}\vbar  & where mark is\\
+& \command{hare} \vbar & at cursor \\
+& \command{tair} \vbar & at mouse, don't move cursor\\
+& \command{gook} & at mouse, move cursor\\
+\end{tabular}
+\end{mycenter}
+
+\subsection*{Structural designators}
+\begin{mycenter}
+\begin{tabular}{lll@{\hspace{3em}}l}
+\makebox[0ex][l]{\cat{struct-simple} =} &&& \makebox[0ex][l]{contained in line}\\
+& \cmd char & \vbar &  character\\
+& \cmd stretch& \vbar& whitespace\\
+& \cmd ting &  \vbar& non-whitespace\\
+& \cmd word&  \vbar& word\\
+& \cmd eed&    \vbar& identifier (hyphenated words) \\
+& \cmd chunk& \vbar & filenames, email addresses,...\\
+& \cmd tier & \vbar & a line (w/o.\ terminator)\\
+& \cmd line & & a line (w.\ terminator)\\
+\end{tabular}
+\end{mycenter}
+\begin{mycenter} 
+\begin{tabular}{lll@{\hspace{3em}}l}
+\makebox[0ex][l]{\cat{struct-complex} =}&&& \makebox[0ex][l]{may span lines}\\
+& \cmd term & \vbar &  an identifier or block\\
+& \cmd inner & \vbar & the inside of enclosing block\\
+& \cmd block & \vbar & an enclosing block\\
+& \cmd defi & \vbar & a definition\\
+& \cmd senten & \vbar & sentence \\
+& \cmd para & \vbar & paragraph \\
+& \cmd buffer & & text in buffer\\
+\end{tabular}
+\end{mycenter}
+\begin{mycenter}
+\begin{tabular}{lll}
+\cat{struct} =& \cat{struct-simple} \vbar
+\cat{struct-complex} \quad whole structure\\
+\cat{struct-partial}=&(\command{prin} \vbar \command{prex})
+\cat{struct} \quad\underline{p}a\underline{r}tial, to beginning (\command{prin})/end (\command{prex}) \\
+\cat{struct-rng}= &\cat{struct} \cat{signed} \opt\vbar  \quad 
+forwards (\cat{positive})/backwards (\cat{negative})\\
+& \cat{struct-partial}\\
+\end{tabular}
+\end{mycenter}
+
+%\subsection*{Search designators}
+
+\subsubsection*{Search range designators}
+
+\begin{mycenter}
+\begin{tabular}{ll@{}ll}
+  \cat{search-rng} = & (&\command{rorch} \vbar & backward\\
+  &&\command{sorch}) & forward\\
+  &\makebox[0pt][l]{\cat{words}} 
+\end{tabular}
+\end{mycenter}
+\myadjust{}
+
+\subsubsection*{Search position designators}
+
+\begin{mycenter}
+\begin{tabular}{ll@{}ll}
+  \cat{search-pos} = &\makebox[0ex][l]{\command{pen}?} &&penultimate \\
+&(& \cmd aift \vbar & after and forward\\
+&& \cmd baif \vbar & before and forward\\
+&& \cmd ooft \vbar & after and backward\\
+&& \cmd boof) & before and backward\\
+&\cat{\makebox[0ex][l]{words}}\\
+  \cat{pos} = & \makebox[0ex][l]{\cat{common-pos} \vbar
+    \cat{search-pos}}\\
+\cmd stroop &&& end of argument, neutral word\\
+\end{tabular}
+\end{mycenter}
+\begin{footnotesize}
+  Commands, except character commands and \command{speece}, terminate
+  argument.
+\end{footnotesize}
+
+
+\subsection*{Cursor commands}
+
+\begin{mycenter}
+\begin{tabular}{lll}
+\cat{movement} = 
+& \cmd nairx \vbar & go to beginning of structures [``next''] and \\
+& \cmd noorx \vbar & go to end of structures \\
+& \cmd skaip\vbar & to end of structures (forward) \\
+& \cmd skoop & to end of structures (backward) \\
+\end{tabular}
+\end{mycenter}
+\begin{mycenter}
+\begin{tabular}{lll}
+\cat{movement} \cat{struct} \cat{positive}? & move \\
+\cat{struct} \cat{positive}? & move to beginning of structure (forward)\\
+\cat{struct} \cat{negative}? & move to beginning of structure (backward)\\
+\cat{movement} \em{character}
+\cat{positive}? & 
+move to
+character occurrences  \\
+\cmd (ghin \vbar ex) \cat{struct} & be\underline{gin}ning or end (\underline{ex}it) of current structure\\ 
+\cmd (ghin \vbar ex) block \cat{positive}\opt & leave blocks,
+go to beginning or end \\
+\cmd go \cat{search-pos} ... & go to first match\\
+\cmd mairk & set mark explicitly\\
+\cmd gairk \cat{positive}\opt & unravel: go to $n$th last mark\\
+\cmd goork & opposite of gairk, go to unravelled mark\\
+\cmd goost & go to loost\\
+\end{tabular}
+\end{mycenter}
+
+
+\subsection*{Text movement commands}
+\label{sec:movement-commands}
+\begin{mycenter}
+\begin{tabular}{l@{\,}lll}
+\cmd grab on\opt \cat{struct-rng} & copy text at mouse to cursor\\
+\cmd pull on\opt \cat{struct-rng} & move text at mouse  to cursor\\
+\cmd paste on\opt \cat{struct-rng} & copy text at cursor to mouse\\
+\cmd push on\opt \cat{struct-rng} & move text at cursor to mouse\\
+\cmd swap \cat{struct-rng}?  \cat{common-pos}?
+& swap between cursor  and position\\
+\cmd trans \cat{struct-rng} & transpose occurrence and following \\
+\end{tabular}
+\end{mycenter}
+\begin{footnotesize}
+Note: ``on'' means: replace the single \cat{struct} at destination.
+\end{footnotesize}
+\subsection*{Text deletion and copy-to-clipboard commands}
+\myadjust
+\begin{mycenter}
+\begin{tabular}{llll}
+\cat{del-copy} = & \cmd rem & \vbar & copy and delete (``cut'')\\
+& \cmd smack  &\vbar & delete, but no copy (``delete'')\\
+& \cmd save &\vbar & copy (``copy'')\\
+& \cmd choose  &  & highlight (``select''), no copy
+\end{tabular}
+\end{mycenter}
+\myadjust
+\begin{mycenter}
+\begin{tabular}{l l}
+\cat{del-copy struct-rng} \cat{common-pos}? &  del/copy
+range at \cat{pos}\\
+\cat{del-copy} (\cat{common-rng} \vbar \cat{search-rng}) &
+del/copy range\\
+\end{tabular}
+\end{mycenter}
+\begin{footnotesize}
+Note: ``choose tat'' highlights range between cursor and mark.
+\end{footnotesize}
+\subsection*{Directional deletion}
+
+\begin{mycenter}
+  \begin{tabular}{ll}
+   \cmd kaill \cat{struct} \cat{positive}\opt \cat{positive} & nearest words forward \\
+   \cmd reese \cat{struct} \cat{positive}\opt \cat{positive} & nearest words backward \\
+  \end{tabular}
+\end{mycenter}
+
+\subsection*{Yank clipboard commands}
+
+\begin{mycenter}
+  \begin{tabular}{ll}
+   \cmd yank \cat{positive}\opt 
+   \cat{common-pos} & insert $n$th entry from clipboard stack\\
+   \cmd pop \cat{common-pos} & insert and pop clipboard stack\\ 
+ \end{tabular}
+\end{mycenter}
+
+\subsection*{Changes}
+
+\begin{mycenter} 
+  \begin{tabular}{l@{}l@{}lll}
+    ~~~&(& \command{caip}  \cat{struct-rng}? & \vbar & capitalize\\
+&& \command{laiw}  \cat{struct-rng}? & \vbar & lowercase \\
+&& \command{aipper} \cat{struct-rng}? & \vbar & uppercase \\
+&& \command{hive}   \cat{struct-rng}? & \vbar & hyphenate\\
+&& \command{speece} & \vbar & delete spaces\\
+&& \command{space} & \vbar & normalize to one space\\
+&& \command{fix} & \vbar & apply spacing heuristics \\
+&& \command{chaiw} & \vbar & delete\\
+&& \command{chow} & \vbar & backspace\\
+&& \command{join} & \vbar & join line with next\\  
+&& \command{lindent} \cat{struct-rng}? & \vbar & left indent range\\
+&& \command{rindent} \cat{struct-rng}? & \vbar & right indent range\\
+&& \command{comment} \cat{struct-rng}? & \vbar & comment range\\
+&& \command{fill} \cat{struct-rng}? &  \vbar & fill \\
+&& \command{pound}  \cat{struct-rng}?) & & compound, remove spaces\\
+&& \makebox[0ex][l]{%(
+\cat{pos} %
+% \vbar \cat{struct-boundary})
+}
+  \end{tabular}
+\end{mycenter}
+\begin{footnotesize}
+  If \cat{struct-rng} is provided, then \cat{pos} is optional with
+  default ``hare.''
+\end{footnotesize}
+
+
+\subsection*{Paired delimiter commands}
+
+\begin{mycenter} 
+  \begin{tabular}{lllllll}
+    \cat{pair-type} = 
+    & \command{par} & \vbar & (\ldots)     & \command{quote} & \vbar & \symbol{34} \ldots\symbol{34} \\
+    & \command{brace} & \vbar & \{ \ldots \}     & \command{sing} & \vbar & '\ldots'\\
+    & \command{bracket} & \vbar & \symbol{91} \ldots \symbol{93} 
+    & \command{bing} & & `\ldots` \\
+    \cat{pair-type} \command{pair} & \makebox[0ex][l]{insert delimiters, around region
+    if possible}\\
+    \cat{pair-type} \command{nix} & \makebox[0ex][l]{delete delimiters}\\
+    \end{tabular}
+  \end{mycenter}
+
+  \subsection*{Window management}
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \cat{window-op} =& \command{maxi} & maximize window \\
+      & \command{mini} & minimize window, choose next \\
+      & \command{vaix} & choose other window\\
+      & \command{voox} & choose other window, reverse direction\\
+      & \command{sploot} & split current window\\
+    \end{tabular}
+  \end{mycenter}
+  \begin{mycenter}
+    \begin{tabular}[t]{llll}
+      \makebox[0ex][l]{\cat{window-action} =}& \\
+      ~~    & \command{menu} & \vbar & show buffer menu\\
+      & \command{open} & \vbar & open a file\\
+      & \command{save} & \vbar  & save file\\
+      & \command{write} & \vbar  & write file (save as) \\
+      & \command{insert} & \vbar  & insert file\\
+      & \command{kaill} & \vbar  & kill buffer\\
+      & \command{direct} & \vbar  & directory listing\\
+      & \command{switch} & \vbar  & most other recently shown file\\
+      & \command{grow} \cat{positive}?  & \vbar & make window bigger\\
+      & \command{shrink}  \cat{positive}? & \vbar & make window smaller \\
+      & \command{up} & \vbar & page up\\
+      & \command{down} & \vbar & page down\\
+      & \command{center} & \vbar & center window\\
+      & \command{head} & \vbar &  current line to window head \\
+      & \command{bottom} & \vbar &  current line to window bottom\\
+      & \cat{positive} \vbar \cat{negative}& &down or up a fraction of page\\
+    \end{tabular}
+  \end{mycenter}
+
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \cat{window-op} \cat{window-action} & do op and action
+    \end{tabular}
+  \end{mycenter}
+
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \command{gaix} \cat{positive}?& go to $n$th next window\\
+      \command{goox} \cat{positive}?& go to $n$th previous window\\
+    \end{tabular}
+  \end{mycenter}
+
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \cat{color} =  \command{red} \vbar \command{blue} \vbar \command{green} \vbar
+      \command{brown} \vbar  \command{purple} \vbar  \command{orange} \vbar
+      \command{yellow} \vbar \command{pink}
+    \end{tabular}
+  \end{mycenter}
+
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \cat{window-op} \cat{color} & do op, select view per color
+    \end{tabular}
+  \end{mycenter}
+
+  \subsection*{Cross-referencing commands}
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \cat{cross-ref-cmd} = \cat{window-op} \cat{cross-ref} \cat{common-pos}?
+    \end{tabular}
+  \end{mycenter}
+
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \makebox[0ex][l]{\cat{cross-ref} =} & \\
+      ~~    & \command{help}& editor help \\
+      &    \command{f-help} & function help (programming languages)\\
+      &    \command{v-help} & variable help (programming languages)\\
+      &    \command{f-def} & function definition (programming languages)\\
+      &    \command{v-def} & variable definition (programming languages)\\
+      &    \command{i}& follow indexed reference\\
+      &    \command{info} & Emacs info\\
+      &    \command{apropos} & Emacs apropos\\
+      &    \command{command} \command{apropos} & Emacs command apropos
+    \end{tabular}
+  \end{mycenter}
+
+  \subsection*{Browsing}
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \command{browse} \cat{common-pos} & invoke browser on URL at position\\
+      \command{browse} \command{direct} & invoke external file browser
+    \end{tabular}
+  \end{mycenter}
+
+  \subsection*{Repetition of last command}
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \command{goink} \cat{positive}? & repeat last command a number of times
+    \end{tabular}
+  \end{mycenter}
+
+  \subsection*{Repetition of command sequence}
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \command{vox} \command{rec} & record a macro \\
+      \command{goink} & stop recording and play \\
+      \command{vox} \command{stop}& stop recording \\
+      \command{vox} \command{play}& play previous macro \\
+    \end{tabular}
+  \end{mycenter}
+
+
+  \subsection*{E-mail support}
+  \begin{mycenter}
+    \begin{tabular}[t]{ll}
+      \command{vox} \command{read} \command{mail}& switch to inbox \\
+       \cmd vox send mail& send current message \\
+       \cmd vox reply& reply to message \\
+       \cmd vox follow-up& reply to all \\
+       \cmd vox forward& forward message \\
+    \end{tabular}
+  \end{mycenter}
+
+  \subsection*{Specialized support}
+
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \cmd pleat & dynamic completion\\
+      \cmd c-pleat & choose dynamic completion\\
+      \cmd vox quit &  listen-quit \\
+%      vox rename & rename buffer \\
+%      reg replace & query-replace-regexp \\
+%      begin comment & begin-comment \\
+%      end comment & end-comment \\
+     \cmd go line... & goto a specified line number \\
+     \cmd meta toob & meta-tab, complete according to mode\\
+     \cmd meta X. & meta-X,  execute command \\
+     \cmd meta N.& meta-N, next \\
+     \cmd meta P.& meta-P, previous \\
+    \end{tabular}
+  \end{mycenter}
+
+  \subsubsection*{Lisp}
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \cmd eval express & eval-expression \\
+      \cmd eval (\cat{common-pos} \vbar \cat{struct-complex}) & evaluate
+      expression \\
+      \cmd eval print& eval-print-last-sexp \\
+    \end{tabular}
+  \end{mycenter}
+
+
+  \subsubsection*{\LaTeX{}}
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \command{m-tech}... & insert command\\
+      \command{m-no tech} \cat{common-pos}? & delete macro\\
+      \command{e-tech}...& insert environment\\
+      \command{e-change tech} ... & change environment\\
+      \command{e-no tech} \cat{common-pos}? & delete environment
+      tags\\
+      \command{e-end tech} \cat{common-pos}? & close environment\\
+    \end{tabular}
+  \end{mycenter}
+
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \cat{pair-type} += & \cmd tech-quote   & ``$\cdots$''\\
+      & \cmd tech-sing & `$\cdots$' \\
+      & \cmd tech-brace & $\{\cdots\}$\\
+      & \cmd tech-angle & $\backslash$$<$$\cdots$$\backslash>$ \\
+    \end{tabular}
+  \end{mycenter}
+
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \command{tech label} & reftex-label\\
+      \command{tech ref} & reftex-reference\\
+      \command{tech cite} & reftex-citation\\
+      \command{tech e.m.} & ``$\backslash{}$emph$\{\cdots\}$''\\
+      \command{tech ...} & various other common \LaTeX commands\\
+    \end{tabular}
+  \end{mycenter}
+
+  \subsubsection*{XML}
+
+  \begin{mycenter}
+    \begin{tabular}[t]{lll}
+      \command{snex}... & insert begin and end tag\\
+      \command{dent snex}... & insert indented begin and end tag\\
+      \command{snoox}...& insert empty element tag\\
+      \command{x-change tag} ... & change tag name\\
+      \command{x-end tag} \cat{common-pos}? & close element\\
+      \command{x-no tag} \cat{common-pos}? & delete begin
+      and end tag\\
+      \command{x-quote} & ``\&apos;\vbar\&apos;''\\
+      \command{x-angle} & ``\&lt;\vbar\&gt;''\\
+      \command{x-cdata} & ``$<$![CDATA[\vbar]]$>$'');\\
+    \end{tabular}
+  \end{mycenter}
+
+  \subsubsection*{Notation}
+  ``?'' means optional, ``+'' means ``one or more''.
+%\balancecolumns
+\end{document}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:14:09 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class CodeSelectGrammar</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class CodeSelectGrammar - A grammar for selecting part of the visible code.</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="sr_interface.html">sr_interface</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">sr_interface.CodeSelectGrammar<BR>
+&nbsp;&nbsp;natlinkutils.SelectGramBase<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">CodeSelectGrammar</SPAN>(<A CLASS="DocLink" HREF="natlinkutils.SelectGramBase.html">SelectGramBase</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CodeSelectGrammar.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app=None</SPAN>, <SPAN CLASS="Argument">window=0</SPAN>, <SPAN CLASS="Argument">exclusive=0</SPAN>, <SPAN CLASS="Argument">allResults=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CodeSelectGrammar.activate</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CodeSelectGrammar.cleanup</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CodeSelectGrammar.deactivate</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CodeSelectGrammar.gotBegin</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">moduleInfo</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CodeSelectGrammar.gotResultsObject</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">recogType</SPAN>, <SPAN CLASS="Argument">resObj</SPAN>)
+    <A CLASS="DocLink" HREF="#sr_interface.CodeSelectGrammar.load_with_verbs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CodeSelectGrammar.load_with_verbs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#sr_interface.CodeSelectGrammar.selection_spoken_form"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">sr_interface.CodeSelectGrammar.selection_spoken_form</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">resObj</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from natlinkutils.GramClassBase</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.__del__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.activate</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window=0</SPAN>, <SPAN CLASS="Argument">exclusive=None</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.beginCallback</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">moduleInfo</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.callIfExists</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">funcName</SPAN>, <SPAN CLASS="Argument">argList</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.deactivate</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.hypothesisCallback</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">words</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.load</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grammar</SPAN>, <SPAN CLASS="Argument">allResults=0</SPAN>, <SPAN CLASS="Argument">hypothesis=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.setExclusive</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">exclusive</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.GramClassBase.unload</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from natlinkutils.SelectGramBase</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.SelectGramBase.getSelectText</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.SelectGramBase.load</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">selectWords=['Select']</SPAN>, <SPAN CLASS="Argument">throughWord='Through'</SPAN>, <SPAN CLASS="Argument">allResults=0</SPAN>, <SPAN CLASS="Argument">hypothesis=0</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.SelectGramBase.makeGrammar</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">selectWords</SPAN>, <SPAN CLASS="Argument">throughWord</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.SelectGramBase.resultsCallback</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">wordsAndNums</SPAN>, <SPAN CLASS="Argument">resObj</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">natlinkutils.SelectGramBase.setSelectText</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">text</SPAN>)
+
+</PRE><H2>Description</H2><P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+[AppState] <EM>app</EM>
+<DD>interface to the editor application
+<DT>
+<EM>INT window</EM>
+<DD>MSW window handle of the window which must be in the
+foreground for the grammar to be activated, or 0 to make the grammar
+global
+<DT>
+<EM>0-1 exclusive=0</EM>
+<DD>Indicates whether the grammar should be activated as
+an exclusive (1) or non-exclusive (1) grammar
+<DT>
+<EM>0-1 allResults = 0</EM>
+<DD>Indicates if the grammar should be loaded so as
+to get all results (even those intercepted by other grammars)    
+</DL>
+<P>
+CLASS ATTRIBUTES**</P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="sr_interface.CodeSelectGrammar.load_with_verbs" CLASS="Method">sr_interface.CodeSelectGrammar.load_with_verbs(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Load the selection grammar using specific verbs
+</P>
+<H2 ID="sr_interface.CodeSelectGrammar.selection_spoken_form" CLASS="Method">sr_interface.CodeSelectGrammar.selection_spoken_form(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">resObj</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Returns the spoken form of the selected part of a *Select
+Pseudocode* utterance.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>ResObj</EM> resObj
+<DD>The <EM>ResObj</EM> returned by the <EM>Select</EM> grammar.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>spoken_form</EM>
+<DD>The spoken form of the selected code.
+
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

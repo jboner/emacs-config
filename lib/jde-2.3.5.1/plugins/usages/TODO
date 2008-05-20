@@ -1,0 +1,228 @@
+;; -*-mode:planner;-*-
+(set (make-variable-buffer-local 'emacs-wiki-directories) '("."))
+
+* Tasks 
+#A3  _ class tree buffer keybindings to get the type hierarchy for the class under point
+#A7  _ check if 1.5 generics work with jde-usages
+#B   _ add hippe-expand hook for classname completion, would be neat if we could import at same time too.
+#B6  _ if only one usage location is found, go to it directly with no UI
+#B1  _ easy navigation between usage locations [[TODO#02][...]] (use compilation-minor-mode?)
+#B2  _ find all usages of a class (look for all method/var references)
+#B3  _ configurable cache directory
+#B4  _ share class info with jde-completion [[TODO#03][...]]
+#B5  _ use semantic instead of regexps in jde-usages-goto-function-regexp
+#B6  _ find all places a class name is used [[TODO#04][...]] (would be useful for renaming a class)
+#B7  _ don't check lastModifieds of .class files that are not the first definition of the class in the classpath.
+#B8  _ handle args = number case better in jde-usages-goto-sig
+#B9  _ use semantic tags instead of regexps in for jde-usages-find-class-source
+#C1  _ callees
+#C2  _ make class separator line in usages buffer clickable
+#C3  _ use qualified name in jde-usages-goto-sig
+#C4  _ buffer history
+#C5  _ use ASM to show bytecode, http://andrei.gmxhome.de/bytecode/index.html
+#C6  _ advanced search dialog box [[TODO#05][...]]
+#C7  _ fix semantic-tag-include-filename to do class->filename conversions (use jde-open-get-java-file-name)
+#C8  _ special handling of the scratch dir? [[TODO#06][...]]
+#C9  _ only write to disk cache if in-memory version has changes
+#C10 _ allow config of *usages buffer names
+#C11 _ reuse same windows ? keep history in these windows ?
+#C12 _ in memory cache for classes ?
+#C13 _ handle cpe conversions between dir/jar ?
+#C14 _ (?) expand jars on init and then treat them like single directories that don't require complete lastModified checks. Create a new ClassPathEntry type for this?
+#C15 _ rename method/field refactoring ??
+#C16 _ Lazy read of .class file [[TODO#07][...]]
+#C17 _ Deal with accessors methods added to give inner classes access to private fields and methods of the outer class. [[TODO#08][...]]
+#C   _ use ECB images 
+#A   X Use interface and abstact class markers (A/I) in the ancestor tree (NoOpClassVisitor) 050512_002002
+#A5  X issue message when searching for usages of static finals 050511_235454
+#A2  X handle constructors correctly in the usages tree [[TODO#01][...]]
+#A1  X multiple method calls on a line do not work correctly in the test case
+#A   X notification of current classpath entry in emacs mini-buffer while building the class dependencies
+#A   X check timestamps of classpath entries before searching for usages
+#A   X decouple from jde-xref [[TODO#09][...]]
+#A   X Calls to super do not count as calls to the superclasses method. [[TODO#10][...]]
+#A   X ClassPathManager._subs is not being calculated. [[TODO#11][...]]
+#A   X don't look at superclasses for constructors [[TODO#12][...]]
+
+#A   X handle java.io.Serializable and java.lang.Cloneable without having to look at rt.jar [[TODO#13][...]]
+#A   X handle deletion of entries from the classpath
+#A   X option for "strictness" - do not look for calls to super and sub classes.
+#A   X add functions to find all sub classes of a class/interface 2/26/04
+#A   X removed shortcuiting of lookups for Cloneable, Serializable and Object and put in correct fix - [[TODO#14][...]]
+#A   X put in copyright and author info into files 3/1/04
+#A   X gray out menu items when not applicable  3/3/4
+#A   X profile memory usage [[TODO#15][...]]
+#A   X look for all definitions of a method (ie from a class, find all subclasses that [[TODO#16][...]]
+#A   X don't create buffer if no usages are found
+#A   X cache class dependencies to disk (is this worth the trouble? checks [[TODO#17][...]]
+#A   X differentiate between classes and interfaces in jde-usages-display-subs-and-implementers.
+#A   X find usages of member variables
+#A   X fix getClassReader to call findNewLocations  and return a dummy ClassReader (instead of null) is the class is no longer present [[TODO#18][...]]
+#A   X 5/26 if method is abstract look for callers of all subclasses [[TODO#19][...]] (separate func?)
+#A   X if method is not defined for the class, go to supers [[TODO#20][...]]
+#A   X 6/16 jde-open-class-source-with-completion now updates [[TODO#21][...]]
+#A   X fix classpath updating bug [[TODO#22][...]]
+#A   X 9/24 make *usages*  _ window size configurable [[TODO#23][...]]
+#A   X make class path entries sharable across projects. This will save [[TODO#24][...]]
+#A   X 9/27 make first line of *usages*  _ clickable
+#A   X 10/5 add test case framework
+#A   X 1/26/05 make class completion use the same completion ui as ido
+#A   X 2/2/05 Only run method call checking code if the method name appears more than once on the line
+#A   X 2/18/05 made usage buffers motion sensitive, with an option to turn it off
+#A   X 2/18/05 use semantic tags instead of regexps in for jde-usages-goto-sig 
+#A   X 4/29/05 don't use obsolete semantic functions
+#A   X 4/29/05 ecb integration ("find callers" menu in ecb method window)
+#A   X 4/29/05 make find super/sub classes functions which don't prompt for classname
+#A   X 5/7/05 type hierarchy [[TODO#25][...]]
+#A   X find overriders does not need class separators in the display tree [[TODO#26][...]]
+#A   X a function which can tell which jar/directory a class is defined in
+
+* Notes
+
+
+.#26 find overriders does not need class separators in the display tree
+  (they don't seem to have any)
+
+.#25 5/7/05 type hierarchy
+          move point to correct type entry in the type hierarchy tree
+          bound "q" to window-delete in class tree buffers
+
+.#24 make class path entries sharable across projects. This will save
+memory and we won't require a complete reload when
+jde-global-classpath changes.  Also useful for for projects with many
+prj.el files.
+
+.#23 9/24 make *usages*  _ window size configurable
+  jde-usages-window-height
+
+.#22 fix classpath updating bug
+  This broke when I rearranged the interactions between a ClassPathEntry and the ClassPathManager in
+  ClassPathManager.buildCache for better synchronization.
+
+.#21 6/16 jde-open-class-source-with-completion now updates
+  jde-usages-known-classes if required, so that it completes againsts
+  the most up to date list of classes. The list of all classes is only
+  generated if jde.util.Usages has detected that a class was added or
+  deleted since the last update of the list.
+
+.#20 if method is not defined for the class, go to supers
+  -bogus TODO, was not required
+
+.#19 5/26 if method is abstract look for callers of all subclasses
+  - changed default behavior to do this
+
+.#18 fix getClassReader to call findNewLocations  and return a dummy ClassReader (instead of null) is the class is no longer present
+  - didn't add dummy ClassReader, but now always check for the nullness of the return value from getClassReader.
+
+.#17 cache class dependencies to disk (is this worth the trouble? checks
+  for staleness might take about the same amount of time as building
+  the dependencies from scratch)
+
+  - ClassPathEntry (CPE) objects can now be serialized. Caching of these is
+    only enabled for directories as deserializing a CPE object for a
+    jar seems to take about the same time (or more) creating the
+    object from scratch by processing the jar.
+    Though one CPE object exists for all subdirectories under the
+    directory in the classpath, all of these objects are stored in
+    one cache file.
+    The cache files are written to disk just before the JVM shuts
+    down via a shutdown hook. http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Runtime.html#addShutdownHook(java.lang.Thread)
+    For now the cache files are only written if the ~/.jde-usages
+    directory exists.
+
+.#16 look for all definitions of a method (ie from a class, find all subclasses that
+redefine this method)
+  - also added jde-usages-goto-sig to navigate to a class name +
+    signature, this uses regexps. Maybe we can move to using the
+    semantic structures later.
+
+.#15 profile memory usage
+  - using ArrayLists instead of HashMaps for the dependency structures
+    reduces the process size by about 25% (from 47.5MB to 35.5MB) for a
+    large project
+
+.#14 removed shortcuiting of lookups for Cloneable, Serializable and Object and put in correct fix -
+  only look for superclasses which for which the method is defined.
+
+.#13 handle java.io.Serializable and java.lang.Cloneable without having to look at rt.jar
+  - nice speedup, but this means we can't find all usages of methods in Serializable or Cloneable
+    (or Object, from a previous fix). The correct fix would be to include only those super classes
+    for which the method you are looking for is defined.
+
+.#12 don't look at superclasses for constructors
+  - added the isConstructor method to the MethodSpec interface. This is checked
+    before calling getSupers in ASMUsages.findUsages
+
+.#11 ClassPathManager._subs is not being calculated.
+  - Instead of trying to delete stale info in _subs when a classpath entry is
+     refreshed we just add the new subclass relations and check for staleness in
+     getSubs. 2/10/04
+
+
+.#10 Calls to super do not count as calls to the superclasses method.
+  - This just works, super() is probably converted into a call to <init>();
+
+
+.#09 decouple from jde-xref
+   - renamed some jde-xref functions to jde-usages. 2/10/04
+
+
+
+.#08 Deal with accessors methods added to give inner classes access to private fields and methods of the outer class. [[TODO#C17][#C17]]
+Ideally we should not display  up these methods
+   in the usage tree; they should be replaced automatically by the list of callers
+   to them. Right now the usages subtree for any  method that starts with "access$"
+    is automatically expanded.
+
+
+.#07 Lazy read of .class file [[TODO#C16][#C16]]
+       don't need to read the whole file when creating the deps
+       class name completion does not require reading the entire .class
+
+
+.#06 special handling of the scratch dir? [[TODO#C8][#C8]]
+         only use classes from this dir if they're newer than a all other .class files in the classpath for the same class
+         delete stale classes? - this is useful so that we get the same behavior as above when executing code, we trying to accomplish
+           this right now by deleting the scratch dir before M-x compile, but that is too conservative
+
+.#05 advanced search dialog box [[TODO#C6][#C6]]
+  - filter usages by package regexp
+  - scope by package/class expressions 
+
+
+.#04 find all places a class name is used [[TODO#B6][#B6]]
+
+  Look for:
+     imports, 
+     local or class variables declarations of this class type, 
+     method parameters of this type
+     catch exception types
+     calls to new Class()
+     calls to static methods,
+     casts,instanceof
+     extends and implements lists
+     (any more?)
+
+
+
+.#03 share class info with jde-completion [[TODO#B4][#B4]]
+
+  goto defn should work for:
+        ClassPathEntry.get (file);      
+        ClassPathManager.this.addEntry (cpe);
+        new ClassPathEntry.Jar (file);
+        super (file);
+
+
+.#02 easy navigation between usage locations [[TODO#B1][#B1]]
+  As of May 1.15 we have jde-usages-next-pos which we suggest should be bound to M-U n
+
+
+
+.#01 handle constructors correctly in the usages tree [[TODO#A2][#A2]]
+  - jde-usages-dct-goto-caller  (now works)
+  - for the first line in the usages tree  (fixed)
+  This works if a constructor is present, but if refering to the
+  default constructor it gives the cryptic message "Can't find method
+  name A in class testproject.A" (using the file A.java in the test
+  case)

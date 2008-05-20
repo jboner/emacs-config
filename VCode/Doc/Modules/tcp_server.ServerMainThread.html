@@ -1,0 +1,939 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:36:16 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class ServerMainThread</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class ServerMainThread</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="tcp_server.html">tcp_server</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">tcp_server.ServerMainThread<BR>
+&nbsp;&nbsp;Object.OwnerObject<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ServerMainThread</SPAN>(<A CLASS="DocLink" HREF="Object.OwnerObject.html">OwnerObject</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">editor_factory</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread._new_instance"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread._new_instance</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>, <SPAN CLASS="Argument">instance</SPAN>, <SPAN CLASS="Argument">window_info</SPAN>, <SPAN CLASS="Argument">test_client=0</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.data_event"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.data_event</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.deactivate_data_thread"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.deactivate_data_thread</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.handshake_listen_socks"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.handshake_listen_socks</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # Invoked when a new socket connection was opened on VC_LISTEN port.</SPAN>
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.handshake_talk_socks"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.handshake_talk_socks</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.is_test_server"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.is_test_server</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.known_instance"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.known_instance</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.new_data_thread"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.new_data_thread</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>, <SPAN CLASS="Argument">listen_sock</SPAN>, <SPAN CLASS="Argument">connection_ending</SPAN>, <SPAN CLASS="Argument">testing=0</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.new_data_thread_given_event"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.new_data_thread_given_event</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>, <SPAN CLASS="Argument">listen_sock</SPAN>, <SPAN CLASS="Argument">data_event</SPAN>, <SPAN CLASS="Argument">connection_ending</SPAN>, <SPAN CLASS="Argument">testing=0</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.package_sock_pair"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.package_sock_pair</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>, <SPAN CLASS="Argument">app_name</SPAN>, <SPAN CLASS="Argument">window_info</SPAN>, <SPAN CLASS="Argument">listen_sock</SPAN>, <SPAN CLASS="Argument">talk_sock</SPAN>, <SPAN CLASS="Argument">test_client=0</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.possible_editor_cleanup"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.possible_editor_cleanup</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.process_ready_socks"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.process_ready_socks</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">ready_socks=None</SPAN>)<SPAN CLASS="OneLiner"> # Processes socket connections that have received new data.</SPAN>
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.remove_other_references"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.remove_other_references</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.start_other_threads"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.start_other_threads</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">listener_evt</SPAN>, <SPAN CLASS="Argument">talker_evt</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_server.ServerMainThread.user_message"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_server.ServerMainThread.user_message</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">message</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.OwnerObject</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject._cleanup_object"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject._cleanup_object</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">object</SPAN>)<SPAN CLASS="OneLiner"> # attempt to call cleanup on object</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_grandparent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_grandparent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grandparent</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_owned"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_owned</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)<SPAN CLASS="OneLiner"> # append a new attribute name to the list of owned objects</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_owned_list"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_owned_list</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)<SPAN CLASS="OneLiner"> # append new attribute names to the list of owned objects</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.cleanup"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.cleanup</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.name_parent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.name_parent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">parent=None</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.owned_by"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.owned_by</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns the name of the parent attribute</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.remove_other_references"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.remove_other_references</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+
+</PRE><H2>Description</H2><P>
+Abstract base class for the main thread of a TCP/IP based 
+VoiceCode server.</P>
+<P>
+ServerMainThread will launch several other threads:</P>
+<P>
+ListenNewEditorsThread listens for new editors to connect on the
+VC_LISTEN port.  It puts the new socket on the new_listen_socks
+Queue, and notifies ServerMainThread through a InterThreadEvent.
+This event will ensure that handshake_listen_socks is called to do
+the initial handshaking.  Once the listen socket has completed
+the initial handshaking, handshake_listen_socks appends it to the 
+pending_listen_socks list.  The editor will then open a </P>
+<P>
+NewConnListThread listens for the talker connections on the VC_TALK
+port.  It appends the new socket to the new_talk_socks list and 
+notifies ServerMainThread through a InterThreadEvent.  This event
+will ensure that handshake_talk_socks is called.
+handshake_talk_socks will go through the new_talk_socks list and
+pair them up with the elements of the pending_listen_socks with
+matching IDs, and will call package_sock_pair.  </P>
+<P>
+package_sock_pair will create a ListenAndQueueMsgsThread to listen 
+for data on the listen_sock and queue complete messages.  
+package_sock_pair will also create an instance of a subclass of 
+AppStateMessaging, with a MixedMessenger which sends messages 
+directly on the talk_sock, but reads them from this queue.  
+The LAQM Thread also notifies ServerMainThread using a
+SocketHasDataEvent.  This event will ensure that
+process_ready_socks is called, which will call
+listen_one_transaction on the appropriate AppStateMessaging.
+AppStateMessaging will also get messages from the editor off of the
+queue when it synchronizes with the editor at recognition starting</P>
+<P>
+The communication between the subsidiary threads and the main
+thread requires the event objects described above and a message loop 
+which receives messages from these event objects and calls the proper 
+ServerMainThread methods.  Some subclasses of ServerMainThread
+(ServerOldMediatorWin32Evt) supply these events themselves, and 
+have an internal message loop.  Others require an external object,
+which owns ServerMainThread (directly or indirectly), to supply the 
+event objects and the message loop.  the events to be </P>
+<P>
+This flexibility means that ServerMainThread relies on
+virtual functions to create the subsidiary threads.</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+[Queue] <EM>new_listen_socks</EM>
+<DD>Queue from which to get any new connections.
+Each item is [(socket, (STR, STR, (INT, STR, STR), BOOL))] 
+a 2ple consiting of a new (uninitialised) socket on the VC_LISTEN
+port, and data about that socket. The data is itself a 4ple
+consisting of: (a) identifier of external editor, (b) name of the
+external editor, (c) another tuple, consisting of window handle, title, 
+and module name of the active window, assumed to be the external editor, 
+and (d) a flag indicating whether the client is expecting to be used for
+regression testing. 
+<DT>
+<EM>[(socket, (None, None, None, None))] new_talk_socks</EM>
+<DD>the socket
+element of each 2ple is a new (uninitialised) socked
+ on the VC_TALK port.  The data part of the 2ple is useless.
+</DL>
+<P>
+[(socket, (STR, STR, (INT, STR, STR), BOOL)] 
+<EM>pending_listen_socks=[]</EM> -- Each entry is
+a 2ple consiting of a new (uninitialised) socket on the VC_LISTEN
+port, and data about that socket. The data is itself a 4ple
+consisting of: (a) identifier of external editor, (b) name of the
+external editor, (c) another tuple, consisting of window handle, title, 
+and module name of the active window, assumed to be the external editor, 
+and (d) a flag indicating whether the client is expecting to be used for
+regression testing. 
+Socks on the pending_listen_socks list have been through
+handshaking, but have not yet been packaged with corresponding
+talk_socks.</P>
+
+<DL>
+
+<DT>
+<EM>threading.lock new_socks_lock</EM>
+<DD>Lock used to make sure that the
+ main thread doesn't access the <EM>new_talk_socks</EM> list at the same 
+ time as the thread that listen for new socket connections.
+<DT>
+[ListenNewEditorsThread] <EM>new_listener_server</EM>
+<DD>Thread that
+listens for new connections on the VC_LISTEN port.
+<DT>
+[NewConnListThread] <EM>new_talker_server</EM>
+<DD>Thread that
+listens for new connections on the VC_TALK port.
+<DT>
+{STR : ListenAndQueueMsgsThread} <EM>data_threads</EM>
+<DD>map from unique 
+socket IDs to threads which poll for data from the listen messenger
+<DT>
+{STR : Event} <EM>connection_ending</EM>
+<DD>map from each unique 
+socket IDs to a corresponding threading.Event 
+used to signal to the corresponding data thread that the connection is 
+ending, or the server is quitting
+<DT>
+<EM>AppStateFactory editor_factory</EM>
+<DD>factory for creating new
+AppStateMessaging instances
+</DL>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<P>
+..[AppStateMessaging] AppStateMessaging.AppStateMessaging.html
+..[ListenForNewListenersThread] tcp_server.ListenForNewListenersThread.html
+..[ListenForNewTalkersThread] tcp_server.ListenForNewTalkersThread.html
+</P>
+<H2 ID="tcp_server.ServerMainThread._new_instance" CLASS="Method">tcp_server.ServerMainThread._new_instance(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>, <SPAN CLASS="Argument">instance</SPAN>, <SPAN CLASS="Argument">window_info</SPAN>, <SPAN CLASS="Argument">test_client=0</SPAN>)</H2>
+<P>None</P>
+
+<P>
+add a new AppStateMessaging.  Called internally by
+package_sock_pair</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+STR <EM>id</EM>
+<DD>The unique ID of the listen socket
+<DT>
+AppStateMessaging <EM>instance</EM> 
+<DD>the new instance
+<DT>
+<EM>(INT, STR, STR) window_info</EM>
+<DD>the window id, title, and module name
+of the external editor, or None if not detected yet
+<DT>
+BOOL <EM>test_client</EM>
+<DD>flag indicating whether or not the client
+is expecting to be used for regression testing
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the instance should be added to our list.
+false if we failed to create a new instance, or if we created
+it, but it should be destroyed because it has run
+the test suite and the server should exit 
+
+</DL>
+<H2 ID="tcp_server.ServerMainThread.data_event" CLASS="Method">tcp_server.ServerMainThread.data_event(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>)</H2>
+<P>None</P>
+
+<P>
+virtual method which supplies a data_event for ServerMainThread 
+subclasses </P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+STR <EM>id</EM>
+<DD>The unique ID of the listen socket
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>SocketHasDataEvent</EM>
+<DD>the data event which will allow the
+data thread to ensure that process_ready_socks is called.
+
+</DL>
+<H2 ID="tcp_server.ServerMainThread.deactivate_data_thread" CLASS="Method">tcp_server.ServerMainThread.deactivate_data_thread(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>)</H2>
+<P>None</P>
+
+<P>
+method to deactivate the data thread associated with a 
+given socket id.  <STRONG>Note:</STRONG> if the thread is daemonic (will not
+prevent the mediator process from ending), and the particular 
+thread class used doesn't provide a way to kill the thread, 
+this method may simply ensure that no messages from that thread
+are processed.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+STR <EM>id</EM>
+<DD>The unique identifier assigned by VoiceCode to
+the socket pair.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="tcp_server.ServerMainThread.handshake_listen_socks" CLASS="Method">tcp_server.ServerMainThread.handshake_listen_socks(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>Invoked when a new socket connection was opened on VC_LISTEN port.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="tcp_server.ServerMainThread.handshake_talk_socks" CLASS="Method">tcp_server.ServerMainThread.handshake_talk_socks(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Does a handshake on a the new socket connection that were opened on
+VC_LISTEN port.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>false if the server should exit (because we're done
+running the test suite)
+
+</DL>
+<H2 ID="tcp_server.ServerMainThread.is_test_server" CLASS="Method">tcp_server.ServerMainThread.is_test_server(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+indicates whether this server running in test mode, and
+waiting for the next test client</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the server was initialize in test mode
+
+</DL>
+<H2 ID="tcp_server.ServerMainThread.known_instance" CLASS="Method">tcp_server.ServerMainThread.known_instance(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns a reference to the AppStateMessaging instance 
+associated with  the given ID
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+STR <EM>id</EM>
+<DD>The unique ID of the listen socket
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>AppStateMessaging</EM>
+<DD>the corresponding instance, or None if
+the id is unknown
+</DL>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="tcp_server.ServerMainThread.new_data_thread" CLASS="Method">tcp_server.ServerMainThread.new_data_thread(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>, <SPAN CLASS="Argument">listen_sock</SPAN>, <SPAN CLASS="Argument">connection_ending</SPAN>, <SPAN CLASS="Argument">testing=0</SPAN>)</H2>
+<P>None</P>
+
+<P>
+creates a new ListenAndQueueMsgsThread to monitor the
+listen_sock</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+STR <EM>id</EM>
+<DD>The unique ID of the listen socket
+<DT>
+socket <EM>listen_sock</EM>
+<DD>The listen socket
+<DT>
+Event <EM>connection_ending</EM>
+<DD>threading.Event 
+used to signal to the data thread that the connection is 
+ending, or the server is quitting
+<DT>
+<EM>BOOL testing</EM>
+<DD>indicates whether we are running in regression
+testing mode
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+[ListenAndQueueMsgsThread]
+<DD>the new threading.Thread object
+</DL>
+<P>
+..[ListenAndQueueMsgsThread] 
+tcp_server.ListenAndQueueMsgsThread.html</P>
+<H2 ID="tcp_server.ServerMainThread.new_data_thread_given_event" CLASS="Method">tcp_server.ServerMainThread.new_data_thread_given_event(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>, <SPAN CLASS="Argument">listen_sock</SPAN>, <SPAN CLASS="Argument">data_event</SPAN>, <SPAN CLASS="Argument">connection_ending</SPAN>, <SPAN CLASS="Argument">testing=0</SPAN>)</H2>
+<P>None</P>
+
+<P>
+creates a new ListenAndQueueMsgsThread to monitor the
+listen_sock</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+STR <EM>id</EM>
+<DD>The unique ID of the listen socket
+<DT>
+socket <EM>listen_sock</EM>
+<DD>The listen socket
+<DT>
+SocketHasDataEvent <EM>data_event</EM>
+<DD>the SocketHasDataEvent event
+to pass to the new thread
+<DT>
+Event <EM>connection_ending</EM>
+<DD>threading.Event 
+used to signal to the data thread that the connection is 
+ending, or the server is quitting
+<DT>
+<EM>BOOL testing</EM>
+<DD>indicates whether we are running in regression
+testing mode
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+[ListenAndQueueMsgsThread]
+<DD>the new threading.Thread object
+</DL>
+<P>
+..[ListenAndQueueMsgsThread] 
+tcp_server.ListenAndQueueMsgsThread.html</P>
+<H2 ID="tcp_server.ServerMainThread.package_sock_pair" CLASS="Method">tcp_server.ServerMainThread.package_sock_pair(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">id</SPAN>, <SPAN CLASS="Argument">app_name</SPAN>, <SPAN CLASS="Argument">window_info</SPAN>, <SPAN CLASS="Argument">listen_sock</SPAN>, <SPAN CLASS="Argument">talk_sock</SPAN>, <SPAN CLASS="Argument">test_client=0</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Packages a listen and talk socket into an
+[AppStateMessaging] instance</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+STR <EM>id</EM>
+<DD>The unique identifier assigned by VoiceCode to
+that socket pair.
+<DT>
+STR <EM>app_name</EM>
+<DD>Name of the external editor.
+<DT>
+<EM>(INT, STR, STR) window_info</EM>
+<DD>the window id, title, and module name
+<DT>
+socket <EM>listen_sock</EM>
+<DD>The listen socket
+<DT>
+socket <EM>talk_sock</EM>
+<DD>The talk socket
+<DT>
+BOOL <EM>test_client</EM>
+<DD>flag indicating whether or not the client
+is expecting to be used for regression testing
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>false if the server should exit (because we're done
+running the test suite)
+</DL>
+<P>
+..[AppStateMessaging] messaging.AppStateMessaging.html</P>
+<H2 ID="tcp_server.ServerMainThread.possible_editor_cleanup" CLASS="Method">tcp_server.ServerMainThread.possible_editor_cleanup(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app</SPAN>)</H2>
+<P>None</P>
+
+<P>
+cleanup AppState corresponding to editor used in regression
+tests, unless we are using NewMediatorObject, where AppMgr will
+already have taken care of this.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>AppStateMessaging app</EM>
+<DD>the editor interface
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="tcp_server.ServerMainThread.process_ready_socks" CLASS="Method">tcp_server.ServerMainThread.process_ready_socks(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">ready_socks=None</SPAN>)</H2>
+<P>Processes socket connections that have received new data.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+[STR] <EM>ready_socks</EM>
+<DD>List of IDs of sockets which may
+have messages waiting, or None to check all sockets in
+data_threads.keys()
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="tcp_server.ServerMainThread.remove_other_references" CLASS="Method">tcp_server.ServerMainThread.remove_other_references(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Perform any cleanup prior to quitting.  Called when the main 
+thread has exited its event loop.  Subclasses which override
+this method should be sure to call their parent class's version
+after doing their own cleanup.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="tcp_server.ServerMainThread.start_other_threads" CLASS="Method">tcp_server.ServerMainThread.start_other_threads(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">listener_evt</SPAN>, <SPAN CLASS="Argument">talker_evt</SPAN>)</H2>
+<P>None</P>
+
+<P>
+method called to start the secondary threads which
+monitor the VC_TALK and VC_LISTEN ports.  These threads communicate
+with the main thread by means of InterThreadEvent objects, to
+let the main thread know to initialize them.</P>
+<P>
+These tasks are handled by separate threads because they can
+block.   The secondary threads do not do the initialization
+directly because that involves invoking some natlink methods, 
+and Natlink does not behave well outside of the main thread.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>InterThreadEvent</EM> listener_evt
+<DD>event object for the
+ListenNewEditorsThread to use to notify the main thread that a
+new editor has connected on the VC_LISTEN port, and that
+handshake_listen_socks should be called
+<DT>
+<EM>InterThreadEvent</EM> talker_evt
+<DD>event object for the
+NewConnListThread to use to notify the main thread that a
+new talker connection has been established on the VC_TALK port, 
+and that handshake_talk_socks should be called
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM> 
+</P>
+<H2 ID="tcp_server.ServerMainThread.user_message" CLASS="Method">tcp_server.ServerMainThread.user_message(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">message</SPAN>)</H2>
+<P>None</P>
+
+<P>
+displays a user message via the appropriate channel
+(e.g. stdout, or a MediatorConsole status line, or an 
+editor-specific status line if supported.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR message</EM>
+<DD>the message
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises existing attributes, unless those attributes
+already exist</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.OwnerObject._cleanup_object" CLASS="Method">Object.OwnerObject._cleanup_object(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">object</SPAN>)</H2>
+<P>attempt to call cleanup on object</P>
+
+<P>
+<STRONG>INPUTS*</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>OwnerObject object</EM>
+<DD>note: class of object is the expected
+class, but _cleanup_object doesn't assume this is correct, nor
+does it check whether the object is a subclass of
+OwnerObject, only that it is a class instance and that it
+has a cleanup attribute
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>reason for error (or None if no error).
+
+</DL>
+<H2 ID="Object.OwnerObject.add_grandparent" CLASS="Method">Object.OwnerObject.add_grandparent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grandparent</SPAN>)</H2>
+<P>None</P>
+
+<P>
+specify the name of the attribute containing a reference to 
+this object's grandparent (or great-grandparent, etc.)
+(Actually, any other reference which needs to be del'ed but not
+cleaned up)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR grandparent</EM>
+<DD>names of owned attributes
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.add_owned" CLASS="Method">Object.OwnerObject.add_owned(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)</H2>
+<P>append a new attribute name to the list of owned objects</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR owned</EM>
+<DD>names of owned attributes
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.add_owned_list" CLASS="Method">Object.OwnerObject.add_owned_list(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)</H2>
+<P>append new attribute names to the list of owned objects</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR] owned</EM>
+<DD>names of owned attributes
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.cleanup" CLASS="Method">Object.OwnerObject.cleanup(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+method to cleanup circular references by cleaning up 
+any children, and then removing the reference to the parent</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.name_parent" CLASS="Method">Object.OwnerObject.name_parent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">parent=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+specify the name of the attribute containing a reference to 
+this object's parent.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR parent</EM>
+<DD>name of the parent, or None if none
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.owned_by" CLASS="Method">Object.OwnerObject.owned_by(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns the name of the parent attribute</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>name of the parent, or None if none
+
+</DL>
+<H2 ID="Object.OwnerObject.remove_other_references" CLASS="Method">Object.OwnerObject.remove_other_references(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+additional cleanup to ensure that this object's references to
+its owned objects are the last remaining references</P>
+<P>
+<STRONG>NOTE:</STRONG> subclasses must call their parent class's 
+remove_other_references method, after performing their own duties.
+Also, a class inheriting from two OwnerObject classes MUST
+define remove_other_references and call both subclasses'
+versions</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

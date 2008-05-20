@@ -1,0 +1,477 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Dec 26 23:45:46 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class ClientConnection</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class ClientConnection</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="tcp_client.html">tcp_client</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">tcp_client.ClientConnection<BR>
+&nbsp;&nbsp;Object.Object<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ClientConnection</SPAN>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_client.ClientConnection.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_client.ClientConnection.connect"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_client.ClientConnection.connect</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app_name</SPAN>, <SPAN CLASS="Argument">data_event</SPAN>, <SPAN CLASS="Argument">host=None</SPAN>, <SPAN CLASS="Argument">listen_port=None</SPAN>, <SPAN CLASS="Argument">talk_port=None</SPAN>, <SPAN CLASS="Argument">test_client=0</SPAN>)<SPAN CLASS="OneLiner"> # connect to the mediator</SPAN>
+    <A CLASS="DocLink" HREF="#tcp_client.ClientConnection.disconnect"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_client.ClientConnection.disconnect</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_client.ClientConnection.is_connected"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_client.ClientConnection.is_connected</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_client.ClientConnection.listen"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_client.ClientConnection.listen</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">listen_sock</SPAN>, <SPAN CLASS="Argument">data_event</SPAN>)<SPAN CLASS="OneLiner"> # creates and starts a data thread on the listen_sock</SPAN>
+    <A CLASS="DocLink" HREF="#tcp_client.ClientConnection.new_data_thread_given_event"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_client.ClientConnection.new_data_thread_given_event</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">listen_sock</SPAN>, <SPAN CLASS="Argument">data_event</SPAN>)
+    <A CLASS="DocLink" HREF="#tcp_client.ClientConnection.open_vc_listener_conn"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_client.ClientConnection.open_vc_listener_conn</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app_name</SPAN>, <SPAN CLASS="Argument">host</SPAN>, <SPAN CLASS="Argument">listen_port</SPAN>, <SPAN CLASS="Argument">test_client=0</SPAN>)<SPAN CLASS="OneLiner"> # Connects to VoiceCode on the listen port</SPAN>
+    <A CLASS="DocLink" HREF="#tcp_client.ClientConnection.open_vc_talker_conn"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">tcp_client.ClientConnection.open_vc_talker_conn</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">host</SPAN>, <SPAN CLASS="Argument">talk_port</SPAN>)<SPAN CLASS="OneLiner"> # Connects to VoiceCode on the talk port</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+</PRE><H2>Description</H2><P>
+class for connecting to the TCP mediator server and listening for 
+incoming messages.</P>
+<P>
+connect will create a ListenAndQueueMsgsThread to listen 
+for data on the talk_sock (the mediator server talks on the talk_sock, 
+while we listen) and queue complete messages.  
+The LAQM Thread also notifies the main thread of a pending message using a
+SocketHasDataEvent.  </P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+ListenAndQueueMsgsThread <EM>data_thread</EM>
+<DD>thread which polls for data from the listen messenger
+<DT>
+BOOL <EM>connecting</EM>
+<DD>flag indicating that the server is in the
+process of connecting to the mediator
+<DT>
+BOOL <EM>connected</EM>
+<DD>flag indicating that the server is 
+connected to the mediator
+<DT>
+STR <EM>ID</EM>
+<DD>unique ID assigned to this connection
+<DT>
+Event <EM>client_quitting</EM>
+<DD>threading.Event 
+used to signal to the data thread that the connection is 
+ending, or the client is quitting
+</DL>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="tcp_client.ClientConnection.connect" CLASS="Method">tcp_client.ClientConnection.connect(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app_name</SPAN>, <SPAN CLASS="Argument">data_event</SPAN>, <SPAN CLASS="Argument">host=None</SPAN>, <SPAN CLASS="Argument">listen_port=None</SPAN>, <SPAN CLASS="Argument">talk_port=None</SPAN>, <SPAN CLASS="Argument">test_client=0</SPAN>)</H2>
+<P>connect to the mediator</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> app_name
+<DD>name of the application to give to the
+mediator
+<DT>
+SocketHasDataEvent <EM>data_event</EM>
+<DD>the SocketHasDataEvent event
+to pass to the new data thread so it can notify the main thread
+when there is a command waiting in the queue.  Unlike the
+server, there is only one connection and one data socket per client, 
+so we don't need to give the socket a unique ID and create a 
+data_event based on that ID.
+<DT>
+<EM>STR</EM> host
+<DD>name or IP address of the host on which the
+mediator server is running.  Defaults to a server running
+locally.
+<DT>
+<EM>INT</EM> listen_port
+<DD>port number on which the server expects
+new listen connections.  Defaults to VC_LISTENER_PORT
+<DT>
+<EM>INT</EM> talk_port
+<DD>port number on which the server expects
+new talk connections.  Defaults to VC_TALKER_PORT
+<DT>
+<EM>BOOL</EM> test_client
+<DD>true if this connection is for a client
+expecting to run regression tests
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>(Messenger, MixedMessenger)</EM>
+<DD>a tuple containing the Messenger 
+for the talk connection and the MixedMessenger for the listen
+connection, or None if the connection was not made successfully
+
+</DL>
+<H2 ID="tcp_client.ClientConnection.disconnect" CLASS="Method">tcp_client.ClientConnection.disconnect(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+disconnect from the mediator.  Note that ClientEditor has the
+messengers, so it will have to be in charge of 
+notifying the mediator that we are disconnecting 
+(if it was client-initiated).  It should do so after this call.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if we disconnected successfully
+
+</DL>
+<H2 ID="tcp_client.ClientConnection.is_connected" CLASS="Method">tcp_client.ClientConnection.is_connected(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+tells whether the client is currently connected or connecting
+to the mediator</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the  client is currently connected (or
+connecting) to a mediator
+
+</DL>
+<H2 ID="tcp_client.ClientConnection.listen" CLASS="Method">tcp_client.ClientConnection.listen(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">listen_sock</SPAN>, <SPAN CLASS="Argument">data_event</SPAN>)</H2>
+<P>creates and starts a data thread on the listen_sock</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+socket <EM>listen_sock</EM>
+<DD>The listen socket
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>MixedMessenger</EM>
+<DD>a MixedMessenger for the listen socket, which 
+sends messages via an underlying MessengerBasic, but receives them 
+from a Queue.
+
+</DL>
+<H2 ID="tcp_client.ClientConnection.new_data_thread_given_event" CLASS="Method">tcp_client.ClientConnection.new_data_thread_given_event(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">listen_sock</SPAN>, <SPAN CLASS="Argument">data_event</SPAN>)</H2>
+<P>None</P>
+
+<P>
+creates a new ListenAndQueueMsgsThread to monitor the
+listen_sock</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+SocketHasDataEvent <EM>data_event</EM>
+<DD>the SocketHasDataEvent event
+to pass to the new thread
+<DT>
+STR <EM>ID</EM>
+<DD>The unique ID of the listen socket
+<DT>
+socket <EM>listen_sock</EM>
+<DD>The listen socket
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+[ListenAndQueueMsgsThread]
+<DD>the new threading.Thread object
+</DL>
+<P>
+..[ListenAndQueueMsgsThread] 
+tcp_server.ListenAndQueueMsgsThread.html</P>
+<H2 ID="tcp_client.ClientConnection.open_vc_listener_conn" CLASS="Method">tcp_client.ClientConnection.open_vc_listener_conn(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app_name</SPAN>, <SPAN CLASS="Argument">host</SPAN>, <SPAN CLASS="Argument">listen_port</SPAN>, <SPAN CLASS="Argument">test_client=0</SPAN>)</H2>
+<P>Connects to VoiceCode on the listen port</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> app_name
+<DD>name of the application to give to the
+mediator
+<DT>
+<EM>STR</EM> host
+<DD>name or IP address of the host on which the
+mediator server is running.  Defaults to a server running
+locally.
+<DT>
+<EM>INT</EM> listen_port
+<DD>port number on which the server expects
+new listen connections
+<DT>
+<EM>BOOL</EM> test_client
+<DD>true if this connection is for a client
+expecting to run regression tests
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>Messenger</EM>
+<DD>a Messenger for the vc_listener connection, or 
+None if the connection was not made successfully
+
+</DL>
+<H2 ID="tcp_client.ClientConnection.open_vc_talker_conn" CLASS="Method">tcp_client.ClientConnection.open_vc_talker_conn(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">host</SPAN>, <SPAN CLASS="Argument">talk_port</SPAN>)</H2>
+<P>Connects to VoiceCode on the talk port</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> host
+<DD>name or IP address of the host on which the
+mediator server is running.  Defaults to a server running
+locally.
+<DT>
+<EM>INT</EM> talk_port
+<DD>port number on which the server expects
+new talk connections
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>socket</EM>
+<DD>socket for the talk connection, or None if the 
+connection was not made successfully
+
+</DL>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises existing attributes, unless those attributes
+already exist</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

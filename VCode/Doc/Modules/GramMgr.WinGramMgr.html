@@ -1,0 +1,1092 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Jan 01 12:59:01 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class WinGramMgr</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class WinGramMgr</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="GramMgr.html">GramMgr</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">GramMgr.WinGramMgr<BR>
+&nbsp;&nbsp;<A HREF="GramMgr.GramMgrDictContext.html">GramMgr.GramMgrDictContext</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="GramMgr.GramMgr.html">GramMgr.GramMgr</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object.OwnerObject<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">WinGramMgr</SPAN>(<A CLASS="DocLink" HREF="GramMgr.GramMgrDictContext.html">GramMgrDictContext</A>):
+    <A CLASS="DocLink" HREF="#GramMgr.WinGramMgr.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.WinGramMgr.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">factory</SPAN>, <SPAN CLASS="Argument">global_grammars=0</SPAN>, <SPAN CLASS="Argument">exclusive=0</SPAN>, <SPAN CLASS="Argument">correction=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.WinGramMgr._deactivate_all_window"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.WinGramMgr._deactivate_all_window</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.WinGramMgr.activate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.WinGramMgr.activate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>, <SPAN CLASS="Argument">window</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.WinGramMgr.buffer_closed"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.WinGramMgr.buffer_closed</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.WinGramMgr.deactivate_all"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.WinGramMgr.deactivate_all</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window=None</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.WinGramMgr.delete_window"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.WinGramMgr.delete_window</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.WinGramMgr.new_buffer"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.WinGramMgr.new_buffer</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>, <SPAN CLASS="Argument">window=None</SPAN>)<SPAN CLASS="OneLiner"> # add grammars for new buffer/window</SPAN>
+    <A CLASS="DocLink" HREF="#GramMgr.WinGramMgr.new_window"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.WinGramMgr.new_window</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>, <SPAN CLASS="Argument">buffer=None</SPAN>)<SPAN CLASS="OneLiner"> # add a new window</SPAN>
+    <A CLASS="DocLink" HREF="#GramMgr.WinGramMgr.remove_other_references"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.WinGramMgr.remove_other_references</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.WinGramMgr.rename_buffer_cbk"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.WinGramMgr.rename_buffer_cbk</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">old_buff_name</SPAN>, <SPAN CLASS="Argument">new_buff_name</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.WinGramMgr.using_global"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.WinGramMgr.using_global</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.OwnerObject</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject._cleanup_object"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject._cleanup_object</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">object</SPAN>)<SPAN CLASS="OneLiner"> # attempt to call cleanup on object</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_grandparent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_grandparent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grandparent</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_owned"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_owned</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)<SPAN CLASS="OneLiner"> # append a new attribute name to the list of owned objects</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.add_owned_list"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.add_owned_list</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)<SPAN CLASS="OneLiner"> # append new attribute names to the list of owned objects</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.cleanup"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.cleanup</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.name_parent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.name_parent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">parent=None</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.owned_by"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.owned_by</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns the name of the parent attribute</SPAN>
+    <A CLASS="DocLink" HREF="#Object.OwnerObject.remove_other_references"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.OwnerObject.remove_other_references</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from GramMgr.GramMgr</SPAN>
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">recog_mgr</SPAN>, <SPAN CLASS="Argument">app</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)<SPAN CLASS="OneLiner"> # constructor</SPAN>
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.activate"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.activate</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>, <SPAN CLASS="Argument">window</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.buffer_closed"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.buffer_closed</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.correct_last"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.correct_last</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # initiate user correction of the most recent utterance, if possible</SPAN>
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.correct_recent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.correct_recent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.deactivate_all"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.deactivate_all</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window=None</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.delete_window"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.delete_window</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.interpret_dictation"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.interpret_dictation</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">result</SPAN>, <SPAN CLASS="Argument">initial_buffer=None</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.interpreter"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.interpreter</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # return a reference to the mediator's current CmdInterp object</SPAN>
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.name"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.name</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns the name of the AppState editor instance </SPAN>
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.new_buffer"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.new_buffer</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>, <SPAN CLASS="Argument">window=None</SPAN>)<SPAN CLASS="OneLiner"> # add grammars for new buffer/window</SPAN>
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.new_window"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.new_window</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)<SPAN CLASS="OneLiner"> # add a new window</SPAN>
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.remove_other_references"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.remove_other_references</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.rename_buffer_cbk"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.rename_buffer_cbk</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">old_buff_name</SPAN>, <SPAN CLASS="Argument">new_buff_name</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.scratch_recent"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.scratch_recent</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">n</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.user_message"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.user_message</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">message</SPAN>)
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgr.using_global"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgr.using_global</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from GramMgr.GramMgrDictContext</SPAN>
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgrDictContext.find_context"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgrDictContext.find_context</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>)<SPAN CLASS="OneLiner"> # Find context for dictation grammar</SPAN>
+    <A CLASS="DocLink" HREF="#GramMgr.GramMgrDictContext.interpret_dictation"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">GramMgr.GramMgrDictContext.interpret_dictation</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">result</SPAN>, <SPAN CLASS="Argument">initial_buffer=None</SPAN>)
+
+</PRE><H2>Description</H2><P>
+implementation of GramMgr using window-specific grammars from
+a WinGramFactory.</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{INT : {STR : WinDictGram}}</EM> dict_grammars
+<DD>map from window handles to
+map from buffer names to dictation grammars
+<DT>
+<EM>{INT : SelectWinGram}</EM> sel_grammars
+<DD>map from window handles to
+to selection grammars
+<DT>
+<EM>{INT : BasicCorrectWinGram}</EM> correction_grammars
+<DD>map from 
+window handles to grammars containing basic correction commands
+<DT>
+<EM>WinGramFactory</EM> factory
+<DD>factory which supplies WinGramMgr
+with new window-specific dictation and selection grammars.
+<DT>
+<EM>STR</EM> correction
+<DD>string indicating the type of correction
+which is available: <CODE>basic</CODE> or <CODE>advanced</CODE>, or None if no 
+correction is available
+</DL>
+<P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.WinGramMgr.__init__" CLASS="Method">GramMgr.WinGramMgr.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">factory</SPAN>, <SPAN CLASS="Argument">global_grammars=0</SPAN>, <SPAN CLASS="Argument">exclusive=0</SPAN>, <SPAN CLASS="Argument">correction=None</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>None</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>WinGramFactory</EM> factory
+<DD>factory which will supply WinGramMgr
+with new window-specific dictation and selection grammars.
+<DT>
+<EM>BOOL</EM> global_grammars
+<DD>use global grammars, instead of
+window-specific ones (only for testing purposes)
+<DT>
+<EM>BOOL</EM> exclusive
+<DD>use exclusive grammars which prevent 
+non-exclusive grammars from getting results (only for testing purposes)
+<DT>
+<EM>STR</EM> correction
+<DD>string indicating the type of correction
+which is available: <CODE>basic</CODE> or <CODE>advanced</CODE>, or None if no 
+correction is available
+
+</DL>
+<H2 ID="GramMgr.WinGramMgr._deactivate_all_window" CLASS="Method">GramMgr.WinGramMgr._deactivate_all_window(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)</H2>
+<P>None</P>
+
+<P>
+de-activate all buffer-specific grammars which would be
+active in window</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> window
+<DD>identifier of current window.  Only grammars associated with 
+that window will be explicitly de-activated.  
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.WinGramMgr.activate" CLASS="Method">GramMgr.WinGramMgr.activate(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>, <SPAN CLASS="Argument">window</SPAN>)</H2>
+<P>None</P>
+
+<P>
+activate grammars for a buffer displayed in a particular
+window, and deactivate all other buffer/window-specific grammars</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> buffer
+<DD>name of buffer
+<DT>
+<EM>INT</EM> window
+<DD>number identifying the current window  displaying
+the buffer.  In Microsoft Windows, this will be the window
+handle
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.WinGramMgr.buffer_closed" CLASS="Method">GramMgr.WinGramMgr.buffer_closed(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>)</H2>
+<P>None</P>
+
+<P>
+clean up and destroy all grammars for a buffer which 
+has been closed.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> buffer
+<DD>name of buffer
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.WinGramMgr.deactivate_all" CLASS="Method">GramMgr.WinGramMgr.deactivate_all(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+de-activate all buffer-specific grammars which would be
+active in window, or all grammars if window is omitted.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> window
+<DD>identifier of current window.  If grammars are window-specific,
+then only grammars associated with that window need be
+explicitly de-activated.  If window is omitted, de-activate all
+grammars.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.WinGramMgr.delete_window" CLASS="Method">GramMgr.WinGramMgr.delete_window(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)</H2>
+<P>None</P>
+
+<P>
+clean up and destroy all grammars for a window which 
+has been deleted.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> window
+<DD>number identifying the current window  displaying
+the buffer.  In Microsoft Windows, this will be the window
+handle
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.WinGramMgr.new_buffer" CLASS="Method">GramMgr.WinGramMgr.new_buffer(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>, <SPAN CLASS="Argument">window=None</SPAN>)</H2>
+<P>add grammars for new buffer/window</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> buffer
+<DD>name of buffer
+<DT>
+<EM>INT</EM> window
+<DD>number identifying the current window  displaying
+the buffer.  In Microsoft Windows, this will be the window
+handle.
+</DL>
+<P>
+Note: if window is omitted, 
+then new_buffer may not be created until activate is called.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.WinGramMgr.new_window" CLASS="Method">GramMgr.WinGramMgr.new_window(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>, <SPAN CLASS="Argument">buffer=None</SPAN>)</H2>
+<P>add a new window</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> window
+<DD>number identifying the current window  displaying
+the buffer.  In Microsoft Windows, this will be the window
+handle.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.WinGramMgr.remove_other_references" CLASS="Method">GramMgr.WinGramMgr.remove_other_references(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+additional cleanup to ensure that this object's references to
+its owned objects are the last remaining references</P>
+<P>
+<STRONG>NOTE:</STRONG> subclasses must call their parent class's 
+remove_other_references method, after performing their own duties.
+Also, a class inheriting from two OwnerObject classes MUST
+define remove_other_references and call both subclasses'
+versions</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.WinGramMgr.rename_buffer_cbk" CLASS="Method">GramMgr.WinGramMgr.rename_buffer_cbk(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">old_buff_name</SPAN>, <SPAN CLASS="Argument">new_buff_name</SPAN>)</H2>
+<P>None</P>
+
+<P>
+callback which notifies us that the application
+has renamed a buffer</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> instance
+<DD>name of the application instance 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> old_buff_name
+<DD>old name of the buffer 
+<DT>
+<EM>STR</EM> new_buff_name
+<DD>new name of the buffer 
+</DL>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.WinGramMgr.using_global" CLASS="Method">GramMgr.WinGramMgr.using_global(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+checks whether GramMgr creates global grammars, rather than 
+window-specific ones</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the global_grammars flag has been set to
+produce global grammars
+
+</DL>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises existing attributes, unless those attributes
+already exist</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.OwnerObject._cleanup_object" CLASS="Method">Object.OwnerObject._cleanup_object(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">object</SPAN>)</H2>
+<P>attempt to call cleanup on object</P>
+
+<P>
+<STRONG>INPUTS*</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>OwnerObject object</EM>
+<DD>note: class of object is the expected
+class, but _cleanup_object doesn't assume this is correct, nor
+does it check whether the object is a subclass of
+OwnerObject, only that it is a class instance and that it
+has a cleanup attribute
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>reason for error (or None if no error).
+
+</DL>
+<H2 ID="Object.OwnerObject.add_grandparent" CLASS="Method">Object.OwnerObject.add_grandparent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">grandparent</SPAN>)</H2>
+<P>None</P>
+
+<P>
+specify the name of the attribute containing a reference to 
+this object's grandparent (or great-grandparent, etc.)
+(Actually, any other reference which needs to be del'ed but not
+cleaned up)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR grandparent</EM>
+<DD>names of owned attributes
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.add_owned" CLASS="Method">Object.OwnerObject.add_owned(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)</H2>
+<P>append a new attribute name to the list of owned objects</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR owned</EM>
+<DD>names of owned attributes
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.add_owned_list" CLASS="Method">Object.OwnerObject.add_owned_list(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">owned</SPAN>)</H2>
+<P>append new attribute names to the list of owned objects</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR] owned</EM>
+<DD>names of owned attributes
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.cleanup" CLASS="Method">Object.OwnerObject.cleanup(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+method to cleanup circular references by cleaning up 
+any children, and then removing the reference to the parent</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.name_parent" CLASS="Method">Object.OwnerObject.name_parent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">parent=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+specify the name of the attribute containing a reference to 
+this object's parent.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR parent</EM>
+<DD>name of the parent, or None if none
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="Object.OwnerObject.owned_by" CLASS="Method">Object.OwnerObject.owned_by(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns the name of the parent attribute</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>name of the parent, or None if none
+
+</DL>
+<H2 ID="Object.OwnerObject.remove_other_references" CLASS="Method">Object.OwnerObject.remove_other_references(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+additional cleanup to ensure that this object's references to
+its owned objects are the last remaining references</P>
+<P>
+<STRONG>NOTE:</STRONG> subclasses must call their parent class's 
+remove_other_references method, after performing their own duties.
+Also, a class inheriting from two OwnerObject classes MUST
+define remove_other_references and call both subclasses'
+versions</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.__init__" CLASS="Method">GramMgr.GramMgr.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">recog_mgr</SPAN>, <SPAN CLASS="Argument">app</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P>constructor</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>RecogStartMgr recog_mgr</EM>
+<DD>the RecogStartMgr which owns this
+grammar manager
+<DT>
+<EM>AppState</EM> app
+<DD>the application to which the buffers belong
+<DT>
+<EM>STR instance_name</EM>
+<DD>the name of this AppState instance 
+
+</DL>
+<H2 ID="GramMgr.GramMgr.activate" CLASS="Method">GramMgr.GramMgr.activate(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>, <SPAN CLASS="Argument">window</SPAN>)</H2>
+<P>None</P>
+
+<P>
+activate grammars for a buffer displayed in a particular
+window, and deactivate all other buffer/window-specific grammars</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> buffer
+<DD>name of buffer
+<DT>
+<EM>INT</EM> window
+<DD>number identifying the current window  displaying
+the buffer.  In Microsoft Windows, this will be the window
+handle
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.buffer_closed" CLASS="Method">GramMgr.GramMgr.buffer_closed(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>)</H2>
+<P>None</P>
+
+<P>
+clean up and destroy all grammars for a buffer which 
+has been closed.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> buffer
+<DD>name of buffer
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.correct_last" CLASS="Method">GramMgr.GramMgr.correct_last(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>initiate user correction of the most recent utterance, if possible</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.correct_recent" CLASS="Method">GramMgr.GramMgr.correct_recent(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+initiate user correction of one or more recent utterances,
+if possible</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.deactivate_all" CLASS="Method">GramMgr.GramMgr.deactivate_all(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+de-activate all buffer-specific grammars which would be
+active in window, or all grammars if window is omitted.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> window
+<DD>identifier of current window.  If grammars are window-specific,
+then only grammars associated with that window need be
+explicitly de-activated.  If window is omitted, de-activate all
+grammars.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.delete_window" CLASS="Method">GramMgr.GramMgr.delete_window(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)</H2>
+<P>None</P>
+
+<P>
+clean up and destroy all grammars for a window which 
+has been deleted.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> window
+<DD>number identifying the current window  displaying
+the buffer.  In Microsoft Windows, this will be the window
+handle
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.interpret_dictation" CLASS="Method">GramMgr.GramMgr.interpret_dictation(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">result</SPAN>, <SPAN CLASS="Argument">initial_buffer=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+interpret the result of recognition by a dictation grammar,
+and store the relevant information to allow for correction.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>SpokenUtterance result</EM>
+<DD>a SpokenUtterance object
+representing the recognition results
+<DT>
+<EM>STR initial_buffer</EM>
+<DD>the name of the initial buffer which was
+active at recognition-starting
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.interpreter" CLASS="Method">GramMgr.GramMgr.interpreter(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>return a reference to the mediator's current CmdInterp object</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.name" CLASS="Method">GramMgr.GramMgr.name(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns the name of the AppState editor instance </P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>the instance name
+
+</DL>
+<H2 ID="GramMgr.GramMgr.new_buffer" CLASS="Method">GramMgr.GramMgr.new_buffer(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>, <SPAN CLASS="Argument">window=None</SPAN>)</H2>
+<P>add grammars for new buffer/window</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> buffer
+<DD>name of buffer
+<DT>
+<EM>INT</EM> window
+<DD>number identifying the current window  displaying
+the buffer.  In Microsoft Windows, this will be the window
+handle.
+</DL>
+<P>
+Note: if grammars are window-specific, and window is omitted, 
+then new_buffer may not be created until activate is called.</P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.new_window" CLASS="Method">GramMgr.GramMgr.new_window(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">window</SPAN>)</H2>
+<P>add a new window</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM> window
+<DD>number identifying the current window  displaying
+the buffer.  In Microsoft Windows, this will be the window
+handle.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.remove_other_references" CLASS="Method">GramMgr.GramMgr.remove_other_references(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+additional cleanup to ensure that this object's references to
+its owned objects are the last remaining references</P>
+<P>
+<STRONG>NOTE:</STRONG> subclasses must call their parent class's 
+remove_other_references method, after performing their own duties.
+Also, a class inheriting from two OwnerObject classes MUST
+define remove_other_references and call both subclasses'
+versions</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.rename_buffer_cbk" CLASS="Method">GramMgr.GramMgr.rename_buffer_cbk(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">old_buff_name</SPAN>, <SPAN CLASS="Argument">new_buff_name</SPAN>)</H2>
+<P>None</P>
+
+<P>
+callback which notifies us that the application
+has renamed a buffer</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> old_buff_name
+<DD>old name of the buffer 
+<DT>
+<EM>STR</EM> new_buff_name
+<DD>new name of the buffer 
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.scratch_recent" CLASS="Method">GramMgr.GramMgr.scratch_recent(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">n</SPAN>)</H2>
+<P>None</P>
+
+<P>
+undo the effect of the n most recent utterances into 
+this application, if possible</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT n</EM>
+<DD>number of utterances to undo
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>INT</EM>
+<DD>number of utterances successfully undone
+
+</DL>
+<H2 ID="GramMgr.GramMgr.user_message" CLASS="Method">GramMgr.GramMgr.user_message(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">message</SPAN>)</H2>
+<P>None</P>
+
+<P>
+sends a user message up the chain to the NewMediatorObject to
+be displayed</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR message</EM>
+<DD>the message
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="GramMgr.GramMgr.using_global" CLASS="Method">GramMgr.GramMgr.using_global(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+checks whether GramMgr creates global grammars, rather than 
+window-specific ones</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the GramMgr produces global grammars
+
+</DL>
+<H2 ID="GramMgr.GramMgrDictContext.find_context" CLASS="Method">GramMgr.GramMgrDictContext.find_context(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">buffer</SPAN>)</H2>
+<P>Find context for dictation grammar</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR buffer</EM>
+<DD>name of the current buffer
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+(STR, STR)
+<DD>(two-word) context before and after the current
+selection
+
+</DL>
+<H2 ID="GramMgr.GramMgrDictContext.interpret_dictation" CLASS="Method">GramMgr.GramMgrDictContext.interpret_dictation(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">result</SPAN>, <SPAN CLASS="Argument">initial_buffer=None</SPAN>)</H2>
+<P>None</P>
+
+<P>
+interpret the result of recognition by a dictation grammar,
+and store the relevant information to allow for correction.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>SpokenUtterance result</EM>
+<DD>a SpokenUtterance object
+representing the recognition results
+<DT>
+<EM>STR initial_buffer</EM>
+<DD>the name of the initial buffer which was
+active at recognition-starting
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:37:29 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class PersistentConfigNewMediator</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class PersistentConfigNewMediator</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="regression.html">regression</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">regression.PersistentConfigNewMediator<BR>
+&nbsp;&nbsp;Object.Object<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">PersistentConfigNewMediator</SPAN>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>):
+    <A CLASS="DocLink" HREF="#regression.PersistentConfigNewMediator.__init__"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">regression.PersistentConfigNewMediator.__init__</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">mediator</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">names</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=1</SPAN>, <SPAN CLASS="Argument">correction=None</SPAN>, <SPAN CLASS="Argument">bypass_sr_recog=0</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)<SPAN CLASS="OneLiner"> # <STRONG>INPUTS</STRONG></SPAN>
+    <A CLASS="DocLink" HREF="#regression.PersistentConfigNewMediator.correction_available"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">regression.PersistentConfigNewMediator.correction_available</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#regression.PersistentConfigNewMediator.editor"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">regression.PersistentConfigNewMediator.editor</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#regression.PersistentConfigNewMediator.execute_command"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">regression.PersistentConfigNewMediator.execute_command</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)
+    <A CLASS="DocLink" HREF="#regression.PersistentConfigNewMediator.init_simulator_regression"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">regression.PersistentConfigNewMediator.init_simulator_regression</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>)<SPAN CLASS="OneLiner"> # re-initialize the mediator, using the same editor application</SPAN>
+    <A CLASS="DocLink" HREF="#regression.PersistentConfigNewMediator.instance_name"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">regression.PersistentConfigNewMediator.instance_name</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#regression.PersistentConfigNewMediator.kbd_event_sim_factory"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">regression.PersistentConfigNewMediator.kbd_event_sim_factory</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app</SPAN>)
+    <A CLASS="DocLink" HREF="#regression.PersistentConfigNewMediator.mediator"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">regression.PersistentConfigNewMediator.mediator</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#regression.PersistentConfigNewMediator.namespace"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">regression.PersistentConfigNewMediator.namespace</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+</PRE><H2>Description</H2><P>
+implementation of PersistentConfig which resets a pre-existing
+NewMediatorObject</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>NewMediatorObject the_mediator</EM>
+<DD>the existing mediator, which will be
+reset by the init_simulator_regression method
+<DT>
+<EM>{STR:ANY} names</EM>
+<DD>the namespace dictionary in which the
+regression test definitions file, tests_def, has been (or will be) 
+run with execfile
+<DT>
+<EM>STR correction</EM>
+<DD>type of correction available with this mediator
+('basic', <CODE>advanced</CODE>, or None)
+<DT>
+<EM>STR editor_name</EM>
+<DD>the name of the editor being used for those
+regression tests using a persistent editor 
+<DT>
+<EM>BOOL symbol_match_dlg</EM>
+<DD>use a CmdInterp with symbol match 
+dialog/prompt.  Normally disabled except during regression
+<DT>
+<EM>BOOL bypass_sr_recog</EM>
+<DD>bypass natlink for dictation
+utterances
+
+</DL>
+<H2 ID="regression.PersistentConfigNewMediator.__init__" CLASS="Method">regression.PersistentConfigNewMediator.__init__(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">mediator</SPAN>, <SPAN CLASS="Argument">editor_name</SPAN>, <SPAN CLASS="Argument">names</SPAN>, <SPAN CLASS="Argument">symbol_match_dlg=1</SPAN>, <SPAN CLASS="Argument">correction=None</SPAN>, <SPAN CLASS="Argument">bypass_sr_recog=0</SPAN>, <SPAN CLASS="Argument">**args</SPAN>)</H2>
+<P><STRONG>INPUTS</STRONG></P>
+
+
+<DL>
+
+<DT>
+<EM>{STR:ANY} names</EM>
+<DD>the namespace dictionary in which the
+regression test definitions file, tests_def, has been (or will be) 
+run with execfile
+<DT>
+<EM>NewMediatorObject the_mediator</EM>
+<DD>the existing mediator, which will be
+reset by the init_simulator_regression method
+<DT>
+<EM>STR editor_name</EM>
+<DD>the name of the editor being used for those
+regression tests using a persistent editor 
+<DT>
+<EM>STR correction</EM>
+<DD>type of correction available with this mediator
+('basic', <CODE>advanced</CODE>, or None)
+<DT>
+<EM>BOOL symbol_match_dlg</EM>
+<DD>use a CmdInterp with symbol match 
+dialog/prompt.  Normally disabled except during regression
+<DT>
+<EM>BOOL bypass_sr_recog</EM>
+<DD>bypass natlink for dictation
+utterances
+
+</DL>
+<H2 ID="regression.PersistentConfigNewMediator.correction_available" CLASS="Method">regression.PersistentConfigNewMediator.correction_available(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+indicates whether correction features are available, so that
+tests which depend on these features can be run conditionally</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD><CODE>basic</CODE> or <CODE>advanced</CODE>, or None if no correction is
+available
+
+</DL>
+<H2 ID="regression.PersistentConfigNewMediator.editor" CLASS="Method">regression.PersistentConfigNewMediator.editor(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns a reference to the editor instance being used
+for regression testing</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>AppState</EM>
+<DD>the editor instance
+
+</DL>
+<H2 ID="regression.PersistentConfigNewMediator.execute_command" CLASS="Method">regression.PersistentConfigNewMediator.execute_command(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">command</SPAN>)</H2>
+<P>None</P>
+
+<P>
+execute a command in the proper namespace, trapping any
+exceptions and printing the traceback</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>STR command</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="regression.PersistentConfigNewMediator.init_simulator_regression" CLASS="Method">regression.PersistentConfigNewMediator.init_simulator_regression(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">symdict_pickle_fname=None</SPAN>)</H2>
+<P>re-initialize the mediator, using the same editor application</P>
+
+<P>
+<STRONG>NOTE:</STRONG>  This method must also ensure that the namespace in
+which the regression test definitions are/will be run with
+execfile contains an object called commands with the
+sim_commands commands as attributes.  commands can be a
+reference to the sim_commands module, if a global old
+MediatorObject is used, or an object with methods.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+STR <EM>symdict_pickle_fname=None</EM>
+<DD>Name of the file containing the
+persistent version of the symbols dictionnary.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="regression.PersistentConfigNewMediator.instance_name" CLASS="Method">regression.PersistentConfigNewMediator.instance_name(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns the instance name of the editor instance being used
+for regression testing</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>the name of the editor instance
+
+</DL>
+<H2 ID="regression.PersistentConfigNewMediator.kbd_event_sim_factory" CLASS="Method">regression.PersistentConfigNewMediator.kbd_event_sim_factory(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Returns a [KbdEventSim] that can be used to simulate keyboard events
+a given client editor.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+[AppState] <EM>app</EM>
+<DD>the client editor on which we want to simulate
+keyboard events
+</DL>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+
+<DL>
+
+<DT>
+[KbdEventSim]
+<DD>an object through which we can simulate keyboard events
+for that editor.
+</DL>
+<P>
+..[KbdEventSim] regression.KbdEventSim.html
+..[AppState] AppState.AppState.html</P>
+<H2 ID="regression.PersistentConfigNewMediator.mediator" CLASS="Method">regression.PersistentConfigNewMediator.mediator(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+returns a reference to the MediatorObject (or
+NewMediatorObject)</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>MediatorObject</EM> or <EM>NewMediatorObject</EM>
+</P>
+<H2 ID="regression.PersistentConfigNewMediator.namespace" CLASS="Method">regression.PersistentConfigNewMediator.namespace(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>None</P>
+
+<P>
+return a reference to the namespace in which commands are
+found</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR:ANY}</EM>
+<DD>the namespace (a dictionary)
+
+</DL>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises existing attributes, unless those attributes
+already exist</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

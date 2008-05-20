@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:31:54 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module GenEdit</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module GenEdit</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="GenEdit.ActivateEventMixIn.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">ActivateEventMixIn</SPAN></A>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>)</SPAN><SPAN CLASS="OneLiner"> # mix-in which implements GenEditFrames.is_active and active_frame_ID</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="GenEdit.GenEdit.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">GenEdit</SPAN></A>(<A CLASS="DocLink" HREF="Object.OwnerObject.html">OwnerObject</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="GenEdit.GenEditBuffers.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">GenEditBuffers</SPAN></A>(<A CLASS="DocLink" HREF="GenEdit.GenEdit.html">GenEdit</A>)</SPAN><SPAN CLASS="OneLiner"> # partial implementation of GenEdit</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="GenEdit.GenEditFrame.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">GenEditFrame</SPAN></A>(<A CLASS="DocLink" HREF="Object.OwnerObject.html">OwnerObject</A>)</SPAN><SPAN CLASS="OneLiner"> # abstract base class for frames for GenEdit</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="GenEdit.GenEditFrameActivateEvent.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">GenEditFrameActivateEvent</SPAN></A>(<A CLASS="DocLink" HREF="GenEdit.GenEditFrameWithBuffers.html">GenEditFrameWithBuffers</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="GenEdit.GenEditFrameWithBuffers.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">GenEditFrameWithBuffers</SPAN></A>(<A CLASS="DocLink" HREF="GenEdit.GenEditFrame.html">GenEditFrame</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="GenEdit.GenEditFrames.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">GenEditFrames</SPAN></A>(<A CLASS="DocLink" HREF="GenEdit.GenEditBuffers.html">GenEditBuffers</A>)</SPAN><SPAN CLASS="OneLiner"> # partial implementation of GenEditBuffers</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="GenEdit.GenEditSimple.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">GenEditSimple</SPAN></A>(<A CLASS="DocLink" HREF="GenEdit.GenEditFrames.html">GenEditFrames</A>)</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="GenEdit.GenEditSingle.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">GenEditSingle</SPAN></A>(<A CLASS="DocLink" HREF="GenEdit.GenEditFrames.html">GenEditFrames</A>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#clear_buffer"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">clear_buffer</SPAN></A>(<SPAN CLASS="Argument">buffer</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#silent_load_file"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">silent_load_file</SPAN></A>(<SPAN CLASS="Argument">buffer</SPAN>, <SPAN CLASS="Argument">file_name</SPAN>)</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Mediator\\GenEdit.pyc'</SPAN></SPAN>
+</PRE><H2>Description</H2><P>
+interface and partial implementation of a new generic GUI editor which 
+can function as an interface to the mediator simulation, or as a test client</P>
+<H2 ID="clear_buffer" CLASS="Function">clear_buffer(<SPAN CLASS="Argument">buffer</SPAN>)</H2>
+<P></P>
+
+<P>
+clear the contents of a TextBufferChangeSpec to make room for it
+to contain a new, empty, file, but avoid sending the change_callback
+to the managing SourceBuffTB.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>TextBufferChangeSpec buffer</EM>
+<DD>the buffer
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="silent_load_file" CLASS="Function">silent_load_file(<SPAN CLASS="Argument">buffer</SPAN>, <SPAN CLASS="Argument">file_name</SPAN>)</H2>
+<P></P>
+
+<P>
+load a new file into an existing buffer, but avoid sending the 
+change_callback to the managing SourceBuffTB, because we are about to
+rename the buffer.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>TextBufferChangeSpec buffer</EM>
+<DD>the buffer
+<DT>
+<EM>STR file_name</EM>
+<DD>full path of the file to load
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if the file was loaded successfully
+
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

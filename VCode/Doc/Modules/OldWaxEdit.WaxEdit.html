@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Wed Dec 25 16:57:31 2002)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class WaxEdit</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class WaxEdit - base class for of new GUI interface to the mediator simulation</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="OldWaxEdit.html">OldWaxEdit</A></P>
+
+
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">WaxEdit</SPAN>:
+    <A CLASS="DocLink" HREF="#OldWaxEdit.WaxEdit.editor_buffer"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">OldWaxEdit.WaxEdit.editor_buffer</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # returns a reference to the TextBufferWX embedded in the GUI</SPAN>
+    <A CLASS="DocLink" HREF="#OldWaxEdit.WaxEdit.editor_has_focus"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">OldWaxEdit.WaxEdit.editor_has_focus</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # indicates whether the editor window has the focus</SPAN>
+    <A CLASS="DocLink" HREF="#OldWaxEdit.WaxEdit.is_active"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">OldWaxEdit.WaxEdit.is_active</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>)<SPAN CLASS="OneLiner"> # indicates whether the editor frame is active</SPAN>
+    <A CLASS="DocLink" HREF="#OldWaxEdit.WaxEdit.mic_change"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">OldWaxEdit.WaxEdit.mic_change</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">state</SPAN>)<SPAN CLASS="OneLiner"> # function to receive microphone state change callbacks</SPAN>
+    <A CLASS="DocLink" HREF="#OldWaxEdit.WaxEdit.open_file_in_buffer"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">OldWaxEdit.WaxEdit.open_file_in_buffer</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">name</SPAN>)<SPAN CLASS="OneLiner"> # opens a new file in the existing TextBufferWX</SPAN>
+    <A CLASS="DocLink" HREF="#OldWaxEdit.WaxEdit.run"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">OldWaxEdit.WaxEdit.run</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app_control</SPAN>)
+    <A CLASS="DocLink" HREF="#OldWaxEdit.WaxEdit.save_file"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">OldWaxEdit.WaxEdit.save_file</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">full_path</SPAN>, <SPAN CLASS="Argument">no_prompt=0</SPAN>)<SPAN CLASS="OneLiner"> # Saves the file in the existing TextBufferWX</SPAN>
+    <A CLASS="DocLink" HREF="#OldWaxEdit.WaxEdit.set_change_callback"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">OldWaxEdit.WaxEdit.set_change_callback</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>)<SPAN CLASS="OneLiner"> # changes the callback to a new function</SPAN>
+    <A CLASS="DocLink" HREF="#OldWaxEdit.WaxEdit.set_instance_string"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">OldWaxEdit.WaxEdit.set_instance_string</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_string</SPAN>)
+    <A CLASS="DocLink" HREF="#OldWaxEdit.WaxEdit.set_name"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">OldWaxEdit.WaxEdit.set_name</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">name</SPAN>)<SPAN CLASS="OneLiner"> # sets the filename to name (usually indicated in the title bar)</SPAN>
+
+</PRE><H2>Description</H2><P>
+<STRONG>CLASS ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="OldWaxEdit.WaxEdit.editor_buffer" CLASS="Method">OldWaxEdit.WaxEdit.editor_buffer(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>returns a reference to the TextBufferWX embedded in the GUI</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>TextBufferWX</EM>
+<DD>the TextBufferWX
+
+</DL>
+<H2 ID="OldWaxEdit.WaxEdit.editor_has_focus" CLASS="Method">OldWaxEdit.WaxEdit.editor_has_focus(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>indicates whether the editor window has the focus</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG>
+<EM>BOOL</EM> -- true if editor window has the focus
+</P>
+<H2 ID="OldWaxEdit.WaxEdit.is_active" CLASS="Method">OldWaxEdit.WaxEdit.is_active(<SPAN CLASS="Argument">self</SPAN>)</H2>
+<P>indicates whether the editor frame is active</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true if frame window is active
+
+</DL>
+<H2 ID="OldWaxEdit.WaxEdit.mic_change" CLASS="Method">OldWaxEdit.WaxEdit.mic_change(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">state</SPAN>)</H2>
+<P>function to receive microphone state change callbacks</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> state
+<DD>new state ('on', <CODE>off</CODE>, <CODE>sleeping</CODE>, 'disabled')
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="OldWaxEdit.WaxEdit.open_file_in_buffer" CLASS="Method">OldWaxEdit.WaxEdit.open_file_in_buffer(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">name</SPAN>)</H2>
+<P>opens a new file in the existing TextBufferWX</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true on success (otherwise the existing file is left
+there)
+
+</DL>
+<H2 ID="OldWaxEdit.WaxEdit.run" CLASS="Method">OldWaxEdit.WaxEdit.run(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app_control</SPAN>)</H2>
+<P>None</P>
+
+<P>
+starts the message loop.  Note: this function does not
+return until the GUI exits.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>AppStateWaxEdit app_control</EM>
+<DD>reference to corresponding 
+AppState interface
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="OldWaxEdit.WaxEdit.save_file" CLASS="Method">OldWaxEdit.WaxEdit.save_file(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">full_path</SPAN>, <SPAN CLASS="Argument">no_prompt=0</SPAN>)</H2>
+<P>Saves the file in the existing TextBufferWX</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR full_path</EM>
+<DD>path name of file to save
+<DT>
+<EM>BOOL no_prompt</EM>
+<DD>if true, don't prompt before overwriting
+an existing file.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM>
+<DD>true on success (otherwise the existing file is left
+there)
+
+</DL>
+<H2 ID="OldWaxEdit.WaxEdit.set_change_callback" CLASS="Method">OldWaxEdit.WaxEdit.set_change_callback(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">change_callback=None</SPAN>)</H2>
+<P>changes the callback to a new function</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>FCT</EM> change_callback
+<DD>change_callback( <EM>INT</EM> start, <EM>INT</EM> end, <EM>STR</EM> text, 
+<EM>INT</EM> selection_start, <EM>INT</EM> selection_end, 
+<EM>STR</EM> buff_name, <EM>BOOL</EM> program_initiated)
+</DL>
+<P>
+The arguments to the change callback specify the character offsets
+of the start and end of the changed region (before the change),
+the text with which this region was replaced, the start and end
+of the selected region (after the change), the name of the
+buffer reporting the change, and whether the change was
+program-initiated or editor-initiated.</P>
+<P>
+Note the difference between this change_callback and the
+TextBufferWX one: here the name of the buffer is returned,
+rather than a reference to the underlying TextBufferWX.  </P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="OldWaxEdit.WaxEdit.set_instance_string" CLASS="Method">OldWaxEdit.WaxEdit.set_instance_string(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_string</SPAN>)</H2>
+<P>None</P>
+
+<P>
+sets the title string which is included in the full title 
+displayed in the title bar</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> instance_string
+<DD>string to include as part of the title
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="OldWaxEdit.WaxEdit.set_name" CLASS="Method">OldWaxEdit.WaxEdit.set_name(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">name</SPAN>)</H2>
+<P>sets the filename to name (usually indicated in the title bar)</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> name
+<DD>name of current file
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

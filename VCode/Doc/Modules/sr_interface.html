@@ -1,0 +1,400 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Thu Feb 13 17:14:09 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module sr_interface</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module sr_interface</H1>
+<PRE><SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_interface.CodeSelectGrammar.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">CodeSelectGrammar</SPAN></A>(<A CLASS="DocLink" HREF="natlinkutils.SelectGramBase.html">SelectGramBase</A>)</SPAN><SPAN CLASS="OneLiner"> # A grammar for selecting part of the visible code.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_interface.CommandDictGrammar.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">CommandDictGrammar</SPAN></A>(<A CLASS="DocLink" HREF="natlinkutils.DictGramBase.html">DictGramBase</A>)</SPAN><SPAN CLASS="OneLiner"> # A grammar for mixing continuous dictation and commands.</SPAN>
+<SPAN CLASS="ClassHead"><A CLASS="DocLink" HREF="sr_interface.SpokenUtteranceNL.html"><SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">SpokenUtteranceNL</SPAN></A>(<A CLASS="DocLink" HREF="SpokenUtterance.SpokenUtterance.html">SpokenUtterance</A>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#addWord"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">addWord</SPAN></A>(<SPAN CLASS="Argument">word</SPAN>, <SPAN CLASS="Argument">*rest</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Add a word to NatSpeak's vocabulary.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#addedByVC"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">addedByVC</SPAN></A>(<SPAN CLASS="Argument">flag</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#clean_spoken_form"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">clean_spoken_form</SPAN></A>(<SPAN CLASS="Argument">spoken_form</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#clean_written_form"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">clean_written_form</SPAN></A>(<SPAN CLASS="Argument">written_form</SPAN>, <SPAN CLASS="Argument">clean_for=None</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#connect"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">connect</SPAN></A>(<SPAN CLASS="Argument">mic_state=None</SPAN>, <SPAN CLASS="Argument">mic_change_callback=None</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Connects to the SR system.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#deleteWord"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">deleteWord</SPAN></A>(<SPAN CLASS="Argument">word</SPAN>, <SPAN CLASS="Argument">*rest</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Delete a word from NatSpeak's vocabulary.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#disconnect"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">disconnect</SPAN></A>()</SPAN><SPAN CLASS="OneLiner"> # Dicsconnects from SR system.</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">getWordInfo</SPAN>(<SPAN CLASS="Argument">word</SPAN>, <SPAN CLASS="Argument">*rest</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#get_mic"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">get_mic</SPAN></A>()</SPAN><SPAN CLASS="OneLiner"> # checks the current microphone state</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#openUser"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">openUser</SPAN></A>(<SPAN CLASS="Argument">user_name</SPAN>, <SPAN CLASS="Argument">create_if_not_exist=0</SPAN>, <SPAN CLASS="Argument">create_using_model=None</SPAN>, <SPAN CLASS="Argument">create_using_topic=None</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Open a user, maybe create it if it doesn't exist.</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">saveUser</SPAN>()</SPAN><SPAN CLASS="OneLiner"> # Saves the current user</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#send_keys"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">send_keys</SPAN></A>(<SPAN CLASS="Argument">s</SPAN>, <SPAN CLASS="Argument">system=0</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # simulates keystroke input</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">set_change_callback</SPAN>(<SPAN CLASS="Argument">mic_change_callback</SPAN>)</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#set_mic"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">set_mic</SPAN></A>(<SPAN CLASS="Argument">mic_state</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # turns microphone on or off (connecting first, if necessary).</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#spoken_written_form"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">spoken_written_form</SPAN></A>(<SPAN CLASS="Argument">vocabulary_entry</SPAN>, <SPAN CLASS="Argument">clean_written=1</SPAN>, <SPAN CLASS="Argument">clean_spoken=1</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Returns the written and spoken forms of a NatSpeak vocabulary entry</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#vocabulary_entry"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">vocabulary_entry</SPAN></A>(<SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">written_form=None</SPAN>, <SPAN CLASS="Argument">clean_written=1</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # Creates a vocabulary entry with given spoken and written forms.</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#word_exists"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">word_exists</SPAN></A>(<SPAN CLASS="Argument">word</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # check if a word exists</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">AltCode</SPAN> = <SPAN CLASS="VariableValue">2</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">GrammarError</SPAN> = <SPAN CLASS="VariableValue">'GrammarError'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">LexicalError</SPAN> = <SPAN CLASS="VariableValue">'LexicalError'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">OptCode</SPAN> = <SPAN CLASS="VariableValue">4</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">RepCode</SPAN> = <SPAN CLASS="VariableValue">3</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">SeqCode</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">SymbolError</SPAN> = <SPAN CLASS="VariableValue">'SymbolError'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">SyntaxError</SPAN> = <SPAN CLASS="VariableValue">'SyntaxError'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Mediator\\sr_interface.pyc'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">add_words_as</SPAN> = <SPAN CLASS="VariableValue">'user'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_active_cap_next</SPAN> = <SPAN CLASS="VariableValue">32</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_cap_all</SPAN> = <SPAN CLASS="VariableValue">2048</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_cond_no_space</SPAN> = <SPAN CLASS="VariableValue">1024</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_is_period</SPAN> = <SPAN CLASS="VariableValue">131072</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_lowercase_all</SPAN> = <SPAN CLASS="VariableValue">8192</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_lowercase_next</SPAN> = <SPAN CLASS="VariableValue">128</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_new_line</SPAN> = <SPAN CLASS="VariableValue">8388608</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_new_paragraph</SPAN> = <SPAN CLASS="VariableValue">16777216</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_no_cap_change</SPAN> = <SPAN CLASS="VariableValue">1048576</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_no_formatting</SPAN> = <SPAN CLASS="VariableValue">262144</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_no_space_all</SPAN> = <SPAN CLASS="VariableValue">16384</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_no_space_before</SPAN> = <SPAN CLASS="VariableValue">2097152</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_no_space_change</SPAN> = <SPAN CLASS="VariableValue">524288</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_no_space_next</SPAN> = <SPAN CLASS="VariableValue">256</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_nodelete</SPAN> = <SPAN CLASS="VariableValue">8</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_passive_cap_next</SPAN> = <SPAN CLASS="VariableValue">16</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_reset_no_space</SPAN> = <SPAN CLASS="VariableValue">32768</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_reset_uc_lc_caps</SPAN> = <SPAN CLASS="VariableValue">4194304</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_space_bar</SPAN> = <SPAN CLASS="VariableValue">134217728</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_title_mode</SPAN> = <SPAN CLASS="VariableValue">33554432</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_topicadded</SPAN> = <SPAN CLASS="VariableValue">1073741824</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_two_spaces_next</SPAN> = <SPAN CLASS="VariableValue">512</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_uppercase_all</SPAN> = <SPAN CLASS="VariableValue">4096</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_uppercase_next</SPAN> = <SPAN CLASS="VariableValue">64</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">dgnwordflag_useradded</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">genkeys_f_capitalize</SPAN> = <SPAN CLASS="VariableValue">524288</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">genkeys_f_lowercase</SPAN> = <SPAN CLASS="VariableValue">262144</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">genkeys_f_scan_code</SPAN> = <SPAN CLASS="VariableValue">65536</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">genkeys_f_uppercase</SPAN> = <SPAN CLASS="VariableValue">131072</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">genkeys_f_usekeypad</SPAN> = <SPAN CLASS="VariableValue">4194304</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">genkeys_f_virtkey</SPAN> = <SPAN CLASS="VariableValue">2097152</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_alt</SPAN> = <SPAN CLASS="VariableValue">2</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_ctrl</SPAN> = <SPAN CLASS="VariableValue">4</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_defertermination</SPAN> = <SPAN CLASS="VariableValue">256</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_extended</SPAN> = <SPAN CLASS="VariableValue">64</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_rightalt</SPAN> = <SPAN CLASS="VariableValue">16</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_rightctrl</SPAN> = <SPAN CLASS="VariableValue">32</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_rightshift</SPAN> = <SPAN CLASS="VariableValue">8</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_shift</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_syskeys_checkshifts</SPAN> = <SPAN CLASS="VariableValue">1024</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">hook_f_systemkeys</SPAN> = <SPAN CLASS="VariableValue">512</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">sr_is_connected</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">None</SPAN> <SPAN CLASS="VariableName">sr_mic_change_callback</SPAN> = <SPAN CLASS="VariableValue">None</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">sr_user_needs_saving</SPAN> = <SPAN CLASS="VariableValue">0</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">vc_base_model</SPAN> = <SPAN CLASS="VariableValue">'BestMatch Model'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">vc_base_topic</SPAN> = <SPAN CLASS="VariableValue">'US General English - BestMatch Plus'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">vc_user_name</SPAN> = <SPAN CLASS="VariableValue">'VoiceCode'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">vk_control</SPAN> = <SPAN CLASS="VariableValue">17</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">vk_menu</SPAN> = <SPAN CLASS="VariableValue">18</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">vk_shift</SPAN> = <SPAN CLASS="VariableValue">16</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_keydown</SPAN> = <SPAN CLASS="VariableValue">256</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_keyup</SPAN> = <SPAN CLASS="VariableValue">257</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_lbuttondblclk</SPAN> = <SPAN CLASS="VariableValue">515</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_lbuttondown</SPAN> = <SPAN CLASS="VariableValue">513</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_lbuttonup</SPAN> = <SPAN CLASS="VariableValue">514</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_mbuttondblclk</SPAN> = <SPAN CLASS="VariableValue">521</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_mbuttondown</SPAN> = <SPAN CLASS="VariableValue">519</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_mbuttonup</SPAN> = <SPAN CLASS="VariableValue">520</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_mousemove</SPAN> = <SPAN CLASS="VariableValue">512</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_rbuttondblclk</SPAN> = <SPAN CLASS="VariableValue">518</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_rbuttondown</SPAN> = <SPAN CLASS="VariableValue">516</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_rbuttonup</SPAN> = <SPAN CLASS="VariableValue">517</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_syskeydown</SPAN> = <SPAN CLASS="VariableValue">260</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">wm_syskeyup</SPAN> = <SPAN CLASS="VariableValue">261</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">int</SPAN> <SPAN CLASS="VariableName">word_info_flag</SPAN> = <SPAN CLASS="VariableValue">1</SPAN></SPAN>
+</PRE><H2>Description</H2><P>
+Interface to the Speech Recognition engine.
+</P>
+<H2 ID="addWord" CLASS="Function">addWord(<SPAN CLASS="Argument">word</SPAN>, <SPAN CLASS="Argument">*rest</SPAN>)</H2>
+<P>Add a word to NatSpeak's vocabulary.</P>
+
+<P>
+We only add the word if it doesn't already exist in the vocabulary.
+</P>
+<H2 ID="addedByVC" CLASS="Function">addedByVC(<SPAN CLASS="Argument">flag</SPAN>)</H2>
+<P></P>
+
+<P>
+Returns <EM>true</EM> iif word information <EM>flag</EM> indicates that word
+was added by VoiceCode</P>
+<H2 ID="clean_spoken_form" CLASS="Function">clean_spoken_form(<SPAN CLASS="Argument">spoken_form</SPAN>)</H2>
+<P></P>
+
+<P>
+Cleans a spoken form.
+word.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> spoken_form
+<DD>Spoken form to be cleansed<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DT>
+<EM>STR</EM> clean_form
+<DD>The cleansed form.
+
+</DL>
+<H2 ID="clean_written_form" CLASS="Function">clean_written_form(<SPAN CLASS="Argument">written_form</SPAN>, <SPAN CLASS="Argument">clean_for=None</SPAN>)</H2>
+<P></P>
+
+<P>
+Substitutes special charactes like newline and space in written form
+of a word.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR written_form</EM>
+<DD>Written form to be cleaned.
+<DT>
+<EM>STR clean_for</EM>
+<DD>If <CODE>sr</CODE>, substitute the character to the form
+ expected by the SR (e.g. <CODE> </CODE> -&gt; {Spacebar}). If <CODE>vc</CODE>, substitute
+ to the form expected by VoiceCode (e.g. <CODE>{Spacebar}</CODE> -&gt; ' '). If
+ neither of those, leave the form alone.
+</DL>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR cleansed_form</EM>
+<DD>The clean written form
+
+</DL>
+<H2 ID="connect" CLASS="Function">connect(<SPAN CLASS="Argument">mic_state=None</SPAN>, <SPAN CLASS="Argument">mic_change_callback=None</SPAN>)</H2>
+<P>Connects to the SR system.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> mic_state
+<DD><EM>'on'</EM> or <EM>'off'</EM>. State to put the mic in
+after connection. If <EM>None</EM>, then leave mic alone.
+<DT>
+<EM>FCT</EM> mic_change_callback
+<DD>mic_change_callback(*STR* mic_state)
+(optional) function to be called when the microphone state changes.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="deleteWord" CLASS="Function">deleteWord(<SPAN CLASS="Argument">word</SPAN>, <SPAN CLASS="Argument">*rest</SPAN>)</H2>
+<P>Delete a word from NatSpeak's vocabulary.</P>
+
+<P>
+Also, we only remove it if the word was added to the vocabulary by
+VoiceCode, i.e. if the word info has <CODE>added by Vocabulary Builder</CODE>
+flag set and if the word is a phrase (single words might actually
+have ben added by the real Vocabulary Builder)</P>
+<H2 ID="disconnect" CLASS="Function">disconnect()</H2>
+<P>Dicsconnects from SR system.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="get_mic" CLASS="Function">get_mic()</H2>
+<P>checks the current microphone state</P>
+
+
+<DL>
+
+<DT>
+<EM>STR</EM> mic_state
+<DD><EM>'on'</EM> or <EM>'off'</EM>. State to put the mic in
+after connection.
+
+</DL>
+<H2 ID="openUser" CLASS="Function">openUser(<SPAN CLASS="Argument">user_name</SPAN>, <SPAN CLASS="Argument">create_if_not_exist=0</SPAN>, <SPAN CLASS="Argument">create_using_model=None</SPAN>, <SPAN CLASS="Argument">create_using_topic=None</SPAN>)</H2>
+<P>Open a user, maybe create it if it doesn't exist.</P>
+
+<P>
+    <STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> user_name
+<DD>Name of the user to be opened.
+<DT>
+<EM>BOOL</EM> create_if_not_exist
+<DD>If <EM>true</EM> then the user will be
+     created if it doesn't exist.
+<DT>
+<EM>STR</EM> create_using_model=None
+<DD>User model to use for creation of
+     the user (if <EM>create_if_not_exist</EM> is *true*).
+<DT>
+<EM>STR</EM> create_using_topic=None
+<DD>Topic to use for creation of
+     the user (if <EM>create_if_not_exist</EM> is *true*)
+</DL>
+<P>
+    <STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="send_keys" CLASS="Function">send_keys(<SPAN CLASS="Argument">s</SPAN>, <SPAN CLASS="Argument">system=0</SPAN>)</H2>
+<P>simulates keystroke input</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR s</EM>
+<DD>keys to send, in Dragon (DDWIN/Natspeak scripting
+language (pre-v6)) notation
+<DT>
+<EM>BOOL system</EM>
+<DD>if true, send the keystrokes as system keys
+(necessary for proper interpretation of Alt+Tab, windows hot keys,
+etc.)
+</DL>
+<P>
+<STRONG>OUTPUT</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="set_mic" CLASS="Function">set_mic(<SPAN CLASS="Argument">mic_state</SPAN>)</H2>
+<P>turns microphone on or off (connecting first, if necessary).</P>
+
+
+<DL>
+
+<DT>
+<EM>STR</EM> mic_state
+<DD><EM>'on'</EM> or <EM>'off'</EM>. State to put the mic in
+after connection.
+
+</DL>
+<H2 ID="spoken_written_form" CLASS="Function">spoken_written_form(<SPAN CLASS="Argument">vocabulary_entry</SPAN>, <SPAN CLASS="Argument">clean_written=1</SPAN>, <SPAN CLASS="Argument">clean_spoken=1</SPAN>)</H2>
+<P>Returns the written and spoken forms of a NatSpeak vocabulary entry</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> vocabulary_entry
+<DD>the vocabulary entry in either
+written or written\spoken form.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> (spoken, written)
+<DD>written and spoken forms of the vocabulary entry.
+
+</DL>
+<H2 ID="vocabulary_entry" CLASS="Function">vocabulary_entry(<SPAN CLASS="Argument">spoken_form</SPAN>, <SPAN CLASS="Argument">written_form=None</SPAN>, <SPAN CLASS="Argument">clean_written=1</SPAN>)</H2>
+<P>Creates a vocabulary entry with given spoken and written forms.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> spoken_form
+<DD>the spoken form 
+<DT>
+<EM>STR</EM> *written_form
+<DD>the written form (default to *spoken_form*)
+<DT>
+<EM>BOOL</EM> clean_written
+<DD>If true, substitute special characters in
+ written form (e.g. '
+' -&gt; '{Enter}')
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>entry</EM>
+<DD>the entry to be added to the SR vocabulary
+
+</DL>
+<H2 ID="word_exists" CLASS="Function">word_exists(<SPAN CLASS="Argument">word</SPAN>)</H2>
+<P>check if a word exists</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> word
+<DD>the word
+
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

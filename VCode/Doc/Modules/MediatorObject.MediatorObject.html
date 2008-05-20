@@ -1,0 +1,465 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Sat Feb 01 16:30:43 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Class MediatorObject</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ClassName">class MediatorObject - Main object for the mediator.</H1>
+<P CLASS="DeclaredIn">Declared in module <A HREF="MediatorObject.html">MediatorObject</A></P>
+
+<H2 CLASS="ClassHierarchy">Inheritance hierarchy:</H2><P CLASS="ClassHierarchy">MediatorObject.MediatorObject<BR>
+&nbsp;&nbsp;Object.Object<BR>
+</P>
+
+<H2>Synopsis</H2>
+<PRE CLASS="ClassDeclaration">
+<SPAN CLASS="PyKeyword">class</SPAN> <SPAN CLASS="ClassName">MediatorObject</SPAN>(<A CLASS="DocLink" HREF="Object.Object.html">Object</A>):
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorObject.MediatorObject.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">app=None</SPAN>, <SPAN CLASS="Argument">interp=None</SPAN>, <SPAN CLASS="Argument">window=0</SPAN>, <SPAN CLASS="Argument">owns_app=1</SPAN>, <SPAN CLASS="Argument">exclusive=0</SPAN>, <SPAN CLASS="Argument">allResults=0</SPAN>, <SPAN CLASS="Argument">owner=None</SPAN>, <SPAN CLASS="Argument">id=None</SPAN>, <SPAN CLASS="Argument">**attrs</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorObject.MediatorObject.add_abbreviation"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorObject.MediatorObject.add_abbreviation</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">abbreviation</SPAN>, <SPAN CLASS="Argument">expansions</SPAN>)<SPAN CLASS="OneLiner"> # Add an abbreviation to VoiceCode's abbreviations dictionary.</SPAN>
+    <A CLASS="DocLink" HREF="#MediatorObject.MediatorObject.add_csc"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorObject.MediatorObject.add_csc</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">acmd</SPAN>)<SPAN CLASS="OneLiner"> # Add a new Context Sensitive Command.</SPAN>
+    <A CLASS="DocLink" HREF="#MediatorObject.MediatorObject.add_lsa"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorObject.MediatorObject.add_lsa</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_forms</SPAN>, <SPAN CLASS="Argument">meanings</SPAN>)<SPAN CLASS="OneLiner"> # Add a language specific word.</SPAN>
+    <A CLASS="DocLink" HREF="#MediatorObject.MediatorObject.close_app_cbk"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorObject.MediatorObject.close_app_cbk</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">unexpected=0</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorObject.MediatorObject.configure"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorObject.MediatorObject.configure</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">config_file='H:\\Projects\\VoiceCode\\VCode\\Config\\new_vc_config.py'</SPAN>)<SPAN CLASS="OneLiner"> # Configures a mediator object based on a configuration file.</SPAN>
+    <A CLASS="DocLink" HREF="#MediatorObject.MediatorObject.define_config_functions"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorObject.MediatorObject.define_config_functions</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">names</SPAN>, <SPAN CLASS="Argument">exclude=[]</SPAN>)
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorObject.MediatorObject.print_abbreviations</SPAN>(<SPAN CLASS="Argument">self</SPAN>)
+    <A CLASS="DocLink" HREF="#MediatorObject.MediatorObject.quit"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorObject.MediatorObject.quit</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">clean_sr_voc=0</SPAN>, <SPAN CLASS="Argument">save_speech_files=None</SPAN>, <SPAN CLASS="Argument">disconnect=1</SPAN>)<SPAN CLASS="OneLiner"> # Quit the mediator object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">MediatorObject.MediatorObject.standard_symbols_in</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">file_list</SPAN>)<SPAN CLASS="OneLiner"> # Compile symbols defined in a series of source files</SPAN>
+
+    <SPAN CLASS="InheritsHead"># Inherited from Object.Object</SPAN>
+    <SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.__init__</SPAN>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">**args_super</SPAN>)
+    <A CLASS="DocLink" HREF="#Object.Object.decl_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.decl_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Define new attributes for <EM>self</EM></SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.deep_construct"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.deep_construct</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)<SPAN CLASS="OneLiner"> # Build an instance of a class.</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)<SPAN CLASS="OneLiner"> # Initialises existing attributes</SPAN>
+    <A CLASS="DocLink" HREF="#Object.Object.possibly_init_attrs"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">Object.Object.possibly_init_attrs</SPAN></A>(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)
+
+</PRE><H2>Description</H2><P>
+Typically, there will be one such object for every application
+that is being controlled through a VoiceCode mediator.</P>
+<P>
+<STRONG>INSTANCE ATTRIBUTES</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>ServerMainThread owner</EM>
+<DD>server which owns this mediator, or
+None.  Note: if owner is set, the id field MUST be provided.
+<DT>
+STR <EM>id</EM>
+<DD>The unique identifier assigned by the server to
+this MediatorObject
+<DT>
+[AppState] <EM>app</EM>
+<DD>interface to editor 
+<DT>
+<EM>BOOL owns_app</EM>
+<DD>does the MediatorObject own the editor app?  If
+so, it should call app.cleanup() and then delete it when it quits.
+Normally, this should be true, except if the mediator is created for
+regression testing purposes with an editor which is reused by the
+next test.
+<DT>
+<EM>AppCbkFilter cbk_filter</EM>
+<DD>object which filters callbacks from
+AppState and passes only close_app_cbk to us.
+<DT>
+[CmdInterp] <EM>interp=CmdInterp.CmdInterp()</EM>
+<DD>Command interpreter used to
+translate pseudo-code to native code.
+<DT>
+[CommandDictGrammar] <EM>mixed_grammar = None</EM>
+<DD>Speech Recognition grammar
+that recognises continuous dictation and forwards the results to the
+<EM>interp</EM> command interpreter.
+<DT>
+[CodeSelectGrammar] code_select_grammar = None
+<DD>Grammar for
+selecting a part of the visible code.
+<DT>
+<EM>INT window=0</EM> 
+<DD>MSW window handle of the top-level window in which
+to activate the grammars, or 0 to make them global.
+<DT>
+<EM>0-1 exclusive=0</EM>
+<DD>Indicates whether the mediator should use
+grammars that are exclusive (1) or non-exclusive (1)
+<DT>
+<EM>0-1 allResults=0</EM>
+<DD>Indicates whether or not the grammars used by the
+mediator should receive all recognition results (even those intercepted by
+other grammars). Typically set to 0, except when running regression test
+(in which case, VoiceCode must receive all recognition results, even if
+user is working in an other window).
+</DL>
+<P>
+CLASS ATTRIBUTES**</P>
+<P>
+<EM>none</EM> --</P>
+<P>
+..[AppState] AppState.AppState.html
+..[CmdInterp] CmdInterp.CmdInterp.html
+..[CommandDictGrammar] sr_interface.CommandDictGrammar.html
+..[CodeSelectGrammar] sr_interface.CodeSelectGrammar.html</P>
+<H2 ID="MediatorObject.MediatorObject.add_abbreviation" CLASS="Method">MediatorObject.MediatorObject.add_abbreviation(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">abbreviation</SPAN>, <SPAN CLASS="Argument">expansions</SPAN>)</H2>
+<P>Add an abbreviation to VoiceCode's abbreviations dictionary.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> abbreviation
+<DD>the abbreviation 
+<DT>
+<EM>[STR]</EM> expansions
+<DD>list of possible expansions
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="MediatorObject.MediatorObject.add_csc" CLASS="Method">MediatorObject.MediatorObject.add_csc(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">acmd</SPAN>)</H2>
+<P>Add a new Context Sensitive Command.</P>
+
+<P>
+<A HREF="CSCmd.CSCmd.html">CSCmd</A> <EM>acmd</EM> is the command to add.</P>
+<H2 ID="MediatorObject.MediatorObject.add_lsa" CLASS="Method">MediatorObject.MediatorObject.add_lsa(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">spoken_forms</SPAN>, <SPAN CLASS="Argument">meanings</SPAN>)</H2>
+<P>Add a language specific word.</P>
+
+<P>
+These words get added and removed dynamically from the SR
+vocabulary, depending on the language of the active buffer.</P>
+<P>
+A redundant CSC is also added to allow translation of the LSA at
+the level of the Mediator, in cases where NatSpeak prefers to
+recognise the LSA as dictated text instead of a spoken/written
+word (this often happens if the spoken form looks to much like
+dictated text, e.g. "is not equal to").</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> spoken_forms
+<DD>List of spoken form of the word.
+<DT>
+<EM>{STR: STR}</EM> meanings
+<DD>Dictionary of language specific
+ meanings. Key is the language name and value is the written form
+ of the LSA for that langugage. If language name is <EM>None</EM>, then
+ it means that this LSA applies for all languages (I know, it
+ doesn't make much sense syntactically).
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="MediatorObject.MediatorObject.close_app_cbk" CLASS="Method">MediatorObject.MediatorObject.close_app_cbk(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">instance_name</SPAN>, <SPAN CLASS="Argument">unexpected=0</SPAN>)</H2>
+<P>None</P>
+
+<P>
+method called by our AppState to tell us that it is closing, or
+disconnecting from the mediator.  This method is included
+only to allow an external editor to disconnect when we are
+running tcp_server with this old MediatorObject implementation.
+MediatorObject responds to this message only by informing its,
+if any.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> instance_name
+<DD>name of the instance.  This parameter is
+included only for compatibility with the usual call from
+AppState to the AppMgr.  This implementation of MediatorObject
+has only one editor instance, so it ignores this parameter
+<DT>
+<EM>BOOL unexpected</EM>
+<DD>1 if the editor broke the connection
+without first sending an editor_disconnecting message
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+<H2 ID="MediatorObject.MediatorObject.configure" CLASS="Method">MediatorObject.MediatorObject.configure(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">config_file='H:\\Projects\\VoiceCode\\VCode\\Config\\new_vc_config.py'</SPAN>)</H2>
+<P>Configures a mediator object based on a configuration file.</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM> config_file = vc_globals.default_config_file
+<DD>Full path of the config
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="MediatorObject.MediatorObject.define_config_functions" CLASS="Method">MediatorObject.MediatorObject.define_config_functions(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">names</SPAN>, <SPAN CLASS="Argument">exclude=[]</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Adds the appropriate configuration functions to the  given
+namespace, to allow the configuration file to access the
+appropriate mediator methods.  These functions are generally
+bound methods.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> names
+<DD>the dictionary or namespace to which to
+add the functions
+<DT>
+<EM>[STR] exclude</EM>
+<DD>list of mediator object attribute objects 
+to ignore during reconfiguration.  Currently, the only recognized 
+attributes are ['editors', 'interp'].  MediatorObject may
+exclude some attribute objects not supported by this version, 
+even if they are not specified.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM> 
+</P>
+<H2 ID="MediatorObject.MediatorObject.quit" CLASS="Method">MediatorObject.MediatorObject.quit(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">clean_sr_voc=0</SPAN>, <SPAN CLASS="Argument">save_speech_files=None</SPAN>, <SPAN CLASS="Argument">disconnect=1</SPAN>)</H2>
+<P>Quit the mediator object</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>BOOL</EM> clean_sr_voc=0
+<DD>If true, remove all SR entries for known
+symbols.
+<DT>
+<EM>BOOL</EM> save_speech_files = None
+<DD>Indicates whether or not
+speech files should be saved. If <EM>None</EM>, then ask the user.
+<DT>
+<EM>BOOL</EM> disconnect = 1
+<DD>Indicates whether or not to disconnect from
+the SR system.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.decl_attrs" CLASS="Method">Object.Object.decl_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Define new attributes for <EM>self</EM></P>
+
+<P>
+Attributes are directly through self.__dict__, thus bypassing safe
+__setattr__.</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ initial values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.deep_construct" CLASS="Method">Object.Object.deep_construct(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">this_class</SPAN>, <SPAN CLASS="Argument">attrs_this_class</SPAN>, <SPAN CLASS="Argument">args_super</SPAN>, <SPAN CLASS="Argument">new_default={}</SPAN>, <SPAN CLASS="Argument">enforce_value={}</SPAN>, <SPAN CLASS="Argument">exclude_bases={}</SPAN>)</H2>
+<P>Build an instance of a class.</P>
+
+<P>
+Basically, this method:
+- declares and initialise all attributes listed in <EM>attrs_this_class</EM>
+- invokes the <EM>__init__</EM> of all superclasses (with the exclusion of those listed in *exclude_bases*), passing them arguments in <EM>args_super</EM></P>
+
+<DL>
+
+<DT>
+<EM>CLASS</EM> this_class
+<DD>Class that we want to build. This is a
+ class object as opposed to the name of a class. Constructors
+ of immediate superclasses of <EM>this_class</EM> are called
+ automatically, except if they are listed in *{CLASS: 1}
+ exclude_bases*.
+<DT>
+<EM>{STR: ANY}</EM> attrs_this_class
+<DD>New attributes (and their
+ values) defined by class <EM>this_class</EM>. The keys are the names
+ of the attributes and the values are the values of the
+ attributes (either default values or values passed to
+ *this_class.__init__*). An attribute with the appropriate
+ name will be declared automatically and initialsed to the
+ value specified in <EM>attrs_this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> args_super
+<DD>Arguments received by
+<EM>this_class.__init__</EM> but not recognised by it. These are
+assumed to be arguments defined in the <EM>__init__</EM> of some
+ancestor class and are just passed up the construction
+chain. Keys of <EM>args_super</EM> correspond to the names of the
+arguments and the values corresponds to the values received
+for them by <EM>this_class.__init__</EM>
+<DT>
+<EM>{STR: ANY}</EM> new_default={}
+<DD>Used to change the default
+ value of an ancestor constructor argument. In other words, if
+ <EM>this_class.__init__</EM> was called without specifying a value
+ for an argument that's listed in <EM>new_default</EM>, the default
+ value defined in <EM>new_default</EM> will be used instead of
+ whatever default might be defined in the constructor
+ of an ancestor class. However, if the constructor was called
+ WITH a specific value for that argument, that specific value
+ will be used instead of both the defaults defined in
+ <EM>new_default</EM> and the constructor of ancestor classes. Keys
+ of <EM>new_default</EM> correspond to argument names, and values
+ correspond to the new default values. If you don't specify a
+ value of <EM>new_default</EM>, it defaults to <EM>{}</EM>, which means that
+ the defaults of none of the ancestor constructor arguments
+ are redefined by <EM>this_class</EM>.
+<DT>
+<EM>{STR: ANY}</EM> enforce_value={}
+<DD>Lists of arguments with
+ enforced values. If the constructor is called with a value
+ for an argument that is different from the value specified
+ for it in <EM>enforce_value</EM>, then an <A HREF="Object.EnforcedConstrArg.html">EnforcedConstrArg</A>
+ exception will be raised. Also, if the constructor is called
+ without specifying a value for a particular argument, then
+ the value defined in <EM>enforce_value</EM> (if it exists) will be
+ used instead of whatever default might be defined in an
+ ancestor class. Keys of <EM>enforce_value</EM> correspond to
+ argument names and values correspond to the enforced
+ values. If you don't specify a value for <EM>enforce_value</EM>, it
+ defaults to <EM>{}</EM>, which means that <EM>this_class.__init__</EM> does
+ not enforce the value of any argument.
+<DT>
+<EM>{CLASS: BOOL}</EM> exclude_bases
+<DD>Immediate base classes whose
+constructors should not be called automatically. If an
+immediate superclass of <EM>this_class</EM> is listed in
+<EM>exclude_bases</EM>, then we don't automatically call its
+constructor. It is assumed that the programmer will call the
+constructor manually in <EM>this_class.__init__</EM>. If you do not
+specify a value for <EM>exclude_bases</EM>, it will default to <EM>{}</EM>,
+which means that the constructor of all immediate super
+classes will be called automatically.
+</DL>
+<H2 ID="Object.Object.init_attrs" CLASS="Method">Object.Object.init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>Initialises existing attributes</P>
+
+<P>
+Attributes are only set if they already exist in
+ <EM>self.__dict__</EM>. Otherwise, an <EM>AttributeError</EM> exception is
+ raised (provided PY_DEBUG_OBJECT=1).</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+<H2 ID="Object.Object.possibly_init_attrs" CLASS="Method">Object.Object.possibly_init_attrs(<SPAN CLASS="Argument">self</SPAN>, <SPAN CLASS="Argument">attrs</SPAN>)</H2>
+<P>None</P>
+
+<P>
+Initialises existing attributes, unless those attributes
+already exist</P>
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>{STR: ANY}</EM> attrs
+<DD>dictionary with attribute name as the keys and
+ default values as the values.
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>none</EM>
+<DD>
+</DL>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+
+<META NAME="GENERATOR" CONTENT="pythondoc 0.7 (Tue Feb 18 09:42:50 2003)">
+
+<link rel="stylesheet" href="pythondoc.css" type="text/css">
+
+<title>Module make_doc</title>
+</head>
+
+<body>
+<P><A HREF="index.html">Table of contents</A> <A HREF="indices.html">Index</A></P>
+
+
+<H1 CLASS="ModuleName">Module make_doc</H1>
+<PRE><SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#find_pydoc_path"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">find_pydoc_path</SPAN></A>(<SPAN CLASS="Argument">names=None</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # search through the python import path for the pydoc script</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#fix_references"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">fix_references</SPAN></A>(<SPAN CLASS="Argument">doc_dir</SPAN>)</SPAN><SPAN CLASS="OneLiner"> # For some reason, internal references must be specified as:</SPAN>
+<SPAN CLASS="FunctionHead"><A CLASS="DocLink" HREF="#quit"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">quit</SPAN></A>()</SPAN><SPAN CLASS="OneLiner"> # central quitting routine</SPAN>
+<SPAN CLASS="FunctionHead"><SPAN CLASS="PyKeyword">def</SPAN> <SPAN CLASS="FunctionName">runme</SPAN>()</SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">string</SPAN> <SPAN CLASS="VariableName">__file__</SPAN> = <SPAN CLASS="VariableValue">'H:\\Projects\\VoiceCode\\VCode\\Admin\\make_doc.py'</SPAN></SPAN>
+<SPAN CLASS="VariableHead"><SPAN CLASS="VariableType">None</SPAN> <SPAN CLASS="VariableName">regs_file_name</SPAN> = <SPAN CLASS="VariableValue">None</SPAN></SPAN>
+</PRE><H2>Description</H2><P>
+Usage: python make_doc.py files</P>
+<P>
+files: names of .py files for which to refresh the documentation. If files is not specified, then documentation for all .py files is refreshed.</P>
+<P>
+Example: python make_doc.py Object.py
+</P>
+<H2 ID="find_pydoc_path" CLASS="Function">find_pydoc_path(<SPAN CLASS="Argument">names=None</SPAN>)</H2>
+<P>search through the python import path for the pydoc script</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>[STR]</EM> names
+<DD>list of possible names for the script (defaults to
+    ['pydoc.py', 'pdoc.py']
+</DL>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+
+<DL>
+
+<DT>
+<EM>STR</EM>
+<DD>full path of the script, or None if it couldn't be found.
+
+</DL>
+<H2 ID="fix_references" CLASS="Function">fix_references(<SPAN CLASS="Argument">doc_dir</SPAN>)</H2>
+<P>For some reason, internal references must be specified as:</P>
+
+<P>
+\.\. [anchor] file:///./this_file.html#internal_ID (for internal refs)
+or
+\.\. [anchor] file:///some_file.html#ID (for external refs)</P>
+<P>
+instead of</P>
+<P>
+\.\. [anchor] #internal_ID or \.\. [anchor] some_file.html#ID</P>
+<P>
+The later causes pythondoc to choke on the definition (note that
+the syntax "anchor":#internal_ID doesn't work either, because
+pythondoc inserts it as is).</P>
+<P>
+The problem is that while pythondoc works with
+file:///./this_file#internal_ID, neither Netscape nor IE will find
+the file unless they are started from the Doc directory.</P>
+<P>
+To deal with this problem, <EM>fix_internal_references</EM> substitutes
+file:///./ and file:/// for a null string in all the Doc/*.html files.   
+</P>
+<H2 ID="quit" CLASS="Function">quit()</H2>
+<P>central quitting routine</P>
+
+<P>
+<STRONG>INPUTS</STRONG></P>
+<P>
+<EM>none</EM></P>
+<P>
+<STRONG>OUTPUTS</STRONG></P>
+<P>
+<EM>none</EM>
+</P>
+
+<HR>
+<TABLE ALIGN="LEFT">
+<TR><TD>
+  <A HREF="http://validator.w3.org/check/referer" TARGET="validate">
+    <IMG BORDER=0 SRC="http://validator.w3.org/images/vh40.gif"
+     ALT="Valid HTML 4.0!" HEIGHT=31 WIDTH=88></A>
+  <A HREF="http://www.w3.org/Style/CSS/Buttons">
+    <IMG ALT="Made with CSS" BORDER=0 WIDTH=88 HEIGHT=31 
+     SRC="http://www.w3.org/Style/CSS/Buttons/mwcos"></A>
+
+</TD>
+<TD STYLE="padding-left: 10">
+  <SPAN CLASS="AUTHOR"></SPAN><BR>
+  <SPAN CLASS="VERSION"></SPAN>
+</TD>
+</TABLE>
+
+</body>
+</html>
