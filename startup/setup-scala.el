@@ -20,11 +20,6 @@
 (defvar scala-build-command nil)
 (make-variable-buffer-local 'scala-build-command)
 
-(add-hook 'scala-mode-hook
-          (lambda ()
-	    (flymake-mode-on)
-	    ))
-
 ;; ----------------------
 ;; Flymake for scala compiler
 ;; Flymake integration copied and heavily modified from:
@@ -34,8 +29,8 @@
   (flymake-goto-next-error)
   (flymake-display-err-menu-for-current-line))
 
-(add-hook 'scala-mode-hook
-  (lambda () (flymake-mode-on)))
+;(add-hook 'scala-mode-hook
+;  (lambda () (flymake-mode-on)))
 
 ;; From the current directory, traverse down until you find a Makefile
 (defun find-makefile ()
