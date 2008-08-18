@@ -8,6 +8,8 @@
 (require 'flymake)
 (require 'font-lock)
  
+(add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode))
+
 ;; ----------------------
 ;; Scala abbrev table setup
 ;; define scala abbrev table and scala mode map (for key bindings)

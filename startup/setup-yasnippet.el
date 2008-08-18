@@ -6,4 +6,4 @@
 (require 'yasnippet)
 (yas/initialize)
 ;(yas/load-directory "$EMACS_LIB/lib/yasnippet/snippets")
-(yas/load-directory "C:/home/jboner/public/emacs-config/lib/yasnippet/snippets")
+(yas/load-directory "C:/cygwin/home/jboner/public/emacs-config/lib/yasnippet/snippets")

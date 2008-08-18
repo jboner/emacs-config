@@ -1,9 +1,10 @@
+;;; -*-Emacs-Lisp-*-
 ;;; scala-mode-auto.el - Provides autoload definitions for scala-mode.
-;;; $Id: scala-mode-auto.el 5359 2005-12-16 15:33:49Z dubochet $
+;;; $Id$
 
 (add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode))
 
-
+
 ;;;### (autoloads (scala-mode) "scala-mode" "scala-mode.el" (15703
 ;;;;;;  49825))
 ;;; Generated autoloads from scala-mode.el
@@ -16,7 +17,7 @@ When started, run `scala-mode-hook'.
 \\{scala-mode-map}" t nil)
 
 ;;;***
-
+
 ;;;### (autoloads (scala-quit-interpreter scala-load-file scala-eval-buffer
 ;;;;;;  scala-eval-region scala-switch-to-interpreter run-scala scala-interpreter-running-p-1)
 ;;;;;;  "inferior-scala-mode" "inferior-scala-mode.el" (15703 53506))
@@ -43,5 +44,8 @@ Load a file in the Scala interpreter." t nil)
 Quit Scala interpreter." t nil)
 
 ;;;***
+
+(autoload 'scala-electric-mode "scala-electric" "Minor mode for electric braces in Scala" t)
+(add-hook 'scala-mode-hook 'scala-electric-mode)
 
 (provide 'scala-mode-auto)

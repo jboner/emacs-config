@@ -1,5 +1,6 @@
+;;; -*-Emacs-Lisp-*-
 ;;; inferior-scala-mode.el - Interaction with a Scala interpreter.
-;;; $Id: inferior-scala-mode.el 12783 2007-09-04 11:07:23Z michelou $
+;;; $Id$
 
 (require 'comint)
 
@@ -9,15 +10,11 @@
   :group 'scala
   :tag "Inferior Scala")
 
-(defcustom scala-default-interpreter "scala"
-  "Name of the interpreter to use by default."
+(defcustom scala-interpreter "scala"
+  "The interpreter that `run-scala' should run. This should
+ be a program in your PATH or the full pathname of the scala interpreter."
   :type 'string
   :group 'inferior-scala)
-
-(defvar scala-interpreter scala-default-interpreter
-  "The interpreter that `run-scala' should run.
-If you want to change the defaut value, don't change that variable
-but customize `scala-default-interpreter' instead.")
 
 (defconst scala-inf-buffer-name "*inferior-scala*")
 

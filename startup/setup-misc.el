@@ -89,6 +89,80 @@
 (setq ido-enable-flex-matching t)
 
 ;;; ------------------------------------------------
+;;; IDO - FILE CACHE
+(defun file-cache-ido-find-file (file)
+  "Using ido, interactively open file from file cache'. 
+First select a file, matched using ido-switch-buffer against the contents
+in `file-cache-alist'. If the file exist in more than one
+directory, select directory. Lastly the file is opened."
+  (interactive (list (file-cache-ido-read "File: "
+                                          (mapcar
+                                           (lambda (x)
+                                             (car x))
+                                           file-cache-alist))))
+  (let* ((record (assoc file file-cache-alist)))
+    (find-file
+     (expand-file-name
+      file
+      (if (= (length record) 2)
+          (car (cdr record))
+        (file-cache-ido-read
+         (format "Find %s in dir: " file) (cdr record)))))))
+ 
+(defun file-cache-ido-read (prompt choices)
+  (let ((ido-make-buffer-list-hook
+         (lambda ()
+           (setq ido-temp-list choices))))
+    (ido-read-buffer prompt)))
+ 
+(require 'filecache)
+;(require 'ido) 
+;(ido-mode t) 
+(global-set-key (kbd "ESC ESC f") 'file-cache-ido-find-file)
+
+;;; FILE CACHE FOR JDE MODE
+;; Prevent subversion files form polluting the cache
+;(add-to-list 'file-cache-filter-regexps "\\.svn-base$")
+;; global variable to keep track of current project
+;(defvar credmp/current-jde-project nil)
+ 
+;; small function to re-create the cache when the project changes
+;(defun credmp/update-cache ()
+;  (if (not (string= jde-current-project credmp/current-jde-project))
+;      (progn
+;        (file-cache-clear-cache)
+;        (file-cache-add-directory-using-find (substring jde-current-project 0 (- (length jde-current-project) 6))))
+;    )
+;  (setq credmp/current-jde-project jde-current-project)
+;  )
+ 
+;; add the hook...
+;(add-hook 'jde-project-hooks 'credmp/update-cache)
+
+;;; ------------------------------------------------
+;; save a list of open files in ~/.emacs.desktop
+;; save the desktop file automatically if it already exists
+(setq desktop-save 'if-exists)
+(desktop-save-mode 1)
+
+;; save a bunch of variables to the desktop file
+;; for lists specify the len of the maximal saved data also
+(setq desktop-globals-to-save
+      (append '((extended-command-history . 30)
+                (file-name-history        . 100)
+                (grep-history             . 30)
+                (compile-history          . 30)
+                (minibuffer-history       . 50)
+                (query-replace-history    . 60)
+                (read-expression-history  . 60)
+                (regexp-history           . 60)
+                (regexp-search-ring       . 20)
+                (search-ring              . 20)
+                (shell-command-history    . 50)
+                tags-file-name
+                register-alist)))
+
+;;; ------------------------------------------------
 ;;; viper and vimpulse modes
 ;(setq viper-mode t)
 ;(require 'viper)
@@ -127,25 +201,3 @@
 ;; turn off anti-aliasing for mac
 ;(setq mac-allow-anti-aliasing nil)
 
-;;; ------------------------------------------------
-;; save a list of open files in ~/.emacs.desktop
-;; save the desktop file automatically if it already exists
-(setq desktop-save 'if-exists)
-(desktop-save-mode 1)
-
-;; save a bunch of variables to the desktop file
-;; for lists specify the len of the maximal saved data also
-(setq desktop-globals-to-save
-      (append '((extended-command-history . 30)
-                (file-name-history        . 100)
-                (grep-history             . 30)
-                (compile-history          . 30)
-                (minibuffer-history       . 50)
-                (query-replace-history    . 60)
-                (read-expression-history  . 60)
-                (regexp-history           . 60)
-                (regexp-search-ring       . 20)
-                (search-ring              . 20)
-                (shell-command-history    . 50)
-                tags-file-name
-                register-alist)))
