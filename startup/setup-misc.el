@@ -172,6 +172,44 @@ directory, select directory. Lastly the file is opened."
                 tags-file-name
                 register-alist)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; compilation; if compilation is successful, autoclose the compilation win
+;; http://www.emacswiki.org/cgi-bin/wiki/ModeCompile
+;; TODO: don't hide when there are warnings either (not just errors)
+(setq compilation-window-height 12)
+(setq compilation-finish-functions 'compile-autoclose)
+(defun compile-autoclose (buffer string)
+  (cond ((and (string-match "finished" string)
+	   (not (string-match "warning" string)))
+	  (message "Build maybe successful: closing window.")
+          (run-with-timer 2 nil                      
+	    'delete-window              
+	    (get-buffer-window buffer t)))
+    (t                                                                    
+      (message "Compilation exited abnormally: %s" string))))
+
+;;; ------------------------------------------------
+;; full-screen mode
+;; based on http://www.emacswiki.org/cgi-bin/wiki/WriteRoom
+;; toggle full screen with F3; require 'wmctrl'
+(when (executable-find "wmctrl") ;sudo apt-get install wmctrl
+  (defun full-screen-toggle ()
+    (interactive)
+    (shell-command "wmctrl -r :ACTIVE: -btoggle,fullscreen")))
+
+;;; ------------------------------------------------
+;; jump out from a pair(like quote, parenthesis, etc.)
+(defun jump-out-of-pair ()
+  (interactive)
+  (let ((pair-regexp "[^])}\"'>]*[])}\"'>]"))
+    (if (looking-at pair-regexp)
+        (progn
+          ;; be sure we can use C-u C-@ to jump back
+          ;; if we goto the wrong place
+          (push-mark)
+          (goto-char (match-end 0)))
+      (c-indent-command))))
+
 ;;; ------------------------------------------------
 ;;; viper and vimpulse modes
 ;(setq viper-mode t)

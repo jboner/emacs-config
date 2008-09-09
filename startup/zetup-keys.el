@@ -33,13 +33,12 @@
 (global-set-key [(f1)]          'hippie-expand)
 (global-set-key [(meta f1)]     'complete-tag)
 (global-set-key [(control f1)]  'dabbrev-expand)
-(global-set-key [(shift f1)]    'kid-c-escape-pair)
 
-(global-set-key [(f2)]          'kid-c-escape-pair)
+(global-set-key [(f2)]          'jump-out-of-pair)
 
-(global-set-key [(f3)]          'yas/expand)
-(global-set-key [(f4)]          'yas/next-field-group)
-(global-set-key [(meta f4)]     'yas/prev-field-group)
+(global-set-key [(f3)]          'full-screen-toggle)
+;(global-set-key [(f4)]          'yas/next-field-group)
+;(global-set-key [(meta f4)]     'yas/prev-field-group)
 
 (global-set-key [(f5)]          'undo)
 ;(global-set-key [(f5)]          'versor-mode)
