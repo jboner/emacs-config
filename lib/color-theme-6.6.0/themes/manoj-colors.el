@@ -96,7 +96,8 @@
      (font-lock-regexp-grouping-construct ((t (:bold t :weight bold))))
 
      (font-lock-variable-name-face ((t (:foreground "Aquamarine")))) ;LightGoldenrod
-     (font-lock-function-name-face ((t (:foreground "mediumspringgreen" :weight bold :height 1.1)))) ;LightSkyBlue
+     (font-lock-function-name-face ((t (:foreground "mediumspringgreen" :weight bold)))) ;LightSkyBlue
+;     (font-lock-function-name-face ((t (:foreground "mediumspringgreen" :weight bold :height 1.1)))) ;LightSkyBlue
      (font-lock-reference-face     ((t (:foreground "PaleGreen"))))
      (font-lock-negation-char-face ((t (nil))))
      (cperl-array-face ((t (:foreground "LawnGreen" :background "B;ack" :bold t))))

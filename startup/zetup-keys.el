@@ -41,7 +41,8 @@
 (global-set-key [(f4)]          'yas/next-field-group)
 (global-set-key [(meta f4)]     'yas/prev-field-group)
 
-(global-set-key [(f5)]          'versor-mode)
+(global-set-key [(f5)]          'undo)
+;(global-set-key [(f5)]          'versor-mode)
 
 (global-set-key [(f6)]          'save-buffer)
 
@@ -61,11 +62,14 @@
 (global-set-key [(meta f10)]    'visit-tags-table)
 (global-set-key [(control f10)] 'tags-query-replace)
 
-(global-set-key [(f11)]         'my-flymake-show-next-error)
+;(global-set-key [(f11)]         'my-flymake-show-next-error)
+(global-set-key [(f11)]         'next-error)
+(global-set-key [(shift f11)]   'previous-error)
+
 (global-set-key [(f12)]         'ido-switch-buffer)
 
 (global-set-key "%"             'match-paren)
-(global-set-key [(meta enter)] 'save-buffer)
+(global-set-key [(meta enter)]  'save-buffer)
 
 ;;; -----------------------------------------------
 ;;; local to specific modes

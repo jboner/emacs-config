@@ -86,8 +86,18 @@
     (load-file "$EMACS_LIB/lib/misc/ido.el")))
 (require 'ido)
 (ido-mode 'both)
-(setq ido-enable-flex-matching t)
-
+(setq 
+ ido-ignore-buffers              ;; ignore these guys
+ '("\\` " "^\*Mess" "^\*Back" "^\*scratch" ".*Completion" "^\*Ido") 
+ ido-everywhere t                ; use for many file dialogs
+ ido-case-fold  t                ; be case-insensitive
+ ido-use-filename-at-point t     ; try to use filename...
+ ido-use-url-at-point t          ; ... or url at point
+ ido-enable-flex-matching t      ; be flexible
+ ido-max-prospects 5             ; don't spam my minibuffer
+ ido-confirm-unique-completion t ; wait for RET, even with unique completion
+)
+									   
 ;;; ------------------------------------------------
 ;;; IDO - FILE CACHE
 (defun file-cache-ido-find-file (file)

@@ -17,18 +17,7 @@
       (if (not (file-exists-p (concat dir "/pom.xml")))
         (message "No pom.xml found")
         (compile (read-from-minibuffer "Command: "
-          (concat "mvn -f " dir "/pom.xml compile |sed -e 's/\\[INFO\\] //g' |sed -e 's/\\[WARNING\\] //g'") nil nil 'mvn-command-history))))))
+          (concat "mvn -o -f " dir "/pom.xml compile |sed -e 's/\\[INFO\\] //g' |sed -e 's/\\[WARNING\\] //g'") nil nil 'mvn-command-history))))))
           ;; for mac/unix
           ;(concat "mvn -f " dir "/pom.xml compile |sed -e s/\\\\[INFO\\\\][[:space:]]//g |sed -e s/\\\\[WARNING\\\\][[:space:]]//g") nil nil 'mvn-command-history))))))
 
-;(defun etags(&optional args)
-;  (interactive)
-;  (let ((fn (buffer-file-name)))
-;    (let ((dir (file-name-directory fn)))
-;      (while (and (not (file-exists-p (concat dir "/etags.bat")))
-;                (not (equal dir (file-truename (concat dir "/..")))))
-;        (setf dir (file-truename (concat dir "/.."))))
-;      (if (not (file-exists-p (concat dir "/etags.bat")))
-;        (message "No etags.bat found")
-;        (compile (read-from-minibuffer "Command: "
-;          (concat " dir "/etags.bat") nil nil nil))))))
