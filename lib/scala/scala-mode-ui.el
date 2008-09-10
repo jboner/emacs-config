@@ -169,7 +169,7 @@
    		                
    ("\r"                       'scala-newline)
 
-   ([f1]                       'speedbar-get-focus)
+;   ([f1]                       'speedbar-get-focus)
 			        
    ([(control c)(control l)]   'scala-load-file)
    ([(control c)(control r)]   'scala-eval-region)
