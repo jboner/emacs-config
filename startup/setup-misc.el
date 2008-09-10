@@ -3,6 +3,9 @@
 (require 'htmlize)
 
 ;;; ------------------------------------------------
+(set-buffer-file-coding-system 'utf-8-unix)
+
+;;; ------------------------------------------------
 ;;; GNU Server
 (load-file "$EMACS_LIB/lib/misc/gnuserv.el")
 (load-library "gnuserv")
