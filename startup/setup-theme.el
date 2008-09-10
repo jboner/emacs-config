@@ -2,7 +2,8 @@
 ;(set-default-font "-outline-ProFont-normal-r-normal-normal-11-97-96-96-c-*-iso8859-1")
 ;(set-default-font "-outline-ProggySquareTT-normal-r-normal-normal-18-97-96-96-c-*-iso8859-1")
 ;(set-default-font "-outline-ProggyCleanTT-normal-r-normal-normal-16-97-96-96-c-*-iso8859-1")
-(set-default-font "-outline-Consolas-normal-r-normal-normal-14-97-96-96-c-*-iso8859-1")
+;(set-default-font "-outline-Consolas-normal-r-normal-normal-14-97-96-96-c-*-iso8859-1")
+;(set-default-font "-raster-Fixedsys-normal-r-normal-normal-12-90-96-96-c-80-iso8859-1")
 
 ;--------------------
 ;; Color theme
@@ -14,7 +15,6 @@
 (require 'theme-manager)
 (color-theme-manoj-dark)
 (color-theme-manoj-font-lock)
-
 
 ;--------------------
 ;; Use font Monaco 10 for Mac OS X -- 

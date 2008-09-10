@@ -89,8 +89,18 @@
     (load-file "$EMACS_LIB/lib/misc/ido.el")))
 (require 'ido)
 (ido-mode 'both)
-(setq ido-enable-flex-matching t)
-
+(setq 
+ ido-ignore-buffers              ;; ignore these guys
+ '("\\` " "^\*Mess" "^\*Back" "^\*scratch" ".*Completion" "^\*Ido") 
+ ido-everywhere t                ; use for many file dialogs
+ ido-case-fold  t                ; be case-insensitive
+ ido-use-filename-at-point t     ; try to use filename...
+ ido-use-url-at-point t          ; ... or url at point
+ ido-enable-flex-matching t      ; be flexible
+ ido-max-prospects 5             ; don't spam my minibuffer
+ ido-confirm-unique-completion t ; wait for RET, even with unique completion
+)
+									   
 ;;; ------------------------------------------------
 ;;; IDO - FILE CACHE
 (defun file-cache-ido-find-file (file)
@@ -164,6 +174,44 @@ directory, select directory. Lastly the file is opened."
                 (shell-command-history    . 50)
                 tags-file-name
                 register-alist)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; compilation; if compilation is successful, autoclose the compilation win
+;; http://www.emacswiki.org/cgi-bin/wiki/ModeCompile
+;; TODO: don't hide when there are warnings either (not just errors)
+(setq compilation-window-height 12)
+(setq compilation-finish-functions 'compile-autoclose)
+(defun compile-autoclose (buffer string)
+  (cond ((and (string-match "finished" string)
+	   (not (string-match "warning" string)))
+	  (message "Build maybe successful: closing window.")
+          (run-with-timer 2 nil                      
+	    'delete-window              
+	    (get-buffer-window buffer t)))
+    (t                                                                    
+      (message "Compilation exited abnormally: %s" string))))
+
+;;; ------------------------------------------------
+;; full-screen mode
+;; based on http://www.emacswiki.org/cgi-bin/wiki/WriteRoom
+;; toggle full screen with F3; require 'wmctrl'
+(when (executable-find "wmctrl") ;sudo apt-get install wmctrl
+  (defun full-screen-toggle ()
+    (interactive)
+    (shell-command "wmctrl -r :ACTIVE: -btoggle,fullscreen")))
+
+;;; ------------------------------------------------
+;; jump out from a pair(like quote, parenthesis, etc.)
+(defun jump-out-of-pair ()
+  (interactive)
+  (let ((pair-regexp "[^])}\"'>]*[])}\"'>]"))
+    (if (looking-at pair-regexp)
+        (progn
+          ;; be sure we can use C-u C-@ to jump back
+          ;; if we goto the wrong place
+          (push-mark)
+          (goto-char (match-end 0)))
+      (c-indent-command))))
 
 ;;; ------------------------------------------------
 ;;; viper and vimpulse modes
