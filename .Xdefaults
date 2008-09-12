@@ -1,0 +1,16 @@
+!$xrdb -merge ~/.Xdefaults 
+
+Xft.dpi: 96
+Xft.rgba: rgb
+Xft.antialias: 1
+Xft.hinting: 1
+
+Emacs.font: Monospace-9
+!Emacs.font: Inconsolata Medium-9
+!Emacs.font: Consolas-11
+!Emacs.font: -bitstream-bitstream vera sans mono-medium-r-*--*-100-*--*--*- 
+!Emacs.font: -*-terminus-medium-r-*-*-14-*-*-*-*-*-*-*
+
+Emacs.menuBar: off
+Emacs.toolBar: off
+Emacs.geometry: 85x60+600+300
