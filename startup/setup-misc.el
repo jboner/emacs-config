@@ -172,7 +172,7 @@ directory, select directory. Lastly the file is opened."
                 tags-file-name
                 register-alist)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ------------------------------------------------
 ;; compilation; if compilation is successful, autoclose the compilation win
 ;; http://www.emacswiki.org/cgi-bin/wiki/ModeCompile
 ;; TODO: don't hide when there are warnings either (not just errors)

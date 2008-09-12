@@ -7,14 +7,16 @@
 
 ;--------------------
 ;; Color theme
-(load-file (substitute-in-file-name "$EMACS_LIB/lib/color-theme-6.6.0/themes/manoj-colors.el"))
+;(load-file (substitute-in-file-name "$EMACS_LIB/lib/color-theme-6.6.0/themes/manoj-colors.el"))
 (add-to-list 'load-path (substitute-in-file-name "$EMACS_LIB/lib/color-theme-6.6.0"))
 (require 'color-theme)
 (color-theme-initialize)
 (add-to-list 'load-path (substitute-in-file-name "$EMACS_LIB/lib/misc"))
 (require 'theme-manager)
-(color-theme-manoj-dark)
-(color-theme-manoj-font-lock)
+;(color-theme-manoj-dark)
+;(color-theme-manoj-font-lock)
+;(color-theme-vim-colors)
+(color-theme-scintilla)
 
 ;--------------------
 ;; Use font Monaco 10 for Mac OS X -- 
