@@ -6,6 +6,11 @@
 (set-buffer-file-coding-system 'utf-8-unix)
 
 ;;; ------------------------------------------------
+;;; TextMate-like Command-T
+(load-file "$EMACS_LIB/lib/misc/command_t.el")
+(global-set-key "\M-t" 'find-tag-file)
+
+;;; ------------------------------------------------
 ;;; GNU Server
 (load-file "$EMACS_LIB/lib/misc/gnuserv.el")
 (load-library "gnuserv")
@@ -128,30 +133,6 @@ directory, select directory. Lastly the file is opened."
            (setq ido-temp-list choices))))
     (ido-read-buffer prompt)))
  
-(require 'filecache)
-;(require 'ido) 
-;(ido-mode t) 
-(global-set-key (kbd "ESC ESC f") 'file-cache-ido-find-file)
-
-;;; FILE CACHE FOR JDE MODE
-;; Prevent subversion files form polluting the cache
-;(add-to-list 'file-cache-filter-regexps "\\.svn-base$")
-;; global variable to keep track of current project
-;(defvar credmp/current-jde-project nil)
- 
-;; small function to re-create the cache when the project changes
-;(defun credmp/update-cache ()
-;  (if (not (string= jde-current-project credmp/current-jde-project))
-;      (progn
-;        (file-cache-clear-cache)
-;        (file-cache-add-directory-using-find (substring jde-current-project 0 (- (length jde-current-project) 6))))
-;    )
-;  (setq credmp/current-jde-project jde-current-project)
-;  )
- 
-;; add the hook...
-;(add-hook 'jde-project-hooks 'credmp/update-cache)
-
 ;;; ------------------------------------------------
 ;; save a list of open files in ~/.emacs.desktop
 ;; save the desktop file automatically if it already exists
@@ -174,22 +155,6 @@ directory, select directory. Lastly the file is opened."
                 (shell-command-history    . 50)
                 tags-file-name
                 register-alist)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; compilation; if compilation is successful, autoclose the compilation win
-;; http://www.emacswiki.org/cgi-bin/wiki/ModeCompile
-;; TODO: don't hide when there are warnings either (not just errors)
-(setq compilation-window-height 12)
-(setq compilation-finish-functions 'compile-autoclose)
-(defun compile-autoclose (buffer string)
-  (cond ((and (string-match "finished" string)
-	   (not (string-match "warning" string)))
-	  (message "Build maybe successful: closing window.")
-          (run-with-timer 2 nil                      
-	    'delete-window              
-	    (get-buffer-window buffer t)))
-    (t                                                                    
-      (message "Compilation exited abnormally: %s" string))))
 
 ;;; ------------------------------------------------
 ;; full-screen mode
@@ -251,4 +216,46 @@ directory, select directory. Lastly the file is opened."
 ;;; ------------------------------------------------
 ;; turn off anti-aliasing for mac
 ;(setq mac-allow-anti-aliasing nil)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; compilation; if compilation is successful, autoclose the compilation win
+;; http://www.emacswiki.org/cgi-bin/wiki/ModeCompile
+;; TODO: don't hide when there are warnings either (not just errors)
+;(setq compilation-window-height 12)
+;(setq compilation-finish-functions 'compile-autoclose)
+;(defun compile-autoclose (buffer string)
+;  (cond ((and (string-match "finished" string)
+;	   (not (string-match "warning" string)))
+;	  (message "Build maybe successful: closing window.")
+;          (run-with-timer 2 nil                      
+;	    'delete-window              
+;	    (get-buffer-window buffer t)))
+;    (t                                                                    
+;      (message "Compilation exited abnormally: %s" string))))
+
+(require 'filecache)
+;(require 'ido) 
+;(ido-mode t) 
+(global-set-key (kbd "ESC ESC f") 'file-cache-ido-find-file)
+
+;;; FILE CACHE FOR JDE MODE
+;; Prevent subversion files form polluting the cache
+;(add-to-list 'file-cache-filter-regexps "\\.svn-base$")
+;; global variable to keep track of current project
+;(defvar credmp/current-jde-project nil)
+ 
+;; small function to re-create the cache when the project changes
+;(defun credmp/update-cache ()
+;  (if (not (string= jde-current-project credmp/current-jde-project))
+;      (progn
+;        (file-cache-clear-cache)
+;        (file-cache-add-directory-using-find (substring jde-current-project 0 (- (length jde-current-project) 6))))
+;    )
+;  (setq credmp/current-jde-project jde-current-project)
+;  )
+ 
+;; add the hook...
+;(add-hook 'jde-project-hooks 'credmp/update-cache)
+
 

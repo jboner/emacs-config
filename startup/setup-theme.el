@@ -13,8 +13,9 @@
 (color-theme-initialize)
 (add-to-list 'load-path (substitute-in-file-name "$EMACS_LIB/lib/misc"))
 (require 'theme-manager)
-(color-theme-manoj-dark)
-(color-theme-manoj-font-lock)
+;(color-theme-manoj-dark)
+;(color-theme-manoj-font-lock)
+(color-theme-scintilla)
 
 ;--------------------
 ;; Use font Monaco 10 for Mac OS X -- 
