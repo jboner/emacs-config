@@ -11,14 +11,14 @@
 
 ;;; ------------------------------------------------
 ;;; CUA mode
-(if (string-equal "21" (substring (emacs-version) 10 12))
-  (progn 
-    (load-file "$EMACS_LIB/lib/misc/cua.el")
-    (require 'cua)
-    (CUA-mode t)))
-(if (string-equal "22" (substring (emacs-version) 10 12))
-  (progn 
-    (cua-mode t)))
+;(if (string-equal "21" (substring (emacs-version) 10 12))
+;  (progn 
+;    (load-file "$EMACS_LIB/lib/misc/cua.el")
+;    (require 'cua)
+;(if (string-equal "22" (substring (emacs-version) 10 12))
+;  (progn 
+;    (cua-mode t)))
+(cua-mode t)
 
 ;;; ------------------------------------------------
 (global-font-lock-mode 1)
@@ -28,6 +28,7 @@
 (setq-default abbrev-mode t)
 (column-number-mode t)
 (line-number-mode t)
+(setq visible-bell t)
 
 ;;; ------------------------------------------------
 (setq max-lisp-eval-depth 1000)
@@ -81,23 +82,38 @@
 
 ;;; ------------------------------------------------
 ;;; IDO
-(if (string-equal "21" (substring (emacs-version) 10 12))
-  (progn ; only load cua for 21.x
-    (load-file "$EMACS_LIB/lib/misc/ido.el")))
-(require 'ido)
-(ido-mode 'both)
+;(if (string-equal "21" (substring (emacs-version) 10 12))
+;  (progn ; only load cua for 21.x
+;    (load-file "$EMACS_LIB/lib/misc/ido.el")))
+;	(require 'ido)
+(ido-mode t)
+(setq ido-enable-flex-matching t)
 (setq 
- ido-ignore-buffers              ;; ignore these guys
+ ido-ignore-buffers              ; ignore these guys
  '("\\` " "^\*Mess" "^\*Back" "^\*scratch" ".*Completion" "^\*Ido") 
  ido-everywhere t                ; use for many file dialogs
  ido-case-fold  t                ; be case-insensitive
  ido-use-filename-at-point t     ; try to use filename...
  ido-use-url-at-point t          ; ... or url at point
- ido-enable-flex-matching t      ; be flexible
- ido-max-prospects 5             ; don't spam my minibuffer
+ ido-max-prospects 10            ; don't spam my minibuffer
  ido-confirm-unique-completion t ; wait for RET, even with unique completion
 )
-									   
+(add-hook 'ido-setup-hook 
+          (lambda () 
+            (define-key ido-completion-map [tab] 'ido-complete)))									   
+
+;; ido-mode for M-x
+;(defun ido-execute ()
+;  (interactive)
+;  (call-interactively
+;   (intern
+;    (ido-completing-read
+;     "M-x "
+;     (let (cmd-list) 
+;       (mapatoms (lambda (S) (when (commandp S) (setq cmd-list (cons (format "%S" S) cmd-list)))))
+;       cmd-list)))))
+;(global-set-key "\M-x" 'ido-execute)
+
 ;;; ------------------------------------------------
 ;;; IDO - FILE CACHE
 (defun file-cache-ido-find-file (file)
@@ -126,8 +142,6 @@ directory, select directory. Lastly the file is opened."
     (ido-read-buffer prompt)))
  
 (require 'filecache)
-;(require 'ido) 
-;(ido-mode t) 
 (global-set-key (kbd "ESC ESC f") 'file-cache-ido-find-file)
 
 ;;; FILE CACHE FOR JDE MODE
@@ -176,17 +190,25 @@ directory, select directory. Lastly the file is opened."
 ;; compilation; if compilation is successful, autoclose the compilation win
 ;; http://www.emacswiki.org/cgi-bin/wiki/ModeCompile
 ;; TODO: don't hide when there are warnings either (not just errors)
-(setq compilation-window-height 12)
-(setq compilation-finish-functions 'compile-autoclose)
-(defun compile-autoclose (buffer string)
-  (cond ((and (string-match "finished" string)
-	   (not (string-match "warning" string)))
-	  (message "Build maybe successful: closing window.")
-          (run-with-timer 2 nil                      
-	    'delete-window              
-	    (get-buffer-window buffer t)))
-    (t                                                                    
-      (message "Compilation exited abnormally: %s" string))))
+;(setq compilation-window-height 12)
+;(setq compilation-finish-functions 'compile-autoclose)
+;(defun compile-autoclose (buffer string)
+;  (cond ((and (string-match "finished" string)
+;	   (not (string-match "warning" string)))
+;	  (message "Build maybe successful: closing window.")
+;          (run-with-timer 2 nil                      
+;	    'delete-window              
+;	    (get-buffer-window buffer t)))
+;    (t                                                                    
+;      (message "Compilation exited abnormally: %s" string))))
+
+;;; ------------------------------------------------
+;;; TextMate-like Command-T
+;(load-file "$EMACS_LIB/lib/misc/command_t.el")
+;(add-hook 'emacs-lisp-mode-hook (lambda (setl ffip-regexp ".*\\.scala")))
+;(load-file "$EMACS_LIB/lib/misc/project-local-variables.el")
+;(load-file "$EMACS_LIB/lib/misc/find-file-in-project.el")
+;(global-set-key "\M-t" 'find-file-in-project)
 
 ;;; ------------------------------------------------
 ;; full-screen mode
@@ -227,23 +249,6 @@ directory, select directory. Lastly the file is opened."
 ;;; Remote Emacs buffer using Erlang 
 ;(add-to-list 'load-path (substitute-in-file-name "$EMACS_LIB/lib/shbuf"))
 ;(require 'shbuf)
-
-;;; ------------------------------------------------
-;;; Desktop
-;(load-file "$EMACS_LIB/lib/misc/desktop.el")
-;(desktop-load-default)
-;(setq history-length 250)
-;(add-to-list 'desktop-globals-to-save 'file-name-history)
-;(desktop-read)
-;(setq desktop-enable t)
-;(setq desktop-buffers-not-to-save
-;        (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-;	        "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb" 
-;	        "\\)$"))
-;(add-to-list 'desktop-modes-not-to-save 'dired-mode)
-;(add-to-list 'desktop-modes-not-to-save 'Info-mode)
-;(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
-;(add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 
 ;;; ------------------------------------------------
 ;; turn off anti-aliasing for mac

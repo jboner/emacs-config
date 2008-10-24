@@ -13,14 +13,14 @@
 ;; ----------------------
 ;; Scala abbrev table setup
 ;; define scala abbrev table and scala mode map (for key bindings)
-(defvar scala-mode-abbrev-table nil)
-(define-abbrev-table 'scala-mode-abbrev-table nil)
-(defvar scala-mode-map ())
-(setq scala-mode-map java-mode-map)
-(define-key scala-mode-map (kbd "<tab>") 'scala-indent-line)
+;(defvar scala-mode-abbrev-table nil)
+;(define-abbrev-table 'scala-mode-abbrev-table nil)
+;(defvar scala-mode-map ())
+;(setq scala-mode-map java-mode-map)
+;(define-key scala-mode-map (kbd "<tab>") 'scala-indent-line)
 
-(defvar scala-build-command nil)
-(make-variable-buffer-local 'scala-build-command)
+;(defvar scala-build-command nil)
+;(make-variable-buffer-local 'scala-build-command)
 
 ;; ----------------------
 ;; Flymake for scala compiler
@@ -31,6 +31,7 @@
   (flymake-goto-next-error)
   (flymake-display-err-menu-for-current-line))
 
+;(flymake-mode-on)
 ;(add-hook 'scala-mode-hook
 ;  (lambda () (flymake-mode-on)))
 
@@ -53,7 +54,7 @@
     (add-hook 'after-save-hook 'flymake-after-save-hook nil t)
     (list "make" (list "-C" (find-makefile) "install"))))
 
-(push '(".+\\.scala$" flymake-scala-init) flymake-allowed-file-name-masks)
+;(push '(".+\\.scala$" flymake-scala-init) flymake-allowed-file-name-masks)
 
 ;; ----------------------
 ;; Scala indentation
