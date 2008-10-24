@@ -4,7 +4,7 @@
 ;; Copyright (C) 2008 Scala Dev Team at EPFL
 ;; Authors: See AUTHORS file
 ;; Keywords: scala languages oop
-;; $Id: scala-mode-auto.el 15859 2008-08-20 11:01:13Z nielsen $
+;; $Id$
 
 ;;; License
 

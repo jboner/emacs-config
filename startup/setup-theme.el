@@ -15,7 +15,6 @@
 (require 'theme-manager)
 ;(color-theme-manoj-dark)
 ;(color-theme-manoj-font-lock)
-;(color-theme-vim-colors)
 (color-theme-scintilla)
 
 ;--------------------
