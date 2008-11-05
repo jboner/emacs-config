@@ -7,8 +7,8 @@
 
 ;;; ------------------------------------------------
 ;;; TextMate-like Command-T
-(load-file "$EMACS_LIB/lib/misc/command_t.el")
-(global-set-key "\M-t" 'find-tag-file)
+;(load-file "$EMACS_LIB/lib/misc/command_t.el")
+;(global-set-key "\M-t" 'find-tag-file)
 
 ;;; ------------------------------------------------
 ;;; GNU Server
