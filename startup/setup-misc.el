@@ -12,10 +12,10 @@
 
 ;;; ------------------------------------------------
 ;;; GNU Server
-(load-file "$EMACS_LIB/lib/misc/gnuserv.el")
-(load-library "gnuserv")
-(gnuserv-start)
-(setq gnuserv-frame (selected-frame))
+;(load-file "$EMACS_LIB/lib/misc/gnuserv.el")
+;(load-library "gnuserv")
+;(gnuserv-start)
+;(setq gnuserv-frame (selected-frame))
 
 ;;; ------------------------------------------------
 ;;; CUA mode
