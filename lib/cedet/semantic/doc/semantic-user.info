@@ -1468,7 +1468,7 @@ If you use `semantic-load.el', or the default CEDET install mechanism,
 you do not need to add the above lines in your `.emacs' file.
 
 The Semantic Database has several user level configuration options that
-controls it's use.  From the user perspective, it appears to be one
+controls its use.  From the user perspective, it appears to be one
 large application.  Internally it is divided into sections.
 
 Core Tables
@@ -1578,7 +1578,7 @@ Include files or equivalent are found in:
 
 In C/C++ code, semantic tries to distinguish between project and system
 headers based on `""' or `<>' delimiters.  Each language can
-distinguish using it's own rules.
+distinguish using its own rules.
 
 The system directory is set up via the variable
 `semantic-dependency-system-include-path'.  The path is also modified
@@ -2573,39 +2573,39 @@ Node: Highlight Edits Mode52666
 Node: Parser State53607
 Node: Unmatched Syntax Highlighting54637
 Node: semanticdb55658
-Ref: semanticdb-mode-hooks57561
-Node: Semanticdb Tag Storage57905
-Ref: semanticdb-default-file-name58302
-Ref: semanticdb-default-save-directory58391
-Ref: semanticdb-persistent-path58720
-Ref: semanticdb-project-predicate-functions59444
-Ref: semanticdb-save-database-hooks59936
-Node: Semanticdb Search Configuration60088
-Node: Semanticdb Roots61918
-Ref: semanticdb-project-roots62356
-Ref: semanticdb-project-root-functions62702
-Node: Include paths63296
-Ref: semantic-add-system-include63631
-Ref: semantic-remove-system-include63825
-Ref: semantic-customize-system-include-path64023
-Ref: semanticdb-implied-include-tags64270
-Node: Search Throttle64794
-Ref: semanticdb-find-default-throttle65294
-Node: Semanticdb search debugging commands67066
-Ref: semanticdb-dump-all-table-summary68093
-Ref: semanticdb-find-test-translate-path68208
-Ref: semanticdb-find-adebug-lost-includes68380
-Ref: semantic-adebug-searchdb68616
-Node: Semanticdb System Backends68721
-Ref: semanticdb-project-system-databases69081
-Ref: semanticdb-search-system-databases69635
-Node: Changing Backends69704
-Ref: semanticdb-new-database-class70243
-Node: Script Generated Cache Files70462
-Node: Create System Databases70937
-Ref: semanticdb-create-ebrowse-database71394
-Node: Debugging71586
-Node: GNU Free Documentation License75933
-Node: Index95671
+Ref: semanticdb-mode-hooks57560
+Node: Semanticdb Tag Storage57904
+Ref: semanticdb-default-file-name58301
+Ref: semanticdb-default-save-directory58390
+Ref: semanticdb-persistent-path58719
+Ref: semanticdb-project-predicate-functions59443
+Ref: semanticdb-save-database-hooks59935
+Node: Semanticdb Search Configuration60087
+Node: Semanticdb Roots61916
+Ref: semanticdb-project-roots62354
+Ref: semanticdb-project-root-functions62700
+Node: Include paths63294
+Ref: semantic-add-system-include63629
+Ref: semantic-remove-system-include63823
+Ref: semantic-customize-system-include-path64021
+Ref: semanticdb-implied-include-tags64268
+Node: Search Throttle64792
+Ref: semanticdb-find-default-throttle65292
+Node: Semanticdb search debugging commands67064
+Ref: semanticdb-dump-all-table-summary68091
+Ref: semanticdb-find-test-translate-path68206
+Ref: semanticdb-find-adebug-lost-includes68378
+Ref: semantic-adebug-searchdb68614
+Node: Semanticdb System Backends68719
+Ref: semanticdb-project-system-databases69079
+Ref: semanticdb-search-system-databases69633
+Node: Changing Backends69702
+Ref: semanticdb-new-database-class70241
+Node: Script Generated Cache Files70460
+Node: Create System Databases70935
+Ref: semanticdb-create-ebrowse-database71392
+Node: Debugging71584
+Node: GNU Free Documentation License75931
+Node: Index95669
 
 End Tag Table

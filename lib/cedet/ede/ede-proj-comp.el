@@ -1,10 +1,10 @@
 ;;; ede-proj-comp.el --- EDE Generic Project compiler/rule driver
 
-;;;  Copyright (C) 1999, 2000, 2001, 2004, 2005, 2007, 2009  Eric M. Ludlam
+;;;  Copyright (C) 1999, 2000, 2001, 2004, 2005, 2007, 2009, 2010  Eric M. Ludlam
 
 ;; Author: Eric M. Ludlam <zappo@gnu.org>
 ;; Keywords: project, make
-;; RCS: $Id: ede-proj-comp.el,v 1.11 2009/07/03 11:34:36 zappo Exp $
+;; RCS: $Id: ede-proj-comp.el,v 1.13 2010/01/07 02:13:56 zappo Exp $
 
 ;; This software is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -82,7 +82,7 @@ For example, yacc/lex files need additional chain rules, or inferences.")
 	    :documentation
 	    "The commands used to execute this compiler.
 The object which uses this compiler will place these commands after
-it's rule definition.")
+its rule definition.")
    (autoconf :initarg :autoconf
 	     :initform nil
 	     :type list
@@ -256,12 +256,11 @@ This will prevent rules from creating duplicate variables or rules."
       (with-slots (variables) this
 	(mapcar
 	 (lambda (var)
-	   (insert (car var) "=")
-	  (let ((cd (cdr var)))
-	    (if (listp cd)
-		(mapc (lambda (c) (insert " " c)) cd)
-	      (insert cd)))
-	  (insert "\n"))
+	   (ede-pmake-insert-variable-once (car var)
+	     (let ((cd (cdr var)))
+	       (if (listp cd)
+		   (mapc (lambda (c) (insert " " c)) cd)
+		 (insert cd)))))
 	 variables))))
 
 (defmethod ede-compiler-intermediate-objects-p ((this ede-compiler))
@@ -318,7 +317,7 @@ The object creating makefile rules must call this method for the
 compiler it decides to use after inserting in the rule."
   (when (slot-boundp this 'commands)
     (with-slots (commands) this
-      (mapcar
+      (mapc
        (lambda (obj) (insert "\t"
 			     (cond ((stringp obj)
 				    obj)

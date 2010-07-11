@@ -1,10 +1,10 @@
 ;;; semanticdb-find.el --- Searching through semantic databases.
 
-;;; Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Eric M. Ludlam
+;;; Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Eric M. Ludlam
 
 ;; Author: Eric M. Ludlam <zappo@gnu.org>
 ;; Keywords: tags
-;; X-RCS: $Id: semanticdb-find.el,v 1.78 2009/07/12 13:55:05 zappo Exp $
+;; X-RCS: $Id: semanticdb-find.el,v 1.87 2010/03/06 04:10:49 zappo Exp $
 
 ;; This file is not part of GNU Emacs.
 
@@ -22,7 +22,7 @@
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
-;; 
+;;
 ;;; Commentary:
 ;;
 ;; Databases of various forms can all be searched.
@@ -82,13 +82,13 @@
 ;;  The PATH argument is then the most interesting argument.  It can
 ;;  have these values:
 ;;
-;;    nil - Take the current buffer, and use it's include list
+;;    nil - Take the current buffer, and use its include list
 ;;    buffer - Use that buffer's include list.
 ;;    filename - Use that file's include list.  If the file is not
 ;;        in a buffer, see of there is a semanticdb table for it.  If
 ;;        not, read that file into a buffer.
 ;;    tag - Get that tag's buffer of file file.  See above.
-;;    table - Search that table, and it's include list.
+;;    table - Search that table, and its include list.
 ;;
 ;; Search Results:
 ;;
@@ -105,7 +105,7 @@
 ;; eldoc - popup help
 ;;   => Requires basic search using default path.  (Header files ok)
 ;; tag jump - jump to a named tag
-;;   => Requires a brute search useing whole project.  (Source files only)
+;;   => Requires a brute search using whole project.  (Source files only)
 ;; completion - Completing symbol names in a smart way
 ;;   => Basic search (headers ok)
 ;; type analysis - finding type definitions for variables & fcns
@@ -120,6 +120,7 @@
 (require 'semanticdb)
 (require 'semanticdb-ref)
 (eval-when-compile
+  (require 'semantic-find)
   (require 'eieio)
   )
 
@@ -179,12 +180,12 @@ the following keys:
 ;; This should allow searches to start running faster.
 (defclass semanticdb-find-search-index (semanticdb-abstract-search-index)
   ((include-path :initform nil
-		 :documentation 
+		 :documentation
 		 "List of semanticdb tables from the include path.")
    (type-cache :initform nil
 	       :documentation
 	       "Cache of all the data types accessible from this file.
-Includes all types from all included files, merged namespaces, and 
+Includes all types from all included files, merged namespaces, and
 expunge duplicates.")
    )
   "Concrete search index for `semanticdb-find'.
@@ -197,7 +198,7 @@ This class will cache data derived during various searches.")
   (when (oref idx type-cache)
     (semantic-reset (oref idx type-cache)))
   ;; Clear the scope.  Scope doesn't have the data it needs to track
-  ;; it's own reset.
+  ;; its own reset.
   (semantic-scope-reset-cache)
   )
 
@@ -208,7 +209,7 @@ This class will cache data derived during various searches.")
   (semantic-reset idx)
   ;; Notify dependants by clearning their indicies.
   (semanticdb-notify-references
-   (oref idx table) 
+   (oref idx table)
    (lambda (tab me)
      (semantic-reset (semanticdb-get-table-index tab))))
   )
@@ -222,7 +223,7 @@ This class will cache data derived during various searches.")
 	(semantic-reset idx)
 	;; Notify dependants by clearning their indicies.
 	(semanticdb-notify-references
-	 (oref idx table) 
+	 (oref idx table)
 	 (lambda (tab me)
 	   (semantic-reset (semanticdb-get-table-index tab))))
 	)
@@ -255,13 +256,13 @@ This class will cache data derived during various searches.")
   "Translate PATH into a list of semantic tables.
 Path translation involves identifying the PATH input argument
 in one of the following ways:
-  nil - Take the current buffer, and use it's include list
+  nil - Take the current buffer, and use its include list
   buffer - Use that buffer's include list.
   filename - Use that file's include list.  If the file is not
       in a buffer, see of there is a semanticdb table for it.  If
       not, read that file into a buffer.
   tag - Get that tag's buffer of file file.  See above.
-  table - Search that table, and it's include list.
+  table - Search that table, and its include list.
   find result - Search the results of a previous find.
 
 In addition, once the base path is found, there is the possibility of
@@ -274,7 +275,7 @@ identified by translating PATH.  Such searches use brute force to
 scan every available table.
 
 The return value is a list of objects of type `semanticdb-table' or
-it's children.  In the case of passing in a find result, the result
+its children.  In the case of passing in a find result, the result
 is returned unchanged.
 
 This routine uses `semanticdb-find-table-for-include' to translate
@@ -304,6 +305,14 @@ Default action as described in `semanticdb-find-translate-path'."
     (if brutish
 	(semanticdb-find-translate-path-brutish-default path)
       (semanticdb-find-translate-path-includes-default path))))
+
+;;;###autoload
+(define-overloadable-function semanticdb-find-table-for-include (includetag &optional table)
+  "For a single INCLUDETAG found in TABLE, find a `semanticdb-table' object
+INCLUDETAG is a semantic TAG of class 'include.
+TABLE is a semanticdb table that identifies where INCLUDETAG came from.
+TABLE is optional if INCLUDETAG has an overlay of :filename attribute."
+  )
 
 (defun semanticdb-find-translate-path-brutish-default (path)
   "Translate PATH into a list of semantic tables.
@@ -382,7 +391,7 @@ Default action as described in `semanticdb-find-translate-path'."
   (let ((table (cond ((null path)
 		      semanticdb-current-table)
 		     ((bufferp path)
-		      (semantic-buffer-local-value 'semanticdb-current-table path))			
+		      (semantic-buffer-local-value 'semanticdb-current-table path))
 		     ((and (stringp path) (file-exists-p path))
 		      (semanticdb-file-table-object path t))
 		     ((semanticdb-abstract-table-child-p path)
@@ -422,7 +431,12 @@ and TAG is a clone of the include tag that was found.")
 (make-variable-buffer-local 'semanticdb-find-scanned-include-tags)
 
 (defvar semanticdb-implied-include-tags nil
-  "Include tags implied for all files of a given mode.")
+  "Include tags implied for all files of a given mode.
+Set this variable with `defvar-mode-local' for a particular mode so
+that any symbols that exist for all files for that mode are included.
+
+Note: This could be used as a way to write a file in a language
+to declare all the built-ins for that language.")
 
 (defun semanticdb-find-translate-path-includes--internal (path)
   "Internal implementation of `semanticdb-find-translate-path-includes-default'.
@@ -462,12 +476,12 @@ a new path from the provided PATH."
 	   (when includetags
 	     ;; If we have some tags, derive a table from them.
 	     ;; else we will do nothing, so the table is useless.
-	     
+
 	     ;; @todo - derive some tables
 	     (message "Need to derive tables for %S in translate-path-includes--default."
 		      path)
 	   )))
-    
+
     ;; Make sure each found include tag has an originating file name associated
     ;; with it.
     (when incfname
@@ -582,14 +596,7 @@ isn't in memory yet."
   "Load an unloaded file in FILENAME using the default semanticdb loader."
   (semanticdb-file-table-object filename))
 
-;;;###autoload
-(define-overloadable-function semanticdb-find-table-for-include (includetag &optional table)
-  "For a single INCLUDETAG found in TABLE, find a `semanticdb-table' object
-INCLUDETAG is a semantic TAG of class 'include.
-TABLE is a semanticdb table that identifies where INCLUDETAG came from.
-TABLE is optional if INCLUDETAG has an overlay of :filename attribute."
-  )
-
+;; The creation of the overload occurs above.
 (defun semanticdb-find-table-for-include-default (includetag &optional table)
   "Default implementation of `semanticdb-find-table-for-include'.
 Uses `semanticdb-current-database-list' as the search path.
@@ -628,7 +635,7 @@ Included databases are filtered based on `semanticdb-find-default-throttle'."
      ;;
      ;; If the name is relative, then it should be findable as relative
      ;; to the source file that this tag originated in, and be fast.
-     ;; 
+     ;;
      ((and (semanticdb-find-throttle-active-p 'local)
 	   (file-exists-p (expand-file-name name originfiledir)))
 
@@ -724,7 +731,7 @@ for details on how this list is derived."
     (data-debug-new-buffer "*SEMANTICDB FTP ADEBUG*")
     (message "Search of tags took %.2f seconds."
 	     (semantic-elapsed-time start end))
-    
+
     (data-debug-insert-stuff-list p "*")))
 
 (defun semanticdb-find-test-translate-path-no-loading (&optional arg)
@@ -746,6 +753,19 @@ for details on how this list is derived."
     (data-debug-new-buffer "*SEMANTICDB FTP ADEBUG*")
     (message "Search of tags took %.2f seconds."
 	     (semantic-elapsed-time start end))
+
+    (data-debug-insert-stuff-list p "*")))
+
+;;;###autoload
+(defun semanticdb-test-current-database-list ()
+  "Call and output results of `semanticdb-current-database-list'.
+Uses the `default-directory' to derive results."
+  (interactive)
+  (require 'data-debug)
+  (let ((start (current-time))
+	(p (semanticdb-current-database-list))
+	)
+    (data-debug-new-buffer "*SEMANTICDB Current Database List*")
     
     (data-debug-insert-stuff-list p "*")))
 
@@ -761,14 +781,14 @@ Examines the variable `semanticdb-find-lost-includes'."
     (if (not lost)
 	(message "There are no unknown includes for %s"
 		 (buffer-name))
-    
+
       (data-debug-new-buffer "*SEMANTICDB lost-includes ADEBUG*")
       (data-debug-insert-tag-list lost "*")
       )))
 
 (defun semanticdb-find-adebug-insert-scanned-tag-cons (consdata prefix prebuttontext)
   "Insert a button representing scanned include CONSDATA.
-PREFIX is the text that preceeds the button.
+PREFIX is the text that precedes the button.
 PREBUTTONTEXT is some text between prefix and the overlay button."
   (let* ((start (point))
 	 (end nil)
@@ -823,7 +843,7 @@ Examines the variable `semanticdb-find-lost-includes'."
     (if (not scanned)
 	(message "There are no includes scanned %s"
 		 (buffer-name))
-    
+
       (data-debug-new-buffer "*SEMANTICDB scanned-includes ADEBUG*")
       (data-debug-insert-stuff-list scanned "*")
       )))
@@ -1009,9 +1029,14 @@ is still made current."
 	  (when norm
 	    ;; The normalized tags can now be found based on that
 	    ;; tags table.
-	    (semanticdb-set-buffer (car norm))
-	    ;; Now reset ans
-	    (setq ans (cdr norm))
+	    (condition-case foo
+		(progn
+		  (semanticdb-set-buffer (car norm))
+		  ;; Now reset ans
+		  (setq ans (cdr norm)))
+	      ;; Don't error for this case, but don't store
+	      ;; the thing either.
+	      (no-method-definition nil))
 	    ))
       )
     ;; Return the tag.
@@ -1021,7 +1046,7 @@ is still made current."
 (defun semanticdb-find-result-mapc (fcn result)
   "Apply FCN to each element of find RESULT for side-effects only.
 FCN takes two arguments.  The first is a TAG, and the
-second is a DB from wence TAG originated.
+second is a DB from whence TAG originated.
 Returns result."
   (mapc (lambda (sublst)
 	  (mapc (lambda (tag)
@@ -1040,7 +1065,7 @@ Returns result."
   "The name of the logging buffer.")
 
 (defun semanticdb-find-toggle-logging ()
-  "Toggle sematnicdb logging."
+  "Toggle semanticdb logging."
   (interactive)
   (setq semanticdb-find-log-flag (null semanticdb-find-log-flag))
   (message "Semanticdb find logging is %sabled"
@@ -1248,7 +1273,7 @@ associated with that tag should be loaded into a buffer."
 See `semanticdb-find-translate-path' for details on PATH.
 The argument BRUTISH will be set so that searching includes all tables
 in the current project.
-FIND-FILE-MATCH indicates that any time a matchi is found, the file
+FIND-FILE-MATCH indicates that any time a match is found, the file
 associated wit that tag should be loaded into a buffer."
   (semanticdb-find-tags-collector
    (lambda (table tags)
@@ -1261,7 +1286,7 @@ associated wit that tag should be loaded into a buffer."
 See `semanticdb-find-translate-path' for details on PATH.
 The argument BRUTISH will be set so that searching includes all tables
 in the current project.
-FIND-FILE-MATCH indicates that any time a matchi is found, the file
+FIND-FILE-MATCH indicates that any time a match is found, the file
 associated wit that tag should be loaded into a buffer."
   (semanticdb-find-tags-collector
    (lambda (table tags)

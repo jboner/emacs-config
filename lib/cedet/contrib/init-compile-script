@@ -7,4 +7,5 @@
 (add-to-list 'load-path "../semantic/bovine/")
 (add-to-list 'load-path "../speedbar/")
 (add-to-list 'load-path "../semantic/wisent/")
+(load "cedet-compat")
 (setq debug-on-error t)

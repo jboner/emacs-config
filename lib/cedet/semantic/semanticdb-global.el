@@ -4,7 +4,7 @@
 
 ;; Author: Eric M. Ludlam <zappo@gnu.org>
 ;; Keywords: tags
-;; X-RCS: $Id: semanticdb-global.el,v 1.6 2009/04/18 16:37:17 zappo Exp $
+;; X-RCS: $Id: semanticdb-global.el,v 1.10 2009/09/29 01:32:34 zappo Exp $
 
 ;; This file is not part of GNU Emacs.
 
@@ -22,7 +22,7 @@
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
-;; 
+;;
 ;;; Commentary:
 ;;
 ;; Use GNU Global for by-name database searches.
@@ -30,7 +30,6 @@
 ;; This will work as an "omniscient" database for a given project.
 ;;
 
-(require 'semanticdb-search)
 (require 'semantic-symref-global)
 
 (eval-when-compile
@@ -49,7 +48,7 @@ in a GNU Global supported hierarchy."
           "Emable in Mode: " obarray
           #'(lambda (s) (get s 'mode-local-symbol-table))
           t (symbol-name major-mode))))
-  
+
   ;; First, make sure the version is ok.
   (cedet-gnu-global-version-check)
 
@@ -57,9 +56,9 @@ in a GNU Global supported hierarchy."
   (when (stringp mode)
     (setq mode (intern mode)))
 
-  (let ((ih (mode-local-value mode 'semantic-init-mode-hooks)))
+  (let ((ih (mode-local-value mode 'semantic-init-mode-hook)))
     (eval `(setq-mode-local
-	    ,mode semantic-init-mode-hooks
+	    ,mode semantic-init-mode-hook
 	    (cons 'semanticdb-enable-gnu-global-hook ih))))
 
   )
@@ -68,6 +67,12 @@ in a GNU Global supported hierarchy."
   "Add support for GNU Global in the current buffer via semantic-init-hook.
 MODE is the major mode to support."
   (semanticdb-enable-gnu-global-in-buffer t))
+
+(defclass semanticdb-project-database-global
+  ;; @todo - convert to one DB per directory.
+  (semanticdb-project-database eieio-instance-tracker)
+  ()
+  "Database representing a GNU Global tags file.")
 
 (defun semanticdb-enable-gnu-global-in-buffer (&optional dont-err-if-not-available)
   "Enable a GNU Global database in the current buffer.
@@ -95,12 +100,6 @@ is not available for this directory."
   ((major-mode :initform nil)
    )
   "A table for returning search results from GNU Global.")
-
-(defclass semanticdb-project-database-global
-  ;; @todo - convert to one DB per directory.
-  (semanticdb-project-database eieio-instance-tracker)
-  ()
-  "Database representing a GNU Global tags file.")
 
 (defmethod semanticdb-equivalent-mode ((table semanticdb-table-global) &optional buffer)
   "Return t, pretend that this table's mode is equivalent to BUFFER.
@@ -158,7 +157,6 @@ Return a list of tags."
 Optional argument TAGS is a list of tags to search.
 Return a list of tags."
   (if tags (call-next-method)
-    ;; YOUR IMPLEMENTATION HERE    
     (let* ((semantic-symref-tool 'global)
 	   (result (semantic-symref-find-tags-by-regexp regex 'project))
 	   )
@@ -177,7 +175,7 @@ Returns a table of all matching tags."
 	   (faketags nil)
 	   )
       (when result
-	(dolist (T (oref result :hit-text))	
+	(dolist (T (oref result :hit-text))
 	  ;; We should look up each tag one at a time, but I'm lazy!
 	  ;; Doing this may be good enough.
 	  (setq faketags (cons
@@ -190,7 +188,7 @@ Returns a table of all matching tags."
 ;;
 ;; If your language does not have a `deep' concept, these can be left
 ;; alone, otherwise replace with implementations similar to those
-;; above. 
+;; above.
 ;;
 (defmethod semanticdb-deep-find-tags-by-name-method
   ((table semanticdb-table-global) name &optional tags)
@@ -227,13 +225,15 @@ If optional arg STANDARDFILE is non nil, use a standard file w/ global enabled."
 
   (save-excursion
     (when standardfile
-      (set-buffer (find-file-noselect semanticdb-test-gnu-global-startfile)))
+      (save-match-data
+	(set-buffer (find-file-noselect semanticdb-test-gnu-global-startfile))))
 
     (condition-case err
 	(semanticdb-enable-gnu-global-in-buffer)
       (error (if standardfile
 		 (error err)
-	       (set-buffer (find-file-noselect semanticdb-test-gnu-global-startfile))
+	       (save-match-data
+		 (set-buffer (find-file-noselect semanticdb-test-gnu-global-startfile)))
 	       (semanticdb-enable-gnu-global-in-buffer))))
 
     (let* ((db (semanticdb-project-database-global "global"))

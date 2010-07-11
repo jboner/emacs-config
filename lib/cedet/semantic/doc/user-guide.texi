@@ -1290,7 +1290,7 @@ mechanism, you do not need to add the above lines in your
 @file{.emacs} file.
 
 The Semantic Database has several user level configuration options
-that controls it's use.  From the user perspective, it appears to be
+that controls its use.  From the user perspective, it appears to be
 one large application.  Internally it is divided into sections.
 
 @table @asis
@@ -1410,7 +1410,7 @@ system directories
 
 In C/C++ code, @semantic{} tries to distinguish between project and
 system headers based on @code{""} or @code{<>} delimiters.  Each
-language can distinguish using it's own rules.
+language can distinguish using its own rules.
 
 The system directory is set up via the variable
 @code{semantic-dependency-system-include-path}.  The path is also

@@ -1,9 +1,9 @@
 ;;; semantic-c-by.el --- Generated parser support file
 
-;; Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Eric M. Ludlam
+;; Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Eric M. Ludlam
 
-;; Author: jboner <jboner@c-0279e055.427-1-64736c11.cust.bredbandsbolaget.se>
-;; Created: 2009-07-30 21:40:49+0200
+;; Author: jboner <jboner@darkstar.lan>
+;; Created: 2010-03-14 16:55:05+0100
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 
@@ -28,9 +28,6 @@
 ;;
 ;; PLEASE DO NOT MANUALLY EDIT THIS FILE!  It is automatically
 ;; generated from the grammar file c.by.
-
-;;; History:
-;;
 
 ;;; Code:
 
@@ -206,32 +203,14 @@
      (var-or-fun)
      (extern-c)
      (template)
-     (using
-      ,(semantic-lambda
-	(semantic-tag
-	 (car
-	  (car
-	   (nth 0 vals)))
-	 'using :type
-	 (car
-	  (nth 0 vals))))
-      )
+     (using)
      ) ;; end declaration
 
     (codeblock
      (define)
      (codeblock-var-or-fun)
      (type)
-     (using
-      ,(semantic-lambda
-	(semantic-tag
-	 (car
-	  (car
-	   (nth 0 vals)))
-	 'using :type
-	 (car
-	  (nth 0 vals))))
-      )
+     (using)
      ) ;; end codeblock
 
     (extern-c-contents
@@ -512,16 +491,7 @@
 	 'label))
       )
      (template)
-     (using
-      ,(semantic-lambda
-	(semantic-tag
-	 (car
-	  (car
-	   (nth 0 vals)))
-	 'using :type
-	 (car
-	  (nth 0 vals))))
-      )
+     (using)
      ( ;;EMPTY
       )
      ) ;; end namespacesubparts
@@ -722,29 +692,57 @@
 	 (nth 0 vals)
 	 (nth 1 vals) nil))
       )
-     ) ;; end type
-
-    (using
-     (USING
+     (NAMESPACE
+      symbol
+      punctuation
+      "\\`[=]\\'"
       typeformbase
       punctuation
       "\\`[;]\\'"
       ,(semantic-lambda
 	(semantic-tag-new-type
 	 (nth 1 vals)
-	 "class" nil nil :prototype t))
+	 (nth 0 vals)
+	 (list
+	  (semantic-tag-new-type
+	   (car
+	    (nth 3 vals))
+	   (nth 0 vals) nil nil)) nil :kind
+	 'alias))
       )
+     ) ;; end type
+
+    (using
      (USING
-      NAMESPACE
-      typeformbase
+      usingname
       punctuation
       "\\`[;]\\'"
       ,(semantic-lambda
-	(semantic-tag-new-type
-	 (nth 2 vals)
-	 "class" nil nil :prototype t))
+	(semantic-tag
+	 (car
+	  (nth 1 vals))
+	 'using :type
+	 (nth 1 vals)))
       )
      ) ;; end using
+
+    (usingname
+     (typeformbase
+      ,(semantic-lambda
+	(semantic-tag-new-type
+	 (car
+	  (nth 0 vals))
+	 "class" nil nil :prototype t))
+      )
+     (NAMESPACE
+      typeformbase
+      ,(semantic-lambda
+	(semantic-tag-new-type
+	 (car
+	  (nth 1 vals))
+	 "namespace" nil nil :prototype t))
+      )
+     ) ;; end usingname
 
     (template
      (TEMPLATE
@@ -1439,13 +1437,11 @@
       namespace-symbol
       opt-bits
       opt-array
-      opt-assign
       ,(semantic-lambda
 	(nth 2 vals)
 	(nth 0 vals)
 	(nth 3 vals)
-	(nth 4 vals)
-	(nth 5 vals))
+	(nth 4 vals))
       )
      ) ;; end varname
 
@@ -1490,19 +1486,28 @@
       )
      ) ;; end variablearg-opt-name
 
+    (varname-opt-initializer
+     (semantic-list)
+     (opt-assign)
+     ( ;;EMPTY
+      )
+     ) ;; end varname-opt-initializer
+
     (varnamelist
      (opt-ref
       varname
+      varname-opt-initializer
       punctuation
       "\\`[,]\\'"
       varnamelist
       ,(semantic-lambda
 	(cons
 	 (nth 1 vals)
-	 (nth 3 vals)))
+	 (nth 4 vals)))
       )
      (opt-ref
       varname
+      varname-opt-initializer
       ,(semantic-lambda
 	(list
 	 (nth 1 vals)))
@@ -2114,74 +2119,64 @@
       "\\`[&]\\'")
      ) ;; end expr-start
 
+    (expr-binop
+     (punctuation
+      "\\`[-]\\'")
+     (punctuation
+      "\\`[+]\\'")
+     (punctuation
+      "\\`[*]\\'")
+     (punctuation
+      "\\`[/]\\'")
+     (punctuation
+      "\\`[&]\\'"
+      punctuation
+      "\\`[&]\\'")
+     (punctuation
+      "\\`[&]\\'")
+     (punctuation
+      "\\`[|]\\'"
+      punctuation
+      "\\`[|]\\'")
+     (punctuation
+      "\\`[|]\\'")
+     ) ;; end expr-binop
+
     (expression
-     (number
+     (unaryexpression
+      expr-binop
+      unaryexpression
       ,(semantic-lambda
 	(list
 	 (identity start)
 	 (identity end)))
       )
-     (multi-stage-dereference
-      ,(semantic-lambda
-	(list
-	 (identity start)
-	 (identity end)))
-      )
-     (NEW
-      multi-stage-dereference
-      ,(semantic-lambda
-	(list
-	 (identity start)
-	 (identity end)))
-      )
-     (NEW
-      builtintype-types
-      semantic-list
-      ,(semantic-lambda
-	(list
-	 (identity start)
-	 (identity end)))
-      )
-     (namespace-symbol
-      ,(semantic-lambda
-	(list
-	 (identity start)
-	 (identity end)))
-      )
-     (string-seq
-      ,(semantic-lambda
-	(list
-	 (identity start)
-	 (identity end)))
-      )
-     (type-cast
-      expression
-      ,(semantic-lambda
-	(list
-	 (identity start)
-	 (identity end)))
-      )
-     (semantic-list
-      expression
-      ,(semantic-lambda
-	(list
-	 (identity start)
-	 (identity end)))
-      )
-     (semantic-list
-      ,(semantic-lambda
-	(list
-	 (identity start)
-	 (identity end)))
-      )
-     (expr-start
-      expression
+     (unaryexpression
       ,(semantic-lambda
 	(list
 	 (identity start)
 	 (identity end)))
       )
      ) ;; end expression
+
+    (unaryexpression
+     (number)
+     (multi-stage-dereference)
+     (NEW
+      multi-stage-dereference)
+     (NEW
+      builtintype-types
+      semantic-list)
+     (namespace-symbol)
+     (string-seq)
+     (type-cast
+      expression)
+     (semantic-list
+      expression)
+     (semantic-list)
+     (expr-start
+      expression)
+     ) ;; end unaryexpression
     )
   "Parser table.")
 

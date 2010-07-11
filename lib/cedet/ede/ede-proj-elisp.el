@@ -4,7 +4,7 @@
 
 ;; Author: Eric M. Ludlam <zappo@gnu.org>
 ;; Keywords: project, make
-;; RCS: $Id: ede-proj-elisp.el,v 1.37 2009/03/17 01:11:48 zappo Exp $
+;; RCS: $Id: ede-proj-elisp.el,v 1.40 2009/10/01 02:24:22 zappo Exp $
 
 ;; This software is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -35,7 +35,9 @@
    (keybindings :initform nil)
    (phony :initform t)
    (sourcetype :initform (ede-source-emacs))
-   (availablecompilers :initform (ede-emacs-compiler ede-xemacs-compiler))
+   (availablecompilers :initform (ede-emacs-compiler 
+				  ede-xemacs-compiler
+				  ede-emacs-preload-compiler))
    (aux-packages :initarg :aux-packages
 		 :initform nil
 		 :type list
@@ -44,7 +46,16 @@
 There should only be one toplevel package per auxiliary tool needed.
 These packages location is found, and added to the compile time
 load path."
-   ))
+   )
+   (pre-load-packages :initarg :pre-load-packages
+		      :initform nil
+		      :type list
+		      :custom (repeat string)
+		      :documentation "Additional packages to pre-load.
+Each package name will be loaded with `require'.
+Each package's directory should also appear in :aux-packages via a package name.
+You must use the `ede-emacs-preload-compiler' if you provide values in this slot.")
+   )
   "This target consists of a group of lisp files.
 A lisp target may be one general program with many separate lisp files in it.")
 
@@ -74,6 +85,23 @@ A lisp target may be one general program with many separate lisp files in it.")
 ;   :objectextention ".elc"
    )
   "Compile Emacs Lisp programs.")
+
+(defvar ede-emacs-preload-compiler
+  (clone
+   ede-emacs-compiler "ede-emacs-preload-compiler"
+   :commands
+   '("@echo \"(add-to-list 'load-path nil)\" > $@-compile-script"
+     "for loadpath in . ${LOADPATH}; do \\"
+     "   echo \"(add-to-list 'load-path \\\"$$loadpath\\\")\" >> $@-compile-script; \\"
+     "done;"
+     "for preload in ${ELISPPRELOAD}; do \\"
+     "   echo \"(load \\\"$$preload\\\")\" >> $@-compile-script; \\"
+     "done;"
+     "@echo \"(setq debug-on-error t)\" >> $@-compile-script"
+     "\"$(EMACS)\" $(EMACSFLAGS) -l $@-compile-script -f batch-byte-compile $^"
+     ))
+  "Compile Emacs Lisp programs with preload libraries.")
+	 
 
 (defvar ede-xemacs-compiler
   (clone ede-emacs-compiler "ede-xemacs-compiler"
@@ -186,13 +214,30 @@ is found, such as a `-version' variable, or the standard header."
 	    (setq items (cdr items)))))
       ))
 
+(defun ede-proj-makefile-insert-preload-items (items)
+  "Insert a sequence of ITEMS into the Makefile ELISPPRELOAD variable."
+    (when items
+      (ede-pmake-insert-variable-shared "ELISPPRELOAD"
+	(let ((begin (save-excursion (re-search-backward "\\s-*="))))
+	  (while items
+	    (when (not (save-excursion
+			 (re-search-backward
+			  (concat "\\s-" (regexp-quote (car items)) "[ \n\t\\]")
+			  begin t)))
+	      (insert " " (car items)))
+	    (setq items (cdr items)))))
+      ))
+
 (defmethod ede-proj-makefile-insert-variables :AFTER ((this ede-proj-target-elisp))
   "Insert variables needed by target THIS."
   (let ((newitems (if (oref this aux-packages)
 		      (ede-proj-elisp-packages-to-loadpath
 		       (oref this aux-packages))))
+	(newpreload (oref this pre-load-packages))
 	)
-    (ede-proj-makefile-insert-loadpath-items newitems)))
+    (ede-proj-makefile-insert-loadpath-items newitems)
+    (when newpreload
+      (ede-proj-makefile-insert-preload-items newpreload))))
 
 (defun ede-proj-elisp-add-path (path)
   "Add path PATH into the file if it isn't already there."
@@ -216,9 +261,9 @@ is found, such as a `-version' variable, or the standard header."
   "Tweak the configure file (current buffer) to accomodate THIS."
   (call-next-method)
   ;; Ok, now we have to tweak the autoconf provided `elisp-comp' program.
-  (let ((ec (ede-expand-filename this "elisp-comp")))
-    (if (not (file-exists-p ec))
-	(message "There may be compile errors.  Rerun a second time.")
+  (let ((ec (ede-expand-filename this "elisp-comp" 'newfile)))
+    (if (or (not ec) (not (file-exists-p ec)))
+	(message "No elisp-comp file.  There may be compile errors?  Rerun a second time.")
       (save-excursion
 	(if (file-symlink-p ec)
 	    (progn
@@ -239,9 +284,9 @@ is found, such as a `-version' variable, or the standard header."
 (defmethod ede-proj-flush-autoconf ((this ede-proj-target-elisp))
   "Flush the configure file (current buffer) to accomodate THIS."
   ;; Remove crufty old paths from elisp-compile
-  (let ((ec (ede-expand-filename this "elisp-comp"))
+  (let ((ec (ede-expand-filename this "elisp-comp" 'newfile))
 	)
-    (if (file-exists-p ec)
+    (if (and ec (file-exists-p ec))
 	(save-excursion
 	  (set-buffer (find-file-noselect ec t))
 	  (goto-char (point-min))

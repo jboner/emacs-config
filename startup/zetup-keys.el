@@ -24,7 +24,7 @@
 ;;; ------------------------------------------------
 (global-set-key [(meta up)]    'hippie-expand)
 (global-set-key [(meta down)]  'set-mark-command)
-(global-set-key [(meta right)] 'copy-region-as-kill)
+(global-set-key [(meta right)] 'yank)
 (global-set-key [(meta left)]  'kill-region)
 
 ;;; ------------------------------------------------

@@ -1,9 +1,9 @@
 ;;; semantic-scope.el --- Analyzer Scope Calculations
 
-;; Copyright (C) 2007, 2008, 2009 Eric M. Ludlam
+;; Copyright (C) 2007, 2008, 2009, 2010 Eric M. Ludlam
 
 ;; Author: Eric M. Ludlam <eric@siege-engine.com>
-;; X-RCS: $Id: semantic-scope.el,v 1.31 2009/04/02 00:50:54 zappo Exp $
+;; X-RCS: $Id: semantic-scope.el,v 1.36 2010/02/19 02:23:59 zappo Exp $
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -40,7 +40,7 @@
 ;; a) Convert each datatype into the real datatype tag
 ;; b) Convert namespaces into the list of contents of the namespace.
 ;; c) Merge all existing scopes together into one search list.
-;; 
+;;
 ;; Step 3: Local variables
 ;;
 ;; a) Local variables are in the master search list.
@@ -233,8 +233,11 @@ are from nesting data types."
 	   )
       ;; In case of arg lists or some-such, throw out non-types.
       (while (and stack (not (semantic-tag-of-class-p pparent 'type)))
-	(setq stack (cdr stack)
-	            pparent (car (cdr stack))))
+	(setq stack (cdr stack) pparent (car (cdr stack))))
+
+      ;; Remove duplicates
+      (while (member pparent scopetypes)
+	(setq stack (cdr stack) pparent (car (cdr stack))))
 
       ;; Step 1:
       ;;    Analyze the stack of tags we are nested in as parents.
@@ -269,7 +272,7 @@ are from nesting data types."
 	    (setq returnlist (nreverse returnlist))
 	    ))
 	)
-	
+
       ;; Only do this level of analysis for functions.
       (when (eq (semantic-tag-class tag) 'function)
 	;; Step 2:
@@ -290,7 +293,7 @@ are from nesting data types."
 			       searchname
 			     (list searchname)))
 		   (fullsearchname nil)
-		   
+
 		   (miniscope (semantic-scope-cache "mini"))
 		   ptag)
 
@@ -442,7 +445,7 @@ implicit \"object\"."
 ;;------------------------------------------------------------
 (define-overloadable-function  semantic-analyze-scope-calculate-access (type scope)
   "Calculate the access class for TYPE as defined by the current SCOPE.
-Access is related to the :parents in SCOPE.  If type is a member of SCOPE 
+Access is related to the :parents in SCOPE.  If type is a member of SCOPE
 then access would be 'private.  If TYPE is inherited by a member of SCOPE,
 the access would be 'protected.  Otherwise, access is 'public")
 
@@ -516,7 +519,7 @@ PROTECTION specifies the type of access requested, such as 'public or 'private."
 	   (fname (semantic-tag-file-name type))
 	   ;; EXTMETH are externally defined methods that are still
 	   ;; a part of this class.
-	
+
 	   ;; @TODO - is this line needed??  Try w/out for a while
 	   ;; @note - I think C++ says no.  elisp might, but methods
 	   ;;         look like defuns, so it makes no difference.
@@ -584,19 +587,63 @@ whose tags can be searched when needed, OR it may be a scope object."
 	 ;; you have a copy of all methods locally.  I think.
 	 (parents (semantic-tag-type-superclasses type))
 	 ps pt
+	 (tmpscope scope)
 	 )
-    (dolist (p parents)
-      (setq ps (cond ((stringp p) p)
-		     ((and (semantic-tag-p p) (semantic-tag-prototype-p p))
-		      (semantic-tag-name p))
-		     ((and (listp p) (stringp (car p)))
-		      p))
-	    pt (condition-case nil
-		   (semantic-analyze-find-tag ps 'type scope)
-		 (error nil)))
-      (when pt
-	(funcall fcn pt)
-	(semantic-analyze-scoped-inherited-tag-map pt fcn scope)))
+    (save-excursion
+
+      ;; Create a SCOPE just for looking up the parent based on where
+      ;; the parent came from.
+      ;;
+      ;; @TODO - Should we cache these mini-scopes around in Emacs
+      ;;         for recycling later?  Should this become a helpful
+      ;;         extra routine?
+      (when (and parents (semantic-tag-with-position-p type))
+	;; @NOTE - Does this save-excursion prevent the calculated
+	;; scope from working properly in any cases?
+	(save-excursion
+	  ;; If TYPE has a position, go there and get the scope.
+	  (semantic-go-to-tag type)
+
+	  ;; We need to make a mini scope, and only include the misc bits
+	  ;; that will help in finding the parent.  We don't really need
+	  ;; to do any of the stuff related to variables and what-not.
+	  (setq tmpscope (semantic-scope-cache "mini"))
+	  (let* ( ;; Step 1:
+		 (scopetypes (cons type (semantic-analyze-scoped-types (point))))
+		 (parents (semantic-analyze-scope-nested-tags (point) scopetypes))
+		 ;;(parentinherited (semantic-analyze-scope-lineage-tags parents scopetypes))
+		 (lscope nil)
+		 )
+	    (oset tmpscope scopetypes scopetypes)
+	    (oset tmpscope parents parents)
+	    ;;(oset tmpscope parentinheritance parentinherited)
+
+	    (when (or scopetypes parents)
+	      (setq lscope (semantic-analyze-scoped-tags scopetypes tmpscope))
+	      (oset tmpscope scope lscope))
+	    (oset tmpscope fullscope (append scopetypes lscope parents))
+	    )))
+      ;; END creating tmpscope
+
+      ;; Look up each parent one at a time.
+      (dolist (p parents)
+	(setq ps (cond ((stringp p) p)
+		       ((and (semantic-tag-p p) (semantic-tag-prototype-p p))
+			(semantic-tag-name p))
+		       ((and (listp p) (stringp (car p)))
+			p))
+	      pt (condition-case nil
+		     (or (semantic-analyze-find-tag ps 'type tmpscope)
+			 ;; A backup hack.
+			 (semantic-analyze-find-tag ps 'type scope))
+		   (error nil)))
+
+	(when pt
+	  (funcall fcn pt)
+	  ;; Note that we pass the original SCOPE in while recursing.
+	  ;; so that the correct inheritance model is passed along.
+	  (semantic-analyze-scoped-inherited-tag-map pt fcn scope)
+	  )))
     nil))
 
 ;;; ANALYZER
@@ -633,7 +680,7 @@ The class returned from the scope calculation is variable
 	    (condition-case nil
 		(oset scopecache localvar (semantic-get-all-local-variables))
 	      (error nil))
-	  
+
 	  (let* (;; Step 1:
 		 (scopetypes (semantic-analyze-scoped-types point))
 		 (parents (semantic-analyze-scope-nested-tags point scopetypes))
@@ -666,7 +713,7 @@ The class returned from the scope calculation is variable
 		  (setq scope (when (or scopetypes parents)
 				(semantic-analyze-scoped-tags scopetypes scopecache))
 			)))
-	      
+
 	      ;; Fill out the scope.
 	      (oset scopecache scope scope)
 	      (oset scopecache fullscope (append scopetypes scope parents))
@@ -726,7 +773,7 @@ hits in order, with the first tag being in the closest scope."
 		    (when (cdr namesplit)
 		      (setq typescoperaw (semantic-tag-type-members
 					  (car ans)))))
-		  
+
 		  (setq namesplit (cdr namesplit)))
 		;; Once done, store the current typecache lookup
 		(oset scope typescope

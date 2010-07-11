@@ -4,7 +4,7 @@
 
 ;; Author: Eric M. Ludlam <zappo@gnu.org>
 ;; Keywords: syntax
-;; X-RCS: $Id: semantic-util.el,v 1.139 2009/07/12 14:29:18 zappo Exp $
+;; X-RCS: $Id: semantic-util.el,v 1.142 2009/09/29 01:31:49 zappo Exp $
 
 ;; This file is not part of GNU Emacs.
 
@@ -66,19 +66,20 @@ If FILE is not loaded, check to see if `semanticdb' feature exists,
    and use it to get tags from files not in memory.
 If FILE is not loaded, and semanticdb is not available, find the file
    and parse it."
-  (if (find-buffer-visiting file)
-      (save-excursion
-	(set-buffer (find-buffer-visiting file))
-	(semantic-fetch-tags))
-    ;; File not loaded
-    (if (and (fboundp 'semanticdb-minor-mode-p)
-	     (semanticdb-minor-mode-p))
-	;; semanticdb is around, use it.
-	(semanticdb-file-stream file)
-      ;; Get the stream ourselves.
-      (save-excursion
-	(set-buffer (find-file-noselect file))
-	(semantic-fetch-tags)))))
+  (save-match-data
+    (if (find-buffer-visiting file)
+	(save-excursion
+	  (set-buffer (find-buffer-visiting file))
+	  (semantic-fetch-tags))
+      ;; File not loaded
+      (if (and (fboundp 'semanticdb-minor-mode-p)
+	       (semanticdb-minor-mode-p))
+	  ;; semanticdb is around, use it.
+	  (semanticdb-file-stream file)
+	;; Get the stream ourselves.
+	(save-excursion
+	  (set-buffer (find-file-noselect file))
+	  (semantic-fetch-tags))))))
 
 (semantic-alias-obsolete 'semantic-file-token-stream
 			 'semantic-file-tag-table)
@@ -158,7 +159,8 @@ THIS ISN'T USED IN SEMANTIC.  DELETE ME SOON."
 	(let ((fn (semantic-dependency-tag-file (car includelist))))
 	  (if (and fn (not (member fn unfound)))
 	      (save-excursion
-		(set-buffer (find-file-noselect fn))
+		(save-match-data
+		  (set-buffer (find-file-noselect fn)))
 		(message "Scanning %s" (buffer-file-name))
 		(setq stream (semantic-fetch-tags))
 		(setq found (semantic-find-first-tag-by-name name stream))
@@ -173,7 +175,7 @@ THIS ISN'T USED IN SEMANTIC.  DELETE ME SOON."
       found)))
 (make-obsolete 'semantic-recursive-find-nonterminal-by-name
 	       "Do not use this function.")
-  
+
 ;;; Completion APIs
 ;;
 ;; These functions provide minibuffer reading/completion for lists of
@@ -329,19 +331,19 @@ If TAG is not specified, use the tag at point."
 
 	(princ "\nGeneral configuration items:\n")
 	(let ((vars '(semantic-inhibit-functions
-		      semantic-init-hooks
-		      semantic-init-db-hooks
+		      semantic-init-hook
+		      semantic-init-db-hook
 		      semantic-unmatched-syntax-hook
 		      semantic--before-fetch-tags-hook
 		      semantic-after-toplevel-bovinate-hook
 		      semantic-after-toplevel-cache-change-hook
 		      semantic-before-toplevel-cache-flush-hook
 		      semantic-dump-parse
-		      
+
 		      )))
 	  (dolist (V vars)
 	    (semantic-describe-buffer-var-helper V buff)))
-	
+
 	(princ "\n\n")
 	(mode-local-describe-bindings-2 buff)
 	)))
@@ -370,7 +372,7 @@ Argument P is the point to search from in the current buffer."
 ;	      (semantic-find-nonterminal-by-type name strm)
 ;	      (semantic-recursive-find-nonterminal-by-name name (current-buffer))
 	      (semantic-brute-find-tag-by-position (point) strm)
-	      
+
 	      )
 ;	)
     (if res

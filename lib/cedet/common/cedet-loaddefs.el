@@ -20,10 +20,12 @@ exists.
 
 ;;;***
 
-;;;### (autoloads nil "cedet-compat" "cedet-compat.el" (18791 63972))
+;;;### (autoloads nil "cedet-compat" "cedet-compat.el" (19357 1712))
 ;;; Generated autoloads from cedet-compat.el
 
 (if (or (featurep (quote xemacs)) (inversion-test (quote emacs) "22.0")) (defalias (quote cedet-split-string) (quote cedet-split-string-1)) (defalias (quote cedet-split-string) (quote split-string)))
+
+(when (not (fboundp (quote with-no-warnings))) (put (quote with-no-warnings) (quote lisp-indent-function) 0) (defun with-no-warnings (&rest body) "Copied from `with-no-warnings' in Emacs 23.\nLike `progn', but prevents compiler warnings in the body.\nNote: Doesn't work if this version is being loaded." (car (last body))))
 
 ;;;***
 
@@ -65,7 +67,7 @@ return nil.
 
 ;;;***
 
-;;;### (autoloads nil "cedet-edebug" "cedet-edebug.el" (18411 2781))
+;;;### (autoloads nil "cedet-edebug" "cedet-edebug.el" (19357 1712))
 ;;; Generated autoloads from cedet-edebug.el
 
 (add-hook (quote edebug-setup-hook) (lambda nil (require (quote cedet-edebug)) (defalias (quote edebug-prin1-to-string) (quote cedet-edebug-prin1-to-string)) (define-key edebug-mode-map "A" (quote data-debug-edebug-expr))))
@@ -75,7 +77,7 @@ return nil.
 ;;;***
 
 ;;;### (autoloads (cedet-files-utest) "cedet-files" "cedet-files.el"
-;;;;;;  (18826 9372))
+;;;;;;  (19357 1712))
 ;;; Generated autoloads from cedet-files.el
 
 (autoload (quote cedet-files-utest) "cedet-files" "\
@@ -193,7 +195,7 @@ return nil.
 ;;;***
 
 ;;;### (autoloads (cedet-utest-batch cedet-utest) "cedet-utests"
-;;;;;;  "cedet-utests.el" (18912 16091))
+;;;;;;  "cedet-utests.el" (19357 1712))
 ;;; Generated autoloads from cedet-utests.el
 
 (autoload (quote cedet-utest) "cedet-utests" "\
@@ -215,7 +217,7 @@ Run the CEDET unit test in BATCH mode.
 ;;;;;;  data-debug-insert-thing data-debug-insert-stuff-vector data-debug-insert-stuff-list
 ;;;;;;  data-debug-insert-widget-properties data-debug-insert-hash-table
 ;;;;;;  data-debug-insert-property-list) "data-debug" "data-debug.el"
-;;;;;;  (18923 20190))
+;;;;;;  (19357 1712))
 ;;; Generated autoloads from data-debug.el
 
 (autoload (quote data-debug-insert-property-list) "data-debug" "\
@@ -309,7 +311,7 @@ messages to CHANNEL.
 
 ;;;### (autoloads (inversion-upgrade-package inversion-add-to-load-path
 ;;;;;;  inversion-find-version inversion-require-emacs inversion-require)
-;;;;;;  "inversion" "inversion.el" (18844 54499))
+;;;;;;  "inversion" "inversion.el" (19357 1712))
 ;;; Generated autoloads from inversion.el
 
 (autoload (quote inversion-require) "inversion" "\
@@ -361,7 +363,7 @@ Try to upgrade PACKAGE in DIRECTORY is available.
 ;;;***
 
 ;;;### (autoloads (mode-local-read-function) "mode-local" "mode-local.el"
-;;;;;;  (19039 58032))
+;;;;;;  (19357 1712))
 ;;; Generated autoloads from mode-local.el
 
 (autoload (quote mode-local-read-function) "mode-local" "\
@@ -405,7 +407,7 @@ See a pretty-printed representation of FUNCTION-NAME.
 ;;;### (autoloads (pulse-line-hook-function pulse-toggle-integration-advice
 ;;;;;;  pulse-momentary-highlight-region pulse-momentary-highlight-one-line
 ;;;;;;  pulse-momentary-highlight-overlay pulse-test pulse) "pulse"
-;;;;;;  "pulse.el" (18900 47467))
+;;;;;;  "pulse.el" (19357 1712))
 ;;; Generated autoloads from pulse.el
 
 (autoload (quote pulse) "pulse" "\
@@ -468,7 +470,7 @@ Only pulses the line if `pulse-command-advice-flag' is non-nil.
 ;;;***
 
 ;;;### (autoloads nil nil ("cedet-load.el" "cedet.el" "ezimage.el"
-;;;;;;  "sformat.el" "working.el") (19057 63260 579648))
+;;;;;;  "working.el") (19357 2550 969618))
 
 ;;;***
 

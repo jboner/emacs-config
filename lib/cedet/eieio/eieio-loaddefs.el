@@ -13,7 +13,7 @@ Build a call tree to show all functions called by FUNC.
 
 ;;;***
 
-;;;### (autoloads (chart-test-it-all) "chart" "chart.el" (18894 8266))
+;;;### (autoloads (chart-test-it-all) "chart" "chart.el" (19357 1713))
 ;;; Generated autoloads from chart.el
 
 (autoload (quote chart-test-it-all) "chart" "\
@@ -25,7 +25,7 @@ Test out various charting features.
 
 ;;;### (autoloads (data-debug-show data-debug-insert-object-button
 ;;;;;;  data-debug-insert-object-slots) "eieio-datadebug" "eieio-datadebug.el"
-;;;;;;  (18805 18670))
+;;;;;;  (19357 1713))
 ;;; Generated autoloads from eieio-datadebug.el
 
 (autoload (quote data-debug-insert-object-slots) "eieio-datadebug" "\
@@ -179,13 +179,10 @@ Argument PPATH is the path to the directory we are going to analyze.
 
 ;;;***
 
-;;;### (autoloads nil nil ("dbif-browse.el" "dbif-edit.el" "dbif.el"
-;;;;;;  "dialog-mode.el" "dialog-tree.el" "dlg-class.el" "dlg-config.el"
-;;;;;;  "e-config.el" "ecfg-menu.el" "eieio-base.el" "eieio-comp.el"
-;;;;;;  "eieio-custom.el" "eieio-doc.el" "eieio-load.el" "eieio-speedbar.el"
-;;;;;;  "eieio-test-methodinvoke.el" "eieio-tests.el" "eieio.el"
-;;;;;;  "eieiocomp.el" "psql.el" "widget-d.el" "widget-i.el") (19057
-;;;;;;  63264 410635))
+;;;### (autoloads nil nil ("eieio-base.el" "eieio-comp.el" "eieio-custom.el"
+;;;;;;  "eieio-doc.el" "eieio-load.el" "eieio-speedbar.el" "eieio-test-methodinvoke.el"
+;;;;;;  "eieio-test-mro.el" "eieio-tests.el" "eieio.el" "eieiocomp.el"
+;;;;;;  "psql.el") (19357 2552 510257))
 
 ;;;***
 

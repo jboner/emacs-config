@@ -7,7 +7,7 @@
 ;; Maintainer: CEDET developers <http://sf.net/projects/cedet>
 ;; Created: 09 Dec 2002
 ;; Keywords: syntax
-;; X-RCS: $Id: cedet.el,v 1.33 2009/03/27 22:27:50 zappo Exp $
+;; X-RCS: $Id: cedet.el,v 1.36 2009/09/12 12:04:55 zappo Exp $
 
 ;; This file is not part of Emacs
 
@@ -59,17 +59,16 @@
 ;;
 ;;   (load-file "<INSTALL-PATH>/cedet/common/cedet.el")
 ;;
-;; If you want to turn on useful or all Semantic features by default,
-;; respectively add:
+;; Once loaded, you can enable additional feature.  For example,
+;; this will enable some basic and advance features:
 ;;
-;;   (setq semantic-load-turn-useful-things-on t)
-;; or
-;;   (setq semantic-load-turn-everything-on t)
-;;
-;; before loading this file, like this:
-;;
-;;   (setq semantic-load-turn-useful-things-on t)
 ;;   (load-file "<INSTALL-PATH>/cedet/common/cedet.el")
+;;   (global-ede-mode t)
+;;   (semantic-load-enable-code-helpers)
+;;   (global-srecode-minor-mode 1)
+;;
+;; See the INSTALL file for more.
+
 ;;
 ;; That's it!
 ;;
@@ -96,10 +95,10 @@
     (cedet         ,cedet-version "common"  "common" 	   )
     (eieio         "1.2"           nil      "eieio"        )
     (semantic      "2.0pre7"       nil      "semantic/doc" )
-    (srecode       "0.2"           nil      "srecode"      ) 
+    (srecode       "1.0pre7"       nil      "srecode"      ) 
     (ede           "1.0pre7"       nil      "ede"    	   )    
     (speedbar      "1.0.3"         nil      "speedbar"     )
-    (cogre         "0.8"           nil      "cogre"  	   )
+    (cogre         "1.0pre7"       nil      "cogre"  	   )
     (cedet-contrib "1.0pre7"      "contrib"  nil           )
     )
   "Table of CEDET packages to install.")

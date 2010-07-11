@@ -9,4 +9,5 @@
 (add-to-list 'load-path "../ede/")
 (add-to-list 'load-path "../eieio/")
 (add-to-list 'load-path "./")
+(load "cedet-compat")
 (setq debug-on-error t)

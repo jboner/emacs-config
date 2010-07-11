@@ -1609,7 +1609,7 @@ the error by providing some behavior.
      available.  OBJECT is othe object being called on
      "call-next-method".  ARGS are the  arguments it is called by.
      This method signals "no-next-method" by default.  Override this
-     method to not throw an error, and it's return value becomes the
+     method to not throw an error, and its return value becomes the
      return value of "call-next-method".
 
 
@@ -1941,10 +1941,10 @@ Ref: slot-missing59382
 Ref: slot-unbound60073
 Ref: no-applicable-method60765
 Ref: no-next-method61130
-Node: Signals61499
-Node: Naming Conventions63116
-Node: CLOS compatibility64346
-Node: Wish List67216
-Node: Function Index67991
+Node: Signals61498
+Node: Naming Conventions63115
+Node: CLOS compatibility64345
+Node: Wish List67215
+Node: Function Index67990
 
 End Tag Table

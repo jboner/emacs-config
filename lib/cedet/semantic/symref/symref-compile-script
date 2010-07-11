@@ -7,4 +7,5 @@
 (add-to-list 'load-path "../bovine/")
 (add-to-list 'load-path "../")
 (add-to-list 'load-path "../../eieio/")
+(load "cedet-compat")
 (setq debug-on-error t)

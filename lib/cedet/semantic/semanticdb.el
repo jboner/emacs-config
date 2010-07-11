@@ -1,10 +1,10 @@
 ;;; semanticdb.el --- Semantic tag database manager
 
-;;; Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Eric M. Ludlam
+;;; Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Eric M. Ludlam
 
 ;; Author: Eric M. Ludlam <zappo@gnu.org>
 ;; Keywords: tags
-;; X-RCS: $Id: semanticdb.el,v 1.134 2009/07/04 13:51:21 zappo Exp $
+;; X-RCS: $Id: semanticdb.el,v 1.139 2010/01/05 02:34:05 zappo Exp $
 
 ;; This file is not part of GNU Emacs.
 
@@ -191,6 +191,23 @@ If one doesn't exist, create it."
   )
 
 
+;;; SEARCH RESULTS TABLE
+;;
+;; Needed for system databases that may not provide
+;; a semanticdb-table associated with a file.
+;;
+(defclass semanticdb-search-results-table (semanticdb-abstract-table)
+  (
+   )
+  "Table used for search results when there is no file or table association.
+Examples include search results from external sources such as from
+Emacs' own symbol table, or from external libraries.")
+
+(defmethod semanticdb-refresh-table ((obj semanticdb-search-results-table) &optional force)
+  "If the tag list associated with OBJ is loaded, refresh it.
+This will call `semantic-fetch-tags' if that file is in memory."
+  nil)
+
 ;;; CONCRETE TABLE CLASSES
 ;;
 (defclass semanticdb-table (semanticdb-abstract-table)
@@ -251,7 +268,9 @@ If the buffer is in memory, return that buffer."
 If the buffer is in memory, return that buffer.
 If the buffer is not in memory, load it with `find-file-noselect'."
   (or (semanticdb-in-buffer-p obj)
-      (find-file-noselect (semanticdb-full-filename obj) t)))
+      ;; Save match data to protect against odd stuff in mode hooks.
+      (save-match-data
+	(find-file-noselect (semanticdb-full-filename obj) t))))
 
 (defmethod semanticdb-set-buffer ((obj semanticdb-table))
   "Set the current buffer to be a buffer owned by OBJ.
@@ -516,10 +535,25 @@ Optional argument FORCE will force a refresh even if the file in question
 is not in a buffer.  Avoid using FORCE for most uses, as an old cache
 may be sufficient for the general case.  Forced updates can be slow.
 This will call `semantic-fetch-tags' if that file is in memory."
-  (when (or (semanticdb-in-buffer-p obj) force)
+  (cond
+   ;;
+   ;; Already in a buffer, just do it.
+   ((semanticdb-in-buffer-p obj)
+    (semanticdb-set-buffer obj)
+    (semantic-fetch-tags))
+   ;;
+   ;; Not in a buffer.  Forcing a load.  
+   (force
+    ;; Patch from Iain Nicol. -- 
+    ;; @TODO: I wonder if there is a way to recycle 
+    ;;        semanticdb-create-table-for-file-not-in-buffer
     (save-excursion
-      (semanticdb-set-buffer obj)
-      (semantic-fetch-tags))))
+      (let ((buff (semantic-find-file-noselect 
+		   (semanticdb-full-filename obj))))
+	(set-buffer buff)
+	(semantic-fetch-tags)
+	;; Kill off the buffer if it didn't exist when we were called.
+	(kill-buffer buff))))))
 
 (defmethod semanticdb-needs-refresh-p ((obj semanticdb-table))
   "Return non-nil of OBJ's tag list is out of date.
@@ -593,6 +627,10 @@ The file associated with OBJ does not need to be in a buffer."
   ;; We do need to mark ourselves dirty.
   (semanticdb-set-dirty table)
 
+  ;; The lexical table may be modified.
+  (when (featurep 'semantic-lex-spp)
+    (oset table lexical-table (semantic-lex-spp-save-table)))
+
   ;; Incremental parser doesn't mokey around with this.
   (oset table unmatched-syntax semantic-unmatched-syntax-cache)
 
@@ -628,11 +666,16 @@ form."
   (semanticdb-save-db semanticdb-current-database)
   (message "Saving current tag summaries...done"))
 
+;; This prevents Semanticdb from querying multiple times if the users
+;; answers "no" to creating the Semanticdb directory.
+(defvar semanticdb--inhibit-create-file-directory)
+
 (defun semanticdb-save-all-db ()
   "Save all semantic tag databases."
   (interactive)
   (message "Saving tag summaries...")
-  (mapc 'semanticdb-save-db semanticdb-database-list)
+  (let ((semanticdb--inhibit-make-directory nil))
+    (mapc 'semanticdb-save-db semanticdb-database-list))
   (message "Saving tag summaries...done"))
 
 (defun semanticdb-save-all-db-idle ()

@@ -4,4 +4,5 @@
 (add-to-list 'load-path "../srecode/")
 (add-to-list 'load-path "../speedbar/")
 (add-to-list 'load-path "../eieio/")
+(load "cedet-compat")
 (setq debug-on-error t)

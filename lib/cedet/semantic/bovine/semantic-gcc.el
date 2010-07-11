@@ -3,7 +3,7 @@
 ;; Copyright (C) 2008, 2009 Eric M. Ludlam
 
 ;; Author: Eric M. Ludlam <eric@siege-engine.com>
-;; X-RCS: $Id: semantic-gcc.el,v 1.15 2009/07/28 15:53:23 ottalex Exp $
+;; X-RCS: $Id: semantic-gcc.el,v 1.18 2009/08/28 12:29:00 davenar Exp $
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -35,11 +35,11 @@ to give to the program."
   ;; $ gcc -v
   ;;
   (let ((buff (get-buffer-create " *gcc-query*"))
-        (old-lc-messages (getenv "LC_MESSAGES")))
+        (old-lc-messages (getenv "LC_ALL")))
     (save-excursion
       (set-buffer buff)
       (erase-buffer)
-      (setenv "LC_MESSAGES" "C")
+      (setenv "LC_ALL" "C")
       (condition-case nil
           (apply 'call-process gcc-cmd nil (cons buff t) nil gcc-options)
         (error ;; Some bogus directory for the first time perhaps?
@@ -48,7 +48,7 @@ to give to the program."
                (apply 'call-process gcc-cmd nil (cons buff t) nil gcc-options)
              (error ;; gcc doesn't exist???
               nil)))))
-      (setenv "LC_MESSAGES" old-lc-messages)
+      (setenv "LC_ALL" old-lc-messages)
       (prog1
           (buffer-string)
         (kill-buffer buff)
@@ -158,11 +158,7 @@ It should also include other symbols GCC was compiled with.")
     (setq semantic-gcc-setup-data fields)
     (unless c-include-path
       ;; Fallback to guesses
-      (let* ( ;; env vars include dirs, see http://gcc.gnu.org/onlinedocs/gcc/Environment-Variables.html
-             (cpath (split-string (getenv "CPATH") path-separator))
-             (c_include_path (split-string (getenv "C_INCLUDE_PATH") path-separator))
-             (cpp_include_path (split-string (getenv "CPP_INCLUDE_PATH") path-separator))
-             ;; gcc include dirs
+      (let* ( ;; gcc include dirs
              (gcc-exe (locate-file "gcc" exec-path exec-suffixes 'executable))
              (gcc-root (expand-file-name ".." (file-name-directory gcc-exe)))
              (gcc-include (expand-file-name "include" gcc-root))
@@ -262,6 +258,12 @@ Ziel: i486-linux-gnu
 Konfiguriert mit: ../src/configure -v --with-pkgversion='Ubuntu 4.3.2-1ubuntu12' --with-bugurl=file:///usr/share/doc/gcc-4.3/README.Bugs --enable-languages=c,c++,fortran,objc,obj-c++ --prefix=/usr --enable-shared --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --enable-nls --with-gxx-include-dir=/usr/include/c++/4.3 --program-suffix=-4.3 --enable-clocale=gnu --enable-libstdcxx-debug --enable-objc-gc --enable-mpfr --enable-targets=all --enable-checking=release --build=i486-linux-gnu --host=i486-linux-gnu --target=i486-linux-gnu
 Thread-Modell: posix
 gcc-Version 4.3.2 (Ubuntu 4.3.2-1ubuntu12)"
+    ;; Damien Deville bsd
+    "Using built-in specs.
+Target: i386-undermydesk-freebsd
+Configured with: FreeBSD/i386 system compiler
+Thread model: posix
+gcc version 4.2.1 20070719  [FreeBSD]"
     )
   "A bunch of sample gcc -v outputs from different machines.")
 
@@ -285,7 +287,8 @@ gcc version 2.95.2 19991024 (release)"
                     (cdr (assoc '--host fields))))
              (p (cdr (assoc '--prefix fields)))
              )
-        (when (not (and v h p))
+	;; No longer test for prefixes.
+        (when (not (and v h))
           (let ((strs (split-string S "\n")))
             (message "Test failed on %S\nV H P:\n%S %S %S" (car strs) v h p))
           (setq fail t))

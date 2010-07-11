@@ -1,9 +1,9 @@
 ;;; srecode-test.el --- SRecode Core Template tests.
 
-;; Copyright (C) 2008, 2009 Eric M. Ludlam
+;; Copyright (C) 2008, 2009, 2010 Eric M. Ludlam
 
 ;; Author: Eric M. Ludlam <eric@siege-engine.com>
-;; X-RCS: $Id: srecode-test.el,v 1.8 2009/01/29 03:15:59 zappo Exp $
+;; X-RCS: $Id: srecode-test.el,v 1.13 2010/02/16 02:06:47 zappo Exp $
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -53,7 +53,9 @@ If there is a second !, the put the mark there.")
   "Perform the insertion and test the output.
 Assumes that the current buffer is the testing buffer."
   (erase-buffer)
-  
+
+  ;;(cedet-utest-log " * Entry %s ..." (object-print o))
+
   (insert (or (oref o pre-fill) ""))
   (goto-char (point-min))
   (let ((start nil))
@@ -87,7 +89,6 @@ Assumes that the current buffer is the testing buffer."
 	     (oref o name) major-mode))
 
     ;; RESOLVE AND INSERT
-    (srecode-resolve-arguments temp dict)
     (let ((entries (oref o dict-entries)))
       (while entries
 	(srecode-dictionary-set-value dict
@@ -106,6 +107,35 @@ Assumes that the current buffer is the testing buffer."
       (pop-to-buffer (current-buffer))
       (error "Entry %s failed!" (object-name o)))
   ))
+
+;;; ARG HANDLER
+;;
+(defun srecode-semantic-handle-:utest (dict)
+  "Add macros into the dictionary DICT for unit testing purposes."
+  (srecode-dictionary-set-value dict "UTESTVAR1" "ARG HANDLER ONE")
+  (srecode-dictionary-set-value dict "UTESTVAR2" "ARG HANDLER TWO")
+  )
+
+(defun srecode-semantic-handle-:utestwitharg (dict)
+  "Add macros into the dictionary DICT based on other vars in DICT."
+  (let ((val1 (srecode-dictionary-lookup-name dict "UTWA"))
+	(nval1 nil))
+    ;; If there is a value, mutate it
+    (if (and val1 (stringp val1))
+	(setq nval1 (upcase val1))
+      ;; No value, make stuff up
+      (setq nval1 "NO VALUE"))
+
+    (srecode-dictionary-set-value dict "UTESTARGXFORM" nval1))
+
+  (let ((dicts (srecode-dictionary-lookup-name dict "UTLOOP")))
+    (dolist (D dicts)
+      ;; For each dictionary, lookup NAME, and transform into
+      ;; something in DICT instead.
+      (let ((sval (srecode-dictionary-lookup-name D "NAME")))
+	(srecode-dictionary-set-value dict (concat "FOO_" sval) sval)
+	)))
+  )
 
 ;;; TEST POINTS
 ;;
@@ -172,13 +202,13 @@ Assumes that the current buffer is the testing buffer."
    (srecode-utest-output
     "wrapinclude-around" :name "wrapinclude-around"
     :output ";; An includable  we could use.
-;; Intermediate Comments
+;; [VAR]Intermediate Comments
 ;; Text after a point inserter."
     )
    (srecode-utest-output
     "wrapinclude-around1" :name "wrapinclude-around"
     :output ";; An includable PENGUIN we could use.
-;; Intermediate Comments
+;; [VAR]Intermediate Comments
 ;; Text after a point inserter."
     :dict-entries '("COMMENT" "PENGUIN")
     )
@@ -204,6 +234,20 @@ VERY VERY LONG STRIN | VERY VERY LONG STRIN
 MIDDLE               |               MIDDLE
 S                    |                    S
 LAST                 |                 LAST")
+   (srecode-utest-output
+    "custom-arg-handler" :name "custom-arg-handler"
+    :output "OUTSIDE SECTION: ARG HANDLER ONE
+INSIDE SECTION: ARG HANDLER ONE")
+   (srecode-utest-output
+    "custom-arg-w-arg none" :name "custom-arg-w-arg"
+    :output "Value of xformed UTWA: NO VALUE")
+   (srecode-utest-output
+    "custom-arg-w-arg upcase" :name "custom-arg-w-arg"
+    :dict-entries '( "UTWA" "uppercaseme" )
+    :output "Value of xformed UTWA: UPPERCASEME")
+   (srecode-utest-output
+    "custom-arg-w-subdict" :name "custom-arg-w-subdict"
+    :output "All items here: item1 item2 item3")
    )
   "Test point entries for the template output tests.")
 
@@ -245,6 +289,52 @@ LAST                 |                 LAST")
        )
       )))
 
+;;; Project test
+;;
+;; Test that "project" specification works ok.
+
+(defun srecode-utest-project ()
+  "Test that project filtering works ok."
+  (interactive)
+  
+  (save-excursion
+    (let ((testbuff (find-file-noselect srecode-utest-testfile))
+	  (temp nil))
+
+      (set-buffer testbuff)
+
+      (srecode-load-tables-for-mode major-mode)
+      (srecode-load-tables-for-mode major-mode 'tests)
+
+      (if (not (srecode-table major-mode))
+	  (error "No template table found for mode %s" major-mode))
+  
+      (erase-buffer)
+
+
+      (setq temp (srecode-template-get-table (srecode-table)
+					     "test-project"
+					     "test"
+					     'tests
+					     ))
+
+      (when (not temp)
+	(error "Project template not found when in project"))
+
+      ;; Temporarily change the home of this file.
+      (let ((default-directory (expand-file-name "~/")))
+
+	(setq temp (srecode-template-get-table (srecode-table)
+					       "test-project"
+					       "test"
+					       'tests
+					       ))
+
+	(when temp
+	  (error "Project template found when not in project")))
+
+      ;;
+      )))
 
 
 (provide 'srecode-test)

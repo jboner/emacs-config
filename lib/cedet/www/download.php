@@ -12,12 +12,13 @@ pre-release and send in bug reports on the build process, or anything
 else to the <a href="http://lists.sourceforge.net/lists/listinfo/cedet-devel">mailing list</a>.
 
 <p>Try out
-<a href="http://sourceforge.net/project/showfiles.php?group_id=17886&release_id=664893">
-cedet-1.0pre6.tar.gz</a>.
+<a href="https://sourceforge.net/projects/cedet/files/cedet/1.0pre7/cedet-1.0pre7.tar.gz/download">
+cedet-1.0pre7.tar.gz</a>.
 
-<p>After building <b>CEDET</b>, consider adding your results to the prerelease
-<a href="http://cedet.wiki.sourceforge.net/1.0+pre6+Tested+Configurations">
-tested configuration page</a> by adding your own platform information.
+<p>After building <b>CEDET</b>, consider posting to
+the <a href="http://lists.sourceforge.net/lists/listinfo/cedet-devel">mailing
+list</a> to let us know how it went!  I'm most interested in
+platform/Emacs version information.
 
 <p><b>Please Note:</b>
 

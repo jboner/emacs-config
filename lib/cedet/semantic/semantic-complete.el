@@ -4,7 +4,7 @@
 
 ;; Author: Eric M. Ludlam <zappo@gnu.org>
 ;; Keywords: syntax
-;; X-RCS: $Id: semantic-complete.el,v 1.61 2009/05/31 19:37:08 zappo Exp $
+;; X-RCS: $Id: semantic-complete.el,v 1.65 2009/11/22 13:56:56 zappo Exp $
 
 ;; This file is not part of GNU Emacs.
 
@@ -38,7 +38,7 @@
 ;; quickly without resorting to "show me every possible option now".
 ;;
 ;; In addition, some symbol names will appear in multiple locations.
-;; If it is important to distiguish, then a way to provide a choice
+;; If it is important to distinguish, then a way to provide a choice
 ;; over these locations is important as well.
 ;;
 ;; Beyond brute force offers for completion of plain strings,
@@ -57,7 +57,7 @@
 ;;
 ;; Here, we will treat each section separately (excluding D)
 ;; They can then be strung together in user-visible commands to
-;; fullfill specific needs.
+;; fulfil specific needs.
 ;;
 ;; COLLECTORS:
 ;;
@@ -126,7 +126,7 @@
       (require 'tooltip)
     (error nil))
   )
-  
+
 ;;; Code:
 
 ;;; Compatibility
@@ -214,7 +214,7 @@ Keeps STRINGS only in the history.")
 Argument COLLECTOR is an object which can be used to to calculate
 a list of possible hits.  See `semantic-completion-collector-engine'
 for details on COLLECTOR.
-Argumeng DISPLAYOR is an object used to display a list of possible
+Argument DISPLAYOR is an object used to display a list of possible
 completions for a given prefix.  See`semantic-completion-display-engine'
 for details on DISPLAYOR.
 PROMPT is a string to prompt with.
@@ -243,7 +243,7 @@ HISTORY is a symbol representing a variable to story the history in."
       (if (string-match ":" prompt)
 	  (setq prompt (concat
 			(substring prompt 0 (match-beginning 0))
-			" (" default-as-string ")"
+			" (default " default-as-string ")"
 			(substring prompt (match-beginning 0))))
 	(setq prompt (concat prompt " (" default-as-string "): "))))
     ;;
@@ -528,8 +528,13 @@ if INLINE, then completion is happening inline in a buffer."
 	(semantic-displayor-set-completions
 	 displayor
 	 (or
-	  (and (not (eq na 'displayend))
-	       (semantic-collector-current-exact-match collector))
+	  ;; For the below - This caused problems for Chong Yidong
+	  ;; when experimenting with the completion engine.  I don't
+	  ;; remember what the problem was though, and I wasn't sure why
+	  ;; the below two lines were there since they obviously added
+	  ;; some odd behavior.  -EML	  
+	  ;(and (not (eq na 'displayend))
+	  ;     (semantic-collector-current-exact-match collector))
 	  (semantic-collector-all-completions collector contents))
 	 contents)
 	;; Ask the displayor to display them.
@@ -603,7 +608,7 @@ Similar to `minibuffer-contents' when completing in the minibuffer."
 	  (insert (substring (semantic-tag-name tag)
 			     (length txt)))
 	  (semantic-complete-inline-exit))
-      
+
       ;; Get whatever binding RET usually has.
       (let ((fcn
 	     (condition-case nil
@@ -652,7 +657,7 @@ Similar to `minibuffer-contents' when completing in the minibuffer."
 	(setq semantic-completion-collector-engine nil
 	      semantic-completion-display-engine nil))
     (error nil))
-    
+
   ;; Remove this hook LAST!!!
   ;; This will force us back through this function if there was
   ;; some sort of error above.
@@ -719,7 +724,7 @@ a reasonable distance."
 	   (t
 	    ;; Else, show completions now
 	    (semantic-complete-inline-force-display)
-    
+
 	    ))))
     ;; If something goes terribly wrong, clean up after ourselves.
     (error (semantic-complete-inline-exit))))
@@ -751,7 +756,7 @@ DO NOT CALL THIS IF THE INLINE COMPLETION ENGINE IS NOT ACTIVE."
 Argument COLLECTOR is an object which can be used to to calculate
 a list of possible hits.  See `semantic-completion-collector-engine'
 for details on COLLECTOR.
-Argumeng DISPLAYOR is an object used to display a list of possible
+Argument DISPLAYOR is an object used to display a list of possible
 completions for a given prefix.  See`semantic-completion-display-engine'
 for details on DISPLAYOR.
 BUFFER is the buffer in which completion will take place.
@@ -850,7 +855,7 @@ Expected return values are:
      ;; Use ans1 when we have it.
      (t
       ans1))))
-	  
+
 
 
 ;;; ------------------------------------------------------------
@@ -1374,7 +1379,7 @@ which have the same name."
   (if (and (slot-boundp obj 'last-prefix)
 	   (string= (oref obj last-prefix) (semantic-completion-text))
 	   (eq last-command this-command))
-      (if (and 
+      (if (and
 	   (slot-boundp obj 'focus)
 	   (slot-boundp obj 'table)
 	   (<= (semanticdb-find-result-length (oref obj table))
@@ -1512,7 +1517,7 @@ one in the source buffer."
 
 
 ;;; Tooltip completion lister
-;; 
+;;
 ;; Written and contributed by Masatake YAMATO <jet@gyve.org>
 ;;
 ;; Modified by Eric Ludlam for
@@ -1667,7 +1672,7 @@ Return a cons cell (X . Y)"
 ;;; Ghost Text displayor
 ;;
 (defclass semantic-displayor-ghost (semantic-displayor-focus-abstract)
-				    
+
   ((ghostoverlay :type overlay
 		 :documentation
 		 "The overlay the ghost text is displayed in.")
@@ -1744,10 +1749,10 @@ completion text in ghost text."
 	     (os (substring (semantic-tag-name tag) (length lp)))
 	     (ol (oref obj ghostoverlay))
 	     )
-      
+
 	(put-text-property 0 (length os) 'face 'region os)
 
-	(semantic-overlay-put 
+	(semantic-overlay-put
 	 ol 'display (concat os (buffer-substring (point) (1+ (point)))))
 	)
       ;; Calculate text difference between contents and the focus item.
@@ -1764,6 +1769,29 @@ completion text in ghost text."
 ;;; ------------------------------------------------------------
 ;;; Specific queries
 ;;
+(defvar semantic-complete-inline-custom-type
+  (append '(radio)
+	  (mapcar
+	   (lambda (class)
+	     (let* ((C (intern (car class)))
+		    (doc (documentation-property C 'variable-documentation))
+		    (doc1 (car (split-string doc "\n")))
+		    )
+	       (list 'const
+		     :tag doc1
+		     C)))
+	   (eieio-build-class-alist semantic-displayor-abstract t))
+	  )
+  "Possible options for inline completion displayors.
+Use this to enable custom editing.")
+
+(defcustom semantic-complete-inline-analyzer-displayor-class
+  'semantic-displayor-traditional
+  "*Class for displayor to use with inline completion."
+  :group 'semantic
+  :type semantic-complete-inline-custom-type
+  )
+
 ;;;###autoload
 (defun semantic-complete-read-tag-buffer-deep (prompt &optional
 						      default-tag
@@ -1866,12 +1894,12 @@ completion works."
 						   history)
   "Ask for a tag by name based on the current context.
 The function `semantic-analyze-current-context' is used to
-calculate the context.  `semantic-analyze-possible-completions' is used 
+calculate the context.  `semantic-analyze-possible-completions' is used
 to generate the list of possible completions.
 PROMPT is the first part of the prompt.  Additional prompt
 is added based on the contexts full prefix.
 CONTEXT is the semantic analyzer context to start with.
-HISTORY is a symbol representing a variable to stor the history in.
+HISTORY is a symbol representing a variable to store the history in.
 usually a default-tag and initial-input are available for completion
 prompts.  these are calculated from the CONTEXT variable passed in."
   (if (not context) (setq context (semantic-analyze-current-context (point))))
@@ -1893,30 +1921,6 @@ prompts.  these are calculated from the CONTEXT variable passed in."
      nil
      inp
      history)))
-
-(defvar semantic-complete-inline-custom-type
-  (append '(radio)
-	  (mapcar
-	   (lambda (class)
-	     (let* ((C (intern (car class)))
-		    (doc (documentation-property C 'variable-documentation))
-		    (doc1 (car (split-string doc "\n")))
-		    )
-	       (list 'const
-		     :tag doc1
-		     C)))
-	   (eieio-build-class-alist semantic-displayor-abstract t))
-	  )
-  "Possible options for inlince completion displayors.
-Use this to enable custom editing.")
-  
-(defcustom semantic-complete-inline-analyzer-displayor-class
-  'semantic-displayor-traditional
-  "*Class for displayor to use with inline completion."
-  :group 'semantic
-  :type semantic-complete-inline-custom-type
-  )
-
 
 ;;;###autoload
 (defun semantic-complete-inline-analyzer (context)
@@ -2002,14 +2006,14 @@ completion works."
   (interactive)
   (message "%S"
    (semantic-format-tag-prototype
-    (semantic-complete-read-tag-project "Symbol: ")
+    (semantic-complete-read-tag-project "Jump to symbol: ")
     )))
 
 ;;;###autoload
 (defun semantic-complete-jump-local ()
   "Jump to a semantic symbol."
   (interactive)
-  (let ((tag (semantic-complete-read-tag-buffer-deep "Symbol: ")))
+  (let ((tag (semantic-complete-read-tag-buffer-deep "Jump to symbol: ")))
     (when (semantic-tag-p tag)
       (push-mark)
       (goto-char (semantic-tag-start tag))

@@ -1,12 +1,12 @@
 ;;; cedet-compat.el --- Compatibility across (X)Emacs versions
 
-;; Copyright (C) 2009 Eric M. Ludlam
+;; Copyright (C) 2009, 2010 Eric M. Ludlam
 ;; Copyright (C) 2004, 2008, 2010 David Ponce
 
 ;; Author: David Ponce <david@dponce.com>
 ;; Maintainer: David Ponce <david@dponce.com>
 ;; Keywords: compatibility
-;; X-RCS: $Id: cedet-compat.el,v 1.4 2009/01/10 01:29:08 zappo Exp $
+;; X-RCS: $Id: cedet-compat.el,v 1.8 2010/02/19 22:43:21 zappo Exp $
 
 ;; This file is not part of Emacs
 
@@ -81,6 +81,17 @@ If string STR1 is greater, the value is a positive number N;
 
 )
 
+(if (not (fboundp 'booleanp))
+
+;; XEmacs does not have booleanp, which is used as a :type specifier for
+;; some slots of some classes in EIEIO.  Define it here.
+;;;###autoload
+(defun boolean-p (bool)
+  "Return non-nil if BOOL is nil or t."
+  (or (null bool) (eq bool t)))
+
+)
+
 ;; subst-char-in-string is not found on the XEmacs <= 21.4.  Provide
 ;; here for compatibility.
 (if (not (fboundp 'subst-char-in-string))
@@ -129,6 +140,41 @@ Copied verbatim from Emacs 23 CVS version subr.el."
 		    list)))
     (nreverse list)))
 
+(when (not (fboundp 'find-coding-systems-region))
+;; XEmacs does not currently have `find-coding-systems-region'. Here
+;; is an emulation, which seems sufficient for CEDET's purposes.
+  (defun find-coding-systems-region (begin end)
+    "Mimic Emacs' find-coding-system-region for XEmacs.
+Return a coding system between BEGIN and END."
+    (if (stringp begin)
+	(if (equal (charsets-in-string begin) '(ascii))
+	    '(undecided)
+	  (delete-if-not
+	   #'(lambda (coding-system)
+	       ;; Assume strings are always short enough that the
+	       ;; condition-case is not worth it.
+	       (query-coding-string begin coding-system t))
+	 
+	   (remove-duplicates
+	    (append
+	     (get-language-info current-language-environment 'coding-system)
+	     (mapcar #'coding-system-name (coding-system-list)))
+	    :test #'eq :from-end t)))
+      (if (equal (charsets-in-region begin end) '(ascii))
+	  '(undecided)
+	(delete-if-not
+	 #'(lambda (coding-system)
+	     (condition-case nil
+		 (query-coding-region begin end coding-system nil t t)
+	       (text-conversion-error)))
+	 (remove-duplicates
+	  (append
+	   (get-language-info current-language-environment 'coding-system)
+	   (mapcar #'coding-system-name (coding-system-list)))
+	  :test #'eq :from-end t)))))
+  )
+
+
 ;;;###autoload
 (if (or (featurep 'xemacs) (inversion-test 'emacs "22.0"))
     ;; For XEmacs, or older Emacs, we need a new split string.
@@ -136,6 +182,18 @@ Copied verbatim from Emacs 23 CVS version subr.el."
   ;; For newer emacs, then the cedet-split-string is the same
   ;; as the built-in one.
   (defalias 'cedet-split-string 'split-string))
+
+
+;;;###autoload
+(when (not (fboundp 'with-no-warnings))
+  (put 'with-no-warnings 'lisp-indent-function 0)
+  (defun with-no-warnings (&rest body)
+    "Copied from `with-no-warnings' in Emacs 23.
+Like `progn', but prevents compiler warnings in the body.
+Note: Doesn't work if this version is being loaded."
+    ;; The implementation for the interpreter is basically trivial.
+    (car (last body))))
+
 
 (provide 'cedet-compat)
 

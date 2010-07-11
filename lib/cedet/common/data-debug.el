@@ -3,7 +3,7 @@
 ;; Copyright (C) 2007, 2008, 2009 Eric M. Ludlam
 
 ;; Author: Eric M. Ludlam <eric@siege-engine.com>
-;; X-RCS: $Id: data-debug.el,v 1.23 2009/04/19 16:18:38 zappo Exp $
+;; X-RCS: $Id: data-debug.el,v 1.25 2009/09/12 02:31:14 zappo Exp $
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -41,6 +41,8 @@
 ;;     stuff))
 
 (require 'font-lock)
+(require 'ring)
+
 ;;; Code:
 
 ;;; Compatibility
@@ -183,7 +185,7 @@ PREBUTTONTEXT is some text between prefix and the overlay list button."
   "Insert all the parts of BUFFER.
 PREFIX specifies what to insert at the start of each line."
   (let ((attrprefix (concat (make-string (length prefix) ? ) "# "))
-	(proplist 
+	(proplist
 	 (list :filename (buffer-file-name buffer)
 	       :live (buffer-live-p buffer)
 	       :modified (buffer-modified-p buffer)
@@ -379,18 +381,9 @@ PREBUTTONTEXT is some text between prefix and the stuff list button."
 		      (ring-size ring)))
 	 (ringthing
 	  (if (= (ring-length ring) 0) nil (ring-ref ring 0)))
-	 (tip (format "Ring max-size %d, length %d.  Full of: %S"
+	 (tip (format "Ring max-size %d, length %d."
 		      (ring-size ring)
-		      (ring-length ring)
-		      (cond ((stringp ringthing)
-			     "strings")
-			    ((semantic-tag-p ringthing)
-			     "tags")
-			    ((eieio-object-p ringthing)
-			     "eieio objects")
-			    ((listp ringthing)
-			     "List of somethin'")
-			    (t "stuff"))))
+		      (ring-length ring)))
 	 )
     (insert prefix prebuttontext str)
     (setq end (point))
@@ -406,7 +399,7 @@ PREBUTTONTEXT is some text between prefix and the stuff list button."
   )
 
 
-;;; Hash-table 
+;;; Hash-table
 ;;
 
 ;;;###autoload
@@ -414,10 +407,10 @@ PREBUTTONTEXT is some text between prefix and the stuff list button."
   "Insert the contents of HASH-TABLE inserting PREFIX before each element."
   (maphash
    (lambda (key value)
-     (data-debug-insert-thing 
+     (data-debug-insert-thing
       key prefix
       (dd-propertize "key " 'face font-lock-comment-face))
-     (data-debug-insert-thing 
+     (data-debug-insert-thing
       value prefix
       (dd-propertize "val " 'face font-lock-comment-face)))
    hash-table))
@@ -440,7 +433,7 @@ PREBUTTONTEXT is some text between prefix and the stuff list button."
   "Insert HASH-TABLE as expandable button with recursive prefix PREFIX and PREBUTTONTEXT in front of the button text."
   (let ((string (dd-propertize (format "%s" hash-table)
 			    'face 'font-lock-keyword-face)))
-    (insert (dd-propertize 
+    (insert (dd-propertize
 	     (concat prefix prebuttontext string)
 	     'ddebug        hash-table
 	     'ddebug-indent (length prefix)
@@ -638,11 +631,11 @@ PREBUTTONTEXT is some text between prefix and the stuff vector button."
       (data-debug-insert-thing
        (symbol-value symbol)
        (concat (make-string indent ? ) "> ")
-       (concat 
+       (concat
 	(dd-propertize "value"
 		    'face 'font-lock-comment-face)
 	" ")))
-    (data-debug-insert-property-list 
+    (data-debug-insert-property-list
      (symbol-plist symbol)
      (concat (make-string indent ? ) "> "))
     (goto-char start))
@@ -660,7 +653,7 @@ PREBUTTONTEXT is some text between prefix and the stuff vector button."
 		(dd-propertize (concat "'" (symbol-name symbol))
 			    'face 'font-lock-variable-name-face))
 	       (t (format "'%s" symbol)))))
-    (insert (dd-propertize 
+    (insert (dd-propertize
 	     (concat prefix prebuttontext string)
 	     'ddebug          symbol
 	     'ddebug-indent   (length prefix)
@@ -762,25 +755,6 @@ FACE is the face to use."
     ;; nil
     (null . data-debug-insert-nil)
 
-    ;; eieio object
-    ((lambda (thing) (object-p thing)) . data-debug-insert-object-button)
-
-    ;; tag
-    (semantic-tag-p . data-debug-insert-tag)
-
-    ;; taglist
-    ((lambda (thing) (and (listp thing) (semantic-tag-p (car thing)))) .
-     data-debug-insert-tag-list-button)
-
-    ;; find results
-    (semanticdb-find-results-p . data-debug-insert-find-results-button)
-   
-    ;; Elt of a find-results
-    ((lambda (thing) (and (listp thing)
-			  (semanticdb-abstract-table-child-p (car thing))
-			  (semantic-tag-p (cdr thing)))) .
-			  data-debug-insert-db-and-tag-button)
-
     ;; Overlay
     (data-debug-overlay-p . data-debug-insert-overlay-button)
 
@@ -819,7 +793,7 @@ FACE is the face to use."
 
     ;; Widgets
     (widgetp . data-debug-insert-widget)
-     
+
     ;; List of stuff
     (listp . data-debug-insert-stuff-list-button)
 
@@ -827,6 +801,22 @@ FACE is the face to use."
     (vectorp . data-debug-insert-stuff-vector-button)
     )
   "Alist of methods used to insert things into an Ddebug buffer.")
+
+;; An augmentation function for the thing alist.
+(defun data-debug-add-specialized-thing (predicate fcn)
+  "Add a new specialized thing to display with data-debug.
+PREDICATE is a function that returns t if a thing is this new type.
+FCN is a function that will display stuff in the data debug buffer."
+  (let ((entry (cons predicate fcn))
+	;; Specialized entries show up AFTER nil,
+	;; but before listp, vectorp, symbolp, and
+	;; other general things.  Splice it into
+	;; the beginning.
+	(first (nthcdr 0 data-debug-thing-alist))
+	(second (nthcdr 1 data-debug-thing-alist))
+      )
+  (when (not (member entry data-debug-thing-alist))
+    (setcdr first (cons entry second)))))
 
 ;; uber insert method
 ;;;###autoload
@@ -853,7 +843,7 @@ If PARENT is non-nil, it is somehow related as a parent to thing."
 ;;; MAJOR MODE
 ;;
 ;; The Ddebug major mode provides an interactive space to explore
-;; the current state of semantic's parsing and analysis
+;; complicated data structures.
 ;;
 (defgroup data-debug nil
   "data-debug group."
@@ -869,7 +859,7 @@ If PARENT is non-nil, it is somehow related as a parent to thing."
     (modify-syntax-entry ?\` "'"     table) ;; Prefix ` (backquote)
     (modify-syntax-entry ?\' "'"     table) ;; Prefix ' (quote)
     (modify-syntax-entry ?\, "'"     table) ;; Prefix , (comma)
-    
+
     table)
   "Syntax table used in data-debug macro buffers.")
 
@@ -1046,7 +1036,7 @@ Do nothing if already expanded."
 
 ;;; DEBUG COMMANDS
 ;;
-;; Various commands to output aspects of the current semantic environment.
+;; Various commands for displaying complex data structures.
 
 ;;;###autoload
 (defun data-debug-edebug-expr (expr)

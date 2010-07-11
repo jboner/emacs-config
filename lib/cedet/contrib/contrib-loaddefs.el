@@ -4,7 +4,7 @@
 
 
 ;;;### (autoloads (eassist-list-methods eassist-switch-h-cpp) "eassist"
-;;;;;;  "eassist.el" (18368 33706))
+;;;;;;  "eassist.el" (19357 1712))
 ;;; Generated autoloads from eassist.el
 
 (defvar eassist-header-switches (quote (("h" "cpp" "cc" "c") ("hpp" "cpp" "cc") ("cpp" "h" "hpp") ("c" "h") ("C" "H") ("H" "C" "CPP" "CC") ("cc" "h" "hpp"))) "\
@@ -28,18 +28,22 @@ This function is recommended to be bound to some convinient hotkey.
 
 ;;;***
 
-;;;### (autoloads nil "ede-gnustep" "ede-gnustep.el" (18786 39631))
+;;;### (autoloads nil "ede-gnustep" "ede-gnustep.el" (19357 1712))
 ;;; Generated autoloads from ede-gnustep.el
 
 (add-to-list (quote ede-project-class-files) (ede-project-autoload "edegnustep" :name "GNUstep-Make" :file (quote ede-gnustep) :proj-file "ProjStep.ede" :load-type (quote ede-step-load) :class-sym (quote ede-step-project)) t)
 
-(add-to-list (quote auto-mode-alist) (quote ("ProjStep\\.ede" . emacs-lisp-mode)))
+(add-to-list (quote ede-project-class-files) (ede-project-autoload "gnustep-root" :name "GNUstep-make Top Most" :file (quote ede-gnustep) :proj-file "RootProjStep.ede" :initializers (quote (:project-mode scanner)) :load-type (quote ede-gnustep-load) :class-sym (quote ede-step-project)) t)
+
+(add-to-list (quote ede-project-class-files) (ede-project-autoload "gnustep" :name "GNUstep-Make in scanner mode" :file (quote ede-gnustep) :proj-file "ProjStep.ede" :initializers (quote (:project-mode scanner)) :load-type (quote ede-gnustep-load) :class-sym (quote ede-step-project)) t)
+
+(add-to-list (quote auto-mode-alist) (quote ("\\(Root\\)?ProjStep\\.ede" . emacs-lisp-mode)))
 
 ;;;***
 
 ;;;### (autoloads (semantic-tag-folding-mode global-semantic-tag-folding-mode
 ;;;;;;  global-semantic-tag-folding-mode) "semantic-tag-folding"
-;;;;;;  "semantic-tag-folding.el" (17213 40189))
+;;;;;;  "semantic-tag-folding.el" (19357 1713))
 ;;; Generated autoloads from semantic-tag-folding.el
 
 (defvar global-semantic-tag-folding-mode nil "\
@@ -97,8 +101,8 @@ Use the alternate LALR(1) parser.
 ;;;***
 
 ;;;### (autoloads nil nil ("cedet-contrib-load.el" "cedet-contrib.el"
-;;;;;;  "semantic-ectag-scala.el" "wisent-ruby.el") (19057 63318
-;;;;;;  162402))
+;;;;;;  "semantic-ectag-scala.el" "wisent-csharp-wy.el" "wisent-php-wy.el"
+;;;;;;  "wisent-ruby-wy.el" "wisent-ruby.el") (19357 2569 49778))
 
 ;;;***
 

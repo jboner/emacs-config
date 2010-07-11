@@ -1,5 +1,6 @@
 ;;; SCALA ------------------------------
-(add-to-list 'load-path (substitute-in-file-name "$EMACS_LIB/lib/scala/"))
+(add-to-list 'load-path (substitute-in-file-name "$EMACS_LIB/lib/scamacs/src/elisp/scala/"))
+(load-file (substitute-in-file-name "$EMACS_LIB/lib/scamacs/src/elisp/sbt/sbt.el"))
 
 ;; ----------------------
 ;; Load deps
@@ -7,7 +8,6 @@
 (require 'compile)
 (require 'flymake)
 (require 'font-lock)
- 
 (add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode))
 
 ;; ----------------------

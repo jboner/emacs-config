@@ -8,4 +8,5 @@
 (add-to-list 'load-path "../srecode/")
 (add-to-list 'load-path "../speedbar/")
 (add-to-list 'load-path "../semantic/bovine/")
+(load "cedet-compat")
 (setq debug-on-error t)

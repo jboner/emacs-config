@@ -1,9 +1,9 @@
 ;;; cedet-utests.el --- Run all unit tests in the CEDET suite.
 
-;; Copyright (C) 2008, 2009 Eric M. Ludlam
+;; Copyright (C) 2008, 2009, 2010 Eric M. Ludlam
 
 ;; Author: Eric M. Ludlam <eric@siege-engine.com>
-;; X-RCS: $Id: cedet-utests.el,v 1.20 2009/04/11 06:55:23 zappo Exp $
+;; X-RCS: $Id: cedet-utests.el,v 1.22 2010/02/16 02:08:14 zappo Exp $
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -91,11 +91,13 @@
 	 (semantic-test-throw-on-input))))
 
     ("semantic: gcc: output parse test" . semantic-gcc-test-output-parser)
+    ("wisent calculator" . wisent-calc-utest)
     ;;
     ;; SRECODE
     ;;
     ("srecode: fields" . srecode-field-utest)
     ("srecode: templates" . srecode-utest-template-output)
+    ("srecode: project" . srecode-utest-project)
     ("srecode: show maps" . srecode-get-maps)
     ("srecode: getset" . srecode-utest-getset-output)
 

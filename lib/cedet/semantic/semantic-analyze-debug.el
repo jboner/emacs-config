@@ -1,9 +1,9 @@
 ;;; semantic-analyze-debug.el --- Debug the analyzer
 
-;; Copyright (C) 2008, 2009 Eric M. Ludlam
+;; Copyright (C) 2008, 2009, 2010 Eric M. Ludlam
 
 ;; Author: Eric M. Ludlam <eric@siege-engine.com>
-;; X-RCS: $Id: semantic-analyze-debug.el,v 1.9 2009/02/01 16:12:12 zappo Exp $
+;; X-RCS: $Id: semantic-analyze-debug.el,v 1.11 2010/03/08 01:15:21 zappo Exp $
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -48,7 +48,7 @@
 	)
 
     ))
-  
+
 (defun semantic-analyzer-debug-found-prefix (ctxt)
   "Debug the prefix found by the analyzer output CTXT."
   (let* ((pf (oref ctxt prefix))
@@ -168,7 +168,7 @@ Semantic could not find this data type in any of its global tables.
 Semantic locates datatypes through either the local scope, or the global
 typecache.
 ")
-	
+
 	;; Describe local scope, and why we might not be able to
 	;; find it.
 	(semantic-analyzer-debug-describe-scope ctxt '(type))
@@ -187,7 +187,7 @@ Current typecache Statistics:\n")
 
 	(princ "\nIf the datatype is not in the typecache, then your include
 path may be incorrect.  ")
-	
+
 	(semantic-analyzer-debug-insert-include-summary tab)
 
 	;; End with-buffer
@@ -252,7 +252,7 @@ with the command:
 				 ots (oref ctxt scope))))))
 		(if (eq nexttype lasttype)
 		    (princ "\n  [ Debugger error trying to help with metatypes ]")
-		
+
 		  (if (eq ots dt)
 		      (princ "\nwhich is a metatype")
 		    (princ "\nwhich is derived from metatype ")
@@ -325,9 +325,9 @@ type constraint looking for the type ")
 	  (princ "."))
 	))
     (semantic-analyzer-debug-add-buttons)
-	
+
     ))
-  
+
 
 (defun semantic-analyzer-debug-test-local-context ()
   "Test the local context parsed from the file."
@@ -457,7 +457,7 @@ or implementing a version specific to ")
 	  (princ "\nA likely cause of an unfound tag is missing include files.")
 	  (semantic-analyzer-debug-insert-tag-list
 	   "The following includes were not found" unk)
-	  
+
 	  (princ "\nYou can fix the include path for ")
 	  (princ (symbol-name (oref table major-mode)))
 	  (princ " by using this function:
@@ -487,7 +487,7 @@ Optional argument CLASSCONSTRAINT says to output to tags of that class."
 	 " >> Known parent types with possible in scope symbols"
 	 parents)
       (princ "\n * No known parents in current scope."))
-	  
+
     (let ((si (semantic-analyze-tags-of-class-list
 	       (oref scope scope) cc))
 	  (lv (semantic-analyze-tags-of-class-list
@@ -498,7 +498,7 @@ Optional argument CLASSCONSTRAINT says to output to tags of that class."
 	   " >> Known symbols within the current scope"
 	   si)
 	(princ "\n * No known symbols currently in scope."))
-	  
+
       (if lv
 	  (semantic-analyzer-debug-insert-tag-list
 	   " >> Known symbols that are declared locally"
@@ -549,24 +549,25 @@ PARENT is a possible parent (by nesting) tag."
   (let ((str (semantic-format-tag-prototype tag parent)))
     (if (and (semantic-tag-with-position-p tag)
 	     (semantic-tag-file-name tag))
-	(insert-button str
-		       'mouse-face 'custom-button-pressed-face
-		       'tag tag
-		       'action
-		       `(lambda (button)
-			  (let ((buff nil)
-				(pnt nil))
-			    (save-excursion
-			      (semantic-go-to-tag
-			       (button-get button 'tag))
-			      (setq buff (current-buffer))
-			      (setq pnt (point)))
-			    (if (get-buffer-window buff)
-				(select-window (get-buffer-window buff))
-			      (pop-to-buffer buff t))
-			    (goto-char pnt)
-			    (pulse-line-hook-function)))
-		       )
+	(with-current-buffer standard-output
+	  (insert-button str
+			 'mouse-face 'custom-button-pressed-face
+			 'tag tag
+			 'action
+			 `(lambda (button)
+			    (let ((buff nil)
+				  (pnt nil))
+			      (save-excursion
+				(semantic-go-to-tag
+				 (button-get button 'tag))
+				(setq buff (current-buffer))
+				(setq pnt (point)))
+			      (if (get-buffer-window buff)
+				  (select-window (get-buffer-window buff))
+				(pop-to-buffer buff t))
+			      (goto-char pnt)
+			      (pulse-line-hook-function)))
+			 ))
       (princ "\"")
       (princ str)
       (princ "\""))
@@ -611,4 +612,5 @@ Look for key expressions, and add push-buttons near them."
       )))
 
 (provide 'semantic-analyze-debug)
+
 ;;; semantic-analyze-debug.el ends here

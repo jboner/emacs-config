@@ -1,9 +1,9 @@
 ;;; srecode-dictionary.el --- Dictionary code for the semantic recoder.
 
-;; Copyright (C) 2007, 2008, 2009 Eric M. Ludlam
+;; Copyright (C) 2007, 2008, 2009, 2010 Eric M. Ludlam
 
 ;; Author: Eric M. Ludlam <eric@siege-engine.com>
-;; X-RCS: $Id: srecode-dictionary.el,v 1.10 2009/04/02 01:50:36 zappo Exp $
+;; X-RCS: $Id: srecode-dictionary.el,v 1.14 2010/02/22 02:41:07 zappo Exp $
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -44,6 +44,11 @@
 	   "The parent dictionary.
 Symbols not appearing in this dictionary will be checked against the
 parent dictionary.")
+   (origin :initarg :origin
+	   :type string
+	   :documentation
+	   "A string representing the origin of this dictionary.
+Useful only while debugging.")
    )
   "Dictionary of symbols and what they mean.
 Dictionaries are used to look up named symbols from
@@ -144,29 +149,42 @@ If BUFFER-OR-PARENT is t, then this dictionary should not be
 assocated with a buffer or parent."
   (save-excursion
     (let ((parent nil)
-	  (buffer nil))
+	  (buffer nil)
+	  (origin nil)
+	  (initfrombuff nil))
       (cond ((bufferp buffer-or-parent)
 	     (set-buffer buffer-or-parent)
-	     (setq buffer buffer-or-parent))
+	     (setq buffer buffer-or-parent
+		   origin (buffer-name buffer-or-parent)
+		   initfrombuff t))
 	    ((srecode-dictionary-child-p buffer-or-parent)
 	     (setq parent buffer-or-parent
-		   buffer (oref buffer-or-parent buffer))
+		   buffer (oref buffer-or-parent buffer)
+		   origin (concat (object-name buffer-or-parent) " in "
+				  (if buffer (buffer-name buffer)
+				    "no buffer")))
 	     (when buffer
 	       (set-buffer buffer)))
 	    ((eq buffer-or-parent t)
-	     (setq buffer nil))
+	     (setq buffer nil
+		   origin "Unspecified Origin"))
 	    (t
-	     (setq buffer (current-buffer)))
+	     (setq buffer (current-buffer)
+		   origin (concat "Unspecified.  Assume "
+				  (buffer-name buffer))
+		   initfrombuff t)
+	     )
 	    )
       (let ((dict (srecode-dictionary
 		   major-mode
 		   :buffer buffer
 		   :parent parent
 		   :namehash  (make-hash-table :test 'equal
-					       :size 20))))
-	;; Only set up the default variables if we don't have
-	;; a buffer
-	(when buffer
+					       :size 20)
+		   :origin origin)))
+	;; Only set up the default variables if we are being built
+	;; directroy for a particular buffer.
+	(when initfrombuff
 	  ;; Variables from the table we are inserting from.
 	  ;; @todo - get a better tree of tables.
 	  (let ((mt (srecode-get-mode-table major-mode))
@@ -185,11 +203,12 @@ TPL is an object representing a compiled template file."
   (when tpl
     (let ((tabs (oref tpl :tables)))
       (while tabs
-	(let ((vars (oref (car tabs) variables)))
-	  (while vars
-	    (srecode-dictionary-set-value
-	     dict (car (car vars)) (cdr (car vars)))
-	    (setq vars (cdr vars))))
+	(when (srecode-template-table-in-project-p (car tabs))
+	  (let ((vars (oref (car tabs) variables)))
+	    (while vars
+	      (srecode-dictionary-set-value
+	       dict (car (car vars)) (cdr (car vars)))
+	      (setq vars (cdr vars)))))
 	(setq tabs (cdr tabs))))))
 
 
@@ -209,9 +228,9 @@ TPL is an object representing a compiled template file."
   "In dictionary DICT, add a section dictionary for section macro NAME.
 Return the new dictionary.
 
-You can add several dictionaries to the same section macro.
-For each dictionary added to a macro, the block of codes in the
-template will be repeated.
+You can add several dictionaries to the same section entry.
+For each dictionary added to a variable, the block of codes in
+the template will be repeated.
 
 If optional argument SHOW-ONLY is non-nil, then don't add a new dictionarly
 if there is already one in place.  Also, don't add FIRST/LAST entries.
@@ -302,7 +321,11 @@ inserted dictionaries."
 
 (defmethod srecode-dictionary-lookup-name ((dict srecode-dictionary)
 					   name)
-  "Return information about the current DICT's value for NAME."
+  "Return information about the current DICT's value for NAME.
+DICT is a dictionary, and NAME is a string that is the name of
+a symbol in the dictionary.
+This function derives values for some special NAMEs, such as `FIRST'
+and 'LAST'."
   (if (not (slot-boundp dict 'namehash))
       nil
     ;; Get the value of this name from the dictionary
@@ -402,10 +425,22 @@ inserted with a new editable field.")
 	   (start (point))
 	   (name (oref sti :object-name)))
 
-      (if (or (not dv) (string= dv ""))
-	  (insert name)
-	(insert dv))
+      (cond
+       ;; No default value.
+       ((not dv) (insert name))
+       ;; A compound value as the default?  Recurse.
+       ((srecode-dictionary-compound-value-child-p dv)
+	(srecode-compound-toString dv function dictionary))
+       ;; A string that is empty?  Use the name.
+       ((and (stringp dv) (string= dv ""))
+	(insert name))
+       ;; Insert strings
+       ((stringp dv) (insert dv))
+       ;; Some other issue
+       (t 
+	(error "Unknown default value for value %S" name)))
 
+      ;; Create a field from the inserter.
       (srecode-field name :name name
 		     :start start
 		     :end (point)
@@ -419,7 +454,7 @@ inserted with a new editable field.")
 
 ;;; Higher level dictionary functions
 ;;
-(defun srecode-create-section-dicionary (sectiondicts STATE)
+(defun srecode-create-section-dictionary (sectiondicts STATE)
   "Create a dictionary with section entries for a template.
 The format for SECTIONDICTS is what is emitted from the template parsers.
 STATE is the current compiler state."
@@ -472,7 +507,7 @@ STATE is the current compiler state."
 	 )
     (message "Creating a dictionary took %.2f seconds."
 	     (semantic-elapsed-time start end))
-    (data-debug-new-buffer "*SRECUDE ADEBUG*")
+    (data-debug-new-buffer "*SRECODE ADEBUG*")
     (data-debug-insert-object-slots dict "*")))
 
 ;;;###autoload

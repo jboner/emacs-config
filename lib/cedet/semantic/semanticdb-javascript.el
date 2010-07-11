@@ -1,11 +1,11 @@
 ;;; semanticdb-javascript.el --- Semantic database extensions for javascript
 
-;;; Copyright (C) 2002, 2003, 2004, 2005, 2007, 2008 Eric M. Ludlam
+;;; Copyright (C) 2002, 2003, 2004, 2005, 2007, 2008, 2009 Eric M. Ludlam
 ;;; Copyright (C) 2006 Joakim Verona
 
 ;; Author: Joakim Verona
 ;; Keywords: tags
-;; X-RCS: $Id: semanticdb-javascript.el,v 1.1 2008/09/04 22:43:05 zappo Exp $
+;; X-RCS: $Id: semanticdb-javascript.el,v 1.4 2009/09/11 18:56:45 zappo Exp $
 
 ;; This file is not part of GNU Emacs.
 
@@ -23,7 +23,7 @@
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
-;; 
+;;
 ;;; Commentary:
 ;;
 ;; Semanticdb database for Javascript.
@@ -33,7 +33,6 @@
 ;; the list of tags.
 ;;
 
-(require 'semanticdb-search)
 (eval-when-compile
   ;; For generic function searching.
   (require 'eieio)
@@ -214,7 +213,7 @@ Return a list of tags."
   (if tags (call-next-method)
     ;; YOUR IMPLEMENTATION HERE
     (semanticdb-javascript-regexp-search regex)
-    
+
     ))
 
 (defmethod semanticdb-find-tags-for-completion-method
@@ -286,7 +285,7 @@ Return a list of tags."
     ;; If it is optional, you can just delete this method.
     ))
 
-(provide 'semanticdb-el)
+(provide 'semanticdb-javascript)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

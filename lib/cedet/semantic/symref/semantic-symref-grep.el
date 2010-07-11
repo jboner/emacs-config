@@ -1,9 +1,9 @@
 ;;; semantic-symref-grep.el --- Symref implementation using find/grep
 
-;; Copyright (C) 2008, 2009 Eric M. Ludlam
+;; Copyright (C) 2008, 2009, 2010 Eric M. Ludlam
 
 ;; Author: Eric M. Ludlam <eric@siege-engine.com>
-;; X-RCS: $Id: semantic-symref-grep.el,v 1.7 2009/06/24 23:13:40 zappo Exp $
+;; X-RCS: $Id: semantic-symref-grep.el,v 1.8 2010/02/27 03:32:13 zappo Exp $
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -121,6 +121,12 @@ GREPPATTERN is the pattren used by grep."
     ;;(message "New command: %s" cmd)
     cmd))
 
+(defcustom semantic-symref-grep-shell "sh"
+  "The shell command to use for executing find/grep.
+This shell should support pipe redirect syntax."
+  :group 'semantic
+  :type 'string)
+
 (defmethod semantic-symref-perform-search ((tool semantic-symref-tool-grep))
   "Perform a search with Grep."
   ;; Grep doesn't support some types of searches.
@@ -171,10 +177,10 @@ GREPPATTERN is the pattren used by grep."
 	  (let ((cmd (concat "find " default-directory " -type f " filepattern " -print0 "
 			     "| xargs -0 grep -H " grepflags "-e " greppat)))
 	    ;;(message "Old command: %s" cmd)
-	    (call-process "sh" nil b nil "-c" cmd)
+	    (call-process semantic-symref-grep-shell nil b nil "-c" cmd)
 	    )
 	(let ((cmd (semantic-symref-grep-use-template rootdir filepattern grepflags greppat)))
-	  (call-process "sh" nil b nil "-c" cmd))
+	  (call-process semantic-symref-grep-shell nil b nil "-c" cmd))
 	))
     (setq ans (semantic-symref-parse-tool-output tool b))
     ;; Return the answer

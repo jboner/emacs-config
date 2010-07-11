@@ -34,6 +34,9 @@
 ;; The below listed parts DO NOT happen in this order as various
 ;; tools have to work together to build up the project.
 ;;
+;; Note: Not all entries below are actually tested.  Make in comments the
+;; bit a new piece of code implements.
+;;
 ;; Parts:
 ;;
 ;; 1) Create an EDE project in /tmp
@@ -44,7 +47,9 @@
 ;;    e Tell EDE where they are.
 ;;    f create a build file.
 ;;    g build the sources
+;;    g.1 Run a program build by EDE
 ;;    e remove files from a project.
+;;    f shared libraries from EDE.
 ;;
 ;; 2) Build sources using SRecode.
 ;;    a Fill in the constructed C files with classes and methods.
@@ -68,6 +73,14 @@
 ;;    a Create a COGRE graph.
 ;;    b Generate C++ code from the graph.
 ;;    c Compile the sources.
+;;
+;; @TODO -
+;; 6) Create a distribution file.
+;;    a Call "make dist"
+;;    b update the version number
+;;    c make a new dist.  Verify version number.
+;;    d In a fresh dir, unpack the dist.
+;;    e Compile that dist.
 
 (require 'semantic)
 (require 'ede)
@@ -86,46 +99,78 @@
 (require 'cit-el)
 (require 'cit-texi)
 (require 'cit-gnustep)
+(require 'cit-dist)
 
 (defvar cedet-integ-target (expand-file-name "edeproj" cedet-integ-base)
   "Root of the EDE project integration tests.")
 
 ;;; Code:
-(defun cedet-integ-test ()
-  "Run the full CEDET integration test."
+(defun cedet-integ-test-Make ()
+  "Run the full CEDET integration test using a Make style project."
+  (cedet-integ-test-proj "Make"))
+
+(defun cedet-integ-test-Automake ()
+  "Run the full CEDET integration test using a Automake style project."
+  (let ((ede-pconf-create-file-query nil))
+    (cedet-integ-test-proj "Automake")))
+
+(defun cedet-integ-test-proj (&optional make-type)
+  "Run the full CEDET integration test.
+Optional argument MAKE-TYPE is the style of EDE project to test."
   (interactive)
+
+  ;; Input check
+  (if (not (member make-type '("Make" "Automake")))
+      (error "Invalid make-type for test: %S" make-type))
+  (message "Running integration test of style %S" make-type)
+
   ;; 1 a) build directories
   ;;
   (cit-make-dir cedet-integ-base)
   (cit-make-dir cedet-integ-target)
   ;; 1 c) make src and include directories
   (cit-make-dir (cit-file "src"))
+  (cit-make-dir (cit-file "lib"))
   (cit-make-dir (cit-file "include"))
   (cit-make-dir (cit-file "uml"))
   ;;
   ;; 1 b) make a toplevel project
   ;;
   (find-file (expand-file-name "README" cedet-integ-target))
-  (ede-new "Make" "CEDET Integ Test Project")
+  (ede-new make-type "CEDET_Integ_Test_Project")
   ;; 1 d) Put C++ src into the right directories.
   ;; 2 a) Create sources with SRecode
   ;;
-  (cit-srecode-fill-cpp)
+  (cit-srecode-fill-cpp make-type)
 
   ;; 5 a,b,c) UML code generation test
-  (cit-fill-uml)
+  (cit-fill-uml make-type)
 
   ;; 1 e) remove files from a project
   (cit-remove-add-to-project-cpp)
+
+  ;; 1 f) remove files from a project
+  (cit-remove-and-do-shared-lib make-type)
 
   ;; 2 e) srecode map manipulation
   (cit-srecode-map-test)
 
   ;; Do some more with Emacs Lisp.
-  (cit-srecode-fill-el)
+  (cit-srecode-fill-el make-type)
 
   ;; Do some texinfo documentation.
   (cit-srecode-fill-texi)
+
+  ;; Create a distribution
+  (find-file (expand-file-name "README" cedet-integ-target))
+  (cit-make-dist)
+
+  (cit-finish-message "PASSED" make-type)
+  )
+
+(defun cedet-integ-test-GNUStep ()
+  "Run the CEDET integration test using GNUStep style project."
+  (interactive)
 
   ;; Do a EDE GNUstep-Make Project
   (make-directory (concat cedet-integ-target "_ede_GSMake") t)
@@ -133,13 +178,24 @@
   (let ((ede-auto-add-method 'always))
     (cit-ede-step-test))
 
-  ;; Leave a message
+  (cit-finish-message "PASSED" "GNUStep")
+  )
+
+(defun cit-finish-message (message style)
+  "Display a MESSAGE that some test is now finished.
+Argument STYLE is the type of build done."
   (let ((b (set-buffer (get-buffer-create "*PASSED*"))))
     (erase-buffer)
-    (insert "\n\n  PASSED!\n")
+    (insert "\n\n  PASSED!\n\n  Make Style: ")
+    (insert (format "%S" style) "\n")
+    (insert "\n\nWaiting 5 seconds before exiting with positive exit status.\n")
     (switch-to-buffer b)
-    )
-  )
+    ;; Now wait.
+    (sit-for 5)
+    ;; 1 means GOOD to the shell script, since any other emacs exit
+    ;; mechanism will be 0. (ie - click on the X in the corner.)
+    (kill-emacs 1)
+    ))
 
 (defun cit-make-dir (dir)
   "Make directory DIR if it doesn't exist."
@@ -186,8 +242,11 @@ EMPTY-DICT-ENTRIES are dictionary entries for the EMPTY fill macro."
 
       ;; 3 b) Srecode to make more sources
       ;; 3 c) Test incremental parsers (by side-effect)
-      (let ((e (srecode-semantic-insert-tag tag)))
+      (let ((e (srecode-semantic-insert-tag tag))
+	    (code (semantic-tag-get-attribute tag :code)))
       
+	(when code (insert code))
+
 	(goto-char e)
 	(sit-for 0)
 	)
@@ -258,28 +317,58 @@ are found, but don't error if they are not their."
     (setq actual (cdr actual))
     ))
 
-(defun cit-compile-and-wait ()
-  "Compile our current project, but wait for it to finish."
+(defun cit-compile-and-wait (&optional ARGS)
+  "Compile our current project, but wait for it to finish.
+Optional ARGS are additional arguments to add to the compile command,
+such as 'clean'."
   (let ((bufftokill (find-file (cit-file "Project.ede"))))
     ;; 1 f) Create a build file.
     (ede-proj-regenerate)
     ;; 1 g) build the sources.
-    (compile ede-make-command)
+    (compile (concat ede-make-command (or ARGS "")))
+    
+    (cit-wait-for-compilation)
 
-    (while compilation-in-progress
-      (accept-process-output)
-      (sit-for 1))
-
-    (save-excursion
-      (set-buffer "*compilation*")
-      (goto-char (point-max))
-
-      (when (re-search-backward " Error " nil t)
-	(error "Compilation failed!"))
-
-      )
     (kill-buffer bufftokill)
     ))
+
+(defun cit-wait-for-compilation ()
+  "Wait for a compilation to finish."
+
+  (while compilation-in-progress
+    (accept-process-output)
+    (sit-for 1))
+
+  (save-excursion
+    (set-buffer "*compilation*")
+    (goto-char (point-max))
+
+    (when (re-search-backward " Error " nil t)
+      (error "Compilation failed!"))
+
+    )
+  )
+
+(defun cit-run-target (command)
+  "Run the program (or whatever) that is associated w/ the current target.
+Use COMMAND to run the program."
+  (let ((target ede-object)
+	(cnt 0))
+    ;; Run the target.
+    (project-run-target target command)
+    ;; Did it produce errors or anything?
+    (save-excursion
+      (set-buffer (ede-shell-buffer target))
+      (goto-char (point-min))
+      ;; Wait for prompt.
+      (unwind-protect
+	  (while (not (re-search-forward "MOOSE" nil t))
+	    (setq cnt (1+ cnt))
+	    (when (> cnt 10) (error "Program output not detected"))
+	    (sit-for .1))
+	;; Kill the buffer.
+	(kill-buffer (ede-shell-buffer target)))
+      )))
 
 (provide 'cedet-integ-test)
 ;;; cedet-integ-test.el ends here

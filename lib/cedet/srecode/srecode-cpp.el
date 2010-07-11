@@ -1,11 +1,11 @@
 ;;; srecode-cpp.el --- C++ specific handlers for Semantic Recoder
 
 ;; Copyright (C) 2007, 2009 Eric M. Ludlam
-;; Copyright (C) 2009 Jan Moringen
+;; Copyright (C) 2009, 2010 Jan Moringen
 
 ;; Author: Eric M. Ludlam <eric@siege-engine.com>
 ;;         Jan Moringen <scymtym@users.sourceforge.net>
-;; X-RCS: $Id: srecode-cpp.el,v 1.5 2009/05/16 11:19:02 zappo Exp $
+;; X-RCS: $Id: srecode-cpp.el,v 1.6 2010/02/03 01:32:02 scymtym Exp $
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -27,6 +27,25 @@
 ;; Supply some C++ specific dictionary fillers and helpers
 
 ;;; Code:
+
+(require 'semantic-tag)
+
+
+;;; Customization
+;;
+
+(defgroup srecode-cpp nil
+  "C++-specific Semantic Recoder settings."
+  :group 'srecode)
+
+(defcustom srecode-cpp-namespaces
+  '("std" "boost")
+  "List expansion candidates for the :using-namespaces argument.
+A dictionary entry of the named PREFIX_NAMESPACE with the value
+NAMESPACE:: is created for each namespace unless the current
+buffer contains a using NAMESPACE; statement "
+  :group 'srecode-cpp
+  :type  '(repeat string))
 
 ;;; :cpp ARGUMENT HANDLING
 ;;
@@ -57,12 +76,29 @@ HEADER - Shown section if in a header file."
     )
   )
 
+(defun srecode-semantic-handle-:using-namespaces (dict)
+  "Add macros into the dictionary DICT based on used namespaces.
+Adds the following:
+PREFIX_NAMESPACE - for each NAMESPACE in `srecode-cpp-namespaces'."
+  (let ((tags (semantic-find-tags-by-class
+	       'using (semantic-fetch-tags))))
+    (dolist (name srecode-cpp-namespaces)
+      (let ((variable (format "PREFIX_%s" (upcase name)))
+	    (prefix   (format "%s::"      name)))
+	(srecode-dictionary-set-value dict variable prefix)
+	(dolist (tag tags)
+	  (when (and (eq (semantic-tag-get-attribute tag :kind)
+			 'namespace)
+		     (string= (semantic-tag-name tag) name))
+	    (srecode-dictionary-set-value dict variable ""))))))
+  )
+
 (define-mode-local-override srecode-semantic-apply-tag-to-dict
   c++-mode (tag-wrapper dict)
   "Apply C++ specific features from TAG-WRAPPER into DICT.
 Calls `srecode-semantic-apply-tag-to-dict-default' first. Adds
 special behavior for tag of classes include, using and function."
-  
+
   ;; Use default implementation to fill in the basic properties.
   (srecode-semantic-apply-tag-to-dict-default tag-wrapper dict)
 
@@ -114,7 +150,7 @@ special behavior for tag of classes include, using and function."
 
 	;; Add modifiers into the dictionary
 	(dolist (modifier modifiers)
-	  (let ((modifier-dict (srecode-dictionary-add-section-dictionary 
+	  (let ((modifier-dict (srecode-dictionary-add-section-dictionary
 				dict "MODIFIERS")))
 	    (srecode-dictionary-set-value modifier-dict "NAME" modifier)))
 

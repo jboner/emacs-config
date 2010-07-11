@@ -162,8 +162,8 @@ The parent to CLASS, CLASS, and all of CLASSes children will be shown.
 ;;;***
 
 ;;;### (autoloads (srecode-semantic-handle-:dot srecode-semantic-handle-:cogre
-;;;;;;  cogre-srecode-setup) "cogre-srecode" "cogre-srecode.el" (18905
-;;;;;;  26818))
+;;;;;;  cogre-srecode-setup) "cogre-srecode" "cogre-srecode.el" (19357
+;;;;;;  1712))
 ;;; Generated autoloads from cogre-srecode.el
 
 (autoload (quote cogre-srecode-setup) "cogre-srecode" "\
@@ -176,7 +176,7 @@ Add macros to dictionary DICT based on COGRE data.
 
 \(fn DICT)" nil nil)
 
-(eval-after-load "srecode-map" (cogre-srecode-setup))
+(eval-after-load "srecode-map" (quote (cogre-srecode-setup)))
 
 (autoload (quote srecode-semantic-handle-:dot) "cogre-srecode" "\
 Add macros to dictionary DICT based on the current DOT buffer.
@@ -267,8 +267,8 @@ Setup buffer for parse.
 
 ;;;***
 
-;;;### (autoloads nil nil ("cogre-load.el" "wisent-dot-wy.el") (19057
-;;;;;;  63312 734188))
+;;;### (autoloads nil nil ("cogre-load.el" "wisent-dot-wy.el") (19357
+;;;;;;  2566 841057))
 
 ;;;***
 

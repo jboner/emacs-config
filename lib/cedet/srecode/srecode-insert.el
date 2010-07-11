@@ -1,9 +1,9 @@
 ;;; srecode-insert --- Insert srecode templates to an output stream.
 
-;;; Copyright (C) 2005, 2007, 2008, 2009 Eric M. Ludlam
+;;; Copyright (C) 2005, 2007, 2008, 2009, 2010 Eric M. Ludlam
 
 ;; Author: Eric M. Ludlam <zappo@gnu.org>
-;; X-RCS: $Id: srecode-insert.el,v 1.31 2009/04/04 03:09:20 zappo Exp $
+;; X-RCS: $Id: srecode-insert.el,v 1.34 2010/02/18 22:45:09 zappo Exp $
 
 ;; This file is not part of GNU Emacs.
 
@@ -87,7 +87,6 @@ DICT-ENTRIES are additional dictionary values to add."
 				    (car dict-entries)
 				    (car (cdr dict-entries)))
       (setq dict-entries (cdr (cdr dict-entries))))
-    ;;(srecode-resolve-arguments temp newdict)
     (srecode-insert-fcn temp newdict)
     ;; Don't put code here.  We need to return the end-mark
     ;; for this insertion step.
@@ -102,6 +101,10 @@ has set everything up already."
   ;; Perform the insertion.
   (let ((standard-output (or stream (current-buffer)))
 	(end-mark nil))
+    ;; Merge any template entries into the input dictionary.
+    (when (slot-boundp template 'dictionary)
+      (srecode-dictionary-merge dictionary (oref template dictionary)))
+
     (unless skipresolver
       ;; Make sure the semantic tags are up to date.
       (semantic-fetch-tags)
@@ -241,6 +244,9 @@ ST can be a class, or an object."
 (defmethod srecode-insert-method ((st srecode-template) dictionary)
   "Insert the srecoder template ST."
   ;; Merge any template entries into the input dictionary.
+  ;; This may happen twice since some templates arguments need
+  ;; these dictionary values earlier, but these values always
+  ;; need merging for template inserting in other templates.
   (when (slot-boundp st 'dictionary)
     (srecode-dictionary-merge dictionary (oref st dictionary)))
   ;; Do an insertion.
@@ -753,9 +759,15 @@ Loops over the embedded CODE which was saved here during compilation.
 The template to insert is stored in SLOT."
   (let ((dicts (srecode-dictionary-lookup-name 
 		dictionary (oref sti :object-name))))
+    (when (not (listp dicts))
+      (error "Cannot insert section %S from non-section variable."
+	     (oref sti :object-name)))
     ;; If there is no section dictionary, then don't output anything
     ;; from this section.
     (while dicts
+      (when (not (srecode-dictionary-p (car dicts)))
+	(error "Cannot insert section %S from non-section variable."
+	       (oref sti :object-name)))
       (srecode-insert-subtemplate sti (car dicts) slot)
       (setq dicts (cdr dicts)))))
 
@@ -855,39 +867,44 @@ this template instance."
     ;; If there was no template name, throw an error
     (if (not templatenamepart)
 	(error "Include macro %s needs a template name." (oref sti :object-name)))
-    ;; Find the template by name, and save it.
-    (if (or (not (slot-boundp sti 'includedtemplate))
-	    (not (oref sti includedtemplate)))
-	(let ((tmpl (srecode-template-get-table (srecode-table)
-						templatenamepart))
-	      (active (oref srecode-template active))
-	      ctxt)
+
+    ;; NOTE: We used to cache the template and not look it up a second time,
+    ;; but changes in the template tables can change which template is
+    ;; eventually discovered, so now we always lookup that template.
+
+    ;; Calculate and store the discovered template
+    (let ((tmpl (srecode-template-get-table (srecode-table)
+					    templatenamepart))
+	  (active (oref srecode-template active))
+	  ctxt)
+      (when (not tmpl)
+	;; If it isn't just available, scan back through
+	;; the active template stack, searching for a matching
+	;; context.
+	(while (and (not tmpl) active)
+	  (setq ctxt (oref (car active) context))
+	  (setq tmpl (srecode-template-get-table (srecode-table)
+						 templatenamepart
+						 ctxt))
 	  (when (not tmpl)
-	    ;; If it isn't just available, scan back through
-	    ;; the active template stack, searching for a matching
-	    ;; context.
-	    (while (and (not tmpl) active)
-	      (setq ctxt (oref (car active) context))
-	      (setq tmpl (srecode-template-get-table (srecode-table)
-						     templatenamepart
-						     ctxt))
-	      (when (not tmpl)
-		(when (slot-boundp (car active) 'table)
-		  (let ((app (oref (oref (car active) table) application)))
-		    (when app
-		      (setq tmpl (srecode-template-get-table 
-				  (srecode-table)
-				  templatenamepart
-				  ctxt app)))
-		    )))
-	      (setq active (cdr active)))
-	    (when (not tmpl)
-	      ;; If it wasn't in this context, look to see if it
-	      ;; defines it's own context
-	      (setq tmpl (srecode-template-get-table (srecode-table)
-						     templatenamepart)))
-	    )
-	  (oset sti :includedtemplate tmpl)))
+	    (when (slot-boundp (car active) 'table)
+	      (let ((app (oref (oref (car active) table) application)))
+		(when app
+		  (setq tmpl (srecode-template-get-table 
+			      (srecode-table)
+			      templatenamepart
+			      ctxt app)))
+		)))
+	  (setq active (cdr active)))
+	(when (not tmpl)
+	  ;; If it wasn't in this context, look to see if it
+	  ;; defines it's own context
+	  (setq tmpl (srecode-template-get-table (srecode-table)
+						 templatenamepart)))
+	)
+
+      ;; Store the found template into this object for later use.
+      (oset sti :includedtemplate tmpl))
 
     (if (not (oref sti includedtemplate))
 	;; @todo - Call into a debugger to help find the template in question.

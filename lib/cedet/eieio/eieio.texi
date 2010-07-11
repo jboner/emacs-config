@@ -1,7 +1,7 @@
 
 \input texinfo   @c -*-texinfo-*-
 @c
-@c $Id: eieio.texi,v 1.62 2009/01/14 00:00:20 zappo Exp $
+@c $Id: eieio.texi,v 1.63 2010/01/07 02:19:54 zappo Exp $
 @c
 
 @c
@@ -1790,7 +1790,7 @@ Called from @dfn{call-next-method} when no additional methods are available.
 @var{object} is othe object being called on @dfn{call-next-method}.
 @var{args} are the  arguments it is called by.
 This method signals @dfn{no-next-method} by default.  Override this
-method to not throw an error, and it's return value becomes the
+method to not throw an error, and its return value becomes the
 return value of @dfn{call-next-method}.
 @end defun
 
