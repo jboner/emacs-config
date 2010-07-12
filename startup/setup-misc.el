@@ -1,14 +1,17 @@
 ;;; ------------------------------------------------
 (require 'linum)
 (require 'htmlize)
+(setq transient-mark-mode t)
+
+(global-set-key [(C-wheel-up)] 'previous-buffer)
+(global-set-key [(C-wheel-down)] 'next-buffer)
 
 ;;; ------------------------------------------------
 (set-buffer-file-coding-system 'utf-8-unix)
 
-;;; ------------------------------------------------
-;;; TextMate-like Command-T
-;(load-file "$EMACS_LIB/lib/misc/command_t.el")
-;(global-set-key "\M-t" 'find-tag-file)
+(load-file "$EMACS_LIB/lib/magit/magit.el")
+(require 'magit)
+;(fuzzy-find-project-root "c:/home/jboner/src")
 
 ;;; ------------------------------------------------
 ;;; GNU Server
@@ -45,8 +48,6 @@
 ;;; ------------------------------------------------
 ;; no TABs allowed
 (setq-default indent-tabs-mode nil)
-;(highlight-tabs)
-;(highlight-trailing-whitespace)
 
 ;;; ------------------------------------------------
 ;; Make all yes-or-no questions as y-or-n
@@ -124,6 +125,7 @@
 
 ;;; ------------------------------------------------
 ;;; IDO - FILE CACHE
+(require 'filecache)
 (defun file-cache-ido-find-file (file)
   "Using ido, interactively open file from file cache'. 
 First select a file, matched using ido-switch-buffer against the contents
@@ -148,12 +150,16 @@ directory, select directory. Lastly the file is opened."
          (lambda ()
            (setq ido-temp-list choices))))
     (ido-read-buffer prompt)))
- 
+
+(global-set-key (kbd "ESC ESC f") 'file-cache-ido-find-file)
+
 ;;; ------------------------------------------------
 ;; save a list of open files in ~/.emacs.desktop
 ;; save the desktop file automatically if it already exists
 (setq desktop-save 'if-exists)
 (desktop-save-mode 1)
+(setq history-length 250)
+(add-to-list 'desktop-globals-to-save 'file-name-history)
 
 ;; save a bunch of variables to the desktop file
 ;; for lists specify the len of the maximal saved data also
@@ -189,14 +195,6 @@ directory, select directory. Lastly the file is opened."
 ;      (message "Compilation exited abnormally: %s" string))))
 
 ;;; ------------------------------------------------
-;;; TextMate-like Command-T
-;(load-file "$EMACS_LIB/lib/misc/command_t.el")
-;(add-hook 'emacs-lisp-mode-hook (lambda (setl ffip-regexp ".*\\.scala")))
-;(load-file "$EMACS_LIB/lib/misc/project-local-variables.el")
-;(load-file "$EMACS_LIB/lib/misc/find-file-in-project.el")
-;(global-set-key "\M-t" 'find-file-in-project)
-
-;;; ------------------------------------------------
 ;; full-screen mode
 ;; based on http://www.emacswiki.org/cgi-bin/wiki/WriteRoom
 ;; toggle full screen with F3; require 'wmctrl'
@@ -219,7 +217,7 @@ directory, select directory. Lastly the file is opened."
       (c-indent-command))))
 
 ;;; ------------------------------------------------
-;;; viper and vimpulse modes
+;; viper and vimpulse modes
 ;(setq viper-mode t)
 ;(require 'viper)
 ;(load-file "$EMACS_LIB/startup/vimpulse.el")
@@ -256,11 +254,6 @@ directory, select directory. Lastly the file is opened."
 ;	    (get-buffer-window buffer t)))
 ;    (t                                                                    
 ;      (message "Compilation exited abnormally: %s" string))))
-
-(require 'filecache)
-;(require 'ido) 
-;(ido-mode t) 
-(global-set-key (kbd "ESC ESC f") 'file-cache-ido-find-file)
 
 ;;; FILE CACHE FOR JDE MODE
 ;; Prevent subversion files form polluting the cache

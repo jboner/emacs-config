@@ -1,6 +1,5 @@
 ;;; SCALA ------------------------------
-(add-to-list 'load-path (substitute-in-file-name "$EMACS_LIB/lib/scamacs/src/elisp/scala/"))
-(load-file (substitute-in-file-name "$EMACS_LIB/lib/scamacs/src/elisp/sbt/sbt.el"))
+(add-to-list 'load-path (substitute-in-file-name "$EMACS_LIB/lib/scala/"))
 
 ;; ----------------------
 ;; Load deps
@@ -8,7 +7,35 @@
 (require 'compile)
 (require 'flymake)
 (require 'font-lock)
+ 
 (add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode))
+
+;; ----------------------
+;; Ensime Scala IDE
+(require 'scala-mode)
+(add-to-list 'load-path (substitute-in-file-name "$EMACS_LIB/lib/ensime/elisp"))
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+;; ----------------------
+;; CEDET
+;(load-file (substitute-in-file-name "$EMACS_LIB/lib/cedet/common/cedet.el"))
+;(load-file (substitute-in-file-name "$EMACS_LIB/lib/cedet/contrib/semantic-ectag-scala.el"))
+;(global-ede-mode 1)                      ; Enable the Project management system
+;(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
+;(global-srecode-minor-mode 1)            ; Enable template insertion menu
+;(semantic-load-enable-primary-exuberent-ctags-support)
+
+(defun scala-turnoff-indent-tabs-mode ()
+  (setq indent-tabs-mode nil))
+(add-hook 'scala-mode-hook 'scala-turnoff-indent-tabs-mode)
+(add-hook 'scala-mode-hook 'yas/minor-mode)
+;(add-hook 'scala-mode-hook 'semantic-scala-cedet-support)
+
+;;; ------------------------------------------------
+;; ECB
+;(add-to-list 'load-path (substitute-in-file-name "$EMACS_LIB/lib/ecb-2.40"))
+;(require 'ecb)
 
 ;; ----------------------
 ;; Scala abbrev table setup
@@ -31,20 +58,20 @@
   (flymake-goto-next-error)
   (flymake-display-err-menu-for-current-line))
 
-;(flymake-mode-on)
 ;(add-hook 'scala-mode-hook
 ;  (lambda () (flymake-mode-on)))
 
 ;; From the current directory, traverse down until you find a Makefile
 (defun find-makefile ()
+  (interactive)
   (let ((fn buffer-file-name))
     (let ((dir (file-name-directory fn)))
       (while (and (not (file-exists-p (concat dir "/Makefile")))
 	          (not (equal dir (file-truename (concat dir "/..")))))
         (setf dir (file-truename (concat dir "/.."))))
       (if (not (file-exists-p (concat dir "/Makefile")))
-	  (message "No Makefile found")
-	dir))))
+     	  (message "No Makefile found")
+	     dir))))
 
 (defun flymake-scala-init ()
   (interactive)

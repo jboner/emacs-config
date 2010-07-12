@@ -71,10 +71,10 @@
 (global-set-key [(meta enter)]  'save-buffer)
 
 ;;; Get Aquamacs Home/End to work as normal
-(define-key osx-key-mode-map [home] 'move-beginning-of-line)
-(define-key osx-key-mode-map  [end] 'move-end-of-line)
-(define-key osx-key-mode-map [A-home] 'beginning-of-buffer)
-(define-key osx-key-mode-map  [A-end] 'end-of-buffer)
+;(define-key osx-key-mode-map [home] 'move-beginning-of-line)
+;(define-key osx-key-mode-map  [end] 'move-end-of-line)
+;(define-key osx-key-mode-map [A-home] 'beginning-of-buffer)
+;(define-key osx-key-mode-map  [A-end] 'end-of-buffer)
 
 ;;; -----------------------------------------------
 ;;; local to specific modes
