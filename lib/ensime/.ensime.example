@@ -8,33 +8,83 @@
  ;; "bin/server.bat" if your're on Windows.
  :server-cmd  "bin/server.sh"
 
+ ;; The default repl command is 'scala'. Override here:
+ ;; ------------------------------
+ ;;  :repl-cmd  "scala"
+
  ;; The host to connect to. Connecting to remote ENSIME servers is not
  ;; currently supported.
- :server-host "localhost"
+ ;; ------------------------------
+ ;; :server-host "localhost"
+
+
+ ;; Assume a standard sbt directory structure. Look in default sbt
+ ;; locations for dependencies, sources, target, etc.
+ ;; -----------------------------
+ :use-sbt t
+ :sbt-compile-conf "compile"
+ :sbt-runtime-conf "runtime"
+
+
+ ;; Use an existing pom.xml to determine the dependencies
+ ;; for the project. A Maven-style directory structure is assumed.
+ ;; -----------------------------
+ ;; :use-maven t
+ ;; :maven-compile-scopes "compile"
+ ;; :maven-runtime-scopes "runtime"
+
+
+ ;; Use an existing ivy.xml to determine the dependencies
+ ;; for the project. A Maven-style directory structure is assumed.
+ ;; -----------------------------
+ ;; :use-ivy t
+ ;; :ivy-compile-conf "compile"
+ ;; :ivy-runtime-conf "compile"
+
 
  ;; The home package for your project. 
- ;; Used to populate the outline view.
+ ;; Used by ENSIME to populate the project outline view.
+ ;; ------------------------------
  :project-package "com.ensime"
 
- ;; The source folder(s) for your project.
- ;; :source (
- ;;    :include ([dir | file]*)
- ;;    :exclude ([dir | file]*)
- ;; )
- :source ( :include ("src/main/"))
+ ;; :debug-class "com.example.Main"
+ ;; The 'main' class to run when debugging.
+ ;; ------------------------------
+ :debug-class "com.ensime.server.Server"
 
- ;; The classpath for compiling your project.
- ;; :classpath (
- ;;     :mvn [t | (:scopes "maven-scopes-str") | nil]
- ;;     :ivy [t | (:conf "ivy-config-str") | nil]
- ;;     :sbt [t | (:conf "ivy-config-str") | nil]
- ;;     :jars ([dir | file]*)
- ;;     :dirs ([dir]*)
- ;; )
- ;; Note that only the :sbt option automatically includes the scala standard library.
- ;; Maven and Ivy users need to either declare scala as a dependency, or include it using
- ;; the :jars option.
+ ;; :debug-args (str*)
+ ;; The arguments to pass to the main class
+ ;; when debugging. 
+ ;; ------------------------------
+ :debug-args ("/tmp/ensime_port.tmp")
 
- :classpath (:sbt (:conf "compile"))
+
+ ;; :sources ([dir | file]*)
+ ;; Include source files by directory(recursively) or by filename.
+ ;; ------------------------------
+ ;; :sources ("src/main/")
+
+
+ ;; :dependency-jars ([dir | file]*)
+ ;; Include jars by directory(recursively) or by filename.
+ ;; ------------------------------
+ ;; :dependency-jars ("lib")
+
+
+ ;; :dependency-dirs ([dir | file]*)
+ ;; Include directories of .class files.
+ ;; ------------------------------
+ ;; :dependency-dirs ("target/classes")
+
+
+ ;; :target dir | file
+ ;; Specify the target of the project build process. Should be 
+ ;; the directory where .class files are written, or the path
+ ;; to a .jar file containing all the project's classes.
+ ;; 
+ ;; The target is used to populate the classpath when launching
+ ;; the inferior scala repl.
+ ;; ------------------------------
+ ;; :target "target/classes"
 
  )

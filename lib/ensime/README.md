@@ -84,6 +84,8 @@ __M-p__  - Backward one link in the inspector.
 
 __C-c C-a__  - Switch to the sbt command-line (works for sbt projects only)
 
+__C-c C-z__  - Switch to the scala interpreter, with project classes in the classpath.
+
 __C-c c__  - Type-check the current file.
 
 __C-c a__  - Type-check all files in the project.

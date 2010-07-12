@@ -14,7 +14,7 @@
 ;;; ------------------------------------------------
 ;;; hippie expand config
 (setq hippie-expand-try-functions-list
-      '(yas/hippie-try-expand 
+      '(yas/hippie-try-expand
         try-expand-dabbrev-visible
         try-expand-dabbrev-from-kill
         try-expand-dabbrev-all-buffers
@@ -22,10 +22,16 @@
         try-complete-file-name))	
 
 ;;; ------------------------------------------------
+(global-set-key [(shift tab)]  'hippie-expand)
+(global-set-key [(control tab)]  'yas/next-field-group)
 (global-set-key [(meta up)]    'hippie-expand)
 (global-set-key [(meta down)]  'set-mark-command)
-(global-set-key [(meta right)] 'yank)
+(global-set-key [(meta right)] 'copy-region-as-kill)
 (global-set-key [(meta left)]  'kill-region)
+
+;;; ------------------------------------------------
+;;; Move around in buffers with Meta-Arrows
+(windmove-default-keybindings 'meta)
 
 ;;; ------------------------------------------------
 (global-set-key [(control backspace)] 'backward-kill-word)
@@ -34,19 +40,23 @@
 (global-set-key [(meta f1)]     'complete-tag)
 (global-set-key [(control f1)]  'dabbrev-expand)
 
-(global-set-key [(f2)]          'jump-out-of-pair)
+(global-set-key [(f2)]          'yas/next-field-group)
+(global-set-key [(meta f2)]     'yas/prev-field-group)
+(global-set-key [(f3)]          'jump-out-of-pair)
 
-(global-set-key [(f3)]          'full-screen-toggle)
-;(global-set-key [(f4)]          'yas/next-field-group)
-;(global-set-key [(meta f4)]     'yas/prev-field-group)
+(global-set-key [(f4)]          'kill-region)
+
+;(global-set-key [(f3)]          'full-screen-toggle)
 
 (global-set-key [(f5)]          'undo)
-;(global-set-key [(f5)]          'versor-mode)
+;;(global-set-key [(f5)]          'versor-mode)
 
 (global-set-key [(f6)]          'save-buffer)
 
-(global-set-key [(meta f7)]     'theme-next)
-(global-set-key [(control f7)]  'theme-prev)
+(global-set-key [(f7)]          'mvn)
+(global-set-key [(shift f7)]    'mvn-master)
+;(global-set-key [(meta f7)]     'theme-next)
+;(global-set-key [(control f7)]  'theme-prev)
 
 (global-set-key [(f8)]          'bm-toggle)
 (global-set-key [(control f8)]  'bm-previous)
@@ -69,12 +79,6 @@
 
 (global-set-key "%"             'match-paren)
 (global-set-key [(meta enter)]  'save-buffer)
-
-;;; Get Aquamacs Home/End to work as normal
-;(define-key osx-key-mode-map [home] 'move-beginning-of-line)
-;(define-key osx-key-mode-map  [end] 'move-end-of-line)
-;(define-key osx-key-mode-map [A-home] 'beginning-of-buffer)
-;(define-key osx-key-mode-map  [A-end] 'end-of-buffer)
 
 ;;; -----------------------------------------------
 ;;; local to specific modes

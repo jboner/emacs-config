@@ -1,6 +1,6 @@
 ;;; nxml ------------------------------
-(add-to-list 'load-path (substitute-in-file-name "$EMACS_LIB/lib/nxml-mode-20041004"))
-(load-file (substitute-in-file-name "$EMACS_LIB/lib/nxml-mode-20041004/rng-auto.el"))
+;(add-to-list 'load-path (substitute-in-file-name "$EMACS_LIB/lib/nxml-mode-20041004"))
+;(load-file (substitute-in-file-name "$EMACS_LIB/lib/nxml-mode-20041004/rng-auto.el"))
 (require 'nxml-mode)
 
 (setq auto-mode-alist
