@@ -283,17 +283,17 @@
 
 (defmacro ensime-assert (pred)
   `(let ((val ,pred))
-     (with-current-buffer ensime-testing-buffer
-       (if (not val)
+     (if (not val)
+	 (with-current-buffer ensime-testing-buffer
 	   (signal 'ensime-test-assert-failed (format "Expected truth of %s." ',pred))))))
 
 
 (defmacro ensime-assert-equal (a b)
   `(let ((val-a ,a)
 	 (val-b ,b))
-     (with-current-buffer ensime-testing-buffer
-       (if (equal val-a val-b) t
-	 (signal 'ensime-test-assert-failed (format "Expected %s to equal %s but was %s" ',a ',b val-a))))))
+     (if (equal val-a val-b) t
+       (with-current-buffer ensime-testing-buffer
+	 (signal 'ensime-test-assert-failed (format "Expected %s to equal %s." ',a ',b))))))
 
 (defun ensime-stop-tests ()
   "Forcibly stop all tests in progress."
@@ -321,38 +321,51 @@
 		      "bin/server.sh"
 		      :dependendency-dirs ("hello" "world")
 		      )))
-     (let ((conf (ensime-load-config file)))
+     (let ((conf (ensime-config-load file)))
        (ensime-assert (equal (plist-get conf :server-cmd) "bin/server.sh"))
        (ensime-assert (equal (plist-get conf :dependendency-dirs) '("hello" "world")))
        (ensime-assert (equal (plist-get conf :root-dir) 
 			     (expand-file-name (file-name-directory file)))))))
 
 
-
-
    (ensime-test 
     "Test loading a broken(syntactically) config file."
     (ensime-with-tmp-file 
      (file "ensime_test_conf_" "(lkjsdfkjskfjs")
-     (let ((conf (ensime-load-config file)))
+     (let ((conf 
+	    (condition-case er
+		(ensime-config-load file)
+	      (error nil))))
        (ensime-assert (null conf)))))
 
+   (ensime-test 
+    "Test name partitioning..."
+    (ensime-partition-qualified-type-name 
+     "scala.tools.nsc.symtab.Types$Type" (path outer-type-name name)
+     (ensime-assert-equal path "scala.tools.nsc.symtab")
+     (ensime-assert-equal outer-type-name "Types")
+     (ensime-assert-equal name "Type"))
 
+    (ensime-partition-qualified-type-name 
+     "scala.tools.nsc.symtab.Types" (path outer-type-name name)
+     (ensime-assert-equal path "scala.tools.nsc.symtab")
+     (ensime-assert-equal outer-type-name nil)
+     (ensime-assert-equal name "Types"))
 
+    (ensime-partition-qualified-type-name 
+     "scala.tools.nsc.symtab.Types$Dude$AbsType" (path outer-type-name name)
+     (ensime-assert-equal path "scala.tools.nsc.symtab")
+     (ensime-assert-equal outer-type-name "Types$Dude")
+     (ensime-assert-equal name "AbsType"))
+
+    )
+   
 
    (ensime-test 
-    "Test specifying classpath as function."
-    (ensime-with-tmp-file 
-     (file "ensime_test_conf_"
-	   (format "%S" '( :server-cmd 
-			   "bin/server.sh"
-			   :classpath gen-class-path)))
-     (let* ((gen-class-path #'(lambda (conf) (list "one" "two" "three")))
-	    (conf (ensime-load-config file)))
-       (ensime-assert (equal (plist-get conf :classpath) '("one" "two" "three"))))))
-
-
-
+    "Test is source file predicate..."
+    (ensime-assert (ensime-is-source-file-p "dude.scala"))
+    (ensime-assert (ensime-is-source-file-p "dude.java"))
+    (ensime-assert (not (ensime-is-source-file-p "dude.javap"))))
 
    (ensime-async-test 
     "Load and compile 'hello world'."
@@ -395,7 +408,8 @@
 		    "com.helloworld")))
 	 (ensime-assert (not (null info)))
 	 (ensime-assert-equal (ensime-package-full-name info) "com.helloworld")
-	 (ensime-assert-equal 1 (length (ensime-package-members info)))
+	 ;; Should be one class, one object
+	 (ensime-assert-equal 2 (length (ensime-package-members info)))
 	 )
        (ensime-cleanup-tmp-project proj)
        (ensime-kill-all-ensime-servers)

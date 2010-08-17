@@ -31,12 +31,12 @@
 
 ;;; ------------------------------------------------
 ;;; Move around in buffers with Meta-Arrows
-(windmove-default-keybindings 'meta)
+;(windmove-default-keybindings 'meta)
 
 ;;; ------------------------------------------------
 (global-set-key [(control backspace)] 'backward-kill-word)
 
-(global-set-key [(f1)]          'hippie-expand)
+;(global-set-key [(f1)]          'hippie-expand)
 (global-set-key [(meta f1)]     'complete-tag)
 (global-set-key [(control f1)]  'dabbrev-expand)
 

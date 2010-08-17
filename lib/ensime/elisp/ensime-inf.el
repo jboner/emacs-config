@@ -115,7 +115,9 @@ server."
   "Run a Scala interpreter in an Emacs buffer"
   (interactive)
 
-  (let ((root-path (or (ensime-configured-project-root) "."))
+  (let ((conn (or (ensime-current-connection)
+		  (ensime-prompt-for-connection)))
+	(root-path (or (ensime-configured-project-root) "."))
 	(cmd-and-args (ensime-inf-get-repl-cmd-line)))
 
     (switch-to-buffer-other-window 
@@ -129,6 +131,8 @@ server."
 		 (car cmd-and-args)
 		 nil 
 		 (cdr cmd-and-args))
+
+    (setq ensime-buffer-connection conn)
 
     (let ((proc (get-buffer-process (current-buffer))))
       (ensime-set-query-on-exit-flag proc))

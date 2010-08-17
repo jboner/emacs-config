@@ -1,15 +1,22 @@
 # ENSIME
 the ENhanced Scala Interaction Mode for Emacs
 
+
 ## Features
 
 - Highlight errors and warnings in your code buffers.
 - Inspect the type of any expression.
 - Browse packages
-- Completion-on-demand for variable, methods, constructores, etc.
+- Completion-on-demand for variables, methods, constructores, etc.
 - Jump to symbol definitions.
+- Automated Refactorings (rename, organize imports, extract method...)
+- Scala REPL
+- Scala Debugger
 - sbt support
-- Check out the [video](http://www.youtube.com/watch?v=A2Lai8IjLoY)
+
+
+Check out this [video](http://www.youtube.com/watch?v=A2Lai8IjLoY) or this [one](http://www.youtube.com/watch?v=v7-G6vD42z8) showcasing debugger support
+
 
 ## System Requirements
 
@@ -19,15 +26,19 @@ the ENhanced Scala Interaction Mode for Emacs
 - Scala 2.8 compatible source and libraries. ENSIME is built against the 2.8 nightly Scala releases. 
 
 
-## Installation
+## Documentation
+- [The ENSIME User Manual](http://aemon.com/file_dump/ensime_manual.html)
 
-__scala-mode__
 
-ENSIME is designed to compliment scala-mode. scala-mode can be found in the Scala distribution under ./misc/scala-tool-support/emacs/
+## Quick Start
 
-__ensime-mode__
+__1) Install scala-mode__
 
-Download the latest ENSIME distribution from the github [downloads page](http://github.com/aemoncannon/ensime/downloads). Unpack the ENSIME distribution into a directory of your choosing. 
+ENSIME is designed to compliment scala-mode (or any other scala language mode). scala-mode can be found in the Scala distribution under ./misc/scala-tool-support/emacs/
+
+__2) Install ensime-mode__
+
+Download the ENSIME distribution from the github [downloads page](http://github.com/aemoncannon/ensime/downloads). Unpack the ENSIME distribution into a directory of your choosing. 
 
 Add the following lines to your .emacs file:
     (require 'scala-mode)
@@ -35,75 +46,19 @@ Add the following lines to your .emacs file:
     (add-to-list 'load-path "ENSIME_ROOT/elisp/")
     (require 'ensime)
     (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+    ;; MINI HOWTO: open .scala file. Ensure bin/server.sh is executable. M-x ensime
 
-Create an .ensime configuration file for your project. See [.ensime](http://github.com/aemoncannon/ensime/blob/master/.ensime.example) in the root of the ENSIME distribution for an up-to-date example.
+
+__3) Verify Permissions__
 
 Verify that the startup script (usually bin/server.sh) has executable permissions.
 
-Finally, open one of the source files for your Scala project and type M-x ensime. Follow the minibuffer instructions to specify the location of your .ensime project file. 
+
+__4) Create Project__
+
+In Emacs, execute M-x ensime-config-gen. Follow directions in the mini-buffer to create a .ensime file for your project.. 
 
 
+__5) Start ENSIME__
 
-__Note for sbt Users__ 
-
-Customize the ensime-sbt-compile-on-save variable if you'd like sbt to recompile your project whenever you save. This is disabled by default as it consumes a lot of CPU without much benefit over ENSIME's built-in type checking.
-
-
-__Note for Scala Standard Library (or other giant project) hackers__ 
-
-You may want to increase the jvm heap size to give ENSIME some more breathing room. We've had some reports of ENSIME hanging when retrieving type information in huge projects. You can add the necessary flags in bin/server.sh. 
-
-
-
-
-## Usage
-
-__TAB__    - Start completing a method/variable.
-
-__C-c t  /  Double-Click__  - Inspect the type of the expression under the cursor.
-
-__M-.  /  Control-Click__  - Jump to definition of symbol under cursor.
-
-__M-,__  - Pop back to previously visited position.
-
-__Double-Click(on an import statement)__  - Inspect the package under cursor.
-
-__Mouse Hover__    - Echo the type of the expression under the cursor.
-
-__C-c p__  - Inspect the package of the current source file.
-
-__C-c o__  - Inspect the package specified in .ensime as :project-package.
-
-__.__  - Forward one page in the inspector history.
-
-__,__  - Backward one page in the inspector history.
-
-__M-n  /  TAB__  - Forward one link in the inspector.
-
-__M-p__  - Backward one link in the inspector.
-
-__C-c C-a__  - Switch to the sbt command-line (works for sbt projects only)
-
-__C-c C-z__  - Switch to the scala interpreter, with project classes in the classpath.
-
-__C-c c__  - Type-check the current file.
-
-__C-c a__  - Type-check all files in the project.
-
-
-
-
-
-
-
-## Troubleshooting
-
-You may want to examine the contents of the \*inferior-ensime-server\* buffer. This buffer collects the stdout and stderr of the server process, which is useful for debugging.
-
-
-  
-
-
-
-
-
+Execute M-x ensime

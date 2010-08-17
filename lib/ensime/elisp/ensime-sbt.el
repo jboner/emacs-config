@@ -66,10 +66,6 @@
   :group 'ensime-sbt
   :type 'boolean)
 
-(defcustom ensime-sbt-compile-on-save nil
-  "Compile project after each file save?"
-  :group 'ensime-sbt
-  :type 'boolean)
 
 (defun ensime-sbt ()
   "Setup and launch sbt."
@@ -80,14 +76,13 @@
     (switch-to-buffer-other-window 
      (get-buffer-create ensime-sbt-build-buffer-name))
 
-    (when ensime-sbt-compile-on-save
-      (add-hook 'ensime-source-buffer-saved-hook 'ensime-sbt-do-auto-compile))
+    (add-hook 'ensime-source-buffer-saved-hook 'ensime-sbt-maybe-auto-compile)
 
     (add-hook 'kill-buffer-hook 
 	      '(lambda ()
 		 (remove-hook 
 		  'ensime-source-buffer-saved-hook 
-		  'ensime-sbt-do-auto-compile)) nil t)
+		  'ensime-sbt-maybe-auto-compile)) nil t)
 
     (comint-mode)
 
@@ -143,10 +138,15 @@
       (erase-buffer)
       (comint-send-input t))))
 
-(defun ensime-sbt-do-auto-compile ()
+(defun ensime-sbt-maybe-auto-compile ()
   "Compile the code."
   (interactive)
-  (ensime-sbt-action "compile"))
+  (when (and 
+	 (ensime-connected-p)
+	 (plist-get (ensime-config 
+		     (ensime-connection)) 
+		    :sbt-compile-on-save))
+    (ensime-sbt-action "compile")))
 
 (defun ensime-sbt-action (action)
   "Run an sbt action. Where action is a string in the set of valid
@@ -178,8 +178,8 @@
       path)))
 
 (defun ensime-sbt-find-path-to-parent-project ()
-  (interactive)
   "Search up the directory tree find an SBT project dir, then see if it has a parent above it."
+  (interactive)
   (let ((path (ensime-sbt-find-path-to-project)))
     (let ((parent-path (file-truename (concat path "/.."))))
       (if (not (ensime-sbt-project-dir-p parent-path))

@@ -44,11 +44,13 @@
 (require 'hideshow)
 (require 'font-lock)
 (require 'auto-complete)
+(require 'ensime-config)
 (require 'ensime-auto-complete)
 (require 'ensime-sbt)
 (require 'ensime-inf)
 (require 'ensime-debug)
-(require 'ido)
+(require 'ensime-builder)
+(require 'ensime-refactor)
 (eval-when (compile)
   (require 'apropos)
   (require 'compile))
@@ -106,7 +108,8 @@
   :type 'integer
   :group 'ensime-server)
 
-(defcustom ensime-default-server-cmd "bin/server.sh"
+(defcustom ensime-default-server-cmd 
+  (if (eq system-type 'windows-nt)  "bin/server.bat" "bin/server.sh")
   "Command to launch server process."
   :type 'string
   :group 'ensime-server)
@@ -129,6 +132,13 @@
   :prefix "ensime-"
   :group 'ensime)
 
+(defun ensime-is-source-file-p (&optional filename)
+  "Return t if the given filename (or the currently visited file if no
+argument is supplied) is a .scala or .java file."
+  (let ((file (or filename buffer-file-name)))
+    (when file
+      (integerp (string-match "\\(?:\\.scala$\\|\\.java$\\)" file)))))
+
 (defun ensime-scala-mode-hook ()
   "Conveniance hook function that just starts ensime-mode."
   (ensime-mode 1))
@@ -147,7 +157,8 @@
 
 (defun ensime-save-buffer-no-hooks ()
   "Just save the buffer per usual, don't type-check!"
-  (let ((after-save-hook nil))
+  (let ((after-save-hook nil)
+	(before-save-hook nil))
     (save-buffer)))
 
 (defvar ensime-mode-map
@@ -163,12 +174,32 @@
     (define-key map (kbd "C-x 5") 'ensime-edit-definition-other-frame)
     (define-key map (kbd "C-c C-a") 'ensime-sbt-switch)
     (define-key map (kbd "C-c C-z") 'ensime-inf-switch)
+
+    (define-key map (kbd "C-c d d") 'ensime-db-start)
+    (define-key map (kbd "C-c d b") 'ensime-db-set-break)
+    (define-key map (kbd "C-c d u") 'ensime-db-clear-break)
+    (define-key map (kbd "C-c d s") 'ensime-db-step)
+    (define-key map (kbd "C-c d n") 'ensime-db-next)
+    (define-key map (kbd "C-c d r") 'ensime-db-run)
+    (define-key map (kbd "C-c d c") 'ensime-db-continue)
+    (define-key map (kbd "C-c d q") 'ensime-db-quit)
+    (define-key map (kbd "C-c d l") 'ensime-db-list-locals)
+
+    (define-key map (kbd "C-c b b") 'ensime-builder-build)
+    (define-key map (kbd "C-c b r") 'ensime-builder-rebuild)
+
+    (define-key map [C-down-mouse-1] 'ignore)
+    (define-key map [C-up-mouse-1] 'ignore)
+    (define-key map [C-mouse-1] 'ignore)
+    (define-key map [double-mouse-1] 'ensime-mouse-1-double-click)
+    (define-key map [C-mouse-1] 'ensime-control-mouse-1-single-click)
     map)
   "Keymap for `ensime-mode'.")
 
 
 (define-minor-mode ensime-mode
-  "ENSIME: The ENhanced Scala Interaction Mode for Emacs (minor-mode)."
+  "ENSIME: The ENhanced Scala Interaction Mode for Emacs (minor-mode).
+\\{ensime-mode-map}"
   nil
   nil
   ensime-mode-map
@@ -178,6 +209,7 @@
 	(ensime-ac-enable)
 	(add-hook 'after-save-hook 'ensime-run-after-save-hooks nil t)
 	(add-hook 'ensime-source-buffer-saved-hook 'ensime-typecheck-current-file)
+	(add-hook 'ensime-source-buffer-saved-hook 'ensime-builder-track-changed-files)
 	(when ensime-tooltip-hints
 	  (add-hook 'tooltip-functions 'ensime-tooltip-handler)
 	  (make-local-variable 'track-mouse)
@@ -186,25 +218,15 @@
 	  (setq tooltip-delay 1.0)
 	  (define-key ensime-mode-map [mouse-movement] 'ensime-mouse-motion))
 
-	(ensime-refresh-note-overlays)
-
-	(define-key ensime-mode-map [double-mouse-1] 'ensime-mouse-1-double-click)
-	;; Clear these
-	(define-key ensime-mode-map [C-down-mouse-1] 'ignore)
-	(define-key ensime-mode-map [C-up-mouse-1] 'ignore)
-	(define-key ensime-mode-map [C-mouse-1] 'ignore)
-
-	(define-key ensime-mode-map [C-mouse-1] 'ensime-control-mouse-1-single-click))
+	(ensime-refresh-note-overlays))
     (progn
       (ensime-ac-disable)
       (remove-hook 'after-save-hook 'ensime-run-after-save-hooks t)
       (remove-hook 'ensime-source-buffer-saved-hook 'ensime-typecheck-current-file)
+      (remove-hook 'ensime-source-buffer-saved-hook 'ensime-builder-track-changed-files)
       (remove-hook 'tooltip-functions 'ensime-tooltip-handler)
       (make-local-variable 'track-mouse)
       (setq track-mouse nil)
-      (define-key ensime-mode-map [mouse-movement] 'ignore)
-      (define-key ensime-mode-map [double-mouse-1] 'ignore)
-      (define-key ensime-mode-map [C-mouse-1] 'ignore)
       )))
 
 ;;;;;; Mouse handlers
@@ -223,7 +245,7 @@
    inspect that package. Otherwise, try to inspect the type
    of the thing at point."
   (interactive "e")
-  (let ((pack-path (ensime-import-or-package-path-at-point)))
+  (let ((pack-path (ensime-package-path-at-point)))
     (if pack-path
 	(ensime-inspect-package-by-path pack-path)
       (ensime-inspect-type))))
@@ -270,6 +292,7 @@
 			 (overlay-get (car note-overlays) 'help-echo))
 			t))
 
+
        ;; Otherwise show a type hint..
        ((and ident ensime-tooltip-type-hints)
 	(progn 
@@ -277,7 +300,7 @@
 	   `(swank:type-at-point ,buffer-file-name ,point)
 	   #'(lambda (type)
 	       (when type
-		 (let ((msg (format "%s" (ensime-type-full-name type))))
+		 (let ((msg (ensime-type-full-name-with-args type)))
 		   (ensime-tooltip-show-message msg)
 		   ))))
 	  t
@@ -325,9 +348,9 @@
   "Read config file for settings. Then start an inferior 
    ENSIME server and connect to its Swank server."
   (interactive)
-  (when (not ensime-mode) 
+  (when (and (ensime-is-source-file-p) (not ensime-mode))
     (ensime-mode 1))
-  (let* ((config (ensime-find-and-load-config))
+  (let* ((config (ensime-config-find-and-load))
 	 (cmd (or (plist-get config :server-cmd) 
 		  ensime-default-server-cmd))
 	 (env (plist-get config :server-env))
@@ -336,26 +359,18 @@
 	 (buffer "*inferior-ensime-server*")
 	 (args (list (ensime-swank-port-file))))
 
-
-    (if (not (file-executable-p (concat 
-				 (file-name-as-directory 
-				  (expand-file-name dir)) 
-				 cmd)))
-
-	(message "Oops! The command '%s' in your config file does not seem to have execute permissions." cmd)
-
-      (progn
-	(ensime-delete-swank-port-file 'quiet)
-	(let ((proc (ensime-maybe-start-server cmd args env dir buffer)))
-	  (ensime-inferior-connect config proc))))))
+    (ensime-delete-swank-port-file 'quiet)
+    (let ((proc (ensime-maybe-start-server cmd args env dir buffer)))
+      (ensime-inferior-connect config proc))))
 
 
 (defun ensime-reload-config ()
   "Re-read the config file, and tell the server to re-up the compiler."
   (interactive)
-  (let* ((config (ensime-find-and-load-config)))
-    ;; Send the project initialization..
-    (ensime-eval-async `(swank:init-project ,config) #'identity)))
+  (ensime-assert-connected
+   (let* ((config (ensime-config-find-and-load)))
+     (ensime-set-config (ensime-current-connection) config)
+     (ensime-eval-async `(swank:init-project ,config) #'identity))))
 
 
 (defun ensime-maybe-start-server (program program-args env directory buffer)
@@ -413,10 +428,6 @@ See `ensime-start'.")
   "Start a Swank server in the inferior Server and connect."
   (ensime-read-port-and-connect config process nil))
 
-(defvar ensime-config-file-name ".ensime"
-  "The default file name for ensime project configurations.")
-
-(add-to-list 'auto-mode-alist '("\\.ensime$" . emacs-lisp-mode))
 
 (defun ensime-file-in-directory-p (file-name dir-name)
   "Determine if file named by file-name is contained in the 
@@ -435,31 +446,6 @@ See `ensime-start'.")
 	    (throw 'return nil))
 	  )))))
 
-(defun ensime-find-config-file (file-name)
-  "Search up the directory tree starting at file-name 
-   for a suitable config file to load, return it's path. Return nil if 
-   no such file found."
-  (let* ((dir (file-name-directory file-name))
-	 (possible-path (concat dir ensime-config-file-name)))
-    (if (file-directory-p dir)
-	(if (file-exists-p possible-path)
-	    possible-path
-	  (if (not (equal dir (directory-file-name dir)))
-	      (ensime-find-config-file (directory-file-name dir)))))))
-
-(defun ensime-find-and-load-config ()
-  "Query the user for the path to a config file, then load it."
-  (let* ((default (ensime-find-config-file buffer-file-name))
-	 (file (if ensime-prefer-noninteractive default
-		 (read-file-name 
-		  "ENSIME Project file: "
-		  (if default (file-name-directory default))
-		  default
-		  nil
-		  (if default (file-name-nondirectory default))
-		  ))))
-    (ensime-load-config file)))
-
 (defun ensime-configured-project-root ()
   "Return root path of the current project as defined in the 
 config file and stored in the current connection. Nil is returned
@@ -469,39 +455,12 @@ defined."
     (let ((config (ensime-config (ensime-connection))))
       (plist-get config :root-dir) ".")))
 
-(defun ensime-load-config (file-name)
-  "Load and parse a project config file. Return the resulting plist.
-
-   The :root-dir setting will be deduced from the location of the project file.
-
-   The :classpath setting may be specified as a list of file-names or
-   the name of a function which will be called at load time. The configuration
-   plist will be passed to this function as it's only argument."
-  (let ((dir (expand-file-name (file-name-directory file-name))))
-    (save-excursion
-      (condition-case error
-	  (let ((config
-		 (let ((buf (find-file-read-only file-name ensime-config-file-name))
-		       (src (buffer-substring-no-properties
-			     (point-min) (point-max))))
-		   (kill-buffer buf)
-		   (read src))))
-
-	    ;; We use the project file's location as th project root.
-	    (plist-put config :root-dir dir)
-
-	    ;; If 'classpath' is a symbol bound to a function, call it
-	    ;; to compute the classpath.
-	    (let ((cp (plist-get config :classpath)))
-	      (if (and cp (symbolp cp) (boundp cp))
-		  (let ((val (eval cp)))
-		    (if (functionp val)
-			(plist-put config :classpath (funcall val config))))))
-
-	    config)
-	(error
-	 '())))
-    ))
+(defmacro ensime-assert-connected (&rest body)
+  "Surround body forms with a check to see if we're connected.
+If not, message the user."
+  `(if (ensime-connected-p)
+       (progn ,@body)
+     (message "This command is requires a connection to an ENSIME server.")))
 
 (defun ensime-swank-port-file ()
   "Filename where the SWANK server writes its TCP port number."
@@ -618,19 +577,19 @@ The default condition handler for timer functions (see
 
 (defcustom ensime-scaladoc-stdlib-url-base 
   "http://www.scala-lang.org/archives/downloads/distrib/files/nightly/docs/library/"
-  "url for constructing scaladoc links."
+  "URL base for constructing scaladoc stdlib links."
   :type 'string
   :group 'ensime)
 
 (defcustom ensime-scaladoc-compiler-url-base 
   "http://www.scala-lang.org/archives/downloads/distrib/files/nightly/docs/compiler/"
-  "url for constructing scaladoc links."
+  "URL for constructing scaladoc compiler links."
   :type 'string
   :group 'ensime)
 
 (defcustom ensime-javadoc-stdlib-url-base 
   "http://java.sun.com/javase/6/docs/api/"
-  "url for constructing scaladoc links."
+  "URL for constructing javadoc links."
   :type 'string
   :group 'ensime)
 
@@ -645,15 +604,17 @@ The default condition handler for timer functions (see
 			 (is-std-lib ensime-scaladoc-stdlib-url-base)
 			 (t nil))))
     (if (or is-std-lib is-compiler-lib)
-	(concat url-base
-		(replace-regexp-in-string "\\." "/" full-type-name)
-		".html"
-		(if member
-		    (let* ((name (ensime-member-name member))
-			   (type (ensime-member-type member))
-			   (param-types (ensime-type-param-types type)))
-		      (concat "#" full-type-name "#" name))))
-      )))
+	(let* ((s (replace-regexp-in-string "\\." "/" full-type-name)))
+	  (concat url-base 
+		  s
+		  ".html"
+		  (if member
+		      (let* ((name (ensime-member-name member))
+			     (type (ensime-member-type member))
+			     (param-types (ensime-type-param-types type)))
+			(concat "#" full-type-name "#" name))))
+	  ))))
+
 
 (defvar ensime-javadoc-type-replacements 
   '(("^scala.Int$" . "int")
@@ -662,7 +623,8 @@ The default condition handler for timer functions (see
     ("^scala.Byte$" . "byte")
     ("^scala.Long$" . "long")
     ("^scala.Float$" . "float")
-    ("^scala.Boolean$" . "char")
+    ("^scala.Boolean$" . "boolean")
+    ("^scala.Char$" . "char")
     ("^scala.Unit$" . "void"))
   "When creating javadoc urls, 
    use this mapping to replace scala types with java types.")
@@ -710,7 +672,7 @@ The default condition handler for timer functions (see
 (defun ensime-make-code-hyperlink (start end http-path &optional face)
   "Make an emacs button, from start to end in current buffer, hyperlinking to http-path."
   (make-button start end
-	       'face (or face font-lock-constant-face)
+	       'face (or face font-lock-keyword-face)
 	       'action `(lambda (x)
 			  (browse-url ,http-path)
 			  (message "Opening documentation in browser..")
@@ -719,7 +681,7 @@ The default condition handler for timer functions (see
 (defun ensime-http-url-p (s)
   (and (stringp s) (string-match "http://" s)))
 
-(defun ensime-insert-link (text file-path &optional offset)
+(defun ensime-insert-link (text file-path &optional offset face)
   "Insert text in current buffer and make it into an emacs 
    button, linking to file-path and offset. Intelligently decide
    whether to make a source link or an http link based on the file-path."
@@ -728,12 +690,12 @@ The default condition handler for timer functions (see
      ((and file-path (ensime-http-url-p file-path))
       (progn
 	(insert text)
-	(ensime-make-code-hyperlink start (point) file-path)))
+	(ensime-make-code-hyperlink start (point) file-path face)))
 
      ((and file-path (integerp offset))
       (progn
 	(insert text)
-	(ensime-make-code-link start (point) file-path offset)))
+	(ensime-make-code-link start (point) file-path offset face)))
 
      (t 
       (progn
@@ -755,38 +717,31 @@ The default condition handler for timer functions (see
     (set-text-properties start (point) `(face ,face))))
 
 (defvar ensime-qualified-type-regexp 
-  "^\\(?:object \\)?\\(\\(?:[a-z0-9]+\\.\\)*[a-z0-9]+\\)\\.\\(.+\\)$")
+  "^\\(?:object \\)?\\(\\(?:[a-z0-9]+\\.\\)*[a-z0-9]+\\)\\.\\(?:\\([^\\.]+\\)\\$\\)?\\([^\\.\$]+\\)$"
+  "Match strings of form pack.pack1.pack2.Types$Type or pack.pack1.pack2.Type")
 
-(defmacro* ensime-with-path-and-name (type-name (path name) &rest body)
+(defmacro* ensime-partition-qualified-type-name (type-name (path outer-type-name name) &rest body)
   "Evaluate BODY with path bound to the dot-separated path of this type-name, and
    name bound to the final type name."
-  `(let ((result (not (null (string-match 
-			     ensime-qualified-type-regexp 
-			     ,type-name)))))
-     (let ((,path (if result (match-string 1 ,type-name) nil))
-	   (,name (if result (match-string 2 ,type-name) ,type-name)))
+  `(let ((matchedp (integerp (string-match 
+			      ensime-qualified-type-regexp 
+			      ,type-name))))
+     (let ((,path (if matchedp (match-string 1 ,type-name) nil))
+	   (,outer-type-name (if matchedp (match-string 2 ,type-name) nil))
+	   (,name (if matchedp (match-string 3 ,type-name) ,type-name)))
        ,@body)))
 
 
-(defun ensime-re-search-containing-point (regex limit-start limit-end &optional group-number pos)
-  "A helper for finding regex matches for which the current point is contained in a specified group."
-  (let ((group-number (or group-number 0))
-	(pos (or pos (point))))
-    (save-excursion
-      (goto-char limit-end)
-      (catch 'return-now
-	(while (> (point) limit-start)
-	  (let* ((search-result (re-search-backward regex limit-start 1))
-		 (contains-result (and search-result
-				       (<= (match-beginning group-number) pos)
-				       (> (match-end group-number) pos))))
-
-	    (cond ((and search-result (not contains-result))
-		   (goto-char (- (match-end 0) 1)))
-
-		  ((and search-result contains-result)
-		   (throw 'return-now t)))
-	    ))))))
+(defmacro ensime-assert-buffer-saved-interactive (&rest body)
+  "Offer to save buffer if buffer is modified. Execute body only if
+buffer is saved."
+  `(if (buffer-modified-p)
+       (if (y-or-n-p "Buffer must be saved to continue. Save now? ")
+	   (progn
+	     (ensime-save-buffer-no-hooks)
+	     ,@body))
+     (progn
+       ,@body)))
 
 
 (defun ensime-kill-txt-props (str)
@@ -878,6 +833,13 @@ values in the provided proplist."
 	(setq result (cons ea result)))))
     (reverse result)))
 
+(defun ensime-line-col-to-point (file line col)
+  "Convert line,column coordinates to a char offset."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (goto-line line)
+    (forward-char col)
+    (point)))
 
 (defvar ensime-net-processes nil
   "List of processes (sockets) connected to Lisps.")
@@ -1190,6 +1152,8 @@ This is automatically synchronized from Lisp.")
    keep track of these so that we can create highlight overlays 
    for newly opened buffers.")
 
+(ensime-def-connection-var ensime-builder-changed-files nil
+  "Files that have changed since the last rebuild.")
 
 
 (defvar ensime-dispatching-connection nil
@@ -1223,7 +1187,7 @@ Return nil otherwise."
   (let ((conn (ensime-current-connection)))
     (cond ((not conn)
 	   (or (ensime-auto-connect)
-	       (error "Not connected.")))
+	       (error "Not connected. M-x ensime to connect")))
 	  ((not (eq (process-status conn) 'open))
 	   (error "Connection closed."))
 	  (t conn))))
@@ -1233,13 +1197,34 @@ Return nil otherwise."
   "Return the connection to use for a given file name.
    Find the first connection with a project root directory that contains 
    file-name (directly or indirectly)."
-  (catch 'return
-    (dolist (p ensime-net-processes)
-      (let* ((config (ensime-config p))
-	     (root-dir-name (plist-get config :root-dir)))
-	(when (ensime-file-in-directory-p file root-dir-name)
-	  (throw 'return p))
-	))))
+  (when file
+    (catch 'return
+      (dolist (p ensime-net-processes)
+	(let* ((config (ensime-config p))
+	       (root-dir-name (plist-get config :root-dir)))
+	  (when (ensime-file-in-directory-p file root-dir-name)
+	    (throw 'return p))
+	  )))))
+
+
+(defun ensime-prompt-for-connection ()
+  "Prompt the user to select a server connection. Used in situations where
+the active connection is ambiguous."
+  (let* ((options 
+	  (mapcar 
+	   (lambda (p) 
+	     (let* ((conf (ensime-config p))
+		    (root (plist-get conf :root-dir))
+		    (num (ensime-connection-number p)))
+	       `(,(format "%s#%s" root num) . ,p)))
+	   ensime-net-processes))
+	 (keys (mapcar (lambda (opt) (car opt)) options))
+	 (key (completing-read (concat "Which project to use? (" 
+				       (mapconcat #'identity keys ", ")
+				       "): ")
+			       keys nil t nil)))
+    (cdr (assoc key options))))
+
 
 ;; FIXME: should be called auto-start
 (defcustom ensime-auto-connect 'never
@@ -1280,7 +1265,7 @@ If PROCESS is not specified, `ensime-connection' is used.
 (defun ensime-connect (config host port)
   "Connect to a running Swank server. Return the connection."
   (interactive (list 
-		(ensime-find-and-load-config)
+		(ensime-config-find-and-load)
 		(read-from-minibuffer "Host: " ensime-default-server-host)
 		(read-from-minibuffer "Port: " (format "%d" ensime-default-port)
 				      nil t)))
@@ -1333,7 +1318,7 @@ If PROCESS is not specified, `ensime-connection' is used.
 	(setf (ensime-machine-instance) instance)))
     (let ((args (when-let (p (ensime-inferior-process))
 		  (ensime-inferior-server-args p))))
-      (when-let (name (plist-get args ':name))
+      (when-let (name (plist-get args :name))
 	(unless (string= (ensime-server-implementation-name) name)
 	  (setf (ensime-connection-name)
 		(ensime-generate-connection-name (symbol-name name)))))
@@ -1367,7 +1352,7 @@ If PROCESS is not specified, `ensime-connection' is used.
 (defun ensime-connection-close-hook (process)
 
   ;; TODO should this be per-connection?
-  (ensime-remove-old-overlays))
+  (ensime-clear-note-overlays))
 
 (add-hook 'ensime-net-process-close-hooks 'ensime-connection-close-hook)
 
@@ -1442,7 +1427,7 @@ versions cannot deal with that."
 	 (while t 
 	   (unless (eq (process-status conn) 'open)
 	     (error "Lisp connection closed unexpectedly"))
-	   (ensime-accept-process-output nil 0.01)))))))
+	   (accept-process-output nil 1 0)))))))
 
 
 (defun ensime-eval-async (sexp &optional cont)
@@ -1544,7 +1529,7 @@ This idiom is preferred over `lexical-let'."
 		   (t
 		    (error "Unexpected reply: %S %S" id value)))))
 	  ((:compiler-ready status)
-	   (message "Compiler ready. %s" (ensime-random-words-of-encouragement))
+	   (message "ENSIME ready. %s" (ensime-random-words-of-encouragement))
 	   (ensime-event-sig :compiler-ready status))
 	  ((:full-typecheck-result result)
 	   (ensime-typecheck-finished result)
@@ -1634,44 +1619,57 @@ This idiom is preferred over `lexical-let'."
 	(plist-get result :notes))
   (ensime-refresh-note-overlays))
 
+
+(defun ensime-make-overlay-at (file line b e msg face)
+  "Create an overlay highlighting the given line in 
+any buffer visiting the given file."
+  (let ((beg b)
+	(end e))
+    (when-let (buf (find-buffer-visiting file))
+      (with-current-buffer buf
+	(when (integerp line)
+	  (save-excursion
+	    (goto-line line)
+	    (setq beg (point-at-bol))
+	    (setq end (point-at-eol))))
+	(ensime-make-overlay beg end msg face nil))
+      )))
+
+
 (defun ensime-refresh-note-overlays ()
   (let ((notes (if (ensime-connected-p)
 		   (ensime-compiler-notes (ensime-current-connection))
 		 '()
 		 )))
-    (ensime-remove-old-overlays)
+    (ensime-clear-note-overlays)
     (dolist (note notes)
       (destructuring-bind 
 	  (&key severity msg beg end line col file &allow-other-keys) note
-	(when-let (buf (find-buffer-visiting file))
-	  (with-current-buffer buf
-	    (save-excursion
-	      (goto-line line)
-	      (let* ((line-start (point-at-bol))
-		     (line-stop (point-at-eol)))
-		(cond 
+	(cond 
+	 ((equal severity 'error)
+	  (progn 
+	    (when-let (ov (ensime-make-overlay-at 
+			   file line nil nil msg 
+			   'ensime-errline))
+	      (push ov ensime-note-overlays))
+	    (when-let (ov (ensime-make-overlay-at
+			   file nil (+ 1 beg) (+ 1 end) 
+			   msg 'ensime-errline-highlight))
+	      (push ov ensime-note-overlays))
+	    ))
 
-		 ((equal severity 'error)
-		  (progn 
-		    (push (ensime-make-overlay
-			   line-start line-stop msg 'ensime-errline nil)
-			  ensime-note-overlays)
-		    (push (ensime-make-overlay
-			   (+ 1 beg) (+ 1 end) msg 'ensime-errline-highlight nil)
-			  ensime-note-overlays)
-		    ))
+	 (t (progn
+	      (when-let (ov (ensime-make-overlay-at
+			     file line nil nil msg 
+			     'ensime-warnline))
+		(push ov ensime-note-overlays))
+	      (when-let (ov (ensime-make-overlay-at
+			     file nil (+ 1 beg) (+ 1 end)
+			     msg 'ensime-warnline-highlight))
+		(push ov ensime-note-overlays))
+	      ))
 
-		 (t (progn 
-		      (push (ensime-make-overlay
-			     line-start line-stop msg 'ensime-warnline nil)
-			    ensime-note-overlays)
-		      (push (ensime-make-overlay
-			     (+ 1 beg) (+ 1 end) msg 'ensime-warnline-highlight nil)
-			    ensime-note-overlays)
-		      ))
-
-		 ))
-	      )))))))
+	 )))))
 
 
 (defface ensime-errline
@@ -1723,12 +1721,10 @@ This idiom is preferred over `lexical-let'."
      ovs)
     ))
 
-(defun ensime-remove-old-overlays ()
+(defun ensime-clear-note-overlays ()
   "Delete the existing note overlays."
-  ;; Guard against nil overlays here..
   (mapc #'delete-overlay ensime-note-overlays)
   (setq ensime-note-overlays '()))
-
 
 ;; Jump to definition
 
@@ -1779,13 +1775,37 @@ This idiom is preferred over `lexical-let'."
       (message "Sorry, no definition found.")))))
 
 
+(defun ensime-files-equal-p (f1 f2)
+  "Return t if file-names refer to same file."
+  (equal (expand-file-name f1) (expand-file-name f2)))
+
+
 (defun ensime-goto-source-location (pos &optional where)
-  "Move to the source location POS."
-  (ecase where
-    ((nil)     (find-file (ensime-pos-file pos)))
-    (window    (find-file-other-window (ensime-pos-file pos)))
-    (frame     (find-file-other-frame (ensime-pos-file pos))))
-  (goto-char (ensime-pos-offset pos)))
+  "Move to the source location POS. Don't open a new window or buffer if file is open
+and visible already."
+  (let* ((file (ensime-pos-file pos))
+	 (file-visible-buf 
+	  (catch 'result
+	    (dolist (w (window-list))
+	      (let* ((buf (window-buffer w))
+		     (window-file (buffer-file-name buf)))
+		(when (and window-file 
+			   (ensime-files-equal-p file window-file))
+		  (throw 'result buf)))))))
+
+    (when (not file-visible-buf)
+      (ecase where
+	((nil)     
+	 (find-file file))
+	(window    
+	 (find-file-other-window file)))
+      (setq file-visible-buf (current-buffer)))
+
+    (with-current-buffer file-visible-buf
+      (if (> (ensime-pos-line pos) 0)
+	  (goto-line (ensime-pos-line pos))
+	(if (> (ensime-pos-offset pos) 0)
+	    (goto-char (ensime-pos-offset pos)))))))
 
 
 ;; Compilation on request
@@ -1803,6 +1823,7 @@ This idiom is preferred over `lexical-let'."
   (interactive)
   (if (buffer-modified-p) (ensime-save-buffer-no-hooks))
   (ensime-rpc-async-typecheck-all))
+
 
 
 ;; RPC Helpers
@@ -1836,11 +1857,22 @@ with the current project's dependencies loaded. Returns a property list."
   (ensime-eval 
    `(swank:debug-unit-info ,file-name-no-path ,line-number ,(or package-prefix ""))))
 
+(defun ensime-rpc-debug-class-locs-to-source-locs (locs)
+  "Get source locations corresponding to class,line pairs."
+  (ensime-eval 
+   `(swank:debug-class-locs-to-source-locs ,locs)))
+
 (defun ensime-rpc-async-typecheck-file (file-name)
   (ensime-eval-async `(swank:typecheck-file ,file-name) #'identity))
 
 (defun ensime-rpc-async-typecheck-all ()
   (ensime-eval-async `(swank:typecheck-all) #'identity))
+
+(defun ensime-rpc-async-builder-init (continue)
+  (ensime-eval-async `(swank:builder-init) continue))
+
+(defun ensime-rpc-async-builder-update (file-names continue)
+  (ensime-eval-async `(swank:builder-update-files ,file-names) continue))
 
 (defun ensime-rpc-name-completions-at-point (&optional prefix is-constructor)
   (ensime-eval 
@@ -1877,6 +1909,15 @@ with the current project's dependencies loaded. Returns a property list."
       (ensime-eval 
        `(swank:call-completion ,id))))
 
+(defun ensime-rpc-refactor-perform (proc-id refactor-type params continue)
+  (ensime-eval-async `(swank:perform-refactor ,proc-id , refactor-type ,params) continue))
+
+(defun ensime-rpc-refactor-exec (proc-id refactor-type continue)
+  (ensime-eval-async `(swank:exec-refactor ,proc-id , refactor-type) continue))
+
+(defun ensime-rpc-refactor-cancel (proc-id)
+  (ensime-eval-async `(swank:cancel-refactor ,proc-id) #'identity))
+
 
 
 ;; Type Inspector UI
@@ -1889,6 +1930,11 @@ with the current project's dependencies loaded. Returns a property list."
 (defun ensime-inspector-buffer-p (buffer)
   "Is this an ensime inspector buffer?"
   (eq (get-buffer ensime-inspector-buffer-name) buffer))
+
+(defun ensime-popup-buffer-p (buffer)
+  "Is this an ensime popup buffer?"
+  (with-current-buffer buffer
+    ensime-is-popup-buffer))
 
 (defun ensime-inspector-insert-linked-package-path (path &optional face)
   "For each component of the package path, insert a link to inspect
@@ -1906,28 +1952,53 @@ with the current project's dependencies loaded. Returns a property list."
       (setq accum (concat accum "."))
       )))
 
-(defun ensime-inspector-insert-linked-type (type &optional with-doc-link detailed)
+
+(defun ensime-inspector-insert-link-to-type-id (text type-id &optional is-obj)
+  "A helper for type link insertion. See usage in ensime-inspector-insert-linked-type. 
+If is-obj is non-nil, use an alternative color for the link."
+  (ensime-insert-action-link
+   text
+   `(lambda (x)
+      (ensime-type-inspector-show 
+       (ensime-rpc-inspect-type-by-id ,type-id)
+       ))
+   (if is-obj
+       font-lock-constant-face
+     font-lock-type-face)
+   ))
+
+(defun ensime-inspector-insert-linked-type (type &optional with-doc-link qualified)
   "Helper utility to output a link to a type.
    Should only be invoked by ensime-inspect-type"
-  (if (ensime-type-is-arrow type) 
-      (ensime-inspector-insert-linked-arrow-type type with-doc-link detailed)
-    (let* ((type-name (if detailed
-			  (ensime-type-full-name type)
-			(ensime-type-name type)
-			))
-	   (type-args (ensime-type-type-args type))
-	   (last-type-arg (car (last type-args))))
-      (ensime-with-path-and-name 
-       type-name (path name)
-       (when path
-	 (ensime-inspector-insert-linked-package-path path))
-       (insert (make-string ensime-indent-level ?\s))
-       (ensime-insert-action-link
-	name
-	`(lambda (x)
-	   (ensime-type-inspector-show 
-	    (ensime-rpc-inspect-type-by-id ,(ensime-type-id type))
-	    )) font-lock-type-face))
+  (if (ensime-type-is-arrow-p type)
+      (ensime-inspector-insert-linked-arrow-type type with-doc-link qualified)
+
+    (let* ((type-args (ensime-type-type-args type))
+	   (last-type-arg (car (last type-args)))
+	   (is-obj (ensime-type-is-object-p type)))
+
+      (insert (make-string ensime-indent-level ?\s))
+
+      (if qualified
+	  (ensime-partition-qualified-type-name 
+	   (ensime-type-full-name type) 
+	   (path outer-type-name name)
+	   (when path
+	     (ensime-inspector-insert-linked-package-path path))
+	   (if (and outer-type-name (integerp (ensime-outer-type-id type)))
+	       (progn
+		 (ensime-inspector-insert-link-to-type-id 
+		  outer-type-name (ensime-outer-type-id type))
+		 (insert "$")
+		 (ensime-inspector-insert-link-to-type-id 
+		  name (ensime-type-id type) is-obj))
+	     (progn
+	       (ensime-inspector-insert-link-to-type-id 
+		name (ensime-type-id type) is-obj))))
+
+	;; Otherwise, insert short name..
+	(ensime-inspector-insert-link-to-type-id 
+	 (ensime-type-name type) (ensime-type-id type) is-obj))
 
       (when type-args
 	(let ((ensime-indent-level 0))
@@ -1948,7 +2019,7 @@ with the current project's dependencies loaded. Returns a property list."
 
       )))
 
-(defun ensime-inspector-insert-linked-arrow-type (type  &optional with-doc-link detailed)
+(defun ensime-inspector-insert-linked-arrow-type (type  &optional with-doc-link qualified)
   "Helper utility to output a link to a type.
    Should only be invoked by ensime-inspect-type"
   (let*  ((param-types (ensime-type-param-types type))
@@ -1956,11 +2027,11 @@ with the current project's dependencies loaded. Returns a property list."
 	  (result-type (ensime-type-result-type type)))
     (insert "(")
     (dolist (tpe param-types)
-      (ensime-inspector-insert-linked-type tpe nil detailed)
+      (ensime-inspector-insert-linked-type tpe nil qualified)
       (if (not (eq tpe last-param-type))
 	  (insert ", ")))
     (insert ") => ")
-    (ensime-inspector-insert-linked-type result-type nil detailed)
+    (ensime-inspector-insert-linked-type result-type nil qualified)
     ))
 
 
@@ -1974,10 +2045,20 @@ with the current project's dependencies loaded. Returns a property list."
 		  (ensime-make-scaladoc-url owner-type m)
 		  (ensime-make-javadoc-url owner-type m)
 		  )))
-    (ensime-insert-link 
-     (format "%s" member-name) url (ensime-pos-offset pos))
-    (tab-to-tab-stop)
-    (ensime-inspector-insert-linked-type type nil nil)
+    (if (equal 'method (ensime-declared-as m))
+	(progn
+	  (ensime-insert-link 
+	   (format "%s" member-name) url (ensime-pos-offset pos) 
+	   font-lock-function-name-face)
+	  (tab-to-tab-stop)
+	  (ensime-inspector-insert-linked-type type nil nil))
+      (progn
+	(ensime-insert-with-face 
+	 (ensime-declared-as-str m)
+	 'font-lock-comment-face)
+	(tab-to-tab-stop)
+	(ensime-inspector-insert-linked-type type nil nil)
+	))
     ))
 
 (defun ensime-inspect-type ()
@@ -1991,6 +2072,7 @@ with the current project's dependencies loaded. Returns a property list."
    owner type."
   (let* ((interfaces (plist-get info :interfaces))
 	 (type (plist-get info :type))
+	 (companion-id (plist-get info :companion-id))
 	 (buffer-name ensime-inspector-buffer-name)
 	 (ensime-indent-level 0))
     (ensime-with-inspector-buffer 
@@ -2003,11 +2085,16 @@ with the current project's dependencies loaded. Returns a property list."
        ;; Display main type
        (let* ((full-type-name (plist-get type :name)))
 	 (ensime-insert-with-face (format "%s\n" 
-					  (ensime-type-declared-as-str type))
+					  (ensime-declared-as-str type))
 				  font-lock-comment-face)
 	 (ensime-inspector-insert-linked-type type t t)
 	 (insert "\n")
 
+	 ;; Insert a link to the companion object or class, if extant
+	 (when-let (id companion-id)
+	   (ensime-inspector-insert-link-to-type-id 
+	    "(companion)" id 
+	    (not (ensime-type-is-object-p type))))
 
 	 ;; Display each member, arranged by owner type
 	 (dolist (interface interfaces)
@@ -2017,7 +2104,7 @@ with the current project's dependencies loaded. Returns a property list."
 
 	     (ensime-insert-with-face 
 	      (format "\n\n%s%s\n" 
-		      (ensime-type-declared-as-str owner-type)
+		      (ensime-declared-as-str owner-type)
 		      (if implicit (concat " (via implicit, " implicit ")") ""))
 	      font-lock-comment-face)
 	     (ensime-inspector-insert-linked-type owner-type t t)
@@ -2043,28 +2130,37 @@ with the current project's dependencies loaded. Returns a property list."
   (let ((p (or path (read-string "Package path: "))))
     (ensime-package-inspector-show (ensime-rpc-inspect-package-by-path p))))
 
-(defun ensime-import-or-package-path-at-point ()
-  "Return the path of the package that is declared or imported at point."
+(defun ensime-package-path-at-point ()
+  "Return the package path at point, or nil if point is not in a package path."
   (let* ((case-fold-search nil)
-	 (re "\\(?:package\\|import\\)\\s-+\\(\\(?:[a-z0-9]+\\.\\)*[a-z0-9]+\\)"))
+	 (re "\\(?:package\\|import\\)[ ]+\\(\\(?:[a-z0-9]+\\.\\)+[a-z0-9]+\\)"))
     (save-excursion
-      (goto-char (point-at-bol))
-      (if (search-forward-regexp re (point-at-eol) t)
-	  (ensime-kill-txt-props (match-string 1))))))
+      (catch 'return
+	(let ((init-point (point))
+	      (limit (point-at-eol)))
+	  (goto-char (point-at-bol))
+	  (while (search-forward-regexp re limit t)
+	    (if (and (>= init-point (match-beginning 1))
+		     (<= init-point (match-end 1)))
+		(throw 'return 
+		       (ensime-kill-txt-props 
+			(match-string 1))))))))))
 
 (defun ensime-inspect-package ()
-  "Inspect the package of the current source file."
+  "If cursor is over a package path, inspect that path. Otherwise, 
+inspect the package of the current source file."
   (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (if (search-forward-regexp 
-	 "package \\(\\(?:[a-z0-9]+\\.\\)*[a-z0-9]+\\)"
-	 (point-max) t)
-	(let ((path (match-string 1)))
-	  (ensime-kill-txt-props path)
-	  (ensime-package-inspector-show (ensime-rpc-inspect-package-by-path path)))
-      (message "No package declaration found."))))
-
+  (let ((pack (ensime-package-path-at-point)))
+    (if pack
+	(ensime-package-inspector-show (ensime-rpc-inspect-package-by-path pack))
+      (save-excursion
+	(if (search-backward-regexp 
+	     "package \\(\\(?:[a-z0-9]+\\.\\)*[a-z0-9]+\\)"
+	     (point-min) t)
+	    (let ((path (match-string 1)))
+	      (ensime-kill-txt-props path)
+	      (ensime-package-inspector-show (ensime-rpc-inspect-package-by-path path)))
+	  (message "No package declaration found."))))))
 
 (defun ensime-inspect-project-package ()
   "Inspect the package declared as the project package in the config file."
@@ -2087,7 +2183,7 @@ with the current project's dependencies loaded. Returns a property list."
 	(when (not (ensime-package-p ea))
 	  (ensime-inspector-insert-linked-type ea nil nil)
 	  (ensime-insert-with-face 
-	   (format " %s" (ensime-type-declared-as-str ea))
+	   (format " %s" (ensime-declared-as-str ea))
 	   font-lock-comment-face)
 	  (insert "\n")))
       (dolist (ea members)
@@ -2107,7 +2203,7 @@ with the current project's dependencies loaded. Returns a property list."
      )))
 
 (defvar ensime-inspector-history '()
-  "Maintain a history of the info objects viewed in the type inspector.")
+  "Maintain a history of the info objects viewed in the inspector buffer.")
 
 (defvar ensime-inspector-history-cursor 0
   "Where are we in the history?")
@@ -2141,20 +2237,26 @@ with the current project's dependencies loaded. Returns a property list."
     (cond ((ensime-package-p info)
 	   (ensime-package-inspector-show info))
 
-	  (t (ensime-type-inspector-show info)))
+	  ((ensime-type-inspection-p info)
+	   (ensime-type-inspector-show info))
+
+	  (t (error 
+	      (format "Cannot inspect unknown structure: %s" 
+		      info))))
     ))
 
 
 (defvar ensime-popup-inspector-map
   (let ((map (make-sparse-keymap)))
     (define-key map [?\t] 'forward-button)
+    (define-key map [mouse-1] 'push-button)
+    (define-key map (kbd "q") 'ensime-popup-buffer-quit-function)
     (define-key map (kbd "M-n") 'forward-button)
     (define-key map (kbd "M-p") 'backward-button)
     (define-key map (kbd ".") 'ensime-inspector-forward-page)
     (define-key map (kbd ",") 'ensime-inspector-backward-page)
     map)
-  "Type and package inspector specific key bindings 
-   (in addition to those defined by popup-buffer-mode)")
+  "Type and package inspector key bindings.")
 
 
 (defmacro* ensime-with-inspector-buffer ((name object &optional select)
@@ -2252,19 +2354,53 @@ It should be used for \"background\" messages such as argument lists."
 (defun ensime-package-p (info)
   (equal 'package (plist-get info :info-type)))
 
+(defun ensime-type-inspection-p (info)
+  (equal 'typeInspect (plist-get info :info-type)))
+
 (defun ensime-type-name (type)
   (plist-get type :name))
 
+(defun ensime-type-name-with-args (type)
+  (concat (plist-get type :name)
+	  (ensime-type-type-args-postfix type)))
+
 (defun ensime-type-id (type)
   (plist-get type :type-id))
+
+(defun ensime-type-is-object-p (type)
+  (equal (plist-get type :decl-as) 'object))
+
+(defun ensime-outer-type-id (type)
+  (plist-get type :outer-type-id))
 
 (defun ensime-type-full-name (type)
   (if (plist-get type :arrow-type)
       (plist-get type :name)
     (plist-get type :full-name)))
 
-(defun ensime-type-declared-as-str (type)
-  (case (plist-get type :declared-as)
+(defun ensime-type-full-name-with-args (type)
+  (if (plist-get type :arrow-type)
+      (plist-get type :name)
+    (concat 
+     (plist-get type :full-name)
+     (ensime-type-type-args-postfix type))))
+
+(defun ensime-type-type-args-postfix (type)
+  (let ((args (ensime-type-type-args type)))
+    (if args
+	(concat "[" 
+		(mapconcat 
+		 (lambda(tpe)
+		   (ensime-type-name-with-args tpe)) args ", ")
+		"]")
+      "")))
+
+(defun ensime-declared-as (obj)
+  (plist-get obj :decl-as))
+
+(defun ensime-declared-as-str (obj)
+  (case (plist-get obj :decl-as)
+    (method "method")
     (trait "trait")
     (interface "interface")
     (class "class")
@@ -2273,7 +2409,7 @@ It should be used for \"background\" messages such as argument lists."
     (otherwise "type")
     ))
 
-(defun ensime-type-is-arrow (type)
+(defun ensime-type-is-arrow-p (type)
   (plist-get type :arrow-type))
 
 (defun ensime-type-param-types (type)
@@ -2303,6 +2439,9 @@ It should be used for \"background\" messages such as argument lists."
 (defun ensime-pos-offset (pos)
   (or (plist-get pos :offset) -1))
 
+(defun ensime-pos-line (pos)
+  (or (plist-get pos :line) -1))
+
 (defun ensime-pos-valid-local-p (pos)
   (and (stringp (ensime-pos-file pos))
        (file-exists-p (ensime-pos-file pos))
@@ -2323,25 +2462,12 @@ It should be used for \"background\" messages such as argument lists."
      ))
 
 
-(defvar ensime-accept-process-output-supports-floats 
-  (ignore-errors (accept-process-output nil 0.0) t))
-
-(defun ensime-accept-process-output (&optional process timeout)
-  "Like `accept-process-output' but the TIMEOUT argument can be a float."
-  (cond (ensime-accept-process-output-supports-floats
-	 (accept-process-output process timeout))
-	(t
-	 (accept-process-output process 
-				(if timeout (truncate timeout))
-				;; Emacs 21 uses microsecs; Emacs 22 millisecs
-				(if timeout (truncate (* timeout 1000000)))))))
-
 
 ;; Popup Buffer
 
 ;;;;; Temporary popup buffers
 
-(defvar ensime-popup-buffer-mode-map
+(defvar ensime-popup-buffer-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "q") 'ensime-popup-buffer-quit-function)
     (define-key map [mouse-1] 'push-button)
@@ -2352,7 +2478,7 @@ It should be used for \"background\" messages such as argument lists."
   "Mode for displaying read only stuff"
   nil
   nil
-  ensime-popup-buffer-mode-map)
+  (make-sparse-keymap))
 
 (add-to-list 'minor-mode-alist
 	     '(ensime-popup-buffer-mode (:eval (ensime-modeline-string))))
@@ -2370,9 +2496,9 @@ OLD-BUFFER is nil if POPUP-WINDOW was newly created.
 
 See `view-return-to-alist' for a similar idea.")
 
-;; keep compiler quiet
-(defvar ensime-buffer-package)
-(defvar ensime-buffer-connection)
+(make-variable-buffer-local
+ (defvar ensime-is-popup-buffer nil 
+   "So we can query later whether this is a popup buffer."))
 
 ;; Interface
 (defmacro* ensime-with-popup-buffer ((name &optional connection select)
@@ -2389,9 +2515,10 @@ the buffer.  If t, the current connection is taken.
   `(let* ((vars% (list ,(if (eq connection t) '(ensime-connection) connection)))
 	  (standard-output (ensime-make-popup-buffer ,name vars%)))
      (with-current-buffer standard-output
-       (prog1 (progn ,@body)
+       (prog1 
+	   (progn 
+	     ,@body)
 	 (assert (eq (current-buffer) standard-output))
-	 (ensime-init-popup-buffer vars%)
 	 (setq buffer-read-only t)
 	 (set-window-point (ensime-display-popup-buffer ,(or select 'nil))
 			   (point))))))
@@ -2406,6 +2533,8 @@ The buffer also uses the minor-mode `ensime-popup-buffer-mode'."
     (erase-buffer)
     (set-syntax-table lisp-mode-syntax-table)
     (ensime-init-popup-buffer buffer-vars)
+    (use-local-map ensime-popup-buffer-map)
+    (setq ensime-is-popup-buffer t)
     (current-buffer)))
 
 (defun ensime-init-popup-buffer (buffer-vars)
@@ -2420,7 +2549,7 @@ The buffer also uses the minor-mode `ensime-popup-buffer-mode'."
   (let ((selected-window (selected-window))
 	(old-windows))
     (walk-windows (lambda (w) 
-		    (if (not (ensime-inspector-buffer-p (window-buffer w)))
+		    (if (not (ensime-popup-buffer-p (window-buffer w)))
 			(push (cons w (window-buffer w)) old-windows)))
 		  nil t)
     (let ((new-window (display-buffer (current-buffer))))
